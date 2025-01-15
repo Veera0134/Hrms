@@ -1,0 +1,106 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body and Background */
+body {
+    background: linear-gradient(135deg, #645cff, #a084dc);
+    color: white;
+}
+
+/* Header and Navigation */
+header {
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img{
+    /* display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    gap: 10px; */
+    width: 200px;
+    height: 90px;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    font-size: 1.5em;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 100px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.text-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #d0d0d0;
+}
+
+.cta-btn {
+    background-color: #ff7f3e;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.illustration {
+    width: 800px;
+    height: 300px;
+    background: url('https://as1.ftcdn.net/v2/jpg/09/15/87/88/1000_F_915878819_B74Ej5j5pbucE528MWDeyVOL9sEbiMi8.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 15px;
+  
+    
+}
+footer {
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    font-size: large;
+}
+

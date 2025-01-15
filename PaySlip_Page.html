@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Payslip</title>
+  <link rel="stylesheet" href="Emp_payslip.css">
+  <script>
+    function validateForm(event) {
+      event.preventDefault();
+
+      // Retrieve form fields
+      const employeeName = document.getElementById('employee-name');
+      const employeeId = document.getElementById('employee-id');
+      const designation = document.getElementById('designation');
+      const department = document.getElementById('department');
+      const payPeriod = document.getElementById('pay-period');
+
+      const basicSalary = document.querySelector('[name="basic-salary"]');
+      const hra = document.querySelector('[name="hra"]');
+      const specialAllowance = document.querySelector('[name="special-allowance"]');
+      const bonus = document.querySelector('[name="bonus"]');
+      const incomeTaxDeduction = document.querySelector('[name="income-tax-deduction"]');
+      const pf = document.querySelector('[name="pf"]');
+      const healthInsurance = document.querySelector('[name="health-insurance"]');
+
+      // Regex for alphabet validation
+      const alphabetRegex = /^[A-Za-z\s]+$/;
+
+      // Check required fields
+      if (!employeeName.value.trim() || !alphabetRegex.test(employeeName.value)) {
+        alert("Please enter a valid name (alphabets only).");
+        employeeName.focus();
+        return false;
+      }
+      if (!employeeId.value.trim()) {
+        alert("Please enter the employee ID.");
+        employeeId.focus();
+        return false;
+      }
+      if (!designation.value.trim() || !alphabetRegex.test(designation.value)) {
+        alert("Please enter a valid designation (alphabets only).");
+        designation.focus();
+        return false;
+      }
+      if (!department.value.trim() || !alphabetRegex.test(department.value)) {
+        alert("Please enter a valid department (alphabets only).");
+        department.focus();
+        return false;
+      }
+      if (!payPeriod.value.trim()) {
+        alert("Please enter the pay period.");
+        payPeriod.focus();
+        return false;
+      }
+
+      if (!basicSalary.value.trim() || Number(basicSalary.value) <= 0) {
+        alert("Please enter a valid basic salary.");
+        basicSalary.focus();
+        return false;
+      }
+      if (!hra.value.trim() || Number(hra.value) < 0) {
+        alert("Please enter a valid HRA.");
+        hra.focus();
+        return false;
+      }
+      if (!specialAllowance.value.trim() || Number(specialAllowance.value) < 0) {
+        alert("Please enter a valid special allowance.");
+        specialAllowance.focus();
+        return false;
+      }
+      if (!bonus.value.trim() || Number(bonus.value) < 0) {
+        alert("Please enter a valid bonus.");
+        bonus.focus();
+        return false;
+      }
+      if (!incomeTaxDeduction.value.trim() || Number(incomeTaxDeduction.value) < 0) {
+        alert("Please enter a valid income tax deduction.");
+        incomeTaxDeduction.focus();
+        return false;
+      }
+      if (!pf.value.trim() || Number(pf.value) < 0) {
+        alert("Please enter a valid provident fund amount.");
+        pf.focus();
+        return false;
+      }
+      if (!healthInsurance.value.trim() || Number(healthInsurance.value) < 0) {
+        alert("Please enter a valid health insurance amount.");
+        healthInsurance.focus();
+        return false;
+      }
+      function saveToLocalStorage(event) {
+      event.preventDefault();
+
+      // Retrieve values
+      const employeeName = document.getElementById('employee-name').value;
+      const department = document.getElementById('department').value;
+
+      // Store values in local storage
+      localStorage.setItem('employeeName', employeeName);
+      localStorage.setItem('department', department);
+
+      // Redirect to another page
+      window.location.href = 'payslip.html';
+    }
+
+      // If all validations pass
+      alert("Form submitted successfully!");
+      document.getElementById('payslip-form').submit();
+    }
+  </script>
+</head>
+<body>
+  <!-- Payslip Header -->
+  <header class="header">
+    <div class="company-info">
+      <!-- <p>Employee Payslip</p> -->
+    </div>
+  </header>
+
+  <!-- Employee Payslip Form -->
+  <form id="payslip-form" onsubmit="validateForm(event)">
+    <!-- Employee Details Section -->
+    <section class="employee-details">
+      <h2>Employee Details</h2>
+      <div class="details">
+        <label for="employee-name"><strong>Emp Name:</strong></label>
+        <input type="text" id="employee-name" name="employee-name" placeholder="Enter Employee Name" required>
+        
+        <label for="employee-id"><strong>Employee ID:</strong></label>
+        <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID" required>
+        
+        <label for="designation"><strong>Designation:</strong></label>
+        <input type="text" id="designation" name="designation" placeholder="Enter Designation" required>
+        
+        <label for="department"><strong>Department:</strong></label>
+        <input type="text" id="department" name="department" placeholder="Enter Department" required>
+        
+        <label for="pay-period"><strong>Pay Period:</strong></label>
+        <input type="text" id="pay-period" name="pay-period" placeholder="Enter Pay Period (e.g., September 2024)" required>
+      </div>
+    </section>
+
+    <!-- Earnings and Deductions Table -->
+    <section class="pay-details">
+      <h2>Earnings and Deductions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic Salary</td>
+            <td><input type="number" name="basic-salary" placeholder="Enter Amount" required></td>
+          </tr>
+          <tr>
+            <td>HRA (House Rent Allowance)</td>
+            <td><input type="number" name="hra" placeholder="Enter Amount"></td>
+          </tr>
+          <tr>
+            <td>Special Allowance</td>
+            <td><input type="number" name="special-allowance" placeholder="Enter Amount"></td>
+          </tr>
+          <tr>
+            <td>Bonus</td>
+            <td><input type="number" name="bonus" placeholder="Enter Amount"></td>
+          </tr>
+          <tr>
+            <td>Income Tax Deduction</td>
+            <td><input type="number" name="income-tax-deduction" placeholder="Enter Amount"></td>
+          </tr>
+          <tr>
+            <td>Provident Fund (PF)</td>
+            <td><input type="number" name="pf" placeholder="Enter Amount"></td>
+          </tr>
+          <tr>
+            <td>Health Insurance</td>
+            <td><input type="number" name="health-insurance" placeholder="Enter Amount"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Net Pay Section -->
+    <section class="net-pay">
+      <h2>Net Pay</h2>
+      <div class="net-pay1">
+        <p><strong>Total Earnings:</strong> <span id="total-earnings"></span></p>
+        <p><strong>Total Deductions:</strong> <span id="total-deductions"></span></p>
+        <p><strong>Net Pay:</strong> <span id="net-pay"></span></p>
+      </div>
+    </section>
+
+    <!-- Submit Button -->
+    <div class="submit-section">
+      <button type="submit">submit</button>     
+    </div>
+   <button class="btn" onclick="location.href='Payroll_Management.html'"> Generate</button>
+  </form>
+  <script>
+  function validateForm(event) {
+  event.preventDefault();
+
+  // Retrieve form fields
+  const employeeName = document.getElementById('employee-name').value.trim();
+  const employeeId = document.getElementById('employee-id').value.trim();
+  const designation = document.getElementById('designation').value.trim();
+  const department = document.getElementById('department').value.trim();
+  const payPeriod = document.getElementById('pay-period').value.trim();
+
+  const basicSalary = document.querySelector('[name="basic-salary"]').value.trim();
+  const hra = document.querySelector('[name="hra"]').value.trim();
+  const specialAllowance = document.querySelector('[name="special-allowance"]').value.trim();
+  const bonus = document.querySelector('[name="bonus"]').value.trim();
+  const incomeTaxDeduction = document.querySelector('[name="income-tax-deduction"]').value.trim();
+  const pf = document.querySelector('[name="pf"]').value.trim();
+  const healthInsurance = document.querySelector('[name="health-insurance"]').value.trim();
+
+  // Regex for alphabet validation
+  const alphabetRegex = /^[A-Za-z\s]+$/;
+
+  // Validate required fields
+  if (!employeeName || !alphabetRegex.test(employeeName)) {
+    alert("Please enter a valid name (alphabets only).");
+    return;
+  }
+  if (!employeeId) {
+    alert("Please enter the employee ID.");
+    return;
+  }
+  if (!designation || !alphabetRegex.test(designation)) {
+    alert("Please enter a valid designation (alphabets only).");
+    return;
+  }
+  if (!department || !alphabetRegex.test(department)) {
+    alert("Please enter a valid department (alphabets only).");
+    return;
+  }
+  if (!payPeriod) {
+    alert("Please enter the pay period.");
+    return;
+  }
+
+  // Calculate total earnings and deductions
+  const totalEarnings = Number(basicSalary) + Number(hra) + Number(specialAllowance) + Number(bonus);
+  const totalDeductions = Number(incomeTaxDeduction) + Number(pf) + Number(healthInsurance);
+  const netPay = totalEarnings - totalDeductions;
+
+  // Update the display with calculated values
+  document.getElementById('total-earnings').textContent = totalEarnings.toFixed(2);
+  document.getElementById('total-deductions').textContent = totalDeductions.toFixed(2);
+  document.getElementById('net-pay').textContent = netPay.toFixed(2);
+
+  // Store data in localStorage
+  const payslipData = {
+    employeeName,
+    employeeId,
+    designation,
+    department,
+    payPeriod,
+    earnings: {
+      basicSalary,
+      hra,
+      specialAllowance,
+      bonus,
+    },
+    deductions: {
+      incomeTaxDeduction,
+      pf,
+      healthInsurance,
+    },
+    totals: {
+      totalEarnings,
+      totalDeductions,
+      netPay,
+    },
+  };
+
+  localStorage.setItem("payslipData", JSON.stringify(payslipData));
+
+  // Navigate to another page (e.g., payslip.html)
+  // alert("Payslip generated successfully!");
+  // window.location.href = "Payroll_Management.html";
+}
+
+
+  </script>
+</body>
+</html>

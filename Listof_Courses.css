@@ -1,0 +1,115 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #645cff, #a084dc);
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.course-section {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.course-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.course-section p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.course-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    color: #333;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.course-card .circle {
+    background-color: #59ce8f;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.course-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    font-size: 0.9rem;
+}
+<div class="course-item">
+<div class="course-logo">
+    <img src="https://th.bing.com/th/id/OIP.P7jGBd6TIx1nq_KvswNfagHaE8?w=275&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Cloud Logo"> <!-- Replace with actual image source -->
+</div>
+<h3>Cloud Computing</h3>
+<p>Explore cloud platforms and deployment strategies.</p>
+<button class="more-btn">More</button>
+</div>
+<div class="course-item">
+<div class="course-logo">
+    <img src="https://th.bing.com/th/id/OIP.MzJOwHKfeJzguozdzaFK3AHaGc?w=181&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="DevOps Logo"> <!-- Replace with actual image source -->
+</div>
+<h3>Azure DevOps</h3>
+<p>Master DevOps practices and tools on the Azure platform.</p>
+<button class="more-btn">More</button>
+</div>
+<div class="course-item">
+<div class="course-logo">
+    <img src="https://images.creativemarket.com/0.1.0/ps/3861260/2000/1500/m1/fpnw/wm1/1-.jpg?1516175974&s=57d5c64e6ca45c2812b6c149cc3c80e1" alt="Web Design Logo"> <!-- Replace with actual image source -->
+</div>
+<h3>Web Design</h3>
+<p>Build beautiful and responsive websites from scratch.</p>
+<button class="more-btn" onclick="location.href='Course_page.html'">More</button>
+</div>
+<div class="course-item">
+<div class="course-logo">
+    <img src="http://ts4.mm.bing.net/th?id=OIP.ubRO8gMLddROYcB4YrtwxAHaE8&pid=15.1" alt="Cybersecurity Logo"> <!-- Replace with actual image source -->
+</div>
+<h3>Cybersecurity</h3>
+<p>Learn essential skills for securing systems and data.</p>
+<button class="more-btn">More</button>
+</div>
+<div class="course-item">
+<div class="course-logo">
+    <img src="https://th.bing.com/th/id/OIP.W5zObPJrAMALQNPoYW5zSQAAAA?rs=1&pid=ImgDetMain" alt="Database Logo"> <!-- Replace with actual image source -->
+</div>
+<h3>Database Management</h3>
+<p>Master techniques for effective database design and queries.</p>
+<button class="more-btn">More</button>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Notification.css">
+  <title>HR Notification Management</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <!-- Header Section -->
+      <div class="header">
+        <h1>HR Notification Management</h1>
+        <p>Manage and send announcements or notifications to all employees</p>
+      </div>
+    </header>
+
+    <!-- Notification Form Section -->
+    <div class="notification-form">
+      <label for="title">Notification Title:</label>
+      <input type="text" id="title" placeholder="Enter notification title">
+
+      <label for="message">Notification Message:</label>
+      <textarea id="message" rows="4" placeholder="Enter notification message"></textarea>
+
+      <button id="sendNotification" type="button">Send Notification</button>
+    </div>
+
+    <!-- Notification List Section -->
+    <div class="notifications">
+      <h2>Recent Notifications</h2>
+      <div class="notification-cards">
+      <div class="notification-card">
+        <div class="notification-text">Holiday Schedule for 2025</div>
+        <div class="notification-time">Posted on: 01 Nov 2024</div>
+      </div>
+      <div class="notification-card">
+        <div class="notification-text">Employee of the Month</div>
+        <div class="notification-time">Posted on: 20 Oct 2024</div>
+      </div>
+      <div class="notification-cards" id="notificationCards">
+        <!-- Notifications will be dynamically added here -->
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    // Check if notifications exist in localStorage and display them
+    window.onload = function() {
+      const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+      const notificationCards = document.getElementById('notificationCards');
+      storedNotifications.forEach(function(notification) {
+        const notificationCard = document.createElement('div');
+        notificationCard.classList.add('notification-card');
+        notificationCard.innerHTML = `
+          <div class="notification-text">${notification.title}</div>
+          <div class="notification-time">Posted on: ${notification.date}</div>
+        `;
+        notificationCards.appendChild(notificationCard);
+      });
+    };
+
+    // Function to handle sending notifications
+    document.getElementById('sendNotification').addEventListener('click', function() {
+      const title = document.getElementById('title').value;
+      const message = document.getElementById('message').value;
+      const date = new Date().toLocaleDateString();
+
+      if (title && message) {
+        // Create notification object
+        const newNotification = { title, message, date };
+        
+        // Get existing notifications from localStorage
+        const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+
+        // Add the new notification
+        storedNotifications.unshift(newNotification); // Add to the front
+
+        // Save updated notifications back to localStorage
+        localStorage.setItem('notifications', JSON.stringify(storedNotifications));
+
+        // Clear form inputs
+        document.getElementById('title').value = '';
+        document.getElementById('message').value = '';
+
+        // Refresh the notification list on the page
+        window.location.reload();
+      } else {
+        alert('Please fill in both title and message!');
+      }
+    });
+  </script>
+</body>
+</html>
+

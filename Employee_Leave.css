@@ -1,0 +1,247 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonts and Colors */
+body {
+  font-family: Arial, sans-serif;
+  /* background-color: #e8f9fd; */
+  /* color: #5e503f; */
+}
+
+
+/* Banner Section */
+.banner {
+  background: linear-gradient(135deg,  #2c3e50, #3498db);
+  color: #fff;
+  text-align: center;
+  padding: 2em 0;
+  margin-bottom: 20px;
+}
+
+.banner h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+/* Leave Overview */
+.leavebd{
+  justify-content: center;
+
+}
+.leave-overview {
+  display: flex;
+  justify-content: center;
+
+  padding: 2em;
+  gap: 1em;
+  margin:0% 10%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.913);
+}
+
+.leave-balance {
+  display: flex;
+  gap: 1em;
+}
+
+.balance-card {
+  /* background-color: #f5e9d7; */
+  padding: 1em;
+  border-radius: 8px;
+  text-align: center;
+  width: 150px;
+}
+
+/* Leave Overview */
+.leave-overview {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 2em;
+gap: 1em;
+}
+
+.leave-balance {
+display: flex;
+gap: 1em;
+margin-bottom: 1em; /* Adds spacing between the balance cards and the buttons */
+}
+
+.apply-leave-btn,
+.leave-history-btn {
+background-color: #328bf1;
+border: none;
+padding: 1em;
+color: #fff;
+cursor: pointer;
+width: 200px; 
+margin: 0.5em 0;
+border-radius: 4px;
+text-align: center;
+font-size: 1em;
+}
+
+.apply-leave-btn {
+background-color: #4f8bc4;
+}
+
+.leave-history-btn {
+background-color: #3486ca;
+}
+
+.apply-leave-btn:hover,
+.leave-history-btn:hover {
+opacity: 0.9;
+}
+
+
+/* Leave Request Form */
+.leave-request {
+  padding: 2em;
+}
+
+.leave-request form label {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.submit-btn {
+  background-color: #ff1e00;
+  border: none;
+  padding: 0.5em 1em;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Leave History */
+.leave-history {
+  padding: 2em;
+}
+
+.leave-history table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.leave-history th, td {
+  padding: 1em;
+  border: 1px solid #d0bca8;
+  text-align: left;
+}
+
+/* Leave Request Form Section */
+.leave-request {
+  /* background-color: #f5e9d7; */
+  border-radius: 8px;
+  padding: 2em;
+  margin: 2em auto;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Form Heading */
+.leave-request h2 {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: #000000;
+}
+
+/* Label and Input Styling */
+.leave-request label {
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  display: block;
+  color: #5e503f;
+}
+
+.leave-request select, 
+.leave-request input[type="date"], 
+.leave-request textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid #d0bca8;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1em;
+  color: #5e503f;
+}
+
+/* Textarea Specific Styling */
+.leave-request textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit Button Styling */
+.submit-btn {
+  width: 100%;
+  padding: 1em;
+  background-color: #ff1e00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #e01c00;
+}
+
+.submit-btn:active {
+  background-color: #b31800;
+}
+/* Leave Overview */
+.leave-overview {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 2em;
+gap: 1em;
+}
+
+.leave-balance {
+display: flex;
+gap: 1em;
+margin-bottom: 1em; /* Adds spacing between the balance cards and the buttons */
+}
+
+/* Button Container for side-by-side alignment */
+.button-container {
+display: flex;
+gap: 1em; /* Space between the buttons */
+}
+
+.apply-leave-btn,
+.leave-history-btn {
+background-color: #146fcad3;
+border: none;
+padding: 1em;
+color: #fff;
+cursor: pointer;
+width: 200px; /* Optional: sets a consistent width for both buttons */
+border-radius: 4px;
+text-align: center;
+font-size: 1em;
+}
+
+.apply-leave-btn {
+background-color: #146fcad3;
+}
+
+.leave-history-btn {
+background-color: #146fcad3;;
+}
+
+.apply-leave-btn:hover,
+.leave-history-btn:hover {
+opacity: 0.9;
+}

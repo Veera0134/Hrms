@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #5E503F;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            margin-top: 1em;
+            font-size: 2em;
+            font-weight: bold;
+            color: #705834;
+            text-align: center;
+        }
+        .notifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1em;
+            width: 80%;
+            padding: 1em;
+        }
+        .notification-card {
+            background-color: #FFF;
+            border-left: 8px solid #D2B48C;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+        .notification-card h3 {
+            margin: 0;
+            color: #705834;
+        }
+        .notification-card p {
+            color: #5E503F;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>Employee Notifications</header>
+    <div class="notifications-container">
+        <div class="notification-card" style="animation-delay: 0.2s;">
+            <h3>Announcement: Company Meeting</h3>
+            <p>There will be a company-wide meeting on Friday at 10 AM. Please join us in the main conference room.</p>
+        </div>
+        
+        <div class="notification-card" style="animation-delay: 0.4s;">
+            <h3>Bonus Letter Update</h3>
+            <p>Bonus letters for this quarter have been issued. Please check your HR portal for details.</p>
+        </div>
+
+        <div class="notification-card" style="animation-delay: 0.6s;">
+            <h3>HR Update: New Leave Policy</h3>
+            <p>The leave policy has been updated effective immediately. Review the details on the HR portal.</p>
+        </div>
+
+        <div class="notification-card" style="animation-delay: 0.8s;">
+            <h3>Project Deadline Reminder</h3>
+            <p>All project deadlines are due by the end of the month. Please ensure your work is on track.</p>
+        </div>
+        
+        <div class="notification-card" style="animation-delay: 1s;">
+            <h3>Holiday Announcement</h3>
+            <p>The office will be closed next Monday for the public holiday. Enjoy your time off!</p>
+        </div>
+        <div class="notification-cards" id="notificationCards">
+            <!-- Notifications will be dynamically added here -->
+          </div>
+    </div>
+    <script>
+        window.onload = function() {
+          const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+          const notificationCards = document.getElementById('notificationCards');
+          storedNotifications.forEach(function(notification) {
+            const notificationCard = document.createElement('div');
+            notificationCard.classList.add('notification-card');
+            notificationCard.innerHTML = `
+              <div class="notification-text"><h3> ${notification.title}</h3></div><br>
+              <div class="notification-text">${notification.message}</div><br>
+              <div class="notification-time">Posted on: ${notification.date}</div>
+            `;
+            notificationCards.appendChild(notificationCard);
+          });
+        };
+      </script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* background: linear-gradient(to bottom, #87CEEB, #FFFACD, #32CD32, #8B4513);  */
+            /* font-family: Arial, sans-serif; */
+            /* background-image: url('https://plus.unsplash.com/premium_photo-1725985758416-618e34ef5616?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE2fHwzZHxlbnwwfHwwfHx8MA%3D%3D'); */
+            /* background-position: bottom; */
+            background-size: cover;
+        } 
+        header {
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #121212;
+    color: white; */
+}
+header h1{
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+}
+header img {
+    width: 300px;
+    height: 100px;
+}
+#img2 {
+    width: 600px;
+    height: 100px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header ul li {
+    margin-left: 30px;
+}
+
+ header ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: #0035;
+    border-radius: 5px;
+    text-align: center;
+}
+
+ header ul li a:hover {
+    text-decoration: underline;
+}
+        .container {
+            width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+            border: solid 2px black;
+            
+        }
+        
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            color: rgb(85, 85, 227);
+            margin-bottom: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            padding: 10px 15px;
+            color: white;
+            /* border: 1px solid #121213; */
+            border-radius: 5px;
+            transition: 0.3s;
+            background-color: #de841d;
+        }
+        nav a:hover {
+            background-color: #b19407;
+            color: white;
+        }
+        hr{
+            border: 3px solid #121213;
+        }
+        section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        section.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bbd4d4;
+            border-radius: 4px;
+            box-shadow: #87CEEB;
+            
+        }
+        button {
+            width: 40%;
+            padding: 10px;
+            background: #de841d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            /* background: #3e8e41; */
+            text-decoration: underline;
+        }
+
+        /* Layout for Personal Details */
+        .personal-details-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 20px;
+        }
+        .personal-details-layout img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        /* .bank-img{
+            height: ;
+        } */
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="./logo.png" alt="Astrolite Tech Solution Logo">
+        <!-- <img id="img2" src="./Header-removebg-preview (1).png" alt="Astrolite Tech Solution Logo"> -->
+         <h1>ASTROLITE TECH SOLUTIONS</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Chat </a></li>
+                <li><a href="#">Help</a></li>
+                <!-- <li><a href="#about">About Us</a></li> -->
+                <!-- <li><a href="#contact">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Onboarding Form</h1>
+        <nav>
+            <a href="#personal-details" onclick="navigateTo('personal-details')">Personal Details</a>
+            <a href="#qualification-details" onclick="navigateTo('qualification-details')">Qualification Details</a>
+            <a href="#bank-details" onclick="navigateTo('bank-details')">Bank Details</a>
+        </nav><hr>
+
+        <!-- Personal Details Section -->
+        <section id="personal-details" class="active">
+            <h2>Personal Details</h2>
+            <div class="personal-details-layout">
+                <!-- Left Column: Picture -->
+                <div>
+                    <img src="https://t4.ftcdn.net/jpg/08/37/21/95/240_F_837219551_4knLWOcNHprOGCUOvxi3ZL5t8XlDiwRG.jpg" alt="Profile Picture">
+                </div>
+                <!-- Right Column: Form -->
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alternate-phone">Alternate Number</label>
+                            <input type="text" id="alternate-phone" name="alternate-phone" placeholder="Enter your alternate number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="marital-status">Marital Status</label>
+                            <select id="marital-status" name="marital-status" required>
+                                <option value="">Select</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="navigateTo('qualification-details')">Next</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+      
+        <!-- Qualification Details Section -->
+        <section id="qualification-details">
+            <h2>Qualification Details</h2>
+                      <div class="personal-details-layout">
+                <!-- Left Column: Picture -->
+                <div>
+                    <img src="https://img.freepik.com/free-photo/people-office_144627-38035.jpg?ga=GA1.1.233059171.1729752547&semt=ais_hybrid" alt="Profile Picture">
+                </div>
+                <!-- Right Column: Form -->
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="ssc-marks">SSC Marks</label>
+                            <input type="text" id="ssc-marks" name="ssc-marks" placeholder="Enter your SSC marks" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ssc-cgpa">SSC CGPA</label>
+                            <input type="text" id="ssc-cgpa" name="ssc-cgpa" placeholder="Enter your SSC CGPA" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qualification-type">Inter / Diploma</label>
+                            <select id="qualification-type" name="qualification-type" required>
+                                <option value="" disabled selected>Select Qualification</option>
+                                <option value="inter">Inter</option>
+                                <option value="diploma">Diploma</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inter-cgpa">CGPA/percentage</label>
+                            <input type="text" id="inter-cgpa" name="inter-cgpa" placeholder="Enter Inter CGPA" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="btech-branch">B.Tech Branch</label>
+                            <select id="btech-branch" name="btech-branch" required>
+                                <option value="" disabled selected>Select your branch</option>
+                                <option value="cse">Computer Science and Engineering</option>
+                                <option value="ece">Electronics and Communication Engineering</option>
+                                <option value="eee">Electrical and Electronics Engineering</option>
+                                <option value="mech">Mechanical Engineering</option>
+                                <option value="civil">Civil Engineering</option>
+                                <option value="it">Information Technology</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="btech-percentage">B.Tech Percentage</label>
+                            <input type="text" id="btech-percentage" name="btech-percentage" placeholder="Enter your B.Tech percentage" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="pg-marks">PG Marks</label>
+                            <input type="text" id="pg-marks" name="pg-marks" placeholder="Enter your PG marks" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pg-percentage">PG Percentage</label>
+                            <input type="text" id="pg-percentage" name="pg-percentage" placeholder="Enter your PG percentage" required>
+                        </div> -->
+                        <button type="button" onclick="navigateTo('personal-details')">Back</button>
+                        <button type="button" onclick="navigateTo('bank-details')">Next</button>
+                    </form>
+                </div>
+                      </div>
+        </section>
+                        <section id="bank-details">
+    <h2>Bank Details</h2>
+                           <div class="personal-details-layout">
+                <!-- Left Column: Picture -->
+                <div class="bank-img">
+                    <img src="./bank img.jpeg" alt="Profile Picture">
+                </div>
+                <!-- Right Column: Form -->
+                <div>
+                          
+    <form>
+              <div class="form-group">
+            <label for="pan-number">PAN Number</label>
+            <input type="text" id="pan-number" name="pan-number" placeholder="Enter your PAN number" required>
+        </div>
+        <div class="form-group">
+            <label for="aadhar-number">Aadhar Number</label>
+            <input type="text" id="aadhar-number" name="aadhar-number" placeholder="Enter your Aadhar number" required>
+        </div>
+        <div class="form-group">
+            <label for="bank-name">Bank Name</label>
+            <input type="text" id="bank-name" name="bank-name" placeholder="Enter your bank name" required>
+        </div>
+        <div class="form-group">
+            <label for="branch-name">Branch Name</label>
+            <input type="text" id="branch-name" name="branch-name" placeholder="Enter your branch name" required>
+        </div>
+        <div class="form-group">
+            <label for="account-number">Account Number</label>
+            <input type="text" id="account-number" name="account-number" placeholder="Enter account number" required>
+        </div>
+        <div class="form-group">
+            <label for="ifsc">IFSC Code</label>
+            <input type="text" id="ifsc" name="ifsc" placeholder="Enter IFSC code" required>
+        </div>
+        <!-- <div class="form-group">
+            <label for="pan-number">PAN Number</label>
+            <input type="text" id="pan-number" name="pan-number" placeholder="Enter your PAN number" required>
+        </div>
+        <div class="form-group">
+            <label for="aadhar-number">Aadhar Number</label>
+            <input type="text" id="aadhar-number" name="aadhar-number" placeholder="Enter your Aadhar number" required>
+        </div> -->
+        <button type="button" onclick="navigateTo('qualification-details')">Back</button>
+        <button type="submit" onclick="Message()">Submit</button>
+    </form>
+    </div>
+                           </div>
+</section>
+
+    
+
+    </div>
+
+     <script>
+        function navigateTo(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+                section.style.animation = 'fadeOut 0.5s ease-out';
+            });
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.add('active');
+            targetSection.style.animation = 'fadeIn 0.5s ease-out';
+        }
+        function Message(){
+            alert("Form submitted successfully\n please wait for the response");
+        }
+        
+
+    </script>
+    
+</body>
+</html>

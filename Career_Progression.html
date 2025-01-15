@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Cards</title>
+    <link rel="stylesheet" href="Career_Progression.css">
+</head>
+<body>
+    
+    <header>
+        <h1>Career_Progression Tracker</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search employees by name, department, or ID...">
+        </div>
+    </header>
+    <div class="employee-cards">
+        <!-- Employee Card 1 -->
+        <div class="card" onclick="openModal('modal1')">
+            <img src="https://th.bing.com/th/id/OIP.mk4DihJ5AqVBvOja8MCvugHaE8?w=276&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic">
+            <h2>Sindhuja</h2>
+            <p>Senior Software Engineer</p>
+        </div>
+
+        <!-- Employee Card 2 -->
+        <div class="card" onclick="openModal('modal2')">
+            <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="John Doe" class="profile-pic">
+            <h2>Veera Raghava</h2>
+            <p>Product Manager</p>
+        </div>
+
+        <!-- Employee Card 3 -->
+        <div class="card" onclick="openModal('modal3')">
+            <img src="https://th.bing.com/th/id/OIP.1H4TjeN5dyNQdkXtz-q7IwHaE2?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Jane Smith" class="profile-pic">
+            <h2>Ajay Kumar</h2>
+            <p>UX Designer</p>
+        </div>
+
+        <!-- Employee Card 4 -->
+        <div class="card" onclick="openModal('modal4')">
+            <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Michael Lee" class="profile-pic">
+            <h2>Latish Tivari</h2>
+            <p>Data Scientist</p>
+        </div>
+    </div>
+
+    <!-- Modals for each employee -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <div class="modal-header">
+                <img src="https://th.bing.com/th/id/OIP.mk4DihJ5AqVBvOja8MCvugHaE8?w=276&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic-large">
+                <h2>Sindhuja</h2>
+                <p class="role">Senior Software Engineer</p>
+            </div>
+            <div class="section">
+                <h3>Promotions</h3>
+                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+            </div>
+            <div class="section">
+                <h3>Salary Increments</h3>
+                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+            </div>
+            <div class="section">
+                <h3>Education & Certifications</h3>
+                <p><strong>June 15, 2023:</strong> Cyber Security Certification</p>
+            </div>
+        </div>
+    </div>
+<div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <div class="modal-header">
+                <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic-large">
+                <h2>Veera Raghava</h2>
+                <p class="role">Senior Software Engineer</p>
+            </div>
+            <div class="section">
+                <h3>Promotions</h3>
+                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+            </div>
+            <div class="section">
+                <h3>Salary Increments</h3>
+                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+            </div>
+            <div class="section">
+                <h3>Education & Certifications</h3>
+                <p><strong>June 15, 2023:</strong> UX Certification</p>
+            </div>
+        </div>
+    </div>
+<div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <div class="modal-header">
+                <img src="https://th.bing.com/th/id/OIP.1H4TjeN5dyNQdkXtz-q7IwHaE2?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic-large">
+                <h2>Ajay Kumar</h2>
+                <p class="role">Senior Software Engineer</p>
+            </div>
+            <div class="section">
+                <h3>Promotions</h3>
+                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+            </div>
+            <div class="section">
+                <h3>Salary Increments</h3>
+                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+            </div>
+            <div class="section">
+                <h3>Education & Certifications</h3>
+                <p><strong>June 15, 2023:</strong> AzureDevOps Certification</p>
+            </div>
+        </div>
+    </div>
+<div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <div class="modal-header">
+                <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Sarah Chen" class="profile-pic-large">
+                <h2>Sindhuja</h2>
+                <p class="role">Senior Software Engineer</p>
+            </div>
+            <div class="section">
+                <h3>Promotions</h3>
+                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+            </div>
+            <div class="section">
+                <h3>Salary Increments</h3>
+                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+            </div>
+            <div class="section">
+                <h3>Education & Certifications</h3>
+                <p><strong>June 15, 2023:</strong> AWS Certification</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Repeat modals for each employee with unique IDs (modal2, modal3, modal4) -->
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+        </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Attendance Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+              background: linear-gradient(135deg, #645cff, #a084dc);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+
+        .attendance-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+
+        .attendance-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-out backwards;
+        }
+
+
+             .card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+        }
+
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+
+        .avatar:hover {
+            transform: scale(1.1);
+        }
+
+
+            .card-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 20px;
+            margin: 15px 0;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+
+        .card-status p {
+            margin: 0;
+        }
+
+
+        .card-status .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+
+        .present {
+            background-color: #e3f7e9;
+            color: #0a6c1f;
+        }
+
+
+        .present .status-dot {
+            background-color: #0a6c1f;
+        }
+
+
+        .absent {
+            background-color: #ffe5e5;
+            color: #cf0000;
+        }
+
+
+        .absent .status-dot {
+            background-color: #cf0000;
+        }
+
+
+        .late {
+            background-color: #fff4e5;
+            color: #b25000;
+        }
+
+
+        .late .status-dot {
+            background-color: #b25000;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+
+        table th {
+            background-color: #f2f2f2;
+        }
+        .chart-container {
+    width: 90%; /* Adjust to fit content within the page */
+    margin: 30px auto;
+    display: flex; /* Flex layout for row alignment */
+    flex-direction: row; /* Ensure content is placed in a row */
+    justify-content: space-between; /* Space between elements */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add space between chart and cards */
+}
+
+canvas {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    flex: 1; /* Allow the chart to grow/shrink */
+    max-width: 60%; /* Ensure it takes up appropriate space */
+}
+
+.cards-beside-graph {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1; /* Allow the cards to grow/shrink */
+    max-width: 35%; /* Restrict maximum width */
+}
+
+.info-card {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+    <header>
+        Employee Attendance
+    </header>
+
+
+    <div id="attendance-cards" class="attendance-container"></div>
+    <div class="chart-container">
+        <canvas id="monthlyAttendanceChart"></canvas>
+        <div class="cards-beside-graph">
+            <div class="info-card">
+                <h3>Monthly Attendance Overview</h3>
+                <p><strong>Total Days Present:</strong> 260</p>
+                <p><strong>Average Attendance:</strong> 21 days</p>
+                <p><strong>Highest Attendance:</strong> 25 days</p>
+            </div>
+            <div class="info-card">
+                <h3>Attendance Goals</h3>
+                <p><strong>Target:</strong> 23 days</p>
+                <p><strong>Remaining:</strong> 5 days</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <h2>Attendance History</h2>
+    <table id="attendance-history">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Punch-In Time</th>
+                <th>Punch-Out Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+                   </tbody>
+    </table>
+
+
+    <script>
+        const ctx = document.getElementById('monthlyAttendanceChart').getContext('2d');
+const attendanceChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // Sample labels
+        datasets: [{
+            label: 'Attendance Days',
+            data: [20, 22, 18, 24], // Sample data
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+            const username = localStorage.getItem("currentUser");
+        const punchInTime = localStorage.getItem("punchInTime");
+        const punchOutTime = localStorage.getItem("punchOutTime");
+
+
+              const today = new Date();
+        const date = today.toLocaleDateString();  
+     
+        const historyData = [
+            { date: "01/05/2025", punchInTime: "09:00 AM", punchOutTime: "06:00 PM", status: "Present" },
+            { date: "01/04/2025", punchInTime: "09:15 AM", punchOutTime: "06:05 PM", status: "Late" },
+            { date: "01/03/2025", punchInTime: "08:45 AM", punchOutTime: "06:00 PM", status: "Present" }
+        ];
+
+
+       
+        function calculateStatus(punchInTime) {
+            if (!punchInTime) {
+                return "Not punched in yet"; 
+            }
+
+
+            const punchInParts = punchInTime.split(":");        
+    const punchInHour = parseInt(punchInParts[0], 10);           
+  const punchInMinute = parseInt(punchInParts[1], 10); 
+            const lateHour = 10; 
+            if (punchInHour < lateHour || (punchInHour === lateHour && punchInMinute < 0)) {
+                return "Present";
+            } else {
+                return "On Time";
+            }
+        }
+
+
+  
+        if (username && punchInTime) {
+            const attendanceContainer = document.getElementById("attendance-cards");
+
+
+            const card = document.createElement("div");
+            card.classList.add("attendance-card");
+
+
+            const status = calculateStatus(punchInTime);
+
+
+            card.innerHTML = `
+                <h3>Attendance Details</h3>
+                <div class="card-header">
+                    <img src="https://ui-avatars.com/api/?name=${username[0]}" alt="${username}" class="avatar">
+                    <span>${username}</span>
+                </div>
+                <div class="card-status ${status.toLowerCase().replace(" ", "-")}">
+                    <span>Status: </span><span>${status}</span>
+                </div>
+                <div class="card-details">
+                    <p><strong>Punch-In Time: </strong>${punchInTime}</p>
+                    <p><strong>Date: </strong>${date}</p>
+                    <p><strong>Punch-Out Time: </strong>${punchOutTime || "Not punched out yet"}</p>
+                </div>
+            `;
+
+
+            attendanceContainer.appendChild(card);
+
+
+                   localStorage.setItem("attendanceData", JSON.stringify({
+                username: username,
+                punchInTime: punchInTime,
+                punchOutTime: punchOutTime || "Not punched out yet",
+                date: date,
+                status: status
+            }));
+        } else {
+            alert("No attendance data found. Please sign in and punch in.");
+        }
+
+
+    
+        const historyTable = document.getElementById("attendance-history").getElementsByTagName('tbody')[0];
+
+
+        historyData.forEach(entry => {
+            const row = historyTable.insertRow();
+            row.innerHTML = `
+                <td>${entry.date}</td>
+                <td>${entry.punchInTime}</td>
+                <td>${entry.punchOutTime}</td>
+                <td>${entry.status}</td>
+            `;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+/* General Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: white;
+    color: #5E503F;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ff7f3e;
+    color: white;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+}
+
+nav a:hover {
+    color: #FEBBAC;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background: linear-gradient(to right, #f0dda5dd, #61ccd1e6); /* Light Pink to Coral Red to Orange Red for # of Employees */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 40px;
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.claim-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #0d8df6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.claim-button:hover {
+    background-color: #4196eb;
+}
+
+.claim-form {
+    display: none;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+}
+
+.claim-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.claim-form form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.claim-form form input,
+.claim-form form select,
+.claim-form form textarea {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.claim-form form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5ca4d2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.claim-form form button:hover {
+    background-color: #6099df;
+}
+
+/* Claim History Table */
+.claim-history {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.claim-history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .info {
+    margin-bottom: 10px;
+}
+
+.card .info strong {
+    display: inline-block;
+    width: 100px;
+    color: #555;
+}
+
+.card .action {
+    text-align: right;
+}
+
+.card .action a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.card .action a:hover {
+    text-decoration: underline;
+}
+
+

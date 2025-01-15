@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Timesheet with System Time</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+     background-image: url('https://as2.ftcdn.net/v2/jpg/09/27/45/33/1000_F_927453319_YMXnhqgsFBaaF3JIu6AA1zpAkdanCXzJ.jpg');
+     background-position: center;
+     background-size: cover;
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      height: 90vh;
+      margin-left: 200px;
+    }
+    .timesheet-container {
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #705834;
+    }
+    .time-display {
+      font-size: 1.2em;
+      margin: 15px 0;
+      color: #624d25;
+    }
+    .action-btn {
+      background-color: #59ce8f;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+      margin: 10px;
+    }
+    .action-btn:hover {
+      background-color: #45b77a;
+    }
+    .reset-btn {
+      background-color: #ff7f3e;
+    }
+    .submit-btn {
+      background-color: #645cff;
+    }
+    .reset-btn:hover {
+      background-color: #e36b2d;
+    }
+    .submit-btn:hover {
+      background-color: #504db4;
+    }
+  </style>
+</head>
+<body>
+  <div class="timesheet-container">
+    <h2>Employee Timesheet</h2>
+    <div class="time-display" id="loginTimeDisplay">Login Time: --:--:--</div>
+    <div class="time-display" id="logoutTimeDisplay">Logout Time: --:--:--</div>
+    <div class="time-display" id="totalHours">Total Hours: --:--</div>
+    <a href="./Dashboard.html" target="_blank"> <button class="action-btn" onclick="recordLoginTime()">Record Login Time</button></a>
+   
+    <button class="action-btn" onclick="recordLogoutTime()">Record Logout Time</button>
+    <!-- <button class="action-btn reset-btn" onclick="resetTimes()">Reset</button> -->
+     <a href="./Home_page.html" target="_blank"><button class="action-btn submit-btn" onclick="submitTimesheet()">Submit</button>
+     </a>
+  </div>
+
+  <script>
+    let loginTime, logoutTime;
+
+    function formatTime(date) {
+      return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    function recordLoginTime() {
+      loginTime = new Date();
+      document.getElementById('loginTimeDisplay').innerText = `Login Time: ${formatTime(loginTime)}`;
+      alert(`Login time recorded successfully! Recorded Time: ${formatTime(loginTime)}`);
+    //   window.location.href="./Dashboard.html" EventTarget=;
+    }
+
+    function recordLogoutTime() {
+      if (!loginTime) {
+        alert("Please record the login time first.");
+        return;
+      }
+      logoutTime = new Date();
+      document.getElementById('logoutTimeDisplay').innerText = `Logout Time: ${formatTime(logoutTime)}`;
+      calculateTotalHours();
+    }
+
+    function calculateTotalHours() {
+      if (loginTime && logoutTime) {
+        const difference = (logoutTime - loginTime) / (1000 * 60 * 60);
+        document.getElementById('totalHours').innerText = `Total Hours: ${difference.toFixed(2)}`;
+      }
+    }
+
+    function resetTimes() {
+      loginTime = null;
+      logoutTime = null;
+      document.getElementById('loginTimeDisplay').innerText = 'Login Time: --:--:--';
+      document.getElementById('logoutTimeDisplay').innerText = 'Logout Time: --:--:--';
+      document.getElementById('totalHours').innerText = 'Total Hours: --:--';
+    }
+
+    function submitTimesheet() {
+      if (!loginTime || !logoutTime) {
+        alert("Please record both login and logout times before submitting.");
+        return;
+      }
+      alert(`Timesheet submitted!\nLogin Time: ${formatTime(loginTime)}\nLogout Time: ${formatTime(logoutTime)}\nTotal Hours: ${document.getElementById('totalHours').innerText.split(": ")[1]}\n Logout is completely Success`);
+    //   window.location.href="./Home_page.html";
+      resetTimes();
+    
+    }
+  </script>
+</body>
+</html>

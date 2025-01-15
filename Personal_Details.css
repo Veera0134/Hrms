@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+    padding: 20px;
+}
+
+.form-container {
+    /* width: 60%; */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    /* margin-left: 500px; */
+    background-image: url('https://t3.ftcdn.net/jpg/01/10/40/52/240_F_110405220_HbToZ6DQgSMnPyEGbI3fSV6KJ1NEQJRX.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.section {
+    margin-bottom: 20px;
+    border: 1px solid #b5b2b2;
+    padding: 20px;
+    border-radius: 6px;
+}
+h2{
+    text-align: center;
+}
+
+h3 {
+    color: #ff7f3e;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.form-group, .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    flex: 1;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+select {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #5f5c5c;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus, input[type="date"]:focus, input[type="email"]:focus, select:focus {
+    outline: none;
+    border-color: #ff7f3e;
+}
+
+/* a {
+    flex: 1;
+    text-align: right;
+    text-decoration: none;
+    color: #804cc3;
+    font-size: 0.9em;
+}
+
+a:hover {
+    text-decoration: underline;
+} */
+
+.form-row label {
+    margin-right: 15px;
+    
+}
+
+.form-row input, .form-row select {
+    margin-right: 10px;
+    flex: 1;
+}
+.button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+button {
+    background-color: #ff7f3e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #cc6530;
+}

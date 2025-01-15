@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appraisal Template</title>
+<style>
+    /* Basic Page Styles */
+    :root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f5f6fa;
+    --card-background: #ffffff;
+    --text-color: #2c3e50;
+    --border-radius: 12px;
+  }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4ff;
+        margin: 0;
+        padding: 20px;
+    }
+    header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }  
+  
+  header h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+    .container {
+        width: 95%;
+        margin: auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-out;
+    }
+
+    /* Header Styles */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .profile-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 15px;
+        background-color: #ddd; /* Placeholder color */
+        overflow: hidden;
+    }
+
+    .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .profile-details h2 {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+    }
+
+    .profile-details p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Section Styles */
+    .section {
+        margin-top: 20px;
+    }
+
+    .section h3 {
+        font-size: 18px;
+        color: #333;
+        margin: 0;
+    }
+
+    .weight {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+    }
+
+    /* Question and Star Rating Styles */
+    .question {
+        margin-top: 15px;
+    }
+
+    .question p {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .stars {
+        display: flex;
+        gap: 5px;
+        font-size: 20px;
+        color: #ccc;
+    }
+
+    .star {
+        transition: transform 0.2s;
+        animation: pulse 1s infinite alternate;
+    }
+
+    .star:hover {
+        color: #f0ad4e;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    /* Feedback Box Styles */
+    .feedback-box {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        resize: none;
+        animation: fadeIn 1.5s ease-in;
+    }
+
+    /* Button Group and Buttons */
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        animation: buttonPop 0.3s ease forwards;
+    }
+
+    .save-button {
+        background-color: #ccc;
+        color: #333;
+    }
+
+    .submit-button {
+        background-color: #6f42c1;
+        color: #fff;
+        animation: buttonGlow 2s ease-in-out infinite;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes buttonPop {
+        from {
+            transform: scale(0.9);
+            opacity: 0.8;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes buttonGlow {
+        0%, 100% {
+            box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(111, 66, 193, 1);
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Appraisal Form</h1>
+        <!-- <div class="search-bar">
+            <input type="text" placeholder="Search employees by name, department, or ID...">
+        </div> -->
+    </header>
+<div class="container">
+    <div class="header">
+        <div class="profile-info">
+            <div class="profile-image">
+                <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Profile Picture">
+            </div>
+            <div class="profile-details">
+                <h2>Veera Raghava</h2>
+                <p>Senior Software Engineer</p>
+                <p>Manager: John Smith</p>
+            </div>
+        </div>
+        <div>
+            <h2>Leadership Excellence</h2>
+            <p>Appraisal Template</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Strategic Thinking</h3>
+        <p class="weight">Weight: 30%</p>
+        <div class="question">
+            <p>How effectively does the employee develop and implement strategic plans?</p>
+            <div class="stars">
+                <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+            </div>
+        </div>
+        <div class="question">
+            <p>Provide specific examples of strategic initiatives led by the employee:</p>
+            <textarea class="feedback-box" rows="3" placeholder="Enter your feedback here..."></textarea>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Team Management</h3>
+        <p class="weight">Weight: 40%</p>
+        <div class="question">
+            <p>Rate the employee's ability to motivate and develop team members:</p>
+            <div class="stars">
+                <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+            </div>
+        </div>
+        <div class="question">
+            <p>How effectively does the employee handle team conflicts?</p>
+            <div class="stars">
+                <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Innovation</h3>
+        <p class="weight">Weight: 30%</p>
+        <div class="question">
+            <p>Rate the employee's contribution to innovative solutions:</p>
+            <div class="stars">
+                <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+            </div>
+        </div>
+        <div class="question">
+            <p>Describe a significant innovation the employee has implemented:</p>
+            <textarea class="feedback-box" rows="3" placeholder="Enter your feedback here..."></textarea>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button class="button save-button">Save Draft</button>
+        <button class="button submit-button">Submit Appraisal</button>
+    </div>
+</div>
+
+</body>
+</html>

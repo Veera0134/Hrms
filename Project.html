@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Project Management</title>
+    <link rel="stylesheet" href="Project.css">
+</head>
+<body>
+    <header>
+        <h1>HR Project Management</h1>
+        <p>Track and manage ongoing projects efficiently</p>
+        
+        <div class="header-actions">
+            <div class="filter-container">
+                <label for="project-filter">Filter Projects:</label>
+                <select id="project-filter">
+                    <option value="all">All Projects</option>
+                    <option value="coming">Coming Projects</option>
+                    <option value="running">Running Projects</option>
+                    <option value="completed">Completed Projects</option>
+                </select>
+            </div>
+    
+            <!-- "+" Icon Button -->
+            <button class="add-project-btn" onclick="openAddProjectForm()">
+                <i class="fas fa-plus"></i> Add Project
+            </button>
+        </div>
+    </header>
+
+    <section class="project-dashboard">
+        
+        <!-- Coming Projects Section -->
+        <div class="project-section" id="coming-projects">
+            <h2>Coming Projects</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Employee Training Portal</h3>
+                    <p>Assigned to: Veera Raghava</p>
+                    <p><strong>Start Date:</strong> 2025-02-01</p>
+                    <p><strong>End Date:</strong> 2025-04-15</p>
+                    <p class="status pending">Pending</p>
+                </div>
+                <div class="project-card">
+                    <h3>Attendance System Revamp</h3>
+                    <p>Assigned to: Srikanth</p>
+                    <p><strong>Start Date:</strong> 2025-03-01</p>
+                    <p><strong>End Date:</strong> 2025-05-30</p>
+                    <p class="status pending">Pending</p>
+                </div>
+                <div class="project-card">
+                    <h3>New Hiring Workflow</h3>
+                    <p>Assigned to: Jay Simha</p>
+                    <p><strong>Start Date:</strong> 2025-04-01</p>
+                    <p><strong>End Date:</strong> 2025-06-15</p>
+                    <p class="status pending">Pending</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Running Projects Section -->
+        <div class="project-section" id="running-projects">
+            <h2>Running Projects</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Employee Onboarding System</h3>
+                    <p>Assigned to: Sindhuja</p>
+                    <p><strong>Start Date:</strong> 2024-11-01</p>
+                    <p><strong>End Date:</strong> 2025-01-15</p>
+                    <p class="status ongoing">Ongoing</p>
+                </div>
+                <div class="project-card">
+                    <h3>Performance Review Module</h3>
+                    <p>Assigned to: Ajay kumar</p>
+                    <p><strong>Start Date:</strong> 2024-11-10</p>
+                    <p><strong>End Date:</strong> 2025-02-01</p>
+                    <p class="status ongoing">Ongoing</p>
+                </div>
+                <div class="project-card">
+                    <h3>HR Dashboard Update</h3>
+                    <p>Assigned to: Latish Tivari</p>
+                    <p><strong>Start Date:</strong> 2024-12-05</p>
+                    <p><strong>End Date:</strong> 2025-03-20</p>
+                    <p class="status ongoing">Ongoing</p>
+                </div>
+            </div>
+        </div>
+    
+
+        <!-- Completed Projects Section -->
+        <div class="project-section" id="completed-projects">
+            <h2>Completed Projects</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Payroll Integration</h3>
+                    <p>Assigned to: Sureka</p>
+                    <p><strong>Start Date:</strong> 2024-08-01</p>
+                    <p><strong>End Date:</strong> 2024-10-15</p>
+                    <p class="status completed">Completed</p>
+                </div>
+                <div class="project-card">
+                    <h3>Employee Self-Service Portal</h3>
+                    <p>Assigned to: Amurtha</p>
+                    <p><strong>Start Date:</strong> 2024-09-01</p>
+                    <p><strong>End Date:</strong> 2024-11-01</p>
+                    <p class="status completed">Completed</p>
+                </div>
+                <div class="project-card">
+                    <h3>Leave Management System</h3>
+                    <p>Assigned to: Pavan</p>
+                    <p><strong>Start Date:</strong> 2024-10-01</p>
+                    <p><strong>End Date:</strong> 2024-12-10</p>
+                    <p class="status completed">Completed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="addProjectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddProjectForm()">&times;</span>
+            <h2>Add New Project</h2>
+            <form id="projectForm">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" pattern="[A-Za-z\s]+" minlength="4" 
+                       title="Project Name must contain at least 4 alphabetic characters and spaces only." required>
+                <span id="projectNameError" class="error-message"></span>
+    
+                <label for="assignedTo">Assigned To:</label>
+                <input type="text" id="assignedTo" pattern="[A-Za-z\s]+" minlength="4" 
+                       title="Assigned To must contain at least 4 alphabetic characters and spaces only." required>
+                <span id="assignedToError" class="error-message"></span>
+    
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" max="" required>
+    
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" max="" required>
+    
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="pending">Pending</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                </select>
+    
+                <button type="button" onclick="addProject()">Add Project</button>
+            </form>
+        </div>
+    </div>
+    
+    </div>
+    
+    
+
+    <script>
+        // JavaScript to filter projects based on selection
+        const filter = document.getElementById('project-filter');
+        const comingProjects = document.getElementById('coming-projects');
+        const runningProjects = document.getElementById('running-projects');
+        const completedProjects = document.getElementById('completed-projects');
+
+        filter.addEventListener('change', (event) => {
+            const value = event.target.value;
+            switch (value) {
+                case 'all':
+                    comingProjects.style.display = 'block';
+                    runningProjects.style.display = 'block';
+                    completedProjects.style.display = 'block';
+                    break;
+                case 'coming':
+                    comingProjects.style.display = 'block';
+                    runningProjects.style.display = 'none';
+                    completedProjects.style.display = 'none';
+                    break;
+                case 'running':
+                    comingProjects.style.display = 'none';
+                    runningProjects.style.display = 'block';
+                    completedProjects.style.display = 'none';
+                    break;
+                case 'completed':
+                    comingProjects.style.display = 'none';
+                    runningProjects.style.display = 'none';
+                    completedProjects.style.display = 'block';
+                    break;
+                default:
+                    comingProjects.style.display = 'block';
+                    runningProjects.style.display = 'block';
+                    completedProjects.style.display = 'block';
+                    break;
+            }
+        });
+     // Open modal
+function openAddProjectForm() {
+    document.getElementById('addProjectModal').style.display = 'block';
+}
+
+// Close modal
+function closeAddProjectForm() {
+    document.getElementById('addProjectModal').style.display = 'none';
+}
+
+// Add project to the list
+function addProject() {
+    const name = document.getElementById('projectName').value;
+    const assignedTo = document.getElementById('assignedTo').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const status = document.getElementById('status').value;
+
+    // Create a new project card
+    const projectCard = document.createElement('div');
+    projectCard.classList.add('project-card');
+    projectCard.innerHTML = `
+        <h3>${name}</h3>
+        <p>Assigned to: ${assignedTo}</p>
+        <p><strong>Start Date:</strong> ${startDate}</p>
+        <p><strong>End Date:</strong> ${endDate}</p>
+        <p class="status ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</p>
+    `;
+
+    // Append to the respective section
+    if (status === 'pending') {
+        document.querySelector('#coming-projects .project-list').appendChild(projectCard);
+    } else if (status === 'ongoing') {
+        document.querySelector('#running-projects .project-list').appendChild(projectCard);
+    } else if (status === 'completed') {
+        document.querySelector('#completed-projects .project-list').appendChild(projectCard);
+    }
+
+    // Close modal and reset form
+    closeAddProjectForm();
+    document.getElementById('projectForm').reset();
+}
+const fields = ["projectName", "assignedTo"];
+    fields.forEach(field => {
+        document.getElementById(field).addEventListener("input", function () {
+            validateField(field);
+        });
+    });
+
+    function validateField(field) {
+        const input = document.getElementById(field);
+        const error = document.getElementById(`${field}Error`);
+        const regex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
+        if (input.value.trim().length < 4) {
+            error.textContent = `${field.replace(/([A-Z])/g, " $1")} must be at least 4 characters long.`;
+            input.classList.add("invalid");
+        } else if (!regex.test(input.value)) {
+            error.textContent = `${field.replace(/([A-Z])/g, " $1")} must contain only alphabets.`;
+            input.classList.add("invalid");
+        } else {
+            error.textContent = "";
+            input.classList.remove("invalid");
+        }
+    }
+
+
+    </script>
+
+</body>
+</html>
+

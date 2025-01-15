@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Claims Dashboard</title>
+    <link rel="stylesheet" href="Claims_Managements.css">
+</head>
+<body>
+    <header>
+        <h1>HR Claims Management Dashboard</h1>
+        <nav>
+            <select id="filterStatus">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+                            
+        </nav>
+    </header>
+
+    <main>
+        <section class="stats-container" >
+            <div class="stat-card">
+                <h3>Pending Claims</h3>
+                <p class="stat-number">12</p>
+            </div>
+            <div class="stat-card">
+                <h3>Approved Claims</h3>
+                <p class="stat-number">45</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Amount</h3>
+                <p class="stat-number">$12,450</p>
+            </div>
+        </section>
+
+        <section class="claims-list">
+            <div class="claim-item">
+                <div class="claim-header">
+                    <span class="employee-id">EMP001</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="claim-details">
+                    <p class="claim-type">Travel Expense</p>
+                    <p class="claim-amount">$250.00</p>
+                    <p class="claim-description">Business trip to New York - Hotel and meals</p>
+                    <p class="claim-date">Submitted: 2024-02-20</p>
+                </div>
+                <div class="claim-actions">
+                    <button class="btn-approve">Approve</button>
+                    <button class="btn-reject">Reject</button>
+                </div>
+            </div>
+
+            <div class="claim-item">
+                <div class="claim-header">
+                    <span class="employee-id">EMP002</span>
+                    <span class="status approved">Approved</span>
+                </div>
+                <div class="claim-details">
+                    <p class="claim-type">Medical Expense</p>
+                    <p class="claim-amount">$150.00</p>
+                    <p class="claim-description">Annual health checkup</p>
+                    <p class="claim-date">Submitted: 2024-02-19</p>
+                </div>
+            </div>
+
+            <div class="claim-item">
+                <div class="claim-header">
+                    <span class="employee-id">EMP003</span>
+                    <span class="status rejected">Rejected</span>
+                </div>
+                <div class="claim-details">
+                    <p class="claim-type">Equipment</p>
+                    <p class="claim-amount">$800.00</p>
+                    <p class="claim-description">Laptop repair and accessories</p>
+                    <p class="claim-date">Submitted: 2024-02-18</p>
+                </div>
+              
+            </div>
+            <div class="claim-item" id>
+                <div id="claims-container"></div>
+            </div>
+        </section>
+        <!-- <button id="clearStorage">Clear Claims Data</button> -->
+     
+    </main>
+
+       <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterStatus = document.getElementById('filterStatus');
+        const claimItems = document.querySelectorAll('.claim-item');
+
+        // Function to filter claims based on status
+        function filterClaims() {
+            const statusFilter = filterStatus.value;
+
+            claimItems.forEach((claim) => {
+                const claimStatus = claim.querySelector('.status').textContent.toLowerCase();
+
+                // Check if the status is matched
+                const isStatusMatch = statusFilter === 'all' || claimStatus.includes(statusFilter.toLowerCase());
+
+                // Display the claim if status matches, otherwise hide it
+                if (isStatusMatch) {
+                    claim.style.display = 'block';
+                } else {
+                    claim.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listener to the filterStatus dropdown
+        filterStatus.addEventListener('change', filterClaims);
+    });
+    const claims = JSON.parse(localStorage.getItem('claims')) || [];
+
+// Select the container for claims
+const claimsContainer = document.getElementById('claims-container');
+
+// Helper function to create a claim card
+function createClaimCard(claim) {
+    const statusClass = claim.status ? claim.status.toLowerCase() : 'pending';
+    const statusText = claim.status ? claim.status.charAt(0).toUpperCase() + claim.status.slice(1) : 'Pending';
+
+    return `
+        <div class="claim-card">
+            <h3>${claim.claimType} Claim</h3>
+            <p><strong>Description:</strong> ${claim.description}</p>
+            <p><strong></strong>Submitted: ${claim.date}</p>
+            <p><strong>Amount:</strong> $${Number(claim.amount).toFixed(2)}</p>
+            <p><strong>Receipt:</strong> ${claim.receipt}</p>
+            <span class="status ${statusClass}">${statusText}</span>
+        </div>
+    `;
+}
+
+// Render all claims
+function renderClaims() {
+    if (claims.length === 0) {
+        // claimsContainer.innerHTML = '<p>No claims to display.</p>';
+    } else {
+        claimsContainer.innerHTML = claims.map(createClaimCard).join('');
+    }
+}
+
+// Initial render
+renderClaims();
+</script>
+
+    
+</body>
+</html>

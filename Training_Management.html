@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Training_Management.css">
+    <title>Training Management</title>
+    <script>
+        function assignTraining(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            const employeeSelect = document.getElementById('employee');
+            const trainingSelect = document.getElementById('training');
+            const employeeName = employeeSelect.options[employeeSelect.selectedIndex].text;
+            const trainingName = trainingSelect.options[trainingSelect.selectedIndex].text;
+
+            // Create a new card for the assigned training
+            const newCard = document.createElement('div');
+            newCard.classList.add('cards-container');
+
+            newCard.innerHTML = `
+                <div class="employee-card" data-employee-id="${employeeName}">
+                    <div class="card-header">
+                        <div class="profile-circle">${employeeName.charAt(0)}</div>
+                        <h2>${employeeName}</h2>
+                        <span class="employee-id">${employeeName}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-group">
+                            <label>Assigned Training:</label>
+                            <span>${trainingName}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Join Date:</label>
+                            <span>${new Date().toISOString().split('T')[0]}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Status:</label>
+                            <span>Assigned</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-view">Generate Certificate</button>
+                    </div>
+                </div>
+            `;
+
+            document.querySelector('.main-container').appendChild(newCard); // Append new card
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Assign Training to Employees</h1>
+    </header>
+
+    <div class="container">
+        <section class="assign-training">
+            <h2>Assign Training to Employees</h2>
+            <form onsubmit="assignTraining(event)">
+                <label for="employee">Select Employee</label>
+                <select id="employee" name="employee">
+                    <option value="emp1">John</option>
+                    <option value="emp2">jay Simha</option>
+                    <option value="emp3">Pavan</option>
+                </select>
+
+                <label for="training">Select Training</label>
+                <select id="training" name="training">
+                    <option value="training1">Web Development</option>
+                    <option value="training2">Project Management</option>
+                    <option value="training3">Cybersecurity</option>
+                </select>
+
+                <button type="submit">Assign Training</button>
+            </form>
+        </section>
+      
+        <section class="employee-cards">
+            <h2>Employee Training Progress</h2>
+            <div class="main-container">
+                 <div class="cards-container">
+                <div class="employee-card" data-employee-id="EMP001">
+                    <div class="card-header">
+                        <div class="profile-circle">VR</div>
+                        <h2>Veera Raghava</h2>
+                        <span class="employee-id">EMP001</span>
+                    </div>
+                    <div class="card-body">
+                     
+                        <div class="info-group">
+                            <label>Assigned Training:</label>
+                            <span>web Developer</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Join Date:</label>
+                            <span>2023-01-15</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Status:</label>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-view">Generate Certificate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cards-container">
+                <div class="employee-card" data-employee-id="EMP002">
+                    <div class="card-header">
+                        <div class="profile-circle">Ak</div>
+                        <h2>Ajay Kumar</h2>
+                        <span class="employee-id">EMP002</span>
+                    </div>
+                    <div class="card-body">
+                      
+                        <div class="info-group">
+                            <label>Assigned Training:</label>
+                            <span>Cyber Security</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Join Date:</label>
+                            <span>2023-01-15</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Status:</label>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-view">Generate Certificate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cards-container">
+                <div class="employee-card" data-employee-id="EMP003">
+                    <div class="card-header">
+                        <div class="profile-circle">Lk</div>
+                        <h2>Latish Kumar</h2>
+                        <span class="employee-id">EMP003</span>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="info-group">
+                            <label>Assigned Training:</label>
+                            <span>Azure Devops</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Join Date:</label>
+                            <span>2023-01-15</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Status:</label>
+                            <span>In Progress</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-view">Generate Certificate</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Astrolite Tech Solution. All rights reserved.</p>
+    </footer>
+</body>
+</html>

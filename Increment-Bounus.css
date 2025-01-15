@@ -1,0 +1,267 @@
+/* Basic Reset */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --text-color: #2c3e50;
+  --border-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Container Styling */
+.container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.5s ease;
+
+}
+
+/* Header Styling */
+h2, h3 {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  animation: slideIn 1s ease-out;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin-bottom: 30px;
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Section Layout */
+.action-section, .recent-bonus-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  background-color: white;
+}
+
+/* Card Styling with Keyframe Animation */
+.card {
+  background-color: white;
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+  animation: pulse 2s infinite alternate;
+}
+.card:hover {
+  transform: scale(1.05);
+  /* background-color: #f0efee; */
+}
+
+/* Button Styling */
+.card button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  animation: buttonFade 1.5s infinite alternate;
+}
+.card button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Form Section Styling */
+.form-section {
+  display: none; /* Hidden by default */
+  margin-top: 30px;
+}
+.form-section.active {
+  display: block;
+  animation: formSlideUp 1s ease-out;
+}
+
+/* Recent Bonus Section */
+.recent-bonus {
+  flex: 1;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  text-align: left;
+  animation: popIn 1.2s ease-out;
+}
+
+/* Label Styling with Keyframe Animation */
+label {
+  font-weight: bold;
+  color: white;
+  animation: labelGlow 1.5s infinite alternate;
+}
+
+/* Input Styling */
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  animation: inputGlow 2s infinite alternate;
+}
+
+/* Approve and Reject Button Styling */
+.approve-btn, .reject-btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  animation: buttonPulse 1.5s infinite alternate;
+}
+.approve-btn {
+  background-color: #59ce8f;
+}
+.reject-btn {
+  background-color: #ff1e00;
+}
+.approve-btn:hover {
+  background-color: #4ca979;
+}
+.reject-btn:hover {
+  background-color: #e60000;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  /* from { background-color: #D2B48C; }
+  to { background-color: #C3A77B; } */
+}
+
+@keyframes buttonFade {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+
+@keyframes formSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes labelGlow {
+  from { color: #705834; }
+  to { color: #8c7c6a; }
+}
+
+@keyframes inputGlow {
+  from { border-color: #ccc; }
+  to { border-color: #705834; }
+}
+
+@keyframes buttonPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* General Button Styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  animation: buttonGlow 2s infinite alternate;
+}
+
+/* Submit Button Styling */
+.submit-btn {
+  background-color: #59ce8f;
+  color: #fff;
+}
+.submit-btn:hover {
+  background-color: #4ca979;
+}
+
+/* Propose Button Styling */
+.propose-btn {
+  background-color: #59ce8f;
+  color: white;
+}
+.propose-btn:hover {
+  background-color: #4ca979;
+}
+
+/* Close Button Styling */
+.close-btn {
+  background-color: #ff1e00;
+  color: #fff;
+  font-size: 14px;
+}
+.close-btn:hover {
+  background-color: #e60000;
+}
+
+/* Keyframe for Button Glow Effect */
+@keyframes buttonGlow {
+  from { box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  to { box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+}
+
+.recent-bonus-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  gap: 20px; /* Space between grid items */
+  padding: 20px;
+}
+
+.recent-bonus {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.recent-bonus:hover {
+  transform: scale(1.05); /* Hover effect for scaling */
+}
+
+.recent-bonus button {
+  background-color:#59ce8f;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.recent-bonus button:hover {
+  background-color: #8c7c6a;
+}

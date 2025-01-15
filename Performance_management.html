@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f9fd;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            /* background-color: #ff1e00; */
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes progressBarAnimation {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 80%; /* Can be dynamic based on progress */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* h2 {
+            color: #ff1e00;
+        } */
+
+        .progress {
+            background-color: #d0d0d0;
+            border-radius: 10px;
+            width: 100%;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background-color: #57d8d8;
+            height: 100%;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            width: 80%;
+            transition: width 0.5s ease-in-out;
+            animation: progressBarAnimation 1s ease-in-out forwards;
+        }
+      #kpis{
+                  display: flex;
+        flex-direction:column;
+      }
+      #kpi-card{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+        .kpi-card {
+            width: 280px;
+            /* background-color: #ff1e00; */
+            color: rgb(0, 0, 0);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, rgb(0, 174, 255), white, rgb(0, 208, 255));
+            transition: transform 0.3s;
+            animation: fadeIn 1s ease-in-out forwards, scaleUp 0.5s ease-in-out;
+        }
+
+        .kpi-card:hover {
+            transform: scale(1.05);
+        }
+
+        .feedback-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feedback-form {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+           
+        .feedback-summary{
+            text-align: center;
+        }
+        .bar-graph {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            animation: progressBarAnimation 1s ease-in-out forwards;
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar-label {
+            width: 150px;
+            text-align: right;
+        }
+
+        .bar-track {
+            background-color: #e0e0e0;
+            width: 100%;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            text-align: right;
+            color: white;
+            padding-right: 5px;
+        }
+
+
+        .btn {
+            background-color: #5780d8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #56c7c3;
+        }
+        .pie-chart {
+        flex: 1;
+        text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Performance Management System</h1>
+    </header>
+
+    <section id="goal-tracking">
+        <h2>Goal Setting and Tracking</h2>
+        <div class="goal">
+            <p>Goal: Complete HRMS Module by Q4</p>
+            <div class="progress">
+                <div class="progress-bar" style="width: 80%;">80%</div>
+            </div>
+            <p>Deadline: December 31, 2024</p>
+        </div>
+    </section>
+
+
+    <section id="feedback">
+        <h2>360-Degree Feedback</h2>
+        <div class="feedback-container">
+            <div class="pie-chart">
+                <h4>Project Performance</h4>
+                <canvas id="performancePieChart" width="300" height="250"></canvas>
+            </div>
+            <div class="feedback-summary">
+                <h3>Feedback Summary</h3>
+                <div class="bar-graph">
+                    <div class="bar">
+                        <span class="bar-label">Leadership:</span>
+                        <div class="bar-track">
+            
+            <div class="bar-fill" style="width: 85%; background-color: #57d8d8;">85%</div>
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <span class="bar-label">Communication:</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 78%; background-color: #57d8d8;">78%</div>
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <span class="bar-label">Problem-Solving:</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 92%; background-color: #57d8d8;">92%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kpis">
+        <h2>Key Performance Indicators (KPIs)</h2>
+        <div id="kpi-card">
+        <div class="kpi-card">
+            <h3>Developer Productivity</h3>
+            <p>Target: 95%</p>
+            <p>Achieved: 90%</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Code Quality</h3>
+            <p>Target: 95%</p>
+            <p>Achieved: 92%</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Bug Resolution Time</h3>
+            <p>Target: 24 hours</p>
+            <p>Achieved: 18 hours</p>
+        </div>
+    </div>
+    </section>
+    <script>
+        // Data for project performance pie chart
+        const projectPerformanceData = {
+            labels: ["Timely Delivery", "Client Satisfaction", "Budget Adherence"],
+            values: [40, 35, 25], // Values related to project performance
+            colors: ["#57d8d8", "#57a8d8", "#57d857"]
+        };
+    
+        // Function to draw a pie chart
+        function drawPieChart(canvasId, data) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext("2d");
+            const total = data.values.reduce((sum, value) => sum + value, 0);
+    
+            let startAngle = 0;
+    
+            data.values.forEach((value, index) => {
+                const sliceAngle = (value / total) * 2 * Math.PI;
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2, canvas.height / 2); // Move to the center
+                ctx.arc(
+                    canvas.width / 2,
+                    canvas.height / 2,
+                    Math.min(canvas.width / 2, canvas.height / 2),
+                    startAngle,
+                    startAngle + sliceAngle
+                );
+                ctx.closePath();
+                ctx.fillStyle = data.colors[index];
+                ctx.fill();
+                startAngle += sliceAngle;
+            });
+    
+            // Add labels
+            let labelStartAngle = 0;
+            data.labels.forEach((label, index) => {
+                const sliceAngle = (data.values[index] / total) * 2 * Math.PI;
+                const middleAngle = labelStartAngle + sliceAngle / 2;
+                const labelX =
+                    canvas.width / 2 +
+                    Math.cos(middleAngle) * (canvas.width / 2.5);
+                const labelY =
+                    canvas.height / 2 +
+                    Math.sin(middleAngle) * (canvas.height / 2.5);
+                ctx.fillStyle = "#000";
+                ctx.font = "14px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText(label, labelX, labelY);
+                labelStartAngle += sliceAngle;
+            });
+        }
+    
+        // Draw the pie chart
+        document.addEventListener("DOMContentLoaded", () => {
+            drawPieChart("performancePieChart", projectPerformanceData);
+        });
+    </script>
+</body>
+</html>

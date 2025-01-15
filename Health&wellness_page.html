@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health and Wellness</title>
+    <style>
+        :root {
+            --primary-color: #3498db; /* Blue color */
+            --secondary-color: #ffffff; /* White color */
+            --background-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-radius: 12px;
+        } 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef5f9;
+            color: #333;
+        }
+        header {
+            color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .card {
+            position: relative;
+            width: 500px;
+            height: 250px;
+            background: var(--primary-color);
+            border-radius: 0 100px 100px 0; /* Semi-circle on the right side */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            justify-content: space-between;
+            animation: buttonGlow 2s ease-in-out infinite;
+        }
+        .card img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary-color);
+        }
+        .card-content {
+            color: var(--secondary-color);
+            flex: 1;
+            margin-right: 1.5rem;
+            position: relative;
+        }
+        .card-content h2 {
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            margin-left: 60px;
+        }
+        .card-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .card-content a {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .card-content a:hover {
+            background-color: #136fd2;
+            color: white;
+        }
+        .double-quote {
+            position: absolute;
+            top: -45px;
+            left: -10px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+        }
+        @keyframes buttonGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgb(6, 33, 51);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Health and Wellness</h1>
+    </header>
+
+    <div class="container">
+        <!-- Wellness Programs Section -->
+        <div class="card">
+            <div class="card-content">
+                <div class="double-quote">“</div>
+                <h2>Wellness Programs</h2>
+                <p>Enhance your physical and mental health through yoga, fitness training, and nutrition workshops. Participate in community events to improve overall well-being.</p>
+                <a href="#">Explore Programs</a>
+            </div>
+            <img src="https://cdn.slidesharecdn.com/ss_thumbnails/heath-and-wellness-220420061646-thumbnail.jpg?width=640&height=640&fit=bounds" alt="Wellness Programs">
+        </div>
+
+        <!-- Mental Health Support Section -->
+        <div class="card">
+            <div class="card-content">
+                <div class="double-quote">“</div>
+                <h2>Mental Health Support</h2>
+                <p>Access confidential mental health counseling and support. Our trained professionals are here to assist with stress management and anxiety relief.</p>
+                <a href="#">Book a Session</a>
+            </div>
+            <img src="https://th.bing.com/th/id/OIP.XuJJcgFzcX6pww6k-9bAdAHaHa?pid=ImgDet&w=178&h=178&c=7&dpr=1.5" alt="Mental Health Support">
+        </div>
+
+        <!-- Medical Checkups Section -->
+        <div class="card">
+            <div class="card-content">
+                <div class="double-quote">“</div>
+                <h2>Medical Checkups</h2>
+                <p>Stay proactive about your health by scheduling regular medical checkups. Book appointments and track medical history effortlessly.</p>
+                <a href="#">Book Now</a>
+            </div>
+            <img src="https://www.khadehospital.com/wp-content/uploads/2022/02/Health-Checkup.jpg" alt="Medical Checkups">
+        </div>
+    </div>
+</body>
+</html>

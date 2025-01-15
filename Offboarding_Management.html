@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offboarding Management</title>
+    <link rel="stylesheet" href="Offboarding_Management.css">
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50, #3498db); /* Sunset colors: soft pink to warm orange */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 2px solid #ddd;
+}
+
+main {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    padding: 20px;
+}
+
+.employee-offboarding {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping of cards */
+    overflow-x: auto; /* Allow horizontal scrolling if cards overflow */
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start; /* Align cards from the start */
+    width: 100%;
+}
+
+.employee-card {
+    background: #eae8e8;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 280px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.employee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.employee-card .card-header h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.employee-card .card-header p {
+    font-size: 14px;
+    color: #666;
+}
+
+.employee-card .card-body {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.employee-card .card-body p {
+    margin-bottom: 5px;
+}
+
+.employee-card .offboarding-status {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.employee-card .status {
+    color: #007bff;
+    text-transform: capitalize;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons .button {
+    width: 48%;
+}
+
+#offboardingDataContainer {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+button.completed {
+    background-color: #28a745;
+}
+
+button.rejected {
+    background-color: #dc3545;
+}
+
+button.completed:hover {
+    background-color: #218838;
+}
+
+button.rejected:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .employee-card {
+        width: 100%;
+    }
+
+    header {
+        font-size: 20px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Offboarding Management</h1>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Employee Cards Section -->
+        <section class="employee-offboarding">
+           
+            <div class="employee-card" id="employeeCard1" empID="12345">
+                <div class="card-header">
+                    <h3>Raghava</h3>
+                    <p>Position: Software Developer</p>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <p>Department: IT</p>
+                        <p>Start Date: 2020-05-15</p>
+                        <p>Status: Active</p>
+                    </div>
+                    <div class="offboarding-status">
+                        <label>Offboarding Status: </label>
+                        <p>Pending</p>
+                    </div>
+                </div>  
+            </div>
+        </section>
+        <section class="employee-offboarding">
+           
+            <div class="employee-card" id="employeeCard1" empID="12345">
+                <div class="card-header">
+                    <h3>Ajay Kumar</h3>
+                    <p>Position: Software Developer</p>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <p>Department: IT</p>
+                        <p>Start Date: 2020-05-15</p>
+                        <p>Status: Active</p>
+                    </div>
+                    <div class="offboarding-status">
+                        <label>Offboarding Status: </label>
+                        <p>Pending</p>
+                    </div>
+                </div>  
+            </div>
+        </section>
+    
+    
+        <div id="offboardingDataContainer">
+            <!-- Employee offboarding data will be displayed here -->
+        </div>
+    </main>
+    
+    <script>
+     
+  // Retrieve stored offboarding data from localStorage
+  const offboardingData = JSON.parse(localStorage.getItem('offboardingData'));
+
+  const container = document.getElementById('offboardingDataContainer');
+
+  if (offboardingData) {
+    const { empName, position, empId, feedback, finalSalary, bonus, acknowledgment, status } = offboardingData;
+
+    // Create a card to display the employee data
+    const card = document.createElement('div');
+    card.className = 'employee-card';
+    card.innerHTML = `
+      <h2> ${empName}</h2>
+      <p><strong>Position:</strong> ${position}</p>
+      <p><strong>Employee ID:</strong> ${empId}</p>
+      <p><strong>Feedback:</strong> ${feedback}</p>
+      <p><strong>Final Salary:</strong> ${finalSalary}</p>
+      <p><strong>Bonus:</strong> ${bonus}</p>
+      <p><strong>Acknowledgment:</strong> ${acknowledgment}</p>
+      <p><strong>Status:</strong> <span class="status">${status}</span></p>
+      <div class="buttons">
+        <button class="button completed" ${status === 'Completed' || status === 'Rejected' ? 'disabled' : ''}>Completed</button>
+        <button class="button rejected" ${status === 'Completed' || status === 'Rejected' ? 'disabled' : ''}>Rejected</button>
+      </div>
+    `;
+
+    // Add event listeners to the buttons
+    const completedButton = card.querySelector('.completed');
+    const rejectedButton = card.querySelector('.rejected');
+    const statusElement = card.querySelector('.status');
+
+    completedButton.addEventListener('click', () => {
+      updateStatus('Completed', statusElement, completedButton, rejectedButton);
+    });
+
+    rejectedButton.addEventListener('click', () => {
+      updateStatus('Rejected', statusElement, completedButton, rejectedButton);
+    });
+
+    container.appendChild(card);
+  } else {
+    container.innerHTML = '<p>No offboarding data found.</p>';
+  }
+
+  // Function to update the status
+  function updateStatus(newStatus, statusElement, completedButton, rejectedButton) {
+    // Update the displayed status
+    statusElement.textContent = newStatus;
+
+    // Update the status in localStorage
+    const updatedData = { ...offboardingData, status: newStatus };
+    localStorage.setItem('offboardingData', JSON.stringify(updatedData));
+
+    // Disable buttons
+    completedButton.disabled = true;
+    rejectedButton.disabled = true;
+
+    // Alert the user
+    alert(`Offboarding Process: ${newStatus}`);
+  }
+</script>
+
+     
+      
+</body>
+</html>
+

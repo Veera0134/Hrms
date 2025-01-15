@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Task Management</title>
+    <link rel="stylesheet" href="./Task_Management.css"> <!-- External CSS for styling -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>HR Task Management</h1>
+        <p>Manage and track tasks assigned to employees</p>
+        <nav>
+
+            <select id="filterStatus" >
+                <option value="all">All Status</option>
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+
+            <button id="addTaskBtn" class="add-task-btn">+</button>
+                <button onclick="loadReviews()">Show Reviews</button>
+
+        </nav>
+    </header>
+    <div id="reviewList">
+        <!-- Reviews will be dynamically loaded here -->
+      </div>
+    <!-- Task Form (Initially Hidden) -->
+    <div id="taskForm" class="task-form">
+        <h2>Add New Task</h2>
+        <form id="taskFormElement">
+            <label for="taskName">Task Name</label>
+            <input type="text" id="taskName" pattern="[A-Za-z\s]+" minlength="4" 
+                   title="Task Name must contain at least 4 alphabetic characters and spaces only." required>
+            <span id="taskNameError" class="error-message"></span>
+            
+            <label for="assignedTo">Assigned To</label>
+            <input type="text" id="assignedTo" pattern="[A-Za-z\s]+" minlength="4" 
+                   title="Assigned To must contain at least 4 alphabetic characters and spaces only." required>
+            <span id="assignedToError" class="error-message"></span>
+            
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" required>
+            
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" required>
+            
+            <label for="taskStatus">Status:</label>
+            <select id="taskStatus" name="taskStatus" required>
+              <option value="todo">To Do</option>
+              <option value="in-progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+            
+            <button type="submit">Save Task</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Task Dashboard Section -->
+    <section class="task-dashboard">
+        <h2>Task Dashboard</h2>
+        <div class="task-list" id="taskList">
+            <!-- Task cards will be dynamically appended here -->
+        </div>
+    </section>
+
+    
+    
+
+
+    <script>
+function loadReviews() {
+  const reviewList = document.getElementById('reviewList');
+  const reviews = JSON.parse(localStorage.getItem('reviews')) || {}; // Fetch reviews from localStorage
+
+  // Clear any existing content in the review list
+  reviewList.innerHTML = '';
+
+  // Check if there are any reviews
+  if (Object.keys(reviews).length === 0) {
+    reviewList.innerHTML = '<p>No reviews available yet.</p>';
+    return;
+  }
+
+  // Generate a card for each review
+  Object.entries(reviews).forEach(([taskName, review]) => {
+    const reviewCard = document.createElement('div');
+    reviewCard.classList.add('review-card');
+
+    reviewCard.innerHTML = `
+      <h3>${taskName}</h3>
+      <p>${review}</p>
+      <button class="done-btn">Done</button>
+      <button class="close-btn">Close</button>
+    `;
+
+    // "Done" button click event
+    reviewCard.querySelector('.done-btn').addEventListener('click', () => {
+      alert(`Review for ${taskName} marked as Done`);
+      // Additional functionality can be added here, like marking the review as done in localStorage
+    });
+
+    // "Close" button click event
+    reviewCard.querySelector('.close-btn').addEventListener('click', () => {
+      reviewList.removeChild(reviewCard);  // Removes the review card from the DOM
+      delete reviews[taskName];            // Removes the review from localStorage
+      localStorage.setItem('reviews', JSON.stringify(reviews));  // Update localStorage
+    });
+
+    reviewList.appendChild(reviewCard);
+  });
+}
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterStatus = document.getElementById('filterStatus');
+    const taskForm = document.getElementById('taskForm');
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const saveTaskBtn = document.querySelector('#taskForm button[type="submit"]');
+    const taskList = document.getElementById('taskList');
+
+    function filterTasks() {
+        const statusFilter = filterStatus.value;
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        taskList.innerHTML = ''; // Clear existing task cards
+
+        tasks.forEach(task => {
+            const taskStatus = task.status.toLowerCase();
+            const isStatusMatch = statusFilter === 'all' || taskStatus.includes(statusFilter.toLowerCase());
+
+            if (isStatusMatch) {
+                createTaskCard(task);
+            }
+        });
+    }
+
+    function createTaskCard(task) {
+        const taskCard = document.createElement('div');
+        taskCard.classList.add('task-card');
+
+        taskCard.innerHTML = `
+            <h3>${task.taskName}</h3>
+            <p>Assigned to: ${task.assignedTo}</p>
+            <p><strong>Start Date:</strong> ${task.startDate}</p>
+            <p><strong>End Date:</strong> ${task.endDate}</p>
+            <button class="status-btn">${task.status.charAt(0).toUpperCase() + task.status.slice(1)}</button>
+        `;
+
+        taskList.appendChild(taskCard);
+    }
+
+    addTaskBtn.addEventListener('click', () => {
+        taskForm.style.display = 'block';  // Show the form
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        taskForm.style.display = 'none';  // Hide the form
+    });
+
+    saveTaskBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent form submission
+
+        const taskName = document.getElementById('taskName').value.trim();
+        const assignedTo = document.getElementById('assignedTo').value.trim();
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const status = document.getElementById('taskStatus').value;
+
+        if (validateForm(taskName, assignedTo)) {
+            const task = {
+                taskName,
+                assignedTo,
+                startDate,
+                endDate,
+                status,
+            };
+
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            createTaskCard(task);
+
+            document.getElementById('taskFormElement').reset();
+            taskForm.style.display = 'none';
+        }
+    });
+
+    function validateForm(taskName, assignedTo) {
+        const taskNameError = document.getElementById('taskNameError');
+        const assignedToError = document.getElementById('assignedToError');
+        const nameRegex = /^[A-Za-z\s]+$/;
+
+        let isValid = true;
+
+        if (taskName.length < 4 || !nameRegex.test(taskName)) {
+            taskNameError.textContent = "Task Name must contain at least 4 alphabetic characters and spaces only.";
+            document.getElementById('taskName').classList.add("invalid");
+            isValid = false;
+        } else {
+            taskNameError.textContent = "";
+            document.getElementById('taskName').classList.remove("invalid");
+        }
+
+        if (assignedTo.length < 4 || !nameRegex.test(assignedTo)) {
+            assignedToError.textContent = "Assigned To must contain at least 4 alphabetic characters and spaces only.";
+            document.getElementById('assignedTo').classList.add("invalid");
+            isValid = false;
+        } else {
+            assignedToError.textContent = "";
+            document.getElementById('assignedTo').classList.remove("invalid");
+        }
+
+        return isValid;
+    }
+
+    filterTasks();
+});
+
+    </script>
+    
+</body>
+</html>

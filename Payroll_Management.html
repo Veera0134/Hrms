@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Processing - HR Portal</title>
+    <link rel="stylesheet" href="Payroll_Management.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Payroll Processing</h1>
+        <p>HR Management System</p>
+    </header>
+
+    <div class="container">
+        <div class="steps-container">
+            <div class="step-card" onclick="showSection('payroll')">
+                <div class="step-number">1</div>
+                <h3>Complete Payroll</h3>
+                <p>Process monthly payroll calculations and approvals</p>
+            </div>
+            <div class="step-card" onclick="showSection('payslip')">
+                <div class="step-number">2</div>
+                <h3>Payslip Generation</h3>
+                <p>Generate and distribute digital payslips</p>
+            </div>
+            <div class="step-card" onclick="showSection('esi-pf')">
+                <div class="step-number">3</div>
+                <h3>ESI & PF Submission</h3>
+                <p>Process statutory compliance reports</p>
+            </div>
+        </div>
+
+        <div class="section-content" id="payroll-section">
+            <h2>Payroll Processing</h2>
+            <div class="action-card">
+                <form id="payrollForm">
+                    <div class="form-group">
+                        <label for="payrollMonth">Select Month</label>
+                        <input type="month" id="payrollMonth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="">Select Department</option>
+                            <option value="it">IT</option>
+                            <option value="hr">HR</option>
+                            <option value="finance">Finance</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="location.href='./PaySlip_Page.html'">Process Payroll</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="section-content hidden" id="payslip-section">
+            <h2>Payslip Generation</h2>
+            <div class="action-card">
+                <div class="search-box">
+                    <input type="text" id="employeeSearch" placeholder="Search employee...">
+                </div>
+                <div id="payslip-details">
+                    <!-- Payslip details will be dynamically inserted here -->
+                  </div>
+            </div>
+        </div>
+
+        <div class="section-content hidden" id="esi-pf-section">
+            <h2>ESI & PF Submission</h2>
+            <div class="action-card">
+                <div class="report-buttons">
+                    <button onclick="generateReport('esi')" class="btn btn-secondary">Generate ESI Report</button>
+                    <button onclick="generateReport('pf')" class="btn btn-secondary">Generate PF Report</button>
+                </div>
+                <div class="report-history">
+                    <h3>Previous Submissions</h3>
+                    <ul id="submissionHistory">
+                        <!-- Submission history will be added here dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // JavaScript Code
+
+document.addEventListener("DOMContentLoaded", () => {
+    const steps = document.querySelectorAll(".step-card");
+    const sections = document.querySelectorAll(".section-content");
+
+    // Function to show a specific section
+    function showSection(sectionId) {
+        sections.forEach(section => {
+            if (section.id === `${sectionId}-section`) {
+                section.classList.remove("hidden");
+            } else {
+                section.classList.add("hidden");
+            }
+        });
+    }
+
+    // Attach click listeners to step cards
+    steps.forEach(step => {
+        step.addEventListener("click", () => {
+            const section = step.getAttribute("onclick").match(/'(.*?)'/)[1];
+            showSection(section);
+        });
+    });
+
+    // Function to generate reports (ESI or PF)
+    // function generateReport(type) {
+    //     const submissionHistory = document.getElementById("submissionHistory");
+    //     const listItem = document.createElement("li");
+    //     const currentDate = new Date().toLocaleDateString();
+
+    //     listItem.textContent = `${type.toUpperCase()} Report submitted on ${currentDate}`;
+    //     submissionHistory.appendChild(listItem);
+
+    //     alert(`${type.toUpperCase()} report has been generated successfully!`);
+    // }
+
+    // Attach event listeners for report generation buttons
+    // document.querySelector(".btn-secondary[onclick*='esi']").addEventListener("click", () => generateReport("esi"));
+    // document.querySelector(".btn-secondary[onclick*='pf']").addEventListener("click", () => generateReport("pf"));
+
+    // Function to filter employee payslip list
+    const employeeSearch = document.getElementById("employeeSearch");
+    employeeSearch.addEventListener("input", () => {
+        const searchValue = employeeSearch.value.toLowerCase();
+        const payslipList = document.getElementById("payslipList");
+        const entries = payslipList.querySelectorAll(".payslip-entry");
+
+        entries.forEach(entry => {
+            const name = entry.textContent.toLowerCase();
+            if (name.includes(searchValue)) {
+                entry.style.display = "block";
+            } else {
+                entry.style.display = "none";
+            }
+        });
+    });
+});
+ // Retrieve data from localStorage
+ const payslipData = JSON.parse(localStorage.getItem("payslipData"));
+
+if (payslipData) {
+  const payslipSection = document.getElementById("payslip-details");
+  payslipSection.innerHTML = `
+    <h2>${payslipData.employeeName} - Payslip</h2>
+    <p><strong>Employee ID:</strong> ${payslipData.employeeId}</p>
+    <p><strong>Department:</strong> ${payslipData.department}</p>   
+    <h3>salary: ${payslipData.totals.netPay}</h3>
+  `;
+} else {
+  alert("No payslip data found.");
+}
+    </script>
+     <!-- <script>
+        function payslip(){
+            document.getElementById("slip").style.display="flex"
+        }
+     </script> -->
+    <!-- <script>// Sample employee data
+        const employees = [
+            { id: 1, name: "John Doe", department: "IT", salary: 50000 },
+            { id: 2, name: "Jane Smith", department: "HR", salary: 45000 },
+            { id: 3, name: "Mike Johnson", department: "Finance", salary: 55000 }
+        ];
+        
+        // Sample submission history
+        const submissions = [
+            { type: "ESI", date: "2024-02-01", status: "Submitted" },
+            { type: "PF", date: "2024-02-01", status: "Submitted" },
+            { type: "ESI", date: "2024-01-01", status: "Submitted" },
+            { type: "PF", date: "2024-01-01", status: "Submitted" }
+        ];
+        
+        // Show/Hide sections
+        function showSection(section) {
+            const sections = ['payroll', 'payslip', 'esi-pf'];
+            sections.forEach(s => {
+                document.getElementById(`${s}-section`).classList.add('hidden');
+            });
+            document.getElementById(`${section}-section`).classList.remove('hidden');
+        }
+        
+        // Process payroll form submission
+        document.getElementById('payrollForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const month = document.getElementById('payrollMonth').value;
+            const department = document.getElementById('department').value;
+            
+            // Simulate payroll processing
+            alert(`Processing payroll for ${department} department for ${month}`);
+        });
+        
+        // Initialize payslip list
+        function initializePayslipList() {
+            const payslipList = document.getElementById('payslipList');
+            payslipList.innerHTML = employees.map(emp => `
+                <div class="action-card">
+                    <h4>${emp.name}</h4>
+                    <p>Department: ${emp.department}</p>
+                    <button onclick="generatePayslip(${emp.id})" class="btn btn-secondary">
+                        Generate Payslip
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        // Generate individual payslip
+        function generatePayslip(employeeId) {
+            const employee = employees.find(emp => emp.id === employeeId);
+            if (employee) {
+                alert(`Generating payslip for ${employee.name}`);
+                // In a real application, this would generate and possibly email the payslip
+            }
+        }
+        
+        // Generate ESI/PF reports
+        function generateReport(type) {
+            const currentDate = new Date().toISOString().split('T')[0];
+            alert(`Generating ${type.toUpperCase()} report for ${currentDate}`);
+            
+            // Add to submission history
+            const newSubmission = {
+                type: type.toUpperCase(),
+                date: currentDate,
+                status: "Submitted"
+            };
+            submissions.unshift(newSubmission);
+            updateSubmissionHistory();
+        }
+        
+        // Update submission history display
+        function updateSubmissionHistory() {
+            const historyList = document.getElementById('submissionHistory');
+            historyList.innerHTML = submissions.map(sub => `
+                <li>
+                    ${sub.type} Report - ${sub.date} - ${sub.status}
+                </li>
+            `).join('');
+        }
+        
+        // Search functionality for payslip generation
+        document.getElementById('employeeSearch').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredEmployees = employees.filter(emp => 
+                emp.name.toLowerCase().includes(searchTerm) ||
+                emp.department.toLowerCase().includes(searchTerm)
+            );
+            
+            const payslipList = document.getElementById('payslipList');
+            payslipList.innerHTML = filteredEmployees.map(emp => `
+                <div class="action-card">
+                    <h4>${emp.name}</h4>
+                    <p>Department: ${emp.department}</p>
+                    <button onclick="generatePayslip(${emp.id})" class="btn btn-secondary">
+                        Generate Payslip
+                    </button>
+                </div>
+            `).join('');
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePayslipList();
+            updateSubmissionHistory();
+        });
+        </script> -->
+</body>
+</html>

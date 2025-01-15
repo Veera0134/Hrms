@@ -1,0 +1,314 @@
+/* General styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #4a90e2;
+    color: white;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+/* Project Dashboard */
+.project-dashboard {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.project-section {
+    margin-bottom: 30px;
+}
+
+.project-section h2 {
+    color: #4a90e2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout for Project Cards */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    animation: fadeInGrid 1s ease-in-out;
+}
+
+/* Project Card Styling */
+.project-card {
+    background-color: #e9f0fc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease forwards;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.project-card:hover {
+    background-color: #d6e4fa;
+    transform: scale(1.05);
+}
+
+.project-card h3 {
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    margin: 5px 0;
+}
+
+/* Status styles */
+.status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+
+.status.pending {
+    background-color: #ff6347;
+}
+
+.status.ongoing {
+    background-color: #ffa500;
+    animation: blink 1.5s infinite;
+}
+
+.status.completed {
+    background-color: #4caf50;
+}
+
+/* Keyframe animations */
+@keyframes fadeInGrid {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Header layout adjustments */
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    gap: 40px;
+}
+
+.filter-container {
+    margin: 20px 0;
+    display: flex;
+    
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.filter-container label {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#project-filter {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#project-filter:hover {
+    border-color: #888;
+    background-color: #f0f0f0;
+}
+
+
+
+.add-project-btn {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.add-project-btn:hover {
+    background-color: #45a049;
+}
+
+.add-project-btn i {
+    font-size: 20px;
+}
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeInModal 0.5s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #4a90e2;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.modal-content button {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #357abd;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Project Card Hover */
+.project-card:hover {
+    transform: translateY(-10px);
+    background-color: #d6e4fc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyframes for Modal and Grid Animations */
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInGrid {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

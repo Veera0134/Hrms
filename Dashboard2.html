@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Dashboard2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="./logo.png" alt="logo">
+            </div>
+            <h1>
+                <span class="As">Astrolite </span>
+                <span class="Te">Tech</span>        
+                <span class="So">Soluction</span>
+            </h1>
+            <div class="profile">
+                <img src="https://th.bing.com/th/id/OIP.wNtVN5VOrnRZ6SYYGALeogEyDM?w=230&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="">
+                <div class="profile-info">
+                    <!-- <span id="userDisplay" class="userDisplay">Raghava</span> 
+                    <span class="status">• online</span>  -->
+                 <span id="username" class="userDisplay"></span>
+                 <span id="punch-time"  class="status"></span>
+                 <span class="status">• online</span> 
+                </div>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                <!--     <span class="badge">5</span> -->
+                  </div>
+                <!-- <span class="dropdown-icon">▼</span> -->
+                <button class="logout-btn">  <i class="fas fa-sign-out-alt logout-icon"></i></button>
+            </div> 
+        </header>
+                <!-- Menu Button Below Header (Aligned Left) -->
+      <div class="sidenav">
+        <div class="menu-button-container">
+            <button id="menuButton" class="menu-button">
+               <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Horizontal Navigation Bar -->
+        <nav class="horizontal-menu" id="horizontalMenu">
+            <a href="javascript:void(0)" onclick="changeContent('home')"><i class="fas fa-home"></i> Home</a>
+            <a href="javascript:void(0)" onclick="changeContent('emp')"><i class="fas fa-tachometer-alt"></i> EMPLOYEE</a>
+            <a href="javascript:void(0)" onclick="changeContent('hrms')"><i class="fas fa-tachometer-alt"></i> HRM'S</a>
+            <a href="javascript:void(0)" onclick="changeContent('crms')"><i class="fas fa-tachometer-alt"></i> CRM'S</a>
+            <a href="javascript:void(0)" onclick="changeContent('profile')"><i class="fas fa-user"></i> Profile</a>
+            <a href="javascript:void(0)" onclick="changeContent('settings')"><i class="fas fa-cog"></i> Settings</a>
+            <a href="javascript:void(0)" onclick="changeContent('logout')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+       </div>
+       <main>
+
+        <iframe id="contentFrame" src="./Content.html" scrolling="yes" width="100%" height="600px" frameborder="0" style="border: 0;"></iframe>
+       </main>
+    </div>
+    <script>
+        // JavaScript to toggle menu visibility
+        const menuButton = document.getElementById('menuButton');
+        const horizontalMenu = document.getElementById('horizontalMenu');
+
+        menuButton.addEventListener('click', () => {
+            horizontalMenu.style.display = horizontalMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Change iframe source based on selected menu item
+        function changeContent(section) {
+            const iframe = document.getElementById('contentFrame');
+
+            switch (section) {
+                case 'home':
+                    iframe.src = "./Content.html"; // Replace with your desired page URL
+                    break;
+                case 'emp':
+                    iframe.src = "./Dashboard_Emp.html"; 
+                    break;
+                    case 'hrms':
+                    iframe.src = "./Dashboard_Hrs.html"; 
+                    break;
+                    case 'crms':
+                    iframe.src = "https://example.com/dashboard"; // Replace with your desired page URL
+                    break;
+                case 'profile':
+                    iframe.src = "https://example.com/profile"; // Replace with your desired page URL
+                    break;
+                case 'settings':
+                    iframe.src = "https://example.com/settings"; // Replace with your desired page URL
+                    break;
+                case 'logout':
+                    iframe.src = "https://example.com/logout"; // Replace with your desired page URL
+                    break;
+                default:
+                    iframe.src = ""; // Clear iframe if no section is selected
+                    break;
+            }
+        }
+               // Fetch stored username and punch-in time
+               const username = localStorage.getItem("currentUser");
+        const punchInTime = localStorage.getItem("punchInTime");
+
+        // Display the data on the dashboard
+        document.getElementById("username").textContent = username || "Not available";
+        document.getElementById("punch-time").textContent = punchInTime || "Not available";
+
+       console.log("punch time " + punchInTime);
+        document.querySelector('.logout-btn').addEventListener('click', function () {
+    // Retrieve the punch-in time from localStorage
+    const punchInTime = localStorage.getItem("punchInTime");
+
+    if (punchInTime) {
+    // Get the current logout time as a Date object
+    const logoutTime = new Date();
+    const logoutHours = logoutTime.getHours();
+    const logoutMinutes = logoutTime.getMinutes();
+
+    // Assuming the stored punchInTime is in 'HH:MM' format (e.g., '08:30')
+    const [punchInHours, punchInMinutes] = punchInTime.split(':').map(Number);
+
+    // Check if punchInTime is valid
+    if (isNaN(punchInHours) || isNaN(punchInMinutes)) {
+        alert("Invalid punch-in time format.");
+    } else {
+        // Calculate the total difference in minutes
+        let totalMinutes = (logoutHours - punchInHours) * 60 + (logoutMinutes - punchInMinutes);
+
+        // Adjust if totalMinutes is negative (meaning the punch-in time was on the previous day)
+        if (totalMinutes < 0) {
+            totalMinutes += 24 * 60;  // Add 24 hours in minutes
+        }
+
+        // Calculate hours and minutes
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        // Format the total time string
+        const totalTime = `${hours}h ${minutes}m`;
+
+        console.log("Total time spent: " + totalTime);
+
+        // Display total time in an alert
+        alert(`You logged out successfully!\nTotal time spent: ${totalTime}`);
+        window.location.href = './Fingertest.html'; // Redirect to login page
+
+    }
+} else {
+    alert("Login time not available. Please try again.");
+}
+
+
+
+    // Clear localStorage and redirect to the login page
+    localStorage.clear();
+});
+
+    </script>
+</body>
+</html>

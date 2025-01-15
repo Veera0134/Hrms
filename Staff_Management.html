@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Staff Management Dashboard</title>
+    <link rel="stylesheet" href="Staff_Management.css">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HR Staff Management Dashboard</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search employees by name, department, or ID...">
+            </div>
+        </header>
+        
+        <main class="employee-grid">
+            <!-- Employee Card 1 -->
+            <div class="employee-card" data-employee-id="EMP001">
+                <div class="card-header">
+                    <div class="profile-circle">VR</div>
+                    <h2>Veera Raghava</h2>
+                    <span class="employee-id">EMP001</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <label>Department:</label>
+                        <span>Engineering</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Position:</label>
+                        <span>Senior Developer</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Join Date:</label>
+                        <span>2023-01-15</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Status:</label>
+                        <span>Active</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-view" onclick="showEmployeeDetails('EMP001')">View Details</button>
+                </div>
+            </div>
+
+            <!-- Employee Card 2 -->
+            <div class="employee-card" data-employee-id="EMP002">
+                <div class="card-header">
+                    <div class="profile-circle">AK</div>
+                    <h2>Ajay Kumar</h2>
+                    <span class="employee-id">EMP002</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <label>Department:</label>
+                        <span>Marketing</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Position:</label>
+                        <span>Marketing Manager</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Join Date:</label>
+                        <span>2022-08-20</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Status:</label>
+                        <span>Active</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-view" onclick="showEmployeeDetails('EMP002')">View Details</button>
+                </div>
+            </div>
+
+            <!-- Employee Card 3 -->
+            <div class="employee-card" data-employee-id="EMP004">
+                <div class="card-header">
+                    <div class="profile-circle">TS</div>
+                    <h2>Sindhuja</h2>
+                    <span class="employee-id">EMP003</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <label>Department:</label>
+                        <span>Finance</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Position:</label>
+                        <span>Financial Analyst</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Join Date:</label>
+                        <span>2023-03-10</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Status:</label>
+                        <span>Active</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-view" onclick="showEmployeeDetails('EMP003')">View Details</button>
+                </div>
+            </div>
+            <div class="employee-card" data-employee-id="EMP003">
+                <div class="card-header">
+                    <div class="profile-circle">LT</div>
+                    <h2>Latish Tivari</h2>
+                    <span class="employee-id">EMP003</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-group">
+                        <label>Department:</label>
+                        <span>Finance</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Position:</label>
+                        <span>Financial Analyst</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Join Date:</label>
+                        <span>2023-03-10</span>
+                    </div>
+                    <div class="info-group">
+                        <label>Status:</label>
+                        <span>Active</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-view" onclick="showEmployeeDetails('EMP003')">View Details</button>
+                </div>
+            </div>
+            <div id="dataContainer" class="data-container">
+                <!-- Employee cards will be dynamically generated here -->
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- Modal structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="profile-circle" id="modalProfileCircle">?</div>
+                <h2 id="modalHeader">Employee Name</h2>
+                <div class="close-modal" onclick="hideModal()">×</div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content goes here -->
+            </div>
+        </div>
+    </div>
+    <!-- Edit Form (Hidden by default) -->
+<!-- Edit Form with Status -->
+<div id="editForm" class="edit-form">
+    <h3>Edit Employee</h3>
+    <form id="employeeEditForm">
+        <div class="form-group">
+            <label for="empID">Employee ID</label>
+            <input id="empID" type="text" name="empID" placeholder="Employee ID">
+        </div>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" type="text" name="fullName" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+            <label for="editDepartment">Department</label>
+            <input id="editDepartment" type="text" name="department" placeholder="Department">
+        </div>
+        <div class="form-group">
+            <label for="editPosition">Position</label>
+            <input id="editPosition" type="text" name="position" placeholder="Position">
+        </div>
+        <div class="form-group">
+            <label for="editStartDate">Start Date</label>
+            <input id="editStartDate" type="date" name="startDate" placeholder="Start Date">
+        </div>
+        <div class="form-group">
+            <label for="editStatus">Status</label>
+            <select id="editStatus" name="status">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+
+    <!-- Modal for Employee Details -->
+    <div id="employeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div class="profile-circle large"></div>
+                <h2 id="modalEmployeeName"></h2>
+                <span id="modalEmployeeId"></span>
+            </div>
+            <div class="modal-body">
+                <div class="details-section">
+                    <h3>Personal Details</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Date of Birth:</label>
+                            <span id="dob"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Gender:</label>
+                            <span id="gender"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Nationality:</label>
+                            <span id="nationality"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Marital Status:</label>
+                            <span id="maritalStatus"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Blood Group:</label>
+                            <span id="bloodGroup"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h3>Contact Details</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Email:</label>
+                            <span id="email"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Phone:</label>
+                            <span id="phone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Address:</label>
+                            <span id="address"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>City:</label>
+                            <span id="city"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Country:</label>
+                            <span id="country"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h3>Emergency Contact</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Name:</label>
+                            <span id="emergencyName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Relationship:</label>
+                            <span id="emergencyRelation"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Phone:</label>
+                            <span id="emergencyPhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Address:</label>
+                            <span id="emergencyAddress"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample employee data
+const employeeData = {
+    'EMP001': {
+        name: 'Veera Raghava',
+        initials: 'JD',
+        personalDetails: {
+            dob: '1990-05-15',
+            gender: 'Male',
+            nationality: 'American',
+            maritalStatus: 'Married',
+            bloodGroup: 'O+'
+        },
+        contactDetails: {
+            email: 'veera@company.com',
+            phone: '+1 234-567-8900',
+            address: '123 Tech Street',
+            city: 'San Francisco',
+            country: 'USA'
+        },
+        emergencyContact: {
+            name: 'Raghava',
+            relationship: 'Spouse',
+            phone: '+1 234-567-8901',
+            address: '123 Tech Street, San Francisco, USA'
+        }
+    },
+    'EMP002': {
+        name: 'Ajay Kumar',
+        initials: 'AS',
+        personalDetails: {
+            dob: '1988-08-22',
+            gender: 'Female',
+            nationality: 'Canadian',
+            maritalStatus: 'Single',
+            bloodGroup: 'A+'
+        },
+        contactDetails: {
+            email: 'Ajay@company.com',
+            phone: '+1 234-567-8902',
+            address: '456 Marketing Ave',
+            city: 'Toronto',
+            country: 'Canada'
+        },
+        emergencyContact: {
+            name: 'Kumar',
+            relationship: 'Brother',
+            phone: '+1 234-567-8903',
+            address: '789 Family Road, Toronto, Canada'
+        }
+    },
+    'EMP003': {
+        name: 'Sindhuja',
+        initials: 'RJ',
+        personalDetails: {
+            dob: '1992-03-30',
+            gender: 'Male',
+            nationality: 'British',
+            maritalStatus: 'Single',
+            bloodGroup: 'B+'
+        },
+        contactDetails: {
+            email: 'Sinduja@company.com',
+            phone: '+1 234-567-8904',
+            address: '789 Finance Street',
+            city: 'London',
+            country: 'UK'
+        },
+        emergencyContact: {
+            name: 'Mary Johnson',
+            relationship: 'Mother',
+            phone: '+1 234-567-8905',
+            address: '321 Family Lane, London, UK'
+        }
+    }
+};
+
+// Show employee details in modal
+function showEmployeeDetails(employeeId) {
+    const modal = document.getElementById('employeeModal');
+    const employee = employeeData[employeeId];
+
+    if (!employee) return;
+
+    // Set employee basic info
+    document.getElementById('modalEmployeeName').textContent = employee.name;
+    document.getElementById('modalEmployeeId').textContent = employeeId;
+    document.querySelector('.modal-header .profile-circle').textContent = employee.initials;
+
+    // Set personal details
+    document.getElementById('dob').textContent = employee.personalDetails.dob;
+    document.getElementById('gender').textContent = employee.personalDetails.gender;
+    document.getElementById('nationality').textContent = employee.personalDetails.nationality;
+    document.getElementById('maritalStatus').textContent = employee.personalDetails.maritalStatus;
+    document.getElementById('bloodGroup').textContent = employee.personalDetails.bloodGroup;
+
+    // Set contact details
+    document.getElementById('email').textContent = employee.contactDetails.email;
+    document.getElementById('phone').textContent = employee.contactDetails.phone;
+    document.getElementById('address').textContent = employee.contactDetails.address;
+    document.getElementById('city').textContent = employee.contactDetails.city;
+    document.getElementById('country').textContent = employee.contactDetails.country;
+
+    // Set emergency contact details
+    document.getElementById('emergencyName').textContent = employee.emergencyContact.name;
+    document.getElementById('emergencyRelation').textContent = employee.emergencyContact.relationship;
+    document.getElementById('emergencyPhone').textContent = employee.emergencyContact.phone;
+    document.getElementById('emergencyAddress').textContent = employee.emergencyContact.address;
+
+    // Show modal
+    modal.style.display = 'block';
+}
+
+// Close modal when clicking the close button or outside the modal
+document.querySelector('.close-modal').addEventListener('click', () => {
+    document.getElementById('employeeModal').style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('employeeModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Prevent modal from closing when clicking inside it
+document.querySelector('.modal-content').addEventListener('click', (event) => {
+    event.stopPropagation();
+});
+
+// Search functionality
+document.querySelector('.search-bar input').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.employee-card');
+
+    cards.forEach(card => {
+        const employeeId = card.dataset.employeeId;
+        const employee = employeeData[employeeId];
+        const searchString = `${employee.name} ${employeeId}`.toLowerCase();
+        
+        if (searchString.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+const storedData = JSON.parse(localStorage.getItem('onboardingData'));
+
+if (storedData) {
+    const container = document.getElementById('dataContainer');
+    
+    // Create card structure
+    const card = document.createElement('div');
+    card.classList.add('employee-card1');
+    card.setAttribute('empID', storedData.Empid);
+
+    // Card header
+    const cardHeader = document.createElement('div');
+    cardHeader.classList.add('card-header');
+
+    const profileCircle = document.createElement('div');
+    profileCircle.classList.add('profile-circle');
+    profileCircle.textContent = storedData.fullName ? storedData.fullName.charAt(0).toUpperCase() : '?';
+    cardHeader.appendChild(profileCircle);
+
+    const headerTitle = document.createElement('h3');
+    headerTitle.textContent = storedData.fullName || 'N/A';
+    cardHeader.appendChild(headerTitle);
+        
+    const empid=document.createElement('p');
+    empid.textContent=storedData.Empid || 'N/A';
+    cardHeader.appendChild(empid);
+
+    card.appendChild(cardHeader);
+
+    // Card body (only basic details)
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    const basicInfo = ['department', 'startDate', 'position'];
+    basicInfo.forEach((key) => {
+        if (storedData[key]) {
+            const infoGroup = document.createElement('div');
+            infoGroup.classList.add('info-group');
+
+            const label = document.createElement('label');
+            label.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}:`;
+            infoGroup.appendChild(label);
+
+            const value = document.createElement('span');
+            value.textContent = storedData[key];
+            infoGroup.appendChild(value);
+
+            cardBody.appendChild(infoGroup);
+        }
+    });
+
+    card.appendChild(cardBody);
+
+    // Card footer (with View Details button and action icons)
+    const cardFooter = document.createElement('div');
+    cardFooter.classList.add('card-footer');
+
+    // View Details Button
+    const btnView = document.createElement('button');
+    btnView.classList.add('btn-view');
+    btnView.textContent = 'View Details';
+    btnView.addEventListener('click', () => showOverlay(storedData));
+    cardFooter.appendChild(btnView);
+
+    // Action Icons (Edit, Delete, Download)
+    const actionIcons = document.createElement('div');
+    actionIcons.classList.add('action-icons');
+
+    // Edit Icon
+    const editIcon = document.createElement('i');
+    editIcon.classList.add('fa', 'fa-edit');
+    editIcon.title = 'Edit';
+    editIcon.addEventListener('click', () => editEmployee(storedData));
+    actionIcons.appendChild(editIcon);
+
+    // Delete Icon
+    const deleteIcon = document.createElement('i');
+    deleteIcon.classList.add('fa', 'fa-trash');
+    deleteIcon.title = 'Delete';
+    deleteIcon.addEventListener('click', () => deleteEmployee(storedData));
+    actionIcons.appendChild(deleteIcon);
+
+    // Download Icon
+    const downloadIcon = document.createElement('i');
+    downloadIcon.classList.add('fa', 'fa-download');
+    downloadIcon.title = 'Download';
+    downloadIcon.addEventListener('click', () => downloadEmployeeData(storedData));
+    actionIcons.appendChild(downloadIcon);
+
+    cardFooter.appendChild(actionIcons);
+
+    card.appendChild(cardFooter);
+
+    container.appendChild(card);
+} else {
+    document.getElementById('dataContainer').textContent = 'No data available.';
+}
+
+// Example action handlers
+function editEmployee(employee) {
+    alert(`Edit employee: ${employee.fullName}`);
+}
+
+function deleteEmployee(employee) {
+    const confirmation = confirm(`Are you sure you want to delete ${employee.fullName}?`);
+    if (confirmation) {
+        // Remove employee from UI
+        const employeeCard = document.querySelector(`.employee-card1[empID="${employee.Empid}"]`);
+        if (employeeCard) {
+            employeeCard.remove();
+        }
+
+        // Remove employee from employeeData
+        delete employeeData[employee.Empid];
+
+        // Update localStorage
+        localStorage.setItem('onboardingData', JSON.stringify(employeeData));
+
+        alert(`Deleted employee: ${employee.fullName}`);
+    }
+}
+
+
+function downloadEmployeeData(employee) {
+    // Create a JSON string from the employee data
+    const employeeJson = JSON.stringify(employee, null, 2); // Pretty print JSON
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([employeeJson], { type: 'application/json' });
+
+    // Create a temporary anchor element to trigger the download
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${employee.fullName.replace(/ /g, '_')}_data.json`; // Set a meaningful filename
+    document.body.appendChild(a);
+
+    // Trigger the download
+    a.click();
+
+    // Clean up
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+}
+
+
+function showOverlay(data) {
+    const modal = document.getElementById('modal');
+    const modalHeader = document.getElementById('modalHeader');
+    const modalProfileCircle = document.getElementById('modalProfileCircle');
+    const modalBody = document.getElementById('modalBody');
+
+    // Populate modal header
+    modalHeader.textContent = data.fullName || 'Employee Name';
+    modalProfileCircle.textContent = data.fullName ? data.fullName.charAt(0).toUpperCase() : '?';
+
+    // Populate modal body
+    modalBody.innerHTML = ''; // Clear previous content
+    Object.keys(data).forEach((key) => {
+        const detailsSection = document.createElement('div');
+        detailsSection.classList.add('details-section');
+
+        const detailTitle = document.createElement('h3');
+        detailTitle.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}`;
+        detailsSection.appendChild(detailTitle);
+
+        const detailsGrid = document.createElement('div');
+        detailsGrid.classList.add('details-grid');
+
+        const detailItem = document.createElement('div');
+        detailItem.classList.add('detail-item');
+
+        const label = document.createElement('label');
+        label.textContent = `${key}:`;
+        detailItem.appendChild(label);
+
+        const value = document.createElement('span');
+        value.textContent = data[key];
+        detailItem.appendChild(value);
+
+        detailsGrid.appendChild(detailItem);
+        detailsSection.appendChild(detailsGrid);
+        modalBody.appendChild(detailsSection);
+    });
+
+    // Show modal
+    modal.style.display = 'block';
+}
+
+function hideModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+function editEmployee(employee) {
+    console.log('Editing employee:', employee);
+
+    const form = document.getElementById('editForm');
+
+    if (!form) {
+        console.error('Edit form not found in DOM.');
+        return;
+    }
+
+    // Show the Edit Form
+    form.style.display = 'block';
+
+    // Populate the form fields
+    const fullNameInput = document.getElementById('fullName');
+    const departmentInput = document.getElementById('editDepartment');
+    const positionInput = document.getElementById('editPosition');
+    const startDateInput = document.getElementById('editStartDate');
+    const statusInput = document.getElementById('editStatus');
+
+    if (!fullNameInput || !departmentInput || !positionInput || !startDateInput || !statusInput) {
+        console.error('One or more form fields are missing in the DOM.');
+        return;
+    }
+
+    fullNameInput.value = employee.fullName || '';
+    departmentInput.value = employee.department || '';
+    positionInput.value = employee.position || '';
+    startDateInput.value = employee.startDate || '';
+    statusInput.value = employee.status || '';
+
+    // Handle form submission
+    document.getElementById('employeeEditForm').onsubmit = function(e) {
+    e.preventDefault(); // Prevent page refresh
+
+    // Get the updated values from the form
+    const updatedEmployee = {
+        Empid: document.getElementById('empID').value,
+        fullName: document.getElementById('fullName').value,
+        department: document.getElementById('editDepartment').value,
+        position: document.getElementById('editPosition').value,
+        startDate: document.getElementById('editStartDate').value,
+        status: document.getElementById('editStatus').value
+    };
+
+    // Find the employee card by EmpID and update it
+    updateEmployeeCard(updatedEmployee, updatedEmployee);
+
+    // Close the form (optional)
+    closeEditForm();
+};
+
+}
+
+
+function closeEditForm() {
+    // Hide the edit form
+    document.getElementById('editForm').style.display = 'none';
+}
+
+function updateEmployeeCard(employee, updatedEmployee) {
+    // Validate the input
+    if (!updatedEmployee.Empid || !updatedEmployee.fullName) {
+        console.error('Invalid updatedEmployee object:', updatedEmployee);
+        return;
+    }
+
+    console.log('Updating card for EmpID:', updatedEmployee.Empid);
+
+    // Find the existing card by EmpID attribute
+    const card = document.querySelector(`.employee-card1[empID="${updatedEmployee.Empid.trim()}"]`);
+
+    if (!card) {
+        console.error(`Employee card not found for EmpID: ${updatedEmployee.Empid.trim()}`);
+        alert(`No card found for EmpID: ${updatedEmployee.Empid.trim()}`);
+        return;
+    }
+
+    console.log('Card found for EmpID:', updatedEmployee.Empid);
+
+    // Update employee object with new values
+    Object.assign(employee, updatedEmployee);
+
+    // Clear the existing card content
+    card.innerHTML = '';
+
+    // Rebuild the card content
+    const cardHeader = document.createElement('div');
+    cardHeader.classList.add('card-header');
+    
+    const profileCircle = document.createElement('div');
+    profileCircle.classList.add('profile-circle');
+    profileCircle.textContent = updatedEmployee.fullName.charAt(0).toUpperCase();
+    cardHeader.appendChild(profileCircle);
+
+    const headerTitle = document.createElement('h3');
+    headerTitle.textContent = updatedEmployee.fullName;
+    cardHeader.appendChild(headerTitle);
+
+    const empId = document.createElement('p');
+    empId.textContent = updatedEmployee.Empid;
+    cardHeader.appendChild(empId);
+
+    card.appendChild(cardHeader);
+
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    const basicInfo = ['department', 'position', 'startDate', 'status'];
+    basicInfo.forEach((key) => {
+        if (updatedEmployee[key]) {
+            const infoGroup = document.createElement('div');
+            infoGroup.classList.add('info-group');
+            
+            const label = document.createElement('strong');
+            label.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: `;
+            infoGroup.appendChild(label);
+
+            const value = document.createElement('span');
+            value.textContent = updatedEmployee[key];
+            infoGroup.appendChild(value);
+
+            cardBody.appendChild(infoGroup);
+        }
+    });
+
+    card.appendChild(cardBody);
+
+    const cardFooter = document.createElement('div');
+    cardFooter.classList.add('card-footer');
+
+    const btnView = document.createElement('button');
+    btnView.classList.add('btn-view');
+    btnView.textContent = 'View Details';
+    btnView.addEventListener('click', () => showOverlay(employee));
+    cardFooter.appendChild(btnView);
+
+    const actionIcons = document.createElement('div');
+    actionIcons.classList.add('action-icons');
+
+    const editIcon = document.createElement('i');
+    editIcon.classList.add('fa', 'fa-edit');
+    editIcon.title = 'Edit';
+    editIcon.addEventListener('click', () => editEmployee(employee));
+    actionIcons.appendChild(editIcon);
+
+    const deleteIcon = document.createElement('i');
+    deleteIcon.classList.add('fa', 'fa-trash');
+    deleteIcon.title = 'Delete';
+    deleteIcon.addEventListener('click', () => deleteEmployee(employee));
+    actionIcons.appendChild(deleteIcon);
+
+    const downloadIcon = document.createElement('i');
+    downloadIcon.classList.add('fa', 'fa-download');
+    downloadIcon.title = 'Download';
+    downloadIcon.addEventListener('click', () => downloadEmployeeData(employee));
+    actionIcons.appendChild(downloadIcon);
+
+    cardFooter.appendChild(actionIcons);
+    card.appendChild(cardFooter);
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Increment-Bounus.css">
+  <title>Increment & Bonus Management</title>
+  
+  <script>
+    function showForm(formId) {
+      document.querySelectorAll('.form-section').forEach(form => form.classList.remove('active'));
+      document.getElementById(formId).classList.add('active');
+    }
+
+    function closeForm(formId) {
+      document.getElementById(formId).classList.remove('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const proposalForm = document.getElementById('proposalForm');
+  const recentBonusSection = document.querySelector('.recent-bonus-section');
+
+  // Handle form submission
+  proposalForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent form submission
+    
+    // Get form values
+    const employeeName = document.getElementById('employeeName').value;
+    const employeeID = document.getElementById('employeeID').value;
+    const bonusAmount = document.getElementById('bonusAmount').value;
+    const reason = document.getElementById('reason').value;
+
+    // Create new bonus card
+    const newCard = document.createElement('div');
+    newCard.className = 'recent-bonus';
+    newCard.innerHTML = `
+      <p><strong>Employee Name:</strong> ${employeeName}</p>
+      <p><strong>Employee ID:</strong> ${employeeID}</p>
+      <p><strong>Bonus Amount:</strong> $${bonusAmount}</p>
+      <p><strong>Reason:</strong> ${reason}</p>
+      <p><strong>Status:</strong> <span class="status">Pending Approval</span></p>
+      <button type="button" class="approve-btn">Approve</button>
+      <button type="button" class="reject-btn">Reject</button>
+    `;
+
+    // Append new card to the Recent Bonus section
+    recentBonusSection.appendChild(newCard);
+
+    // Clear the form and close it
+    proposalForm.reset();
+    closeForm('proposalFormSection');
+  });
+
+  // Handle approve/reject button clicks
+  recentBonusSection.addEventListener('click', (event) => {
+    if (event.target.classList.contains('approve-btn')) {
+      const card = event.target.closest('.recent-bonus');
+      const employeeName = card.querySelector('p').textContent.split(':')[1].trim();
+      alert(`Bonus for ${employeeName} has been approved.`);
+      card.querySelector('.status').textContent = 'Approved';
+      disableButtons(card);
+    } else if (event.target.classList.contains('reject-btn')) {
+      const card = event.target.closest('.recent-bonus');
+      const employeeName = card.querySelector('p').textContent.split(':')[1].trim();
+      alert(`Bonus for ${employeeName} has been rejected.`);
+      card.querySelector('.status').textContent = 'Rejected';
+      disableButtons(card);
+    }
+  });
+
+  // Disable buttons after action
+  function disableButtons(card) {
+    const approveButton = card.querySelector('.approve-btn');
+    const rejectButton = card.querySelector('.reject-btn');
+    approveButton.disabled = true;
+    rejectButton.disabled = true;
+  }
+});
+
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Increment & Bonus Management</h2>
+  
+  <div class="action-section">
+    <div class="card">
+      <h3>Bonus Proposal</h3>
+      <p>Submit new bonus proposals for review.</p>
+      <button onclick="showForm('proposalFormSection')">Propose Bonus</button>
+    </div>
+  </div>
+
+  <!-- Bonus Proposal Form Section -->
+  <div id="proposalFormSection" class="form-section">
+    <h3>Bonus Proposal Form</h3>
+    <form id="proposalForm">
+      <label for="employeeName">Employee Name:</label>
+      <input type="text" id="employeeName" name="employeeName" required>
+
+      <label for="employeeID">Employee ID:</label>
+      <input type="text" id="employeeID" name="employeeID" required>
+
+      <label for="bonusAmount">Proposed Bonus Amount:</label>
+      <input type="number" id="bonusAmount" name="bonusAmount" required>
+
+      <label for="reason">Reason for Bonus:</label>
+      <textarea id="reason" name="reason" rows="3" required></textarea>
+
+      <button type="submit" class="submit-btn">Submit Proposal</button>
+      <button type="button" class="close-btn" onclick="closeForm('proposalFormSection')">Close</button>
+    </form>
+  </div>
+
+  <!-- Recent Bonus Data Section -->
+  <h3 style="text-align:center; margin-top: 30px;">Recent Bonus Data</h3>
+  <div class="recent-bonus-section">
+    <div class="recent-bonus">
+      <p><strong>Employee Name:</strong> Veera Raghava</p>
+      <p><strong>Employee ID:</strong> 12345</p>
+      <p><strong>Bonus Amount:</strong> $5,000</p>
+      <p><strong>Status:</strong> <span class="status">Pending Approval</span></p>
+      <button type="button" class="approve-btn">Approve</button>
+      <button type="button" class="reject-btn">Reject</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

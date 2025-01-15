@@ -1,0 +1,91 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f5f6fa;
+    --card-background: #ffffff;
+    --text-color: #2c3e50;
+    --border-radius: 12px;
+  }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f5fc;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 98%;
+}
+
+.profile-card {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-info {
+    text-align: left;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.view-profile {
+    background-color: #5a67d8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.metrics {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric i {
+    font-size: 24px;
+    color: #5a67d8;
+}
+
+.metric p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.career-progress {
+    margin-top: 30px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.progress-item i {
+    font-size: 20px;
+    color: #5a67d8;
+    margin-right: 15px;
+}

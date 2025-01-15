@@ -1,0 +1,137 @@
+/* General styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.8em;
+}
+
+.dashboard {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #333;
+    color: white;
+    width: 200px;
+    padding: 20px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px;
+    display: block;
+    transition: background-color 0.3s;
+    animation: buttonGlow 1.5s infinite ease-in-out;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #555;
+    border-radius: 4px;
+    animation: pulse 0.4s ease-in-out;
+}
+
+/* Content area styling */
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.content h2 {
+    color: #4a90e2;
+    margin-bottom: 15px;
+}
+
+.content p {
+    color: #666;
+    font-size: 1em;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Animation for button hover effect */
+  @keyframes buttonGlow {
+    0% {
+      box-shadow: 0 0 5px #8ecadb;
+    }
+    50% {
+      box-shadow: 0 0 20px #8ecadb;
+    }
+    100% {
+      box-shadow: 0 0 5px #8ecadb;
+    }
+  }
+  
+  /* Animation for horizontal menu slide-in */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Animation for menu item hover */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

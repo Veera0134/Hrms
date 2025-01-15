@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Attendance Dashboard</title>
+    <link rel="stylesheet" href="Attendance_Management.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>HR Attendance Dashboard</h1>
+        <p class="date" id="current-date"> </p>
+        <span class="icon-button">
+          <i class="fas fa-plus-circle" id="openModal"> </i>
+        </span>
+      </header>
+
+      <div class="stats">
+        <div class="stat-card">
+          <h3>Total Employees</h3>
+          <p id="total-employees">12</p>
+        </div>
+        <div class="stat-card">
+          <h3>Present Today</h3>
+          <p>9</p>
+        </div>
+        <div class="stat-card">
+          <h3>Absent Today</h3>
+          <p>3</p>
+        </div>
+      </div>
+
+      <main class="employee-grid" id="employee-grid">
+        <div class="employee-card">
+            <div class="employee-info">
+              <img src="https://ui-avatars.com/api/?name=John+Doe" alt="John Doe" class="avatar">
+              <h3>Veera Raghava</h3>
+              <p class="employee-id">EMP001</p>
+            </div>
+            <div class="status present">
+              <span class="status-dot"></span>
+              Present
+            </div>
+            <div class="time-info">
+              <p>Time In: 9:00 AM</p>
+              <p>Time Out: 5:00 PM</p>
+            </div>
+          </div>
+  
+          <div class="employee-card">
+            <div class="employee-info">
+              <img src="https://ui-avatars.com/api/?name=Jane+Smith" alt="Jane Smith" class="avatar">
+              <h3>Ajay kumar</h3>
+              <p class="employee-id">EMP002</p>
+            </div>
+            <div class="status present">
+              <span class="status-dot"></span>
+              Present
+            </div>
+            <div class="time-info">
+              <p>Time In: 8:45 AM</p>
+              <p>Time Out: 4:45 PM</p>
+            </div>
+          </div>
+          <div class="employee-card">
+              <div class="employee-info">
+                <img src="https://ui-avatars.com/api/?name=Jane+Smith" alt="Jane Smith" class="avatar">
+                <h3>Latish kumar</h3>
+                <p class="employee-id">EMP002</p>
+              </div>
+              <div class="status present">
+                <span class="status-dot"></span>
+                Present
+              </div>
+              <div class="time-info">
+                <p>Time In: 8:45 AM</p>
+                <p>Time Out: 4:45 PM</p>
+              </div>
+            </div>
+    
+  
+          <div class="employee-card">
+            <div class="employee-info">
+              <img src="https://ui-avatars.com/api/?name=Mike+Johnson" alt="Mike Johnson" class="avatar">
+              <h3>Sinduja</h3>
+              <p class="employee-id">EMP003</p>
+            </div>
+            <div class="status absent">
+              <span class="status-dot"></span>
+              Absent
+            </div>
+            <div class="time-info">
+              <p>Time In: --:--</p>
+              <p>Time Out: --:--</p>
+            </div>
+          </div>
+  
+          <div class="employee-card">
+            <div class="employee-info">
+              <img src="https://ui-avatars.com/api/?name=Sarah+Williams" alt="Sarah Williams" class="avatar">
+              <h3>Sureka</h3>
+              <p class="employee-id">EMP004</p>
+            </div>
+            <div class="status late">
+              <span class="status-dot"></span>
+              Late
+            </div>
+            <div class="time-info">
+              <p>Time In: 10:30 AM</p>
+              <p>Time Out: --:--</p>
+            </div>
+          </div>
+          <div class="attendance-container" id="attendance-cards-container">
+            <!-- Cards will be populated here -->
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal for Adding New Employee -->
+    <div id="employeeModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Add New Employee</h2>
+        <form id="employeeForm">
+          <label for="empName">Employee Name:</label>
+          <input
+            type="text"
+            id="empName"
+            name="empName"
+            pattern="[A-Za-z\s]+"
+            minlength="4"
+            title="Employee Name must contain at least 4 alphabetic characters and spaces only."
+            required
+          />
+          <span id="empNameError" class="error-message"></span>
+    
+          <label for="empId">Employee ID:</label>
+          <input type="text" id="empId" name="empId" required />
+    
+          <label for="empPosition">Position:</label>
+          <input
+            type="text"
+            id="empPosition"
+            name="empPosition"
+            pattern="[A-Za-z\s]+"
+            minlength="4"
+            title="Position must contain at least 4 alphabetic characters and spaces only."
+            required
+          />
+          <span id="empPositionError" class="error-message"></span>
+    
+          <label for="empTimeIn">Time In:</label>
+          <input type="time" id="empTimeIn" name="empTimeIn" required />
+    
+          <label for="empTimeOut">Time Out:</label>
+          <input type="time" id="empTimeOut" name="empTimeOut" required />
+    
+          <button type="submit">Add Employee</button>
+        </form>
+      </div>
+    </div>
+    
+
+   <script>
+    // Modal logic (uncomment if needed)
+const modal = document.getElementById("employeeModal");
+const openModal = document.getElementById("openModal");
+const closeModal = document.getElementById("closeModal");
+
+openModal.onclick = function () {
+  modal.style.display = "block";
+};
+
+closeModal.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Validate form fields
+const fields = ["empName", "empPosition"];
+fields.forEach((field) => {
+  document.getElementById(field).addEventListener("input", function () {
+    validateField(field);
+  });
+});
+
+function validateField(field) {
+  const input = document.getElementById(field);
+  const error = document.getElementById(`${field}Error`);
+  const regex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
+  if (input.value.trim().length < 4) {
+    error.textContent = `${field.replace(/([A-Z])/g, " $1")} must be at least 4 characters long.`;
+    input.classList.add("invalid");
+  } else if (!regex.test(input.value)) {
+    error.textContent = `${field.replace(/([A-Z])/g, " $1")} must contain only alphabets.`;
+    input.classList.add("invalid");
+  } else {
+    error.textContent = "";
+    input.classList.remove("invalid");
+  }
+}
+
+// Get today's date and display it
+const today = new Date();
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const formattedDate = today.toLocaleDateString('en-US', options);
+document.getElementById('current-date').textContent = formattedDate;
+
+// Add new employee to the grid (assuming form has id 'employeeForm')
+const employeeForm = document.getElementById('employeeForm');
+employeeForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const empName = document.getElementById('empName').value;
+  const empId = document.getElementById('empId').value;
+  const empPosition = document.getElementById('empPosition').value;
+  const empTimeIn = document.getElementById('empTimeIn').value;
+  const empTimeOut = document.getElementById('empTimeOut').value;
+
+  const newEmployeeCard = document.createElement('div');
+  newEmployeeCard.classList.add('employee-card');
+
+  newEmployeeCard.innerHTML = `
+    <div class="employee-info">
+      <img src="https://ui-avatars.com/api/?name=${empName}" alt="${empName}" class="avatar">
+      <h3>${empName}</h3>
+      <p class="employee-id">${empId}</p>
+    </div>
+    <div class="status present">
+      <span class="status-dot"></span>
+      Present
+    </div>
+    <div class="time-info">
+      <p>Time In: ${empTimeIn}</p>
+      <p>Time Out: ${empTimeOut}</p>
+    </div>
+  `;
+
+  document.getElementById('employee-grid').appendChild(newEmployeeCard);
+  modal.style.display = "none";
+
+  const totalEmployees = document.getElementById('total-employees');
+  totalEmployees.textContent = parseInt(totalEmployees.textContent) + 1;
+
+  employeeForm.reset();
+});
+
+// Retrieve the stored attendance data from localStorage
+const attendanceData = JSON.parse(localStorage.getItem("attendanceData"));
+
+// If attendance data exists, populate the cards
+if (attendanceData) {
+  const container = document.getElementById("attendance-cards-container");
+
+  // Create a card for the attendance data
+  const card = document.createElement("div");
+  card.classList.add("attendance-card");
+
+  const punchInParts = attendanceData.punchInTime.split(":");
+  const punchInHour = parseInt(punchInParts[0], 10);
+  const punchInMinute = parseInt(punchInParts[1], 10);
+
+  const lateHour = 10; // 10:00 AM is the cut-off for being "On Time"
+  let status = "Present";
+
+  if (punchInHour > lateHour || (punchInHour === lateHour && punchInMinute < 0)) {
+    status = "Late";
+  }
+
+  const statusClass = status.toLowerCase().replace(" ", "-");
+  const firstLetter = attendanceData.username.charAt(0).toUpperCase();
+
+  card.innerHTML = `
+    <div class="card-header">
+      <img src="https://ui-avatars.com/api/?name=${attendanceData.username}" alt="${attendanceData.username}" class="avatar">
+      <h3>${attendanceData.username}</h3>
+    </div>
+    <div class="card-status ${statusClass}">
+      <p>Status: ${status}</p>
+    </div>
+    <div class="card-details">
+      <p><strong>Punch-In Time:</strong> ${attendanceData.punchInTime}</p>
+      <p><strong>Punch-Out Time:</strong> ${attendanceData.punchOutTime || "Not punched out yet"}</p>
+      <p><strong>Date:</strong> ${attendanceData.date}</p>
+    </div>
+  `;
+
+  container.appendChild(card);
+} else {
+  alert("No attendance data available.");
+}
+
+   </script>
+  </body>
+</html>

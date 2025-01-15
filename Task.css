@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: black;
+  padding: 2em;
+  background: linear-gradient(135deg, #e8f9fd, #a1d6e2);
+
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: black;
+}
+
+
+
+/* Kanban Board Layout */
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.kanban-column {
+  width: 30%;
+  background-color: transparent;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #000000;
+}
+
+.kanban-column h2 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.4em;
+  color: black;
+}
+
+.task {
+  background-color: #3336e7d8;
+  color: white;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.task:hover {
+  background-color: #9192d5d8;
+}
+
+.kanban-column {
+  min-height: 300px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.task p {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Review Form */
+.review-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.review-form h3 {
+  margin-top: 0;
+  color: black;
+}
+
+.review-form label {
+  display: block;
+  margin-top: 10px;
+  color: black;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
+
+.review-form button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background-color: gray;
+}
+.background {
+  /* position: relative; */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+  /* Circle Animation */
+  .circle {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 5s infinite ease-in-out;
+  }
+  
+  /* Line Animation */
+  .line {
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    width: 300px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    animation: slide 8s infinite linear;
+  }
+  
+  /* Rhombus Animation */
+  .rhombus {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(45deg);
+    animation: rotate 6s infinite linear;
+  }
+  
+  /* Animations */
+  
+  /* Floating Effect for Circle */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
+  
+  /* Sliding Line Effect */
+  @keyframes slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  /* Rotating Rhombus */
+  @keyframes rotate {
+    0% {
+      transform: rotate(45deg);
+    }
+    100% {
+      transform: rotate(405deg);
+    }
+  }
+  

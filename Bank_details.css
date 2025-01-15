@@ -1,0 +1,83 @@
+/* Bank_details.css */
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    /* background-color: #e8f9fd; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 70vh; 
+    margin: 0;
+}
+
+/* Card container styling */
+.section {
+    background-color: white; /* Card background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 800px; /* Fixed width for the card */
+    margin-top: 100px;
+}
+
+/* Heading styling */
+h3 {
+    text-align: center;
+    color: #705834; /* Primary color */
+    margin-bottom: 20px;
+}
+
+/* Form row styling */
+.form-row {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of form groups */
+}
+
+/* Form group styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    flex: 1 1 45%; /* Allow 2 items per row */
+    margin-right: 20px; /* Space between columns */
+}
+
+/* Remove margin from last item in a row */
+.form-row .form-group:nth-child(2n) {
+    margin-right: 0; /* Remove margin for even items */
+}
+
+/* Label styling */
+label {
+    margin-bottom: 5px;
+    color: #5E503F; /* Text color */
+}
+
+/* Input styling */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #d0bca8; /* Light border */
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Input focus effect */
+input[type="text"]:focus {
+    border-color: #59ce8f; /* Highlight color on focus */
+    outline: none; /* Remove default outline */
+}
+button {
+    background-color: #ff7f3e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #47b079;
+}
+

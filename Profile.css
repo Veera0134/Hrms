@@ -1,0 +1,117 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    /* background-color: #f9ede5; */
+    color: #5e503f;
+    padding: 2em;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2em;
+  }
+  
+  header h1 {
+    font-size: 2.5em;
+    color: #705834;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 2em;
+    font-size: 1em;
+    color: #705834;
+  }
+  
+  /* Bio Data Container */
+  .bio-container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d0bca8;
+  }
+  
+  /* Profile Section */
+  .profile {
+    display: flex;
+    align-items: center;
+    /* text-decoration: underline; */
+  }
+  
+  .img {
+    margin-right: 20px;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-left: 60px;
+    margin-bottom: 30px;
+  }
+  
+  .profile-details {
+    margin-top: 0;
+    margin-left: 360px;
+    margin-bottom: 30px;
+  }
+  
+  
+  /* Section Styling */
+  h2 {
+    font-size: 1.4 em;
+    margin-bottom: 1em;
+    color: #705834;
+    text-decoration: underline;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin-bottom: 2em;
+  }
+  
+  ul li {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  
+  /* Emergency Section */
+  .emergency-section{
+     margin-left: 130px;
+  }
+  .emergency-section h2{
+    margin-left: 200px;
+  }
+  .emergency-section ul li {
+    color: #8c7c6a;
+    font-weight: bold;
+    margin-left: 210px;
+  }
+  
+  footer p {
+    font-size: 1em;
+    color: #705834;
+  }
+  .profile-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .personal-section, .contact-section {
+    width: 45%;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  
