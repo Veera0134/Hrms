@@ -6,13 +6,11 @@ body {
 }
 
 .form-container {
-    /* width: 60%; */
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-    /* margin-left: 500px; */
     background-image: url('https://t3.ftcdn.net/jpg/01/10/40/52/240_F_110405220_HbToZ6DQgSMnPyEGbI3fSV6KJ1NEQJRX.jpg');
     background-size: cover;
     background-position: center;
@@ -62,17 +60,6 @@ input[type="text"]:focus, input[type="date"]:focus, input[type="email"]:focus, s
     border-color: #ff7f3e;
 }
 
-/* a {
-    flex: 1;
-    text-align: right;
-    text-decoration: none;
-    color: #804cc3;
-    font-size: 0.9em;
-}
-
-a:hover {
-    text-decoration: underline;
-} */
 
 .form-row label {
     margin-right: 15px;

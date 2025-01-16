@@ -154,13 +154,13 @@
             background-color: #f2f2f2;
         }
         .chart-container {
-    width: 90%; /* Adjust to fit content within the page */
+    width: 90%; 
     margin: 30px auto;
-    display: flex; /* Flex layout for row alignment */
-    flex-direction: row; /* Ensure content is placed in a row */
-    justify-content: space-between; /* Space between elements */
-    align-items: flex-start; /* Align items at the top */
-    gap: 20px; /* Add space between chart and cards */
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 20px; 
 }
 
 canvas {
@@ -168,16 +168,16 @@ canvas {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
-    flex: 1; /* Allow the chart to grow/shrink */
-    max-width: 60%; /* Ensure it takes up appropriate space */
+    flex: 1; 
+    max-width: 60%;
 }
 
 .cards-beside-graph {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    flex: 1; /* Allow the cards to grow/shrink */
-    max-width: 35%; /* Restrict maximum width */
+    flex: 1; 
+    max-width: 35%; 
 }
 
 .info-card {
@@ -238,10 +238,10 @@ canvas {
 const attendanceChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // Sample labels
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], 
         datasets: [{
             label: 'Attendance Days',
-            data: [20, 22, 18, 24], // Sample data
+            data: [20, 22, 18, 24], 
             backgroundColor: [
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(255, 206, 86, 0.2)',

@@ -20,17 +20,13 @@
   const proposalForm = document.getElementById('proposalForm');
   const recentBonusSection = document.querySelector('.recent-bonus-section');
 
-  // Handle form submission
   proposalForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent form submission
-    
-    // Get form values
+    event.preventDefault(); 
     const employeeName = document.getElementById('employeeName').value;
     const employeeID = document.getElementById('employeeID').value;
     const bonusAmount = document.getElementById('bonusAmount').value;
     const reason = document.getElementById('reason').value;
 
-    // Create new bonus card
     const newCard = document.createElement('div');
     newCard.className = 'recent-bonus';
     newCard.innerHTML = `
@@ -43,15 +39,12 @@
       <button type="button" class="reject-btn">Reject</button>
     `;
 
-    // Append new card to the Recent Bonus section
     recentBonusSection.appendChild(newCard);
 
-    // Clear the form and close it
     proposalForm.reset();
     closeForm('proposalFormSection');
   });
 
-  // Handle approve/reject button clicks
   recentBonusSection.addEventListener('click', (event) => {
     if (event.target.classList.contains('approve-btn')) {
       const card = event.target.closest('.recent-bonus');
@@ -68,7 +61,6 @@
     }
   });
 
-  // Disable buttons after action
   function disableButtons(card) {
     const approveButton = card.querySelector('.approve-btn');
     const rejectButton = card.querySelector('.reject-btn');
@@ -92,7 +84,6 @@
     </div>
   </div>
 
-  <!-- Bonus Proposal Form Section -->
   <div id="proposalFormSection" class="form-section">
     <h3>Bonus Proposal Form</h3>
     <form id="proposalForm">
@@ -113,7 +104,6 @@
     </form>
   </div>
 
-  <!-- Recent Bonus Data Section -->
   <h3 style="text-align:center; margin-top: 30px;">Recent Bonus Data</h3>
   <div class="recent-bonus-section">
     <div class="recent-bonus">

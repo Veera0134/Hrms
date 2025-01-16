@@ -116,7 +116,7 @@
 
         .fingerprint-btn i {
             margin-right: 10px;
-            font-size: 1.2rem; /* Fingerprint icon size */
+            font-size: 1.2rem;
         }
 
         .fingerprint-btn:hover {
@@ -151,13 +151,11 @@
     </div>
 
     <script>
-     // Real-time validation for each field
 document.getElementById("name").addEventListener("input", validateName);
 document.getElementById("email").addEventListener("input", validateEmail);
 document.getElementById("password").addEventListener("input", validatePassword);
 document.getElementById("confirm-password").addEventListener("input", validateConfirmPassword);
 
-// Error message element
 const errorMessage = document.getElementById("error-message");
 
 function validateName() {
@@ -198,34 +196,28 @@ function validateConfirmPassword() {
     }
 }
 
-// Add click event to the fingerprint icon
 document.getElementById("fingerprint-icon").addEventListener("click", function() {
     alert("Fingerprint icon clicked!");
 });
 
-// Form submission
 document.getElementById("signup-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Ensure there are no error messages before submission
     if (errorMessage.textContent === "") {
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        // Store the form data in localStorage
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
 
         alert("Sign Up successful!");
 
-        // Optionally, redirect to the dashboard
-        window.location.href = "Fingertest.html"; // Redirect to dashboard
+        window.location.href = "Fingertest.html"; 
     }
 });
 
-// Retrieve stored data from localStorage (example usage)
 window.addEventListener("load", function() {
     const storedName = localStorage.getItem("name");
     const storedEmail = localStorage.getItem("email");
@@ -233,7 +225,6 @@ window.addEventListener("load", function() {
     if (storedName && storedEmail) {
         console.log("Stored Name:", storedName);
         console.log("Stored Email:", storedEmail);
-        // You can populate the form fields with stored data if needed
     }
 });
 

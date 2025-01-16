@@ -21,7 +21,7 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #2c3e50, #3498db); /* Sunset colors: soft pink to warm orange */
+    background: linear-gradient(135deg, #2c3e50, #3498db); 
     color: white;
     padding: 20px;
     text-align: center;
@@ -38,11 +38,11 @@ main {
 
 .employee-offboarding {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping of cards */
-    overflow-x: auto; /* Allow horizontal scrolling if cards overflow */
+    flex-wrap: nowrap;
+    overflow-x: auto; 
     gap: 20px;
     padding: 20px;
-    justify-content: flex-start; /* Align cards from the start */
+    justify-content: flex-start; 
     width: 100%;
 }
 
@@ -166,7 +166,6 @@ button.rejected:hover {
     </header>
     
     <main>
-        <!-- Employee Cards Section -->
         <section class="employee-offboarding">
            
             <div class="employee-card" id="employeeCard1" empID="12345">
@@ -210,13 +209,11 @@ button.rejected:hover {
     
     
         <div id="offboardingDataContainer">
-            <!-- Employee offboarding data will be displayed here -->
         </div>
     </main>
     
     <script>
      
-  // Retrieve stored offboarding data from localStorage
   const offboardingData = JSON.parse(localStorage.getItem('offboardingData'));
 
   const container = document.getElementById('offboardingDataContainer');
@@ -224,7 +221,6 @@ button.rejected:hover {
   if (offboardingData) {
     const { empName, position, empId, feedback, finalSalary, bonus, acknowledgment, status } = offboardingData;
 
-    // Create a card to display the employee data
     const card = document.createElement('div');
     card.className = 'employee-card';
     card.innerHTML = `
@@ -242,7 +238,6 @@ button.rejected:hover {
       </div>
     `;
 
-    // Add event listeners to the buttons
     const completedButton = card.querySelector('.completed');
     const rejectedButton = card.querySelector('.rejected');
     const statusElement = card.querySelector('.status');
@@ -260,20 +255,15 @@ button.rejected:hover {
     container.innerHTML = '<p>No offboarding data found.</p>';
   }
 
-  // Function to update the status
   function updateStatus(newStatus, statusElement, completedButton, rejectedButton) {
-    // Update the displayed status
     statusElement.textContent = newStatus;
 
-    // Update the status in localStorage
     const updatedData = { ...offboardingData, status: newStatus };
     localStorage.setItem('offboardingData', JSON.stringify(updatedData));
 
-    // Disable buttons
     completedButton.disabled = true;
     rejectedButton.disabled = true;
 
-    // Alert the user
     alert(`Offboarding Process: ${newStatus}`);
   }
 </script>

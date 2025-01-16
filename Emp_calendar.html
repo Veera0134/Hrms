@@ -12,7 +12,6 @@
             color: #333;
         }
         header {
-            /* background: #645cff; */
             color: rgb(3, 3, 3);
             padding: 10px 20px;
             text-align: center;
@@ -30,7 +29,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            /* background: #a084dc; */
             color: rgb(0, 0, 0);
         }
         .calendar-header button {
@@ -128,7 +126,6 @@
 
         let date = new Date();
 
-        // Sample Events
         const events = {
             "2024-12-16": "Project Deadline",
             "2024-12-20": "Team Meeting",
@@ -159,19 +156,16 @@
 
                 day.innerHTML = `<h3>${i}</h3>`;
 
-                // Mark Saturday (6) and Sunday (0) as leave days
                 if (dayOfWeek === 0 || dayOfWeek === 6) {
                     day.classList.add('leave');
                     day.innerHTML += `<p>Leave</p>`;
                 }
 
-                // Add event details if the date matches
                 if (events[dateString]) {
                     day.classList.add('event');
                     day.innerHTML += `<div class="event-details">${events[dateString]}</div>`;
                 }
 
-                // Highlight today
                 const today = new Date();
                 if (
                     today.getFullYear() === year &&

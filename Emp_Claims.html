@@ -37,11 +37,7 @@
             <form id="claim-form">
                 <label for="claim-type">Claim Type:</label>
                 <input type="text" id="Claim" name="Claim" required pattern="[A-Za-z]+" title="Only alphabets are allowed.">
-                <!-- <select id="claim-type" name="claim-type">
-                    <option value="travel">Travel</option>
-                    <option value="medical">Medical</option>
-                    <option value="lodging">other</option>
-                </select> -->
+        
         
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" required>
@@ -96,14 +92,7 @@
         </section>
     </main>
 
-    <!-- <footer>
-        <p>&copy; 2024 Astrolite Tech Solution. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#">Support</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-    </footer> -->
+
     <script>
                 function openClaimForm() {
             document.querySelector('.claim-form').style.display = 'block';
@@ -113,10 +102,7 @@
         const claims = JSON.parse(localStorage.getItem('claims')) || [];
         const cardContainer = document.querySelector('.claim-history .card-container');
         
-        // Clear existing cards
-        // cardContainer.innerHTML = '';
 
-        // Populate new cards
         claims.forEach((claim) => {
             const card = document.createElement('div');
             card.classList.add('card');
@@ -145,16 +131,13 @@
     }
 
     document.getElementById('claim-form').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent form from reloading the page
-        
-        // Get form data
+        e.preventDefault();
         const claimType = document.getElementById('claim-type').value;
         const date = document.getElementById('date').value;
         const amount = document.getElementById('amount').value;
         const description = document.getElementById('description').value;
         const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
 
-        // Create claim object
         const claim = {
             claimType,
             date,
@@ -163,36 +146,27 @@
             receipt
         };
 
-        // Get existing claims from local storage
         let claims = JSON.parse(localStorage.getItem('claims')) || [];
         claims.push(claim);
 
-        // Save updated claims to local storage
         localStorage.setItem('claims', JSON.stringify(claims));
 
-        // Reset the form
         this.reset();
 
-        // Update claim history
         renderClaimHistory();
 
-        // Send success alert
         alert('Your claim has been successfully submitted!');
     });
 
-    // Render claim history on page load
     document.addEventListener('DOMContentLoaded', renderClaimHistory);
         document.getElementById('claim-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent form from reloading the page
-            
-            // Get form data
+            e.preventDefault(); 
             const claimType = document.getElementById('claim-type').value;
             const date = document.getElementById('date').value;
             const amount = document.getElementById('amount').value;
             const description = document.getElementById('description').value;
             const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
     
-            // Create claim object
             const claim = {
                 claimType,
                 date,
@@ -201,17 +175,13 @@
                 receipt
             };
     
-            // Get existing claims from local storage
             let claims = JSON.parse(localStorage.getItem('claims')) || [];
             claims.push(claim);
     
-            // Save updated claims to local storage
             localStorage.setItem('claims', JSON.stringify(claims));
     
-            // Send success alert
             alert('Your claim has been successfully submitted!');
     
-            // Reset the form
             this.reset();
         });
     </script>

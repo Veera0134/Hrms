@@ -67,7 +67,6 @@
 
 <section id="why-join" class="why-join">
     <div class="why-join-container">
-      <!-- Left Side - Text -->
       <div class="text-part">
         <h2>Why Join Us?</h2>
         <div class="benefits">
@@ -79,74 +78,29 @@
             <h3>Work-Life Balance</h3>
             <p>Enjoy a healthy work-life balance with flexible working hours and remote work options.</p>
           </div>
-          <!-- <div class="benefit">
-            <h3>Competitive Pay</h3>
-            <p>Our compensation packages are highly competitive and rewarding.</p>
-          </div> -->
-          <!-- <div class="benefit">
-            <h3>Inclusive Culture</h3>
-            <p>We value diversity and inclusivity in our work environment.</p>
-          </div> -->
+
         </div>
       </div>
   
-      <!-- Right Side - Image -->
       <div class="image-part">
         <img src="https://as1.ftcdn.net/v2/jpg/05/92/33/28/1000_F_592332870_m9snNaOqjsLZKL05nQt6cBRMxqLqPNuK.jpg" alt="Join Us Image" class="join-image">
       </div>
     </div>
   </section>
 
-
-<!-- <section id="application-form" class="application-form">
-    <div class="form-container">
-
-      <div class="image-part">
-        <img src="https://plus.unsplash.com/premium_photo-1682124651258-410b25fa9dc0?q=80&w=1921&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Application Image" class="application-image">
-      </div>
-  
-
-      <div class="form-part">
-        <h2>Apply Now</h2>
-        <form action="#" method="POST">
-         
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email@gmail.com" required>
-          </div>
-          <div class="form-group">
-       
-            <label for="resume">Upload Resume</label>
-            <input type="file" id="resume" name="resume" required>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn-primary">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section> -->
   
 
   <footer>
     <p>© 2024 Astrolite Tech Solution. All rights reserved.</p>
   </footer>
   <script>
-    // Retrieve jobs from localStorage
     const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 
-    // Container to display jobs
     const jobListContainer = document.getElementById("jobList");
 
-    // Check if jobs exist
     if (jobs.length === 0) {
       jobListContainer.innerHTML = "<p>No job postings available.</p>";
     } else {
-      // Create job cards
       jobs.forEach((job, index) => {
         const jobCard = document.createElement("div");
         jobCard.className = "job-card";

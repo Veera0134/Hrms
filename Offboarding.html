@@ -14,21 +14,7 @@
   <main>
     <form id="offboardingForm">
       <div class="container">
-        <!-- <section class="employee-details">
-          <h2>Employee Details</h2>
-          <fieldset>
-            <legend>Personal Information</legend>
-            <label for="empName">Employee Name:</label>
-            <input type="text" id="empName" name="empName" placeholder="Enter employee name" required>
-            
-            <label for="position">Position:</label>
-            <input type="text" id="position" name="position" placeholder="Enter position" required>
-            
-            <label for="empId">Employee ID:</label>
-            <input type="text" id="empId" name="empId" placeholder="Enter employee ID" required>
-          </fieldset>
-        </section> -->
-        
+
         <aside class="checklist">
           <h2>Offboarding Checklist</h2>
           <ul>
@@ -125,24 +111,19 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      // Collect employee details
+     
       const empName = document.getElementById('empName').value;
       const position = document.getElementById('position').value;
       const empId = document.getElementById('empId').value;
 
-      // Collect additional data
-      // const checklist = Array.from(form.elements['checklist[]'])
-      //   .filter(input => input.checked)
-      //   .map(input => input.value);
+  
       const feedback = document.getElementById('feedback').value;
       const finalSalary = document.getElementById('final-salary').value;
       const bonus = document.getElementById('bonus').value;
       const acknowledgment = document.getElementById('acknowledgment').value;
 
-      // Set the initial offboarding status
       const status = "Pending";
 
-      // Store data in localStorage
       localStorage.setItem('offboardingData', JSON.stringify({
         empName,
         position,
@@ -151,13 +132,11 @@
         finalSalary,
         bonus,
         acknowledgment,
-        status, // Include the status in the stored data
+        status, 
       }));
-      // Display alert message with employee name
       alert(`Thank you, ${empName}, for completing the offboarding process.`);
 
-      // Redirect to another page (optional)
-      // window.location.href = 'Offboarding_Management.html';
+
     });
   </script>
 </body>

@@ -23,7 +23,6 @@ header h1 {
     margin-bottom: 0.5em;
 }
 
-/* Project Dashboard */
 .project-dashboard {
     max-width: 1200px;
     margin: 30px auto;
@@ -51,7 +50,6 @@ header h1 {
     animation: fadeInGrid 1s ease-in-out;
 }
 
-/* Project Card Styling */
 .project-card {
     background-color: #e9f0fc;
     padding: 20px;
@@ -75,7 +73,6 @@ header h1 {
     margin: 5px 0;
 }
 
-/* Status styles */
 .status {
     font-weight: bold;
     padding: 5px 10px;
@@ -97,7 +94,6 @@ header h1 {
     background-color: #4caf50;
 }
 
-/* Keyframe animations */
 @keyframes fadeInGrid {
     from {
         opacity: 0;
@@ -129,7 +125,6 @@ header h1 {
     }
 }
 
-/* Header layout adjustments */
 .header-actions {
     display: flex;
     align-items: center;
@@ -171,7 +166,7 @@ header h1 {
 
 
 .add-project-btn {
-    background-color: #4CAF50; /* Green background */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     padding: 10px 15px;
@@ -191,9 +186,9 @@ header h1 {
 .add-project-btn i {
     font-size: 20px;
 }
-/* Modal Styling */
+
 .modal {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -272,14 +267,12 @@ header h1 {
     color: #333;
 }
 
-/* Project Card Hover */
 .project-card:hover {
     transform: translateY(-10px);
     background-color: #d6e4fc;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Keyframes for Modal and Grid Animations */
 @keyframes fadeInModal {
     from {
         opacity: 0;

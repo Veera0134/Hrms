@@ -100,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Attach click listeners to step cards
     steps.forEach(step => {
         step.addEventListener("click", () => {
             const section = step.getAttribute("onclick").match(/'(.*?)'/)[1];
@@ -108,23 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Function to generate reports (ESI or PF)
-    // function generateReport(type) {
-    //     const submissionHistory = document.getElementById("submissionHistory");
-    //     const listItem = document.createElement("li");
-    //     const currentDate = new Date().toLocaleDateString();
-
-    //     listItem.textContent = `${type.toUpperCase()} Report submitted on ${currentDate}`;
-    //     submissionHistory.appendChild(listItem);
-
-    //     alert(`${type.toUpperCase()} report has been generated successfully!`);
-    // }
-
-    // Attach event listeners for report generation buttons
-    // document.querySelector(".btn-secondary[onclick*='esi']").addEventListener("click", () => generateReport("esi"));
-    // document.querySelector(".btn-secondary[onclick*='pf']").addEventListener("click", () => generateReport("pf"));
-
-    // Function to filter employee payslip list
+ 
     const employeeSearch = document.getElementById("employeeSearch");
     employeeSearch.addEventListener("input", () => {
         const searchValue = employeeSearch.value.toLowerCase();
@@ -141,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
- // Retrieve data from localStorage
  const payslipData = JSON.parse(localStorage.getItem("payslipData"));
 
 if (payslipData) {
@@ -156,118 +138,6 @@ if (payslipData) {
   alert("No payslip data found.");
 }
     </script>
-     <!-- <script>
-        function payslip(){
-            document.getElementById("slip").style.display="flex"
-        }
-     </script> -->
-    <!-- <script>// Sample employee data
-        const employees = [
-            { id: 1, name: "John Doe", department: "IT", salary: 50000 },
-            { id: 2, name: "Jane Smith", department: "HR", salary: 45000 },
-            { id: 3, name: "Mike Johnson", department: "Finance", salary: 55000 }
-        ];
-        
-        // Sample submission history
-        const submissions = [
-            { type: "ESI", date: "2024-02-01", status: "Submitted" },
-            { type: "PF", date: "2024-02-01", status: "Submitted" },
-            { type: "ESI", date: "2024-01-01", status: "Submitted" },
-            { type: "PF", date: "2024-01-01", status: "Submitted" }
-        ];
-        
-        // Show/Hide sections
-        function showSection(section) {
-            const sections = ['payroll', 'payslip', 'esi-pf'];
-            sections.forEach(s => {
-                document.getElementById(`${s}-section`).classList.add('hidden');
-            });
-            document.getElementById(`${section}-section`).classList.remove('hidden');
-        }
-        
-        // Process payroll form submission
-        document.getElementById('payrollForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const month = document.getElementById('payrollMonth').value;
-            const department = document.getElementById('department').value;
-            
-            // Simulate payroll processing
-            alert(`Processing payroll for ${department} department for ${month}`);
-        });
-        
-        // Initialize payslip list
-        function initializePayslipList() {
-            const payslipList = document.getElementById('payslipList');
-            payslipList.innerHTML = employees.map(emp => `
-                <div class="action-card">
-                    <h4>${emp.name}</h4>
-                    <p>Department: ${emp.department}</p>
-                    <button onclick="generatePayslip(${emp.id})" class="btn btn-secondary">
-                        Generate Payslip
-                    </button>
-                </div>
-            `).join('');
-        }
-        
-        // Generate individual payslip
-        function generatePayslip(employeeId) {
-            const employee = employees.find(emp => emp.id === employeeId);
-            if (employee) {
-                alert(`Generating payslip for ${employee.name}`);
-                // In a real application, this would generate and possibly email the payslip
-            }
-        }
-        
-        // Generate ESI/PF reports
-        function generateReport(type) {
-            const currentDate = new Date().toISOString().split('T')[0];
-            alert(`Generating ${type.toUpperCase()} report for ${currentDate}`);
-            
-            // Add to submission history
-            const newSubmission = {
-                type: type.toUpperCase(),
-                date: currentDate,
-                status: "Submitted"
-            };
-            submissions.unshift(newSubmission);
-            updateSubmissionHistory();
-        }
-        
-        // Update submission history display
-        function updateSubmissionHistory() {
-            const historyList = document.getElementById('submissionHistory');
-            historyList.innerHTML = submissions.map(sub => `
-                <li>
-                    ${sub.type} Report - ${sub.date} - ${sub.status}
-                </li>
-            `).join('');
-        }
-        
-        // Search functionality for payslip generation
-        document.getElementById('employeeSearch').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredEmployees = employees.filter(emp => 
-                emp.name.toLowerCase().includes(searchTerm) ||
-                emp.department.toLowerCase().includes(searchTerm)
-            );
-            
-            const payslipList = document.getElementById('payslipList');
-            payslipList.innerHTML = filteredEmployees.map(emp => `
-                <div class="action-card">
-                    <h4>${emp.name}</h4>
-                    <p>Department: ${emp.department}</p>
-                    <button onclick="generatePayslip(${emp.id})" class="btn btn-secondary">
-                        Generate Payslip
-                    </button>
-                </div>
-            `).join('');
-        });
-        
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            initializePayslipList();
-            updateSubmissionHistory();
-        });
-        </script> -->
+    
 </body>
 </html>

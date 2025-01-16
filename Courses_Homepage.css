@@ -6,13 +6,11 @@
     font-family: Arial, sans-serif;
 }
 
-/* Body and Background */
 body {
     background: linear-gradient(135deg, #645cff, #a084dc);
     color: white;
 }
 
-/* Header and Navigation */
 header {
     padding: 20px;
 }
@@ -24,16 +22,10 @@ nav {
 }
 
 .logo img{
-    /* display: flex;
-    align-items: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    gap: 10px; */
     width: 200px;
     height: 90px;
 }
 
-/* Navigation Links */
 .nav-links {
     list-style: none;
     display: flex;
@@ -47,7 +39,6 @@ nav {
     font-size: 1.0em;
 }
 
-/* Hero Section */
 .hero {
     display: flex;
     align-items: center;

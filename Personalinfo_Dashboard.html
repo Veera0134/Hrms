@@ -12,8 +12,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            /* justify-content: center;
-            align-items: flex-start; */
+         
             height: 100vh;
             overflow-x: hidden;
             background-image: url('https://img.freepik.com/premium-vector/school-frame-hand-drawn-style-education-frame-background_698782-3308.jpg?w=740');
@@ -22,12 +21,9 @@
         }
     
         .form-container {
-            /* background-position: center;
-            background-size: cover;
-            background-image: url('https://img.freepik.com/premium-vector/school-frame-hand-drawn-style-education-frame-background_698782-3308.jpg?w=740'); */
+
             display: flex;
             width: 1000px;
-            /* margin: 50px; */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -122,22 +118,17 @@
             flex-wrap: nowrap;
         }
     
-        /* .form-card {
-            flex: 1 1 calc(33.33% - 10px);
-            margin-bottom: 20px;
-        } */
+ 
     </style>
     
 </head>
 <body>
     <div class="form-container">
-        <!-- Form content -->
         <div class="form-content">
             <h1>Employee Onboarding Form</h1>
     
             <form id="onboardingForm">
                 <div class="rows">
-                <!-- Personal Information -->
                 <div class="form-card">
                     <fieldset>
                         <legend>Personal Information</legend>
@@ -233,7 +224,6 @@
                     </fieldset>
                 </div>
     
-                <!-- Emergency Contact Information -->
                 <div class="form-card">
                     <fieldset>
                         
@@ -289,7 +279,6 @@
                               <div class="form-group">
                                 <label for="experienceCertificate">Upload Experience Certificate</label>
                                 <input type="file" id="experienceCertificate" name="experienceCertificate" accept=".jpg, .jpeg, .png, .pdf" >
-                                <!-- <div class="error" id="errorExperienceCertificate">Please upload your experience certificate.</div> -->
                             </div>
                             
                         
@@ -335,18 +324,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitButton = form.querySelector('button[type="submit"]');
     const errorMessages = document.querySelectorAll(".error");
 
-    // Hide all error messages initially
     errorMessages.forEach(error => {
         error.style.display = "none";
     });
 
-    // Function to validate individual field
     function validateField(input) {
         const value = input.value.trim();
         const errorId = `error${input.id.charAt(0).toUpperCase() + input.id.slice(1)}`;
         const error = document.getElementById(errorId);
         
-        if (!error) return true; // Skip if no associated error element
+        if (!error) return true; 
 
         let isValid = true;
 
@@ -395,13 +382,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
 
-        // Show or hide the error message
         error.style.display = isValid ? "none" : "block";
 
         return isValid;
     }
 
-    // Function to validate the entire form
     function checkFormValidity() {
         let isFormValid = true;
 
@@ -411,11 +396,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Enable or disable the submit button
         submitButton.disabled = !isFormValid;
     }
 
-    // Attach real-time validation
     form.querySelectorAll("input").forEach((input) => {
         input.addEventListener("input", () => {
             validateField(input);
@@ -423,7 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Prevent form submission if validation fails
     form.addEventListener("submit", (event) => {
         let isFormValid = true;
 
@@ -439,7 +421,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Initial check to disable the button
     checkFormValidity();
     document.getElementById('onboardingForm').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent form submission to server
@@ -447,14 +428,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData(this);
             const data = {};
             formData.forEach((value, key) => {
-                data[key] = value; // Populate the data object
+                data[key] = value; 
             });
 
-            // Save data in localStorage
             localStorage.setItem('onboardingData', JSON.stringify(data));
 
-            // Redirect to the data display page
-            // window.location.href = 'Staff_Management.html';
+    
             window.location.href = 'Assert.html'
         });
 });

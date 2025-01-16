@@ -65,12 +65,10 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Hero Section */
 .Img-cont {
     background-image: url('https://t3.ftcdn.net/jpg/08/16/10/16/240_F_816101671_NUWTvGCKef8emf3J2ljF9pL66WcMVv2n.jpg');
     background-size: cover;
     background-position: center;
-    /* filter: brightness(50%); */
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -83,7 +81,6 @@ nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.3);
     padding: 20px;
     border-radius: 8px;
-    /* transition: transform 0.3s, background-color 0.3s; */
 }
 
 .Img-cont h2:hover {
@@ -92,7 +89,6 @@ nav ul li a:hover {
 }
 #hero {
     height: 80vh;
-    /* background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); */
     background-image: url('https://t3.ftcdn.net/jpg/08/16/10/16/240_F_816101671_NUWTvGCKef8emf3J2ljF9pL66WcMVv2n.jpg');
     background-size: cover;
     background-position: center;
@@ -107,8 +103,7 @@ nav ul li a:hover {
 .hero-content {
     margin-top: 150px;
     max-width: 800px;
-    /* border: #1f2937 solid 1px; */
-    /* background-color: rgb(240, 235, 235); */
+
     color: rgb(255, 255, 255);
     animation: fadeIn 1s ease-out;
 }
@@ -149,17 +144,6 @@ nav ul li a:hover {
     transform: translateY(-2px);
 }
 
-/* Services Section */
-/*  */
-
-/* Footer Section */
-/* footer {
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-weight: bold;
-} */
 #services {
     padding: 5rem 1rem;
     background: var(--light-bg);
@@ -197,7 +181,6 @@ nav ul li a:hover {
   height: 100px;
 }
 
-/* Stats Section */
 #stats {
     padding: 5rem 1rem;
     background: var(--primary-color);

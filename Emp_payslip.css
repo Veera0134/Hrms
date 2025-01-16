@@ -1,18 +1,15 @@
-/* Basic Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   padding: 2em;
 }
 
-/* Header Section */
 .header {
   text-align: center;
   padding: 2em 0;
@@ -38,10 +35,9 @@ body {
   font-size: 1.2em;
 }
 
-/* Employee Details Section */
 .employee-details {
   padding: 20px;
-  border: 3px solid #ddd; /* Updated border to 3px */
+  border: 3px solid #ddd;
   border-radius: 8px;
   margin: 20px 0;
 }
@@ -68,7 +64,7 @@ body {
   width: 100%;
   max-width: 300px;
   padding: 8px 12px;
-  border: 3px solid #ccc; /* Updated border to 3px */
+  border: 3px solid #ccc; 
   border-radius: 4px;
   font-size: 1em;
   transition: border-color 0.3s ease-in-out;
@@ -100,13 +96,12 @@ body {
   border-radius: 4px;
 }
 
-/* Pay Details Table */
 .pay-details {
   padding: 2em;
   margin-top: 2em;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 3px solid #ddd; /* Updated border to 3px */
+  border: 3px solid #ddd;
 }
 
 .pay-details h2 {
@@ -124,7 +119,7 @@ table {
 table th, table td {
   padding: 1em;
   text-align: left;
-  border: 3px solid #ddd; /* Updated border to 3px */
+  border: 3px solid #ddd;
 }
 
 table th {
@@ -135,7 +130,6 @@ table td {
   background-color: initial;
 }
 
-/* Net Pay Section */
 .net-pay {
   display: flex;
   flex-direction: column;
@@ -147,7 +141,7 @@ table td {
   align-items: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 3px solid #ddd; /* Updated border to 3px */
+  border: 3px solid #ddd; 
 }
 
 .net-pay h2 {
@@ -162,37 +156,31 @@ table td {
   margin-bottom: 0.5em;
 }
 
-/* Employee Details Section Input Fields */
 .employee-details , td input[type="text"] {
   width: 100%;
-  /* max-width: 300px; */
   padding: 10px 15px;
-  border: 3px solid #ccc; /* Thicker border for emphasis */
-  border-radius: 8px; /* Rounded corners for a modern look */
+  border: 3px solid #ccc; 
+  border-radius: 8px; 
   font-size: 1em;
-  background-color: #f9f9f9; /* Subtle background color */
-  transition: all 0.3s ease-in-out; /* Smooth transition on focus and hover */
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out; 
 }
 
-/* Focus state for input fields */
 .employee-details input[type="text"]:focus {
   border-color: #4CAF50;
   
-  background-color: #e7f5e7; /* Light green background when focused */
-  outline: none; /* Removes the default outline */
+  background-color: #e7f5e7; 
+  outline: none; 
 }
 
-/* Placeholder Styling */
 .employee-details input::placeholder {
-  color: #aaa; /* Light grey color for placeholder text */
-  font-style: italic; /* Italicize placeholder text */
+  color: #aaa;
+  font-style: italic; 
 }
 
-/* Hover effect for input fields */
 .employee-details input[type="text"]:hover {
-  border-color: #59ce8f; /* Change border to a more vibrant green on hover */
+  border-color: #59ce8f; 
 }
-/* Submit Section Styling */
 .submit-section {
   text-align: center;
   margin-top: 30px;
@@ -201,39 +189,35 @@ table td {
   margin-left: 47%;
   text-align: center;
   margin-top: 30px;
-  background-color: #57c7cf; /* Green background */
-  color: white; /* White text */
-  font-size: 18px; /* Larger text size */
-  padding: 12px 25px; /* Ample padding for better click area */
-  border: none; /* Remove border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor to indicate clickable button */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+  background-color: #57c7cf; 
+  color: white; 
+  font-size: 18px;
+  padding: 12px 25px; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
-/* Button Styling */
 .submit-section button {
-  background-color: #57c7cf; /* Green background */
-  color: white; /* White text */
-  font-size: 18px; /* Larger text size */
-  padding: 12px 25px; /* Ample padding for better click area */
-  border: none; /* Remove border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor to indicate clickable button */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+  background-color: #57c7cf;
+  color: white; 
+  font-size: 18px; 
+  padding: 12px 25px; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
-/* Button Hover Effect */
 .submit-section button:hover {
-  background-color: #0d9ae6; /* Darker green on hover */
-  transform: translateY(-2px); /* Slightly lift the button on hover */
+  background-color: #0d9ae6; 
+  transform: translateY(-2px); 
 }
 
-/* Button Active Effect */
 .submit-section button:active {
-  background-color: #388e3c; /* Even darker green on click */
-  transform: translateY(1px); /* Button appears pressed */
+  background-color: #388e3c;
+  transform: translateY(1px); 
 }
-/* Pay Details Section Styling */
 .pay-details {
   padding: 2em;
   margin-top: 2em;
@@ -242,7 +226,6 @@ table td {
   background-color: #ffffff;
 }
 
-/* Heading Style */
 .pay-details h2 {
   text-align: center;
   font-size: 1.8em;
@@ -250,12 +233,11 @@ table td {
   margin-bottom: 1em;
 }
 
-/* Table Styling */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1em;
-  background-color: #f9f9f9; /* Light gray background for the table */
+  background-color: #f9f9f9; 
 }
 
 table th, table td {
@@ -265,7 +247,7 @@ table th, table td {
 }
 
 table th {
-  background-color: #f1f1f1; /* Light gray background for headers */
+  background-color: #f1f1f1;
   font-size: 1.2em;
   font-weight: bold;
 }
@@ -285,22 +267,20 @@ table input[type="number"] {
 }
 
 table input[type="number"]:focus {
-  border-color: #4CAF50; /* Green border on focus */
-  background-color: #e7f5e7; /* Light green background on focus */
+  border-color: #4CAF50; 
+  background-color: #e7f5e7; 
 }
 
 table tr:nth-child(even) {
-  background-color: #f8f8f8; /* Light alternating row color */
+  background-color: #f8f8f8; 
 }
 
-/* Placeholder Styling */
 table input::placeholder {
   color: #aaa;
   font-style: italic;
 }
 
-/* Hover Effect for Rows */
 table tr:hover {
-  background-color: #e1f7d5; /* Light green hover effect */
+  background-color: #e1f7d5; 
 }
 

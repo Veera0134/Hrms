@@ -6,7 +6,6 @@
     <title>Dashboard - Company Overview</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -50,13 +49,11 @@
     <h1 style="text-align: center; margin-bottom: 30px;">Company Overview Dashboard</h1>
 
     <div class="dashboard">
-        <!-- Pie Chart -->
         <div class="chart-container">
             <h2>Project Overview</h2>
             <canvas id="pieChart"></canvas>
         </div>
 
-        <!-- Bar Chart -->
         <div class="chart-container">
             <h2>Employee Details</h2>
             <canvas id="barChart"></canvas>
@@ -64,7 +61,6 @@
     </div>
 
     <script>
-        // Pie Chart for Project Overview
         const pieCtx = document.getElementById('pieChart').getContext('2d');
         const pieChart = new Chart(pieCtx, {
             type: 'pie',
@@ -72,7 +68,7 @@
                 labels: ['Completed Projects', 'Ongoing Projects', 'Pending Projects'],
                 datasets: [{
                     label: 'Projects',
-                    data: [50, 20, 10], // Replace with dynamic data if available
+                    data: [50, 20, 10], 
                     backgroundColor: ['#4caf50', '#ff9800', '#f44336'],
                     borderWidth: 1
                 }]

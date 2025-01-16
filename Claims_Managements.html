@@ -84,7 +84,6 @@
                 <div id="claims-container"></div>
             </div>
         </section>
-        <!-- <button id="clearStorage">Clear Claims Data</button> -->
      
     </main>
 
@@ -93,17 +92,14 @@
         const filterStatus = document.getElementById('filterStatus');
         const claimItems = document.querySelectorAll('.claim-item');
 
-        // Function to filter claims based on status
         function filterClaims() {
             const statusFilter = filterStatus.value;
 
             claimItems.forEach((claim) => {
                 const claimStatus = claim.querySelector('.status').textContent.toLowerCase();
 
-                // Check if the status is matched
                 const isStatusMatch = statusFilter === 'all' || claimStatus.includes(statusFilter.toLowerCase());
 
-                // Display the claim if status matches, otherwise hide it
                 if (isStatusMatch) {
                     claim.style.display = 'block';
                 } else {
@@ -112,15 +108,12 @@
             });
         }
 
-        // Add event listener to the filterStatus dropdown
         filterStatus.addEventListener('change', filterClaims);
     });
     const claims = JSON.parse(localStorage.getItem('claims')) || [];
 
-// Select the container for claims
 const claimsContainer = document.getElementById('claims-container');
 
-// Helper function to create a claim card
 function createClaimCard(claim) {
     const statusClass = claim.status ? claim.status.toLowerCase() : 'pending';
     const statusText = claim.status ? claim.status.charAt(0).toUpperCase() + claim.status.slice(1) : 'Pending';
@@ -137,7 +130,6 @@ function createClaimCard(claim) {
     `;
 }
 
-// Render all claims
 function renderClaims() {
     if (claims.length === 0) {
         // claimsContainer.innerHTML = '<p>No claims to display.</p>';
@@ -146,7 +138,6 @@ function renderClaims() {
     }
 }
 
-// Initial render
 renderClaims();
 </script>
 

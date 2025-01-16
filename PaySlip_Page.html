@@ -9,7 +9,6 @@
     function validateForm(event) {
       event.preventDefault();
 
-      // Retrieve form fields
       const employeeName = document.getElementById('employee-name');
       const employeeId = document.getElementById('employee-id');
       const designation = document.getElementById('designation');
@@ -24,10 +23,8 @@
       const pf = document.querySelector('[name="pf"]');
       const healthInsurance = document.querySelector('[name="health-insurance"]');
 
-      // Regex for alphabet validation
       const alphabetRegex = /^[A-Za-z\s]+$/;
 
-      // Check required fields
       if (!employeeName.value.trim() || !alphabetRegex.test(employeeName.value)) {
         alert("Please enter a valid name (alphabets only).");
         employeeName.focus();
@@ -92,35 +89,27 @@
       function saveToLocalStorage(event) {
       event.preventDefault();
 
-      // Retrieve values
       const employeeName = document.getElementById('employee-name').value;
       const department = document.getElementById('department').value;
 
-      // Store values in local storage
       localStorage.setItem('employeeName', employeeName);
       localStorage.setItem('department', department);
 
-      // Redirect to another page
       window.location.href = 'payslip.html';
     }
 
-      // If all validations pass
       alert("Form submitted successfully!");
       document.getElementById('payslip-form').submit();
     }
   </script>
 </head>
 <body>
-  <!-- Payslip Header -->
   <header class="header">
     <div class="company-info">
-      <!-- <p>Employee Payslip</p> -->
     </div>
   </header>
 
-  <!-- Employee Payslip Form -->
   <form id="payslip-form" onsubmit="validateForm(event)">
-    <!-- Employee Details Section -->
     <section class="employee-details">
       <h2>Employee Details</h2>
       <div class="details">
@@ -141,7 +130,6 @@
       </div>
     </section>
 
-    <!-- Earnings and Deductions Table -->
     <section class="pay-details">
       <h2>Earnings and Deductions</h2>
       <table>
@@ -184,7 +172,6 @@
       </table>
     </section>
 
-    <!-- Net Pay Section -->
     <section class="net-pay">
       <h2>Net Pay</h2>
       <div class="net-pay1">
@@ -194,7 +181,6 @@
       </div>
     </section>
 
-    <!-- Submit Button -->
     <div class="submit-section">
       <button type="submit">submit</button>     
     </div>
@@ -204,7 +190,6 @@
   function validateForm(event) {
   event.preventDefault();
 
-  // Retrieve form fields
   const employeeName = document.getElementById('employee-name').value.trim();
   const employeeId = document.getElementById('employee-id').value.trim();
   const designation = document.getElementById('designation').value.trim();
@@ -219,10 +204,8 @@
   const pf = document.querySelector('[name="pf"]').value.trim();
   const healthInsurance = document.querySelector('[name="health-insurance"]').value.trim();
 
-  // Regex for alphabet validation
   const alphabetRegex = /^[A-Za-z\s]+$/;
 
-  // Validate required fields
   if (!employeeName || !alphabetRegex.test(employeeName)) {
     alert("Please enter a valid name (alphabets only).");
     return;
@@ -244,17 +227,14 @@
     return;
   }
 
-  // Calculate total earnings and deductions
   const totalEarnings = Number(basicSalary) + Number(hra) + Number(specialAllowance) + Number(bonus);
   const totalDeductions = Number(incomeTaxDeduction) + Number(pf) + Number(healthInsurance);
   const netPay = totalEarnings - totalDeductions;
 
-  // Update the display with calculated values
   document.getElementById('total-earnings').textContent = totalEarnings.toFixed(2);
   document.getElementById('total-deductions').textContent = totalDeductions.toFixed(2);
   document.getElementById('net-pay').textContent = netPay.toFixed(2);
 
-  // Store data in localStorage
   const payslipData = {
     employeeName,
     employeeId,
@@ -281,9 +261,7 @@
 
   localStorage.setItem("payslipData", JSON.stringify(payslipData));
 
-  // Navigate to another page (e.g., payslip.html)
-  // alert("Payslip generated successfully!");
-  // window.location.href = "Payroll_Management.html";
+
 }
 
 

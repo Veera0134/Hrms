@@ -71,30 +71,25 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Initialize sections
       const applyLeaveBtn = document.querySelector(".apply-leave-btn");
       const leaveRequestSection = document.querySelector(".leave-request");
       const leaveHistoryBtn = document.querySelector(".leave-history-btn");
       const leaveHistorySection = document.querySelector(".leave-history");
       const leaveHistoryTable = document.getElementById("leaveHistoryTable");
 
-      // Hide sections initially
       leaveRequestSection.style.display = "none";
       leaveHistorySection.style.display = "none";
 
-      // Toggle leave request section visibility
       applyLeaveBtn.addEventListener("click", function () {
         leaveRequestSection.style.display =
           leaveRequestSection.style.display === "none" ? "block" : "none";
       });
 
-      // Toggle leave history section visibility
       leaveHistoryBtn.addEventListener("click", function () {
         leaveHistorySection.style.display =
           leaveHistorySection.style.display === "none" ? "block" : "none";
       });
 
-      // Load leave history from local storage
       function loadLeaveHistory() {
         const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
         leaveHistoryTable.innerHTML = ""; // Clear table
@@ -111,36 +106,29 @@
       }
       loadLeaveHistory();
 
-      // Handle form submission
       document.getElementById("leaveRequestForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        // Get form values
         const leaveType = document.querySelector("select").value;
         const startDate = document.querySelector("input[type='date']").value;
         const endDate = document.querySelectorAll("input[type='date']")[1].value;
         const reason = document.querySelector("textarea").value;
 
-        // Create a leave request object
         const leaveRequest = {
           leaveType,
           startDate,
           endDate,
           reason,
-          status: "Pending", // Default status
+          status: "Pending",
         };
 
-        // Retrieve existing requests from local storage
         let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
         leaveRequests.push(leaveRequest);
 
-        // Save to local storage
         localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
 
-        // Update leave history table
         loadLeaveHistory();
 
-        // Reset form and show success message
         document.getElementById("leaveRequestForm").reset();
         alert("Leave Request Form is submitted successfully");
       });

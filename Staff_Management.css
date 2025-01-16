@@ -22,7 +22,6 @@ body {
   line-height: 1.6;
 }
 
-/* Header Styles */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -74,7 +73,6 @@ header h1 {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Employee Grid */
 .employee-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -82,7 +80,6 @@ header h1 {
   padding: 20px 0;
 }
 
-/* Employee Card */
 .employee-card {
   background: var(--card-background);
   border-radius: var(--border-radius);
@@ -198,7 +195,6 @@ header h1 {
   transform: translateY(-2px);
 }
 
-/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -320,7 +316,6 @@ header h1 {
   }
 }
 
-/* Scrollbar Styles */
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }
@@ -339,7 +334,6 @@ header h1 {
   background: #2980b9;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     padding: 10px;
@@ -459,7 +453,6 @@ transition: 0.3s ease;
 background: #6c3483;
 }
 
-/* Overlay styles */
 .overlay {
 display: none;
 position: fixed;
@@ -516,7 +509,6 @@ transform: translateY(-5px);
 box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Container for the action icons */
 .action-icons {
 display: flex;
 justify-content: space-between;
@@ -524,43 +516,36 @@ align-items: center;
 gap: 10px;
 }
 
-/* Style for individual action icons */
 .action-icons i {
 font-size: 18px;
-color: #333; /* Default icon color */
+color: #333; 
 cursor: pointer;
 transition: color 0.3s, transform 0.3s;
 }
 
-/* Hover effects for action icons */
 .action-icons i:hover {
-color: #ff7f3e; /* Change color on hover */
-transform: scale(1.1); /* Slightly enlarge the icon */
+color: #ff7f3e; 
+transform: scale(1.1); 
 }
 
-/* Additional styling for the Edit icon */
 .action-icons .fa-edit {
-color: #4CAF50; /* Green color for Edit */
+color: #4CAF50; 
 }
 
-/* Additional styling for the Delete icon */
 .action-icons .fa-trash {
-color: #f44336; /* Red color for Delete */
+color: #f44336; 
 }
 
-/* Additional styling for the Download icon */
 .action-icons .fa-download {
-color: #2196F3; /* Blue color for Download */
+color: #2196F3; 
 }
 
-/* Button Style */
 .card-footer .btn-view {
 margin-bottom: 10px;
 }
-/* Edit form styles */
-/* Edit Form Styles */
+
 .edit-form {
-display: none; /* Hidden by default */
+display: none; 
 position: fixed;
 top: 50%;
 left: 50%;

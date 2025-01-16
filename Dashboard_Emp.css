@@ -39,14 +39,14 @@ nav ul li a:hover {
 
 .dashboard {
     position: relative;
-    height: 100vh; /* Full viewport height */
+    height: 100vh; 
     width: 100%;
     padding: 50px;
     text-align: center;
    
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    background-attachment: fixed;
 }
 
 .welcome-message h1 {

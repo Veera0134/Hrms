@@ -9,10 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* background: linear-gradient(to bottom, #87CEEB, #FFFACD, #32CD32, #8B4513);  */
-            /* font-family: Arial, sans-serif; */
-            /* background-image: url('https://plus.unsplash.com/premium_photo-1725985758416-618e34ef5616?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE2fHwzZHxlbnwwfHwwfHx8MA%3D%3D'); */
-            /* background-position: bottom; */
+
             background-size: cover;
         } 
         header {
@@ -21,8 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: #121212;
-    color: white; */
+
 }
 header h1{
     color: white;
@@ -90,7 +86,6 @@ header ul li {
             text-decoration: none;
             padding: 10px 15px;
             color: white;
-            /* border: 1px solid #121213; */
             border-radius: 5px;
             transition: 0.3s;
             background-color: #de841d;
@@ -141,11 +136,9 @@ header ul li {
             transition: background-color 0.3s ease;
         }
         button:hover {
-            /* background: #3e8e41; */
             text-decoration: underline;
         }
 
-        /* Layout for Personal Details */
         .personal-details-layout {
             display: grid;
             grid-template-columns: 1.5fr 2fr;
@@ -155,11 +148,8 @@ header ul li {
             width: 100%;
             border-radius: 8px;
         }
-        /* .bank-img{
-            height: ;
-        } */
 
-        /* Keyframes */
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -185,15 +175,13 @@ header ul li {
 <body>
     <header>
         <img src="./logo.png" alt="Astrolite Tech Solution Logo">
-        <!-- <img id="img2" src="./Header-removebg-preview (1).png" alt="Astrolite Tech Solution Logo"> -->
          <h1>ASTROLITE TECH SOLUTIONS</h1>
         <nav>
             <ul>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Chat </a></li>
                 <li><a href="#">Help</a></li>
-                <!-- <li><a href="#about">About Us</a></li> -->
-                <!-- <li><a href="#contact">Contact</a></li> -->
+          
             </ul>
         </nav>
     </header>
@@ -205,15 +193,12 @@ header ul li {
             <a href="#bank-details" onclick="navigateTo('bank-details')">Bank Details</a>
         </nav><hr>
 
-        <!-- Personal Details Section -->
         <section id="personal-details" class="active">
             <h2>Personal Details</h2>
             <div class="personal-details-layout">
-                <!-- Left Column: Picture -->
                 <div>
                     <img src="https://t4.ftcdn.net/jpg/08/37/21/95/240_F_837219551_4knLWOcNHprOGCUOvxi3ZL5t8XlDiwRG.jpg" alt="Profile Picture">
                 </div>
-                <!-- Right Column: Form -->
                 <div>
                     <form>
                         <div class="form-group">
@@ -258,15 +243,12 @@ header ul li {
             </div>
         </section>
       
-        <!-- Qualification Details Section -->
         <section id="qualification-details">
             <h2>Qualification Details</h2>
                       <div class="personal-details-layout">
-                <!-- Left Column: Picture -->
                 <div>
                     <img src="https://img.freepik.com/free-photo/people-office_144627-38035.jpg?ga=GA1.1.233059171.1729752547&semt=ais_hybrid" alt="Profile Picture">
                 </div>
-                <!-- Right Column: Form -->
                 <div>
                     <form>
                         <div class="form-group">
@@ -306,14 +288,7 @@ header ul li {
                             <label for="btech-percentage">B.Tech Percentage</label>
                             <input type="text" id="btech-percentage" name="btech-percentage" placeholder="Enter your B.Tech percentage" required>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="pg-marks">PG Marks</label>
-                            <input type="text" id="pg-marks" name="pg-marks" placeholder="Enter your PG marks" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pg-percentage">PG Percentage</label>
-                            <input type="text" id="pg-percentage" name="pg-percentage" placeholder="Enter your PG percentage" required>
-                        </div> -->
+   
                         <button type="button" onclick="navigateTo('personal-details')">Back</button>
                         <button type="button" onclick="navigateTo('bank-details')">Next</button>
                     </form>
@@ -323,11 +298,9 @@ header ul li {
                         <section id="bank-details">
     <h2>Bank Details</h2>
                            <div class="personal-details-layout">
-                <!-- Left Column: Picture -->
                 <div class="bank-img">
                     <img src="./bank img.jpeg" alt="Profile Picture">
                 </div>
-                <!-- Right Column: Form -->
                 <div>
                           
     <form>
@@ -355,14 +328,7 @@ header ul li {
             <label for="ifsc">IFSC Code</label>
             <input type="text" id="ifsc" name="ifsc" placeholder="Enter IFSC code" required>
         </div>
-        <!-- <div class="form-group">
-            <label for="pan-number">PAN Number</label>
-            <input type="text" id="pan-number" name="pan-number" placeholder="Enter your PAN number" required>
-        </div>
-        <div class="form-group">
-            <label for="aadhar-number">Aadhar Number</label>
-            <input type="text" id="aadhar-number" name="aadhar-number" placeholder="Enter your Aadhar number" required>
-        </div> -->
+
         <button type="button" onclick="navigateTo('qualification-details')">Back</button>
         <button type="submit" onclick="Message()">Submit</button>
     </form>

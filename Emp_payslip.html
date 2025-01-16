@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Payslip</title>
-    <!-- Add Font Awesome for the calendar icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -53,7 +52,6 @@
             border: none;
             text-decoration: none;
         }
-        /* Calendar icon and download button */
         .calendar-btn, .download-btn {
             background-color: transparent;
             border: none;
@@ -62,11 +60,9 @@
             color: #ff7f3e;
             margin-right: 10px;
         }
-        /* Initially hide the content */
         .hidden-content {
             display: none;
         }
-        /* Show content when button is clicked */
         .payslip-details.active + .hidden-content {
             display: block;
         }
@@ -94,55 +90,11 @@
 </head>
 <body>
 
-<!-- <div class="payslip-container">
-    <div class="payslip-header">
-        <h1>Employee Payslip</h1>
-    </div>
-
-    <div class="payslip-details">
-        <h3>Employee Details</h3>
-        <div><span>Employee ID:</span> <span>12345</span></div>
-        <div><span>Name:</span> <span>Veera Raghava</span></div>
-        <div><span>Department:</span> <span>Software</span></div>
-        <div><span>Pay Date:</span> 
-            <span>MM/DD/YYYY 
-            </span>
-        </div>
-
-        <button class="view-button" onclick="this.closest('.payslip-details').classList.toggle('active')">
-            View Pay Slip
-        </button>
-    </div>
-
-    <div class="hidden-content">
-        <div class="payslip-salary">
-            <h3>Salary Breakdown</h3>
-            <div><span>Basic Pay:</span> <span>$3000</span></div>
-            <div><span>HRA:</span> <span>$500</span></div>
-            <div><span>Other Allowances:</span> <span>$200</span></div>
-        </div>
-
-        <div class="payslip-deductions">
-            <h3>Deductions</h3>
-            <div><span>PF:</span> <span>$150</span></div>
-            <div><span>Tax:</span> <span>$100</span></div>
-            <div><span>Other Deductions:</span> <span>$50</span></div>
-        </div>
-
-        <div class="payslip-summary">
-            <span>Net Salary:</span> <span>$3400</span>
-        </div>
-    </div>
-
- 
-    <button class="download-btn" onclick="downloadPayslip()">📥 Download Payslip</button>
-</div> -->
 <div id="payslip-details">
     <!-- Payslip details will be dynamically inserted here -->
   </div>
 
 <script>
- // Retrieve data from localStorage
  const payslipData = JSON.parse(localStorage.getItem("payslipData"));
 
  if (payslipData) {
@@ -191,12 +143,10 @@
       const hiddenContent = document.getElementById("hidden-content");
       const downloadBtn = document.getElementById("download-payslip-btn");
 
-      // Toggle visibility of hidden content
       viewDetailsBtn.addEventListener("click", () => {
         hiddenContent.style.display = hiddenContent.style.display === "none" || !hiddenContent.style.display ? "block" : "none";
       });
 
-      // Download payslip as a text file
       downloadBtn.addEventListener("click", () => {
         const payslipContent = `
           ${payslipData.employeeName} - Payslip
@@ -229,16 +179,7 @@
       alert("No payslip data found.");
     }
 
-    // Function to handle download button click
-    // function downloadPayslip() {
-    //     const payslipContent = document.querySelector('.payslip-container').innerHTML;
-    //     const blob = new Blob([payslipContent], { type: 'application/pdf' });
-    //     const url = URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = 'employee_payslip.pdf';
-    //     a.click();
-    // }
+
 </script>
 
 </body>

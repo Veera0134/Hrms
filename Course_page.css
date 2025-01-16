@@ -1,11 +1,9 @@
-/* Resetting basic styling */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Styling the body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f9ede5;
@@ -17,7 +15,6 @@ body {
     color: #5E503F;
 }
 
-/* Main Heading Styling */
 h2 {
     font-size: 2.0rem;
     color: #8c7c6a;
@@ -29,39 +26,35 @@ h2 {
     text-decoration: underline;
 }
 
-/* Card Container Flexbox */
 .card-container {
     width: 80%;
     max-width: 1200px;
     display: flex;
-    flex-wrap: wrap; /* Enables wrapping into multiple rows */
+    flex-wrap: wrap; 
     gap: 20px;
     justify-content: center;
     margin: 20px 0;
 }
 
-/* Card Styling */
 .card {
     background-color: #ebdfcd;
     border-radius: 8px;
     padding: 20px;
-    width: 30%; /* Each card takes up 30% of the container width for three columns */
-    min-width: 250px; /* Minimum width for smaller screens */
-    max-width: 400px; /* Maximum width to keep cards from getting too large */
+    width: 30%; 
+    min-width: 250px; 
+    max-width: 400px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: left;
     cursor: pointer;
 }
 
-/* Card Heading */
 .card h3 {
     font-size: 1.5rem;
     color: #705834;
     margin-bottom: 10px;
 }
 
-/* Card Content */
 .card p {
     font-size: 1rem;
     color: #5E503F;
@@ -69,13 +62,11 @@ h2 {
     line-height: 1.6;
 }
 
-/* Hover Effects */
 .card:hover {
     transform: translateY(1px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Button Styling */
 .card button {
     background-color: #ff7f3e;
     color: #fff;

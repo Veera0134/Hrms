@@ -25,7 +25,6 @@
         }
 
         .overlay {
-            /* background-color: rgba(0, 0, 0, 0.6); */
             position: absolute;
             top: 0;
             left: 0;
@@ -38,7 +37,7 @@
             position: relative;
             z-index: 2;
             padding: 50px 20px;
-            margin: 0; /* Removed any margin to eliminate the gap */
+            margin: 0; 
         }
 
         .header {
@@ -60,7 +59,7 @@
             top: 20px;
             left: 5px;
             width: 250px; 
-            height: 100px; /* Adjust size of logo */
+            height: 100px; 
         }
 
         .tree-container {
@@ -70,7 +69,7 @@
             height: 100vh;
             flex-direction: column;
             position: relative;
-            margin-top: -150px; /* Removed any top margin */
+            margin-top: -150px;
             animation: slideUp 2s ease-out;
         }
 
@@ -80,10 +79,8 @@
             align-items: flex-start;
             gap: 50px;
         position: relative;
-            /* animation: cardBounce 2s infinite ease-in-out; */
-            /* Removed the 'top' property */
+       
         }
-           /* Horizontal lines between cards */
     .card-container::before,
     .card-container::after {
         content: '';
@@ -94,16 +91,14 @@
         z-index: 1;
     }
 
-    /* Line between Card 1 and Card 2 */
     .card-container::before {
-        left: 20%; /* Start from Card 1 */
-        width: 25%; /* Length to reach Card 2 */
+        left: 20%; 
+        width: 25%; 
     }
 
-    /* Line between Card 2 and Card 3 */
     .card-container::after {
-        right: 20%; /* End at Card 3 */
-        width: 25%; /* Length from Card 2 */
+        right: 20%; 
+        width: 25%; 
     }
 
         .card {
@@ -116,7 +111,6 @@
             text-align: center;
             transition: transform 0.9s;
             cursor: pointer;
-            /* animation: cardBounce 2s infinite ease-in-out; */
         }
         .card::before {
             content: '';
@@ -173,11 +167,9 @@
         }
 
         .buttons a:hover {
-            /* background-color: #45a049; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9 );
         }
 
-        /* Adjust card positions in triangle shape */
         .card-container .card:nth-child(1) {
             transform: translateY(-50px);
         }

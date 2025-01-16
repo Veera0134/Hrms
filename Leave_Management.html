@@ -9,7 +9,7 @@
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Linear gradient background */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
   }
   h1 {
     color: white;
@@ -68,51 +68,38 @@
 <body>
   <h1>Leave Management</h1>
   <div class="card-container" id="leaveHistoryContainer">
-    <!-- Leave history cards will be added here dynamically -->
     <div class="card">
         <h3>Annual Leave</h3>
         <p><strong>Date Range:</strong> 2024-01-15 - 2024-01-20</p>
         <p><strong>Status:</strong> <span class="status">Approve</span></p>
         <p><strong>Reason:</strong> Family vacation</p>
-        <!-- <div class="button-container">
-          <button class="approve-btn">Approve</button>
-          <button class="reject-btn">Reject</button>
-        </div> -->
+
       </div>
       <div class="card">
         <h3>Sick Leave</h3>
         <p><strong>Date Range:</strong> 2024-02-01 - 2024-02-03</p>
         <p><strong>Status:</strong> <span class="status">Approve</span></p>
         <p><strong>Reason:</strong> Flu</p>
-        <!-- <div class="button-container">
-          <button class="approve-btn">Approve</button>
-          <button class="reject-btn">Reject</button>
-        </div> -->
+     
       </div>
       <div class="card">
         <h3>Casual Leave</h3>
         <p><strong>Date Range:</strong> 2024-03-05 - 2024-03-06</p>
         <p><strong>Status:</strong> <span class="status">Reject</span></p>
         <p><strong>Reason:</strong> Personal errands</p>
-        <!-- <div class="button-container">
-          <button class="approve-btn">Approve</button>
-          <button class="reject-btn">Reject</button>
-        </div> -->
+
       </div>
   </div>
 
   <script>
-    // Retrieve leave requests from local storage
     const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
 
-    // Populate the leave history container
     const container = document.getElementById("leaveHistoryContainer");
 
     leaveRequests.forEach((request, index) => {
       const card = document.createElement("div");
       card.className = "card";
 
-      // Create card content
       card.innerHTML = `
         <h3>${request.leaveType} Leave</h3>
         <p><strong>Date Range:</strong> ${request.startDate} - ${request.endDate}</p>
@@ -124,12 +111,10 @@
         </div>
       `;
 
-      // Append card to the container
       container.appendChild(card);
     });
 
-    // Add event listeners for Approve and Reject buttons
-   // Add event listeners for Approve and Reject buttons
+
 container.addEventListener("click", (e) => {
   if (e.target.classList.contains("approve-btn")) {
     updateStatus(e.target.dataset.index, "Approved", e.target);
@@ -138,21 +123,16 @@ container.addEventListener("click", (e) => {
   }
 });
 
-// Function to update the status of a leave request and hide the buttons
 function updateStatus(index, status, button) {
-  // Update the status in the leaveRequests array
   leaveRequests[index].status = status;
 
-  // Save the updated leaveRequests back to localStorage
   localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
 
-  // Find the card related to the clicked button
   const card = button.closest(".card");
 
-  // Hide the buttons in the card
   const buttonContainer = card.querySelector(".button-container");
   if (buttonContainer) {
-    buttonContainer.style.display = "none"; // Hide the button container
+    buttonContainer.style.display = "none";
   }
 
 }

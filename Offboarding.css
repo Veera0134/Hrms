@@ -1,18 +1,15 @@
-/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
- /* Gradient without white */
-  color: #333; /* Neutral text color */
-  min-height: 100vh; /* Ensures the gradient covers the full viewport */
+  color: #333; 
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Header Styles */
 header {
-  background: linear-gradient(90deg, #cce7ff, #66b2ff, #0047ab); /* Matching header gradient */
+  background: linear-gradient(90deg, #cce7ff, #66b2ff, #0047ab); 
   color: #fff;
   text-align: center;
   padding: 1rem 0;
@@ -26,19 +23,18 @@ header h1 {
 main{
   width: 100%;
 }
-/* Layout Styles */
 .container {
   display: flex;
   flex-wrap: wrap;
   margin: 2rem;
   gap: 2rem;
-  flex-grow: 1; /* Ensures the content fills available space */
+  flex-grow: 1;
 }
 
 .checklist {
   flex: 1;
   max-width: 30%;
-   background: linear-gradient(135deg, #cce7ff, #7fbddc); /* Semi-transparent gradient blue */
+   background: linear-gradient(135deg, #cce7ff, #7fbddc);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -58,7 +54,6 @@ main{
   text-decoration: underline;
 }
 
-/* Checklist Styles */
 .checklist h2 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -85,7 +80,7 @@ main{
 }
 
 .toggle input {
-  display: none; /* Hides the checkbox */
+  display: none; 
 }
 
 .toggle .slider {
@@ -94,8 +89,8 @@ main{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0047ab; /* Default slider background */
-  border-radius: 20px; /* Rounds the edges */
+  background-color: #0047ab; 
+  border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -107,26 +102,24 @@ main{
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: #fff; /* Knob color */
+  background-color: #fff; 
   border-radius: 50%;
   transition: transform 0.3s;
 }
 
 .toggle input:checked + .slider {
-  background-color: #002e7a; /* Slider background when active */
+  background-color: #002e7a;
 }
 
 .toggle input:checked + .slider::before {
-  transform: translateX(20px); /* Moves the knob to the right */
+  transform: translateX(20px);
 }
 
-/* Form Section Styles */
 fieldset {
-  border: 2px solid #060606; /* Border matching gradient */
+  border: 2px solid #060606; 
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 2rem;
-/*   background-color: rgba(102, 178, 255, 0.7); Transparent light blue background */
 }
 
 legend {
@@ -134,14 +127,14 @@ legend {
   font-size: 20px;
   font-weight: bold;
   text-decoration: underline;
-  color: #050505; /* White for contrast */
+  color: #050505; 
 }
 
 form label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #040404; /* White text for labels */
+  color: #040404;
 }
 
 form input[type="text"],
@@ -156,9 +149,8 @@ form textarea {
 }
 
 
-/* Links */
 a {
-  color: #0047ab; /* Deep blue link */
+  color: #0047ab; 
   text-decoration: none;
 }
 
@@ -167,7 +159,6 @@ a:hover {
   animation: bounce 0.5s ease-in-out;
 }
 
-/* Keyframes */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -210,10 +201,9 @@ a:hover {
     transform: translateY(0);
   }
 }
-/* Button Base Styling */
 form button {
-  background-color: #0047ab; /* Deep blue */
-  color: #fff; /* White text */
+  background-color: #0047ab; 
+  color: #fff; 
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 4px;
@@ -222,18 +212,18 @@ form button {
   transition: all 0.3s ease-in-out;
 }
 
-/* Hover Effect */
+
 form button:hover {
-  background-color: #002e7a; /* Darker blue */
-  animation: buttonPulse 0.5s infinite; /* Pulse animation */
+  background-color: #002e7a; 
+  animation: buttonPulse 0.5s infinite; 
 }
 
-/* Keyframes for Button Hover */
+
 @keyframes buttonPulse {
   0%, 100% {
-    transform: scale(1); /* Normal size */
+    transform: scale(1); 
   }
   50% {
-    transform: scale(1.1); /* Slightly larger */
+    transform: scale(1.1); 
   }
 }

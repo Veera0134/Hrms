@@ -116,7 +116,6 @@
                     <button type="submit">Sign In</button>
                 </form>
         
-                <!-- Hidden fingerprint icon initially -->
                 <i class="fas fa-fingerprint" 
                    id="fingerprint-icon" 
                    style="font-size: 50px; margin-left: 50%; margin-top: 20px; transform: translateX(-50%); cursor: pointer; display: none;">
@@ -125,7 +124,6 @@
                 <p class="error-message" id="error-message"></p>
                 <p class="punch-time" id="punch-time"></p>
                 
-                <!-- Next button initially hidden -->
                 <button id="next-button" style="display: none; width: 100%; padding: 0.75rem; background: linear-gradient(to right, green, teal); color: white; font-size: 1rem; border: none; border-radius: 4px; cursor: pointer; margin-top: 1rem;">Next</button>
                 
                 <a href="./FingerSign_Uppage.html">Don't have an account? Sign Up</a>
@@ -134,39 +132,31 @@
     
 
     <script>
-   // Elements
 const errorMessage = document.getElementById("error-message");
 const punchTimeDisplay = document.getElementById("punch-time");
 const fingerprintIcon = document.getElementById("fingerprint-icon");
 const nextButton = document.getElementById("next-button");
 
-// Initially hide fingerprint icon and next button
 fingerprintIcon.style.display = "none";
 nextButton.style.display = "none";
 
-// Form submission for authentication
 document.getElementById("signin-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Retrieve stored data from localStorage
     const storedUsername = localStorage.getItem("name");
     const storedPassword = localStorage.getItem("password");
 
-    // Check if entered username and password match the stored ones
     if (username === storedUsername && password === storedPassword) {
         alert("Sign In successful!");
 
-        // Save authentication status
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("currentUser", username);
 
-        // Show the fingerprint icon
         fingerprintIcon.style.display = "block";
 
-        // Clear any previous error message
         errorMessage.textContent = "";
     } else {
         errorMessage.textContent = "Invalid username or password. Please try again.";
@@ -174,34 +164,28 @@ document.getElementById("signin-form").addEventListener("submit", function (even
     }
 });
 
-// Fingerprint icon click for punch-in
 fingerprintIcon.addEventListener("click", () => {
     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
     if (isAuthenticated) {
         const currentDateTime = new Date();
 
-// Format the time to "HH:MM"
-const punchInHours = currentDateTime.getHours().toString().padStart(2, '0'); // Ensures 2 digits (e.g., 08, 09)
-const punchInMinutes = currentDateTime.getMinutes().toString().padStart(2, '0'); // Ensures 2 digits (e.g., 05, 10)
+const punchInHours = currentDateTime.getHours().toString().padStart(2, '0'); 
+const punchInMinutes = currentDateTime.getMinutes().toString().padStart(2, '0'); 
 const punchInTime = `${punchInHours}:${punchInMinutes}`;
 
-// Store the punch-in time in localStorage
 localStorage.setItem("punchInTime", punchInTime);
 
-// For testing, let's log the value to the console
 console.log("Punch-In Time stored:", punchInTime);
 
-        // Show the Next button after punch-in
         nextButton.style.display = "block";
     } else {
         alert("Please log in first to punch in!");
     }
 });
 
-// Next button click to navigate to another page
 nextButton.addEventListener("click", () => {
-    window.location.href = "Dashboard2.html"; // Replace 'nextpage.html' with your target page URL
+    window.location.href = "Dashboard2.html"; 
 });
 
     </script>

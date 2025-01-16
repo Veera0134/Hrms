@@ -157,7 +157,6 @@ header h1 {
 
 .asset-section {
   display: flex;
-  /* justify-content: space-between; */
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -179,7 +178,6 @@ header h1 {
   margin: 10px 0;
 }
 
-/* CSS Keyframes for Animations */
 @keyframes fadeIn {
   0% {
       opacity: 0;
@@ -191,7 +189,6 @@ header h1 {
   }
 }
 
-/* Button Styles */
 .btn {
   padding: 10px 20px;
   background-color: #4CAF50;

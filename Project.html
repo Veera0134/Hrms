@@ -32,7 +32,6 @@
 
     <section class="project-dashboard">
         
-        <!-- Coming Projects Section -->
         <div class="project-section" id="coming-projects">
             <h2>Coming Projects</h2>
             <div class="project-list">
@@ -60,7 +59,6 @@
             </div>
         </div>
 
-        <!-- Running Projects Section -->
         <div class="project-section" id="running-projects">
             <h2>Running Projects</h2>
             <div class="project-list">
@@ -89,7 +87,6 @@
         </div>
     
 
-        <!-- Completed Projects Section -->
         <div class="project-section" id="completed-projects">
             <h2>Completed Projects</h2>
             <div class="project-list">
@@ -155,7 +152,6 @@
     
 
     <script>
-        // JavaScript to filter projects based on selection
         const filter = document.getElementById('project-filter');
         const comingProjects = document.getElementById('coming-projects');
         const runningProjects = document.getElementById('running-projects');
@@ -191,17 +187,14 @@
                     break;
             }
         });
-     // Open modal
 function openAddProjectForm() {
     document.getElementById('addProjectModal').style.display = 'block';
 }
 
-// Close modal
 function closeAddProjectForm() {
     document.getElementById('addProjectModal').style.display = 'none';
 }
 
-// Add project to the list
 function addProject() {
     const name = document.getElementById('projectName').value;
     const assignedTo = document.getElementById('assignedTo').value;
@@ -209,7 +202,6 @@ function addProject() {
     const endDate = document.getElementById('endDate').value;
     const status = document.getElementById('status').value;
 
-    // Create a new project card
     const projectCard = document.createElement('div');
     projectCard.classList.add('project-card');
     projectCard.innerHTML = `
@@ -220,7 +212,6 @@ function addProject() {
         <p class="status ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</p>
     `;
 
-    // Append to the respective section
     if (status === 'pending') {
         document.querySelector('#coming-projects .project-list').appendChild(projectCard);
     } else if (status === 'ongoing') {
@@ -229,7 +220,6 @@ function addProject() {
         document.querySelector('#completed-projects .project-list').appendChild(projectCard);
     }
 
-    // Close modal and reset form
     closeAddProjectForm();
     document.getElementById('projectForm').reset();
 }

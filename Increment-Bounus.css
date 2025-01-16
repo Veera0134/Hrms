@@ -17,7 +17,6 @@ body {
   background-color: #f9f9f9;
 }
 
-/* Container Styling */
 .container {
   width: 80%;
   margin: 20px auto;
@@ -28,7 +27,6 @@ body {
 
 }
 
-/* Header Styling */
 h2, h3 {
   color: white;
   text-align: center;
@@ -41,7 +39,6 @@ h2, h3 {
   animation: slideDown 0.5s ease-out;
 }
 
-/* Section Layout */
 .action-section, .recent-bonus-section {
   display: flex;
   justify-content: space-between;
@@ -49,7 +46,6 @@ h2, h3 {
   background-color: white;
 }
 
-/* Card Styling with Keyframe Animation */
 .card {
   background-color: white;
   flex: 1;
@@ -62,10 +58,8 @@ h2, h3 {
 }
 .card:hover {
   transform: scale(1.05);
-  /* background-color: #f0efee; */
 }
 
-/* Button Styling */
 .card button {
   background-color: var(--secondary-color);
   color: #fff;
@@ -82,9 +76,8 @@ h2, h3 {
   transform: translateY(-2px);
 }
 
-/* Form Section Styling */
 .form-section {
-  display: none; /* Hidden by default */
+  display: none; 
   margin-top: 30px;
 }
 .form-section.active {
@@ -92,7 +85,6 @@ h2, h3 {
   animation: formSlideUp 1s ease-out;
 }
 
-/* Recent Bonus Section */
 .recent-bonus {
   flex: 1;
   padding: 10px;
@@ -102,14 +94,12 @@ h2, h3 {
   animation: popIn 1.2s ease-out;
 }
 
-/* Label Styling with Keyframe Animation */
 label {
   font-weight: bold;
   color: white;
   animation: labelGlow 1.5s infinite alternate;
 }
 
-/* Input Styling */
 input, select, textarea {
   padding: 10px;
   border: 1px solid #ccc;
@@ -118,7 +108,6 @@ input, select, textarea {
   animation: inputGlow 2s infinite alternate;
 }
 
-/* Approve and Reject Button Styling */
 .approve-btn, .reject-btn {
   padding: 10px 15px;
   border-radius: 5px;
@@ -140,7 +129,6 @@ input, select, textarea {
   background-color: #e60000;
 }
 
-/* Keyframe Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -186,7 +174,6 @@ input, select, textarea {
   to { transform: scale(1.05); }
 }
 
-/* General Button Styling */
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -197,7 +184,6 @@ button {
   animation: buttonGlow 2s infinite alternate;
 }
 
-/* Submit Button Styling */
 .submit-btn {
   background-color: #59ce8f;
   color: #fff;
@@ -206,7 +192,6 @@ button {
   background-color: #4ca979;
 }
 
-/* Propose Button Styling */
 .propose-btn {
   background-color: #59ce8f;
   color: white;
@@ -215,7 +200,6 @@ button {
   background-color: #4ca979;
 }
 
-/* Close Button Styling */
 .close-btn {
   background-color: #ff1e00;
   color: #fff;
@@ -225,7 +209,6 @@ button {
   background-color: #e60000;
 }
 
-/* Keyframe for Button Glow Effect */
 @keyframes buttonGlow {
   from { box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   to { box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
@@ -233,8 +216,8 @@ button {
 
 .recent-bonus-section {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
-  gap: 20px; /* Space between grid items */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; 
   padding: 20px;
 }
 
@@ -247,7 +230,7 @@ button {
 }
 
 .recent-bonus:hover {
-  transform: scale(1.05); /* Hover effect for scaling */
+  transform: scale(1.05); 
 }
 
 .recent-bonus button {

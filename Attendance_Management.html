@@ -113,12 +113,10 @@
             </div>
           </div>
           <div class="attendance-container" id="attendance-cards-container">
-            <!-- Cards will be populated here -->
         </div>
       </main>
     </div>
 
-    <!-- Modal for Adding New Employee -->
     <div id="employeeModal" class="modal">
       <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
@@ -164,7 +162,6 @@
     
 
    <script>
-    // Modal logic (uncomment if needed)
 const modal = document.getElementById("employeeModal");
 const openModal = document.getElementById("openModal");
 const closeModal = document.getElementById("closeModal");
@@ -183,7 +180,6 @@ window.onclick = function (event) {
   }
 };
 
-// Validate form fields
 const fields = ["empName", "empPosition"];
 fields.forEach((field) => {
   document.getElementById(field).addEventListener("input", function () {
@@ -207,13 +203,11 @@ function validateField(field) {
   }
 }
 
-// Get today's date and display it
 const today = new Date();
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 const formattedDate = today.toLocaleDateString('en-US', options);
 document.getElementById('current-date').textContent = formattedDate;
 
-// Add new employee to the grid (assuming form has id 'employeeForm')
 const employeeForm = document.getElementById('employeeForm');
 employeeForm.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -252,14 +246,11 @@ employeeForm.addEventListener('submit', function (e) {
   employeeForm.reset();
 });
 
-// Retrieve the stored attendance data from localStorage
 const attendanceData = JSON.parse(localStorage.getItem("attendanceData"));
 
-// If attendance data exists, populate the cards
 if (attendanceData) {
   const container = document.getElementById("attendance-cards-container");
 
-  // Create a card for the attendance data
   const card = document.createElement("div");
   card.classList.add("attendance-card");
 
@@ -267,7 +258,7 @@ if (attendanceData) {
   const punchInHour = parseInt(punchInParts[0], 10);
   const punchInMinute = parseInt(punchInParts[1], 10);
 
-  const lateHour = 10; // 10:00 AM is the cut-off for being "On Time"
+  const lateHour = 10; 
   let status = "Present";
 
   if (punchInHour > lateHour || (punchInHour === lateHour && punchInMinute < 0)) {

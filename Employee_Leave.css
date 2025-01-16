@@ -5,15 +5,12 @@
   box-sizing: border-box;
 }
 
-/* Fonts and Colors */
 body {
   font-family: Arial, sans-serif;
-  /* background-color: #e8f9fd; */
-  /* color: #5e503f; */
+
 }
 
 
-/* Banner Section */
 .banner {
   background: linear-gradient(135deg,  #2c3e50, #3498db);
   color: #fff;
@@ -27,7 +24,6 @@ body {
   margin-bottom: 0.5em;
 }
 
-/* Leave Overview */
 .leavebd{
   justify-content: center;
 
@@ -48,14 +44,12 @@ body {
 }
 
 .balance-card {
-  /* background-color: #f5e9d7; */
   padding: 1em;
   border-radius: 8px;
   text-align: center;
   width: 150px;
 }
 
-/* Leave Overview */
 .leave-overview {
 display: flex;
 flex-direction: column;
@@ -67,7 +61,7 @@ gap: 1em;
 .leave-balance {
 display: flex;
 gap: 1em;
-margin-bottom: 1em; /* Adds spacing between the balance cards and the buttons */
+margin-bottom: 1em; 
 }
 
 .apply-leave-btn,
@@ -98,7 +92,6 @@ opacity: 0.9;
 }
 
 
-/* Leave Request Form */
 .leave-request {
   padding: 2em;
 }
@@ -116,7 +109,6 @@ opacity: 0.9;
   cursor: pointer;
 }
 
-/* Leave History */
 .leave-history {
   padding: 2em;
 }
@@ -133,9 +125,7 @@ opacity: 0.9;
   text-align: left;
 }
 
-/* Leave Request Form Section */
 .leave-request {
-  /* background-color: #f5e9d7; */
   border-radius: 8px;
   padding: 2em;
   margin: 2em auto;
@@ -144,7 +134,6 @@ opacity: 0.9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* Form Heading */
 .leave-request h2 {
   text-align: center;
   font-size: 1.8em;
@@ -152,7 +141,6 @@ opacity: 0.9;
   color: #000000;
 }
 
-/* Label and Input Styling */
 .leave-request label {
   font-size: 1em;
   margin-bottom: 0.5em;
@@ -173,13 +161,11 @@ opacity: 0.9;
   color: #5e503f;
 }
 
-/* Textarea Specific Styling */
 .leave-request textarea {
   resize: vertical;
   min-height: 100px;
 }
 
-/* Submit Button Styling */
 .submit-btn {
   width: 100%;
   padding: 1em;
@@ -199,7 +185,6 @@ opacity: 0.9;
 .submit-btn:active {
   background-color: #b31800;
 }
-/* Leave Overview */
 .leave-overview {
 display: flex;
 flex-direction: column;
@@ -211,13 +196,12 @@ gap: 1em;
 .leave-balance {
 display: flex;
 gap: 1em;
-margin-bottom: 1em; /* Adds spacing between the balance cards and the buttons */
+margin-bottom: 1em; 
 }
 
-/* Button Container for side-by-side alignment */
 .button-container {
 display: flex;
-gap: 1em; /* Space between the buttons */
+gap: 1em;
 }
 
 .apply-leave-btn,
@@ -227,7 +211,7 @@ border: none;
 padding: 1em;
 color: #fff;
 cursor: pointer;
-width: 200px; /* Optional: sets a consistent width for both buttons */
+width: 200px; 
 border-radius: 4px;
 text-align: center;
 font-size: 1em;
