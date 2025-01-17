@@ -559,7 +559,6 @@ z-index: 1000;
 font-family: Arial, sans-serif;
 }
 
-/* Header Styles */
 .edit-form h3 {
 text-align: center;
 font-size: 1.5rem;
@@ -568,12 +567,10 @@ margin-bottom: 20px;
 font-weight: 600;
 }
 
-/* Form Field Container */
 .form-group {
 margin-bottom: 20px;
 }
 
-/* Label Styles */
 .form-group label {
 display: block;
 font-weight: bold;
@@ -596,15 +593,14 @@ color: #333;
 
 .form-group input:focus,
 .form-group select:focus {
-border-color: #4CAF50; /* Green for focus */
+border-color: #4CAF50;
 outline: none;
 }
 
-/* Button Styles */
 button {
 padding: 12px 18px;
 border: none;
-background-color: #4CAF50; /* Green */
+background-color: #4CAF50; 
 color: white;
 border-radius: 5px;
 cursor: pointer;
@@ -622,25 +618,21 @@ button:hover {
 opacity: 0.8;
 }
 
-/* Button Container */
 button[type="button"] {
 margin-top: 15px;
-background-color: #f44336; /* Red for Cancel */
+background-color: #f44336;
 width: 100%;
 font-size: 1rem;
 }
 
-/* Form Close Button */
 button[type="button"]:hover {
 background-color: #d32f2f;
 }
 
-/* Close Button Style */
 button:hover {
 opacity: 0.8;
 }
 
-/* Responsive Design */
 @media (max-width: 480px) {
 .edit-form {
   width: 90%;

@@ -7,14 +7,13 @@
     <title>Training Management</title>
     <script>
         function assignTraining(event) {
-            event.preventDefault(); // Prevent form from submitting normally
+            event.preventDefault(); 
 
             const employeeSelect = document.getElementById('employee');
             const trainingSelect = document.getElementById('training');
             const employeeName = employeeSelect.options[employeeSelect.selectedIndex].text;
             const trainingName = trainingSelect.options[trainingSelect.selectedIndex].text;
 
-            // Create a new card for the assigned training
             const newCard = document.createElement('div');
             newCard.classList.add('cards-container');
 
@@ -45,7 +44,7 @@
                 </div>
             `;
 
-            document.querySelector('.main-container').appendChild(newCard); // Append new card
+            document.querySelector('.main-container').appendChild(newCard);
         }
     </script>
 </head>

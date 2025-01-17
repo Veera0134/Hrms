@@ -27,9 +27,7 @@
         </nav>
     </header>
     <div id="reviewList">
-        <!-- Reviews will be dynamically loaded here -->
       </div>
-    <!-- Task Form (Initially Hidden) -->
     <div id="taskForm" class="task-form">
         <h2>Add New Task</h2>
         <form id="taskFormElement">
@@ -61,11 +59,9 @@
         </form>
     </div>
 
-    <!-- Task Dashboard Section -->
     <section class="task-dashboard">
         <h2>Task Dashboard</h2>
         <div class="task-list" id="taskList">
-            <!-- Task cards will be dynamically appended here -->
         </div>
     </section>
 
@@ -76,18 +72,14 @@
     <script>
 function loadReviews() {
   const reviewList = document.getElementById('reviewList');
-  const reviews = JSON.parse(localStorage.getItem('reviews')) || {}; // Fetch reviews from localStorage
-
-  // Clear any existing content in the review list
+  const reviews = JSON.parse(localStorage.getItem('reviews')) || {}; 
   reviewList.innerHTML = '';
 
-  // Check if there are any reviews
   if (Object.keys(reviews).length === 0) {
     reviewList.innerHTML = '<p>No reviews available yet.</p>';
     return;
   }
 
-  // Generate a card for each review
   Object.entries(reviews).forEach(([taskName, review]) => {
     const reviewCard = document.createElement('div');
     reviewCard.classList.add('review-card');
@@ -99,17 +91,14 @@ function loadReviews() {
       <button class="close-btn">Close</button>
     `;
 
-    // "Done" button click event
     reviewCard.querySelector('.done-btn').addEventListener('click', () => {
       alert(`Review for ${taskName} marked as Done`);
-      // Additional functionality can be added here, like marking the review as done in localStorage
     });
 
-    // "Close" button click event
     reviewCard.querySelector('.close-btn').addEventListener('click', () => {
-      reviewList.removeChild(reviewCard);  // Removes the review card from the DOM
-      delete reviews[taskName];            // Removes the review from localStorage
-      localStorage.setItem('reviews', JSON.stringify(reviews));  // Update localStorage
+      reviewList.removeChild(reviewCard);  
+      delete reviews[taskName];            
+      localStorage.setItem('reviews', JSON.stringify(reviews));  
     });
 
     reviewList.appendChild(reviewCard);
@@ -129,7 +118,7 @@ function loadReviews() {
         const statusFilter = filterStatus.value;
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-        taskList.innerHTML = ''; // Clear existing task cards
+        taskList.innerHTML = ''; 
 
         tasks.forEach(task => {
             const taskStatus = task.status.toLowerCase();
@@ -157,15 +146,15 @@ function loadReviews() {
     }
 
     addTaskBtn.addEventListener('click', () => {
-        taskForm.style.display = 'block';  // Show the form
+        taskForm.style.display = 'block'; 
     });
 
     cancelBtn.addEventListener('click', () => {
-        taskForm.style.display = 'none';  // Hide the form
+        taskForm.style.display = 'none'; 
     });
 
     saveTaskBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault();
 
         const taskName = document.getElementById('taskName').value.trim();
         const assignedTo = document.getElementById('assignedTo').value.trim();

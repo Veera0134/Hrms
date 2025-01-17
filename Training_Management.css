@@ -86,10 +86,8 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Employee Cards Styles */
 .employee-cards {
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -102,14 +100,11 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
-    /* position: fixed; */
     bottom: 0;
     width: 100%;
 }
 
-/* Keyframes Animations */
 
-/* Fade in the body */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -119,7 +114,6 @@ footer {
     }
 }
 
-/* Slide in header from the left */
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
@@ -129,7 +123,6 @@ footer {
     }
 }
 
-/* Fade in the container */
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -141,7 +134,6 @@ footer {
     }
 }
 
-/* Fade in cards from left */
 @keyframes fadeInLeft {
     0% {
         opacity: 0;
@@ -153,7 +145,6 @@ footer {
     }
 }
 
-/* Fade in each card */
 @keyframes fadeInCard {
     0% {
         opacity: 0;
@@ -163,7 +154,6 @@ footer {
     }
 }
 
-/* Button appearance animation */
 @keyframes buttonAppear {
     0% {
         opacity: 0;

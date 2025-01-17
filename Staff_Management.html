@@ -22,7 +22,6 @@
         </header>
         
         <main class="employee-grid">
-            <!-- Employee Card 1 -->
             <div class="employee-card" data-employee-id="EMP001">
                 <div class="card-header">
                     <div class="profile-circle">VR</div>
@@ -52,7 +51,6 @@
                 </div>
             </div>
 
-            <!-- Employee Card 2 -->
             <div class="employee-card" data-employee-id="EMP002">
                 <div class="card-header">
                     <div class="profile-circle">AK</div>
@@ -82,7 +80,6 @@
                 </div>
             </div>
 
-            <!-- Employee Card 3 -->
             <div class="employee-card" data-employee-id="EMP004">
                 <div class="card-header">
                     <div class="profile-circle">TS</div>
@@ -146,7 +143,6 @@
     </div>
 
     
-    <!-- Modal structure -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -155,12 +151,10 @@
                 <div class="close-modal" onclick="hideModal()">×</div>
             </div>
             <div class="modal-body" id="modalBody">
-                <!-- Dynamic content goes here -->
             </div>
         </div>
     </div>
-    <!-- Edit Form (Hidden by default) -->
-<!-- Edit Form with Status -->
+
 <div id="editForm" class="edit-form">
     <h3>Edit Employee</h3>
     <form id="employeeEditForm">
@@ -196,7 +190,6 @@
 </div>
 
 
-    <!-- Modal for Employee Details -->
     <div id="employeeModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -284,7 +277,6 @@
     </div>
 
     <script>
-        // Sample employee data
 const employeeData = {
     'EMP001': {
         name: 'Veera Raghava',
@@ -360,43 +352,36 @@ const employeeData = {
     }
 };
 
-// Show employee details in modal
 function showEmployeeDetails(employeeId) {
     const modal = document.getElementById('employeeModal');
     const employee = employeeData[employeeId];
 
     if (!employee) return;
 
-    // Set employee basic info
     document.getElementById('modalEmployeeName').textContent = employee.name;
     document.getElementById('modalEmployeeId').textContent = employeeId;
     document.querySelector('.modal-header .profile-circle').textContent = employee.initials;
 
-    // Set personal details
     document.getElementById('dob').textContent = employee.personalDetails.dob;
     document.getElementById('gender').textContent = employee.personalDetails.gender;
     document.getElementById('nationality').textContent = employee.personalDetails.nationality;
     document.getElementById('maritalStatus').textContent = employee.personalDetails.maritalStatus;
     document.getElementById('bloodGroup').textContent = employee.personalDetails.bloodGroup;
 
-    // Set contact details
     document.getElementById('email').textContent = employee.contactDetails.email;
     document.getElementById('phone').textContent = employee.contactDetails.phone;
     document.getElementById('address').textContent = employee.contactDetails.address;
     document.getElementById('city').textContent = employee.contactDetails.city;
     document.getElementById('country').textContent = employee.contactDetails.country;
 
-    // Set emergency contact details
     document.getElementById('emergencyName').textContent = employee.emergencyContact.name;
     document.getElementById('emergencyRelation').textContent = employee.emergencyContact.relationship;
     document.getElementById('emergencyPhone').textContent = employee.emergencyContact.phone;
     document.getElementById('emergencyAddress').textContent = employee.emergencyContact.address;
 
-    // Show modal
     modal.style.display = 'block';
 }
 
-// Close modal when clicking the close button or outside the modal
 document.querySelector('.close-modal').addEventListener('click', () => {
     document.getElementById('employeeModal').style.display = 'none';
 });
@@ -408,12 +393,10 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Prevent modal from closing when clicking inside it
 document.querySelector('.modal-content').addEventListener('click', (event) => {
     event.stopPropagation();
 });
 
-// Search functionality
 document.querySelector('.search-bar input').addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const cards = document.querySelectorAll('.employee-card');
@@ -435,12 +418,10 @@ const storedData = JSON.parse(localStorage.getItem('onboardingData'));
 if (storedData) {
     const container = document.getElementById('dataContainer');
     
-    // Create card structure
     const card = document.createElement('div');
     card.classList.add('employee-card1');
     card.setAttribute('empID', storedData.Empid);
 
-    // Card header
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
 
@@ -459,7 +440,6 @@ if (storedData) {
 
     card.appendChild(cardHeader);
 
-    // Card body (only basic details)
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
 
@@ -483,36 +463,30 @@ if (storedData) {
 
     card.appendChild(cardBody);
 
-    // Card footer (with View Details button and action icons)
     const cardFooter = document.createElement('div');
     cardFooter.classList.add('card-footer');
 
-    // View Details Button
     const btnView = document.createElement('button');
     btnView.classList.add('btn-view');
     btnView.textContent = 'View Details';
     btnView.addEventListener('click', () => showOverlay(storedData));
     cardFooter.appendChild(btnView);
 
-    // Action Icons (Edit, Delete, Download)
     const actionIcons = document.createElement('div');
     actionIcons.classList.add('action-icons');
 
-    // Edit Icon
     const editIcon = document.createElement('i');
     editIcon.classList.add('fa', 'fa-edit');
     editIcon.title = 'Edit';
     editIcon.addEventListener('click', () => editEmployee(storedData));
     actionIcons.appendChild(editIcon);
 
-    // Delete Icon
     const deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fa', 'fa-trash');
     deleteIcon.title = 'Delete';
     deleteIcon.addEventListener('click', () => deleteEmployee(storedData));
     actionIcons.appendChild(deleteIcon);
 
-    // Download Icon
     const downloadIcon = document.createElement('i');
     downloadIcon.classList.add('fa', 'fa-download');
     downloadIcon.title = 'Download';
@@ -528,7 +502,6 @@ if (storedData) {
     document.getElementById('dataContainer').textContent = 'No data available.';
 }
 
-// Example action handlers
 function editEmployee(employee) {
     alert(`Edit employee: ${employee.fullName}`);
 }
@@ -536,16 +509,13 @@ function editEmployee(employee) {
 function deleteEmployee(employee) {
     const confirmation = confirm(`Are you sure you want to delete ${employee.fullName}?`);
     if (confirmation) {
-        // Remove employee from UI
         const employeeCard = document.querySelector(`.employee-card1[empID="${employee.Empid}"]`);
         if (employeeCard) {
             employeeCard.remove();
         }
 
-        // Remove employee from employeeData
         delete employeeData[employee.Empid];
 
-        // Update localStorage
         localStorage.setItem('onboardingData', JSON.stringify(employeeData));
 
         alert(`Deleted employee: ${employee.fullName}`);
@@ -554,22 +524,17 @@ function deleteEmployee(employee) {
 
 
 function downloadEmployeeData(employee) {
-    // Create a JSON string from the employee data
     const employeeJson = JSON.stringify(employee, null, 2); // Pretty print JSON
 
-    // Create a Blob from the JSON string
     const blob = new Blob([employeeJson], { type: 'application/json' });
 
-    // Create a temporary anchor element to trigger the download
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `${employee.fullName.replace(/ /g, '_')}_data.json`; // Set a meaningful filename
+    a.download = `${employee.fullName.replace(/ /g, '_')}_data.json`;
     document.body.appendChild(a);
 
-    // Trigger the download
     a.click();
 
-    // Clean up
     document.body.removeChild(a);
     URL.revokeObjectURL(a.href);
 }
@@ -581,12 +546,10 @@ function showOverlay(data) {
     const modalProfileCircle = document.getElementById('modalProfileCircle');
     const modalBody = document.getElementById('modalBody');
 
-    // Populate modal header
     modalHeader.textContent = data.fullName || 'Employee Name';
     modalProfileCircle.textContent = data.fullName ? data.fullName.charAt(0).toUpperCase() : '?';
 
-    // Populate modal body
-    modalBody.innerHTML = ''; // Clear previous content
+    modalBody.innerHTML = '';
     Object.keys(data).forEach((key) => {
         const detailsSection = document.createElement('div');
         detailsSection.classList.add('details-section');
@@ -614,7 +577,6 @@ function showOverlay(data) {
         modalBody.appendChild(detailsSection);
     });
 
-    // Show modal
     modal.style.display = 'block';
 }
 
@@ -632,10 +594,8 @@ function editEmployee(employee) {
         return;
     }
 
-    // Show the Edit Form
     form.style.display = 'block';
 
-    // Populate the form fields
     const fullNameInput = document.getElementById('fullName');
     const departmentInput = document.getElementById('editDepartment');
     const positionInput = document.getElementById('editPosition');
@@ -653,11 +613,9 @@ function editEmployee(employee) {
     startDateInput.value = employee.startDate || '';
     statusInput.value = employee.status || '';
 
-    // Handle form submission
     document.getElementById('employeeEditForm').onsubmit = function(e) {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault(); 
 
-    // Get the updated values from the form
     const updatedEmployee = {
         Empid: document.getElementById('empID').value,
         fullName: document.getElementById('fullName').value,
@@ -667,10 +625,8 @@ function editEmployee(employee) {
         status: document.getElementById('editStatus').value
     };
 
-    // Find the employee card by EmpID and update it
     updateEmployeeCard(updatedEmployee, updatedEmployee);
 
-    // Close the form (optional)
     closeEditForm();
 };
 
@@ -678,12 +634,10 @@ function editEmployee(employee) {
 
 
 function closeEditForm() {
-    // Hide the edit form
     document.getElementById('editForm').style.display = 'none';
 }
 
 function updateEmployeeCard(employee, updatedEmployee) {
-    // Validate the input
     if (!updatedEmployee.Empid || !updatedEmployee.fullName) {
         console.error('Invalid updatedEmployee object:', updatedEmployee);
         return;
@@ -691,7 +645,6 @@ function updateEmployeeCard(employee, updatedEmployee) {
 
     console.log('Updating card for EmpID:', updatedEmployee.Empid);
 
-    // Find the existing card by EmpID attribute
     const card = document.querySelector(`.employee-card1[empID="${updatedEmployee.Empid.trim()}"]`);
 
     if (!card) {
@@ -702,13 +655,10 @@ function updateEmployeeCard(employee, updatedEmployee) {
 
     console.log('Card found for EmpID:', updatedEmployee.Empid);
 
-    // Update employee object with new values
     Object.assign(employee, updatedEmployee);
 
-    // Clear the existing card content
     card.innerHTML = '';
 
-    // Rebuild the card content
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
     
