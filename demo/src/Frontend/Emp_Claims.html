@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Claim Portal</title>
+    <link rel="stylesheet" href="Emp_Claims.css">
+</head>
+<body>
+   
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="icon">✈️</div>
+                <div class="title">Travel Claims</div>
+                <div class="description">Submit claims related to travel disruptions, cancellations, or lost luggage.</div>
+                <button class="claim-button" onclick="openClaimForm()">Claim</button>
+            </div>
+        
+            <div class="card">
+                <div class="icon">🏥</div>
+                <div class="title">Medical Claims</div>
+                <div class="description">File claims for medical expenses, treatments, or emergency healthcare services.</div>
+                <button class="claim-button" onclick="openClaimForm()">Claim</button>
+            </div>
+        
+            <div class="card">
+                <div class="icon">📦</div>
+                <div class="title">Other Claims</div>
+                <div class="description">Handle claims for various other services, including product warranties or damages.</div>
+                <button class="claim-button" onclick="openClaimForm()">Claim</button>
+            </div>
+        </div>
+        
+        <section class="claim-form">
+            <h2>Submit a New Claim</h2>
+            <form id="claim-form">
+                <label for="claim-type">Claim Type:</label>
+                <select id="claim-type" name="claim-type">
+                    <option value="travel">Travel</option>
+                    <option value="medical">Medical</option>
+                    <option value="lodging">other</option>
+                </select>
+        
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+        
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+        
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+        
+                <label for="receipt">Upload Receipt:</label>
+                <input type="file" id="receipt" name="receipt">
+        
+                <button type="submit">Submit Claim</button>
+            </form>
+        </section>
+        <section class="claim-history">
+            <h2>Claim History</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="info">
+                        <strong>Date:</strong> 2024-11-01
+                    </div>
+                    <div class="info">
+                        <strong>Type:</strong> Travel
+                    </div>
+                    <div class="info">
+                        <strong>Amount:</strong> $150.00
+                    </div>
+                    <div class="info">
+                        <strong>Status:</strong> Approved
+                    </div>
+
+                </div>
+        
+                <div class="card">
+                    <div class="info">
+                        <strong>Date:</strong> 2024-11-05
+                    </div>
+                    <div class="info">
+                        <strong>Type:</strong> Medical
+                    </div>
+                    <div class="info">
+                        <strong>Amount:</strong> $200.00
+                    </div>
+                    <div class="info">
+                        <strong>Status:</strong> Pending
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+<Script>
+    // Emp_Claims.js
+
+// Function to open the claim form
+function openClaimForm() {
+    document.querySelector('.claim-form').style.display = 'block';
+    window.scrollTo({ top: document.querySelector('.claim-form').offsetTop, behavior: 'smooth' });
+}
+
+// Function to render claim history
+async function renderClaimHistory() {
+    const cardContainer = document.querySelector('.claim-history .card-container');
+    cardContainer.innerHTML = ''; // Clear existing claims
+
+    try {
+        const response = await fetch('/api/claims'); // Fetch claims from the backend
+        if (!response.ok) throw new Error('Failed to fetch claim history.');
+        const claims = await response.json();
+
+        claims.forEach((claim) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <div class="info">
+                    <strong>Date:</strong> ${claim.date}
+                </div>
+                <div class="info">
+                    <strong>Type:</strong> ${claim.claimType}
+                </div>
+                <div class="info">
+                    <strong>Amount:</strong> $${claim.amount}
+                </div>
+                <div class="info">
+                    <strong>Status:</strong> ${claim.status}
+                </div>
+                <div class="info">
+                    <strong>Description:</strong> ${claim.description}
+                </div>
+                <div class="info">
+                    <strong>Receipt:</strong> ${claim.receipt || 'No file uploaded'}
+                </div>
+            `;
+            cardContainer.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error rendering claim history:', error);
+        alert('Unable to load claim history. Please try again later.');
+    }
+}
+
+// Function to submit a new claim
+async function submitClaimForm(event) {
+    event.preventDefault();
+
+    const claimType = document.getElementById('Claim').value;
+    const date = document.getElementById('date').value;
+    const amount = document.getElementById('amount').value;
+    const description = document.getElementById('description').value;
+    const receiptFile = document.getElementById('receipt').files[0];
+
+    const formData = new FormData();
+    formData.append('claimType', claimType);
+    formData.append('date', date);
+    formData.append('amount', amount);
+    formData.append('description', description);
+    if (receiptFile) formData.append('receipt', receiptFile);
+
+    try {
+        const response = await fetch('/api/claims', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) throw new Error('Failed to submit claim.');
+
+        alert('Your claim has been successfully submitted!');
+        document.getElementById('claim-form').reset(); // Reset the form
+        renderClaimHistory(); // Update the claim history
+    } catch (error) {
+        console.error('Error submitting claim:', error);
+        alert('Unable to submit your claim. Please try again later.');
+    }
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    renderClaimHistory();
+    document.getElementById('claim-form').addEventListener('submit', submitClaimForm);
+});
+
+</Script>
+</body>
+</html>

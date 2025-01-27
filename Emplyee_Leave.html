@@ -45,11 +45,12 @@
           <option>Casual Leave</option>
         </select>
       </label>
-      <label>Start Date: <input type="date"></label>
-      <label>End Date: <input type="date"></label>
+      <label>Start Date: <input type="date" id="startDate"></label>
+      <label>End Date: <input type="date" id="endDate" ></label>
       <label>Reason: <textarea rows="3"></textarea></label>
       <button type="submit" class="submit-btn">Submit Request</button>
     </form>
+    <p id="error-message" style="color: red; display: none;"></p>
   </section>
 
   <section class="leave-history">
@@ -110,9 +111,28 @@
         e.preventDefault();
 
         const leaveType = document.querySelector("select").value;
-        const startDate = document.querySelector("input[type='date']").value;
-        const endDate = document.querySelectorAll("input[type='date']")[1].value;
+        const startDateInput = document.getElementById("startDate");
+        const endDateInput = document.getElementById("endDate");
+        const errorMessage = document.getElementById("error-message");
         const reason = document.querySelector("textarea").value;
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+        const today = new Date();
+            // Clear previous error messages
+    errorMessage.style.display = "none";
+
+// Validation for dates
+if (startDate < today) {
+  errorMessage.textContent = "Start date cannot be in the past.";
+  errorMessage.style.display = "block";
+  return;
+}
+
+if (endDate < startDate) {
+  errorMessage.textContent = "End date cannot be earlier than the start date.";
+  errorMessage.style.display = "block";
+  return;
+}
 
         const leaveRequest = {
           leaveType,

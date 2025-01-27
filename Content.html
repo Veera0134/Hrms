@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="Content.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="dashboard-container">
-    <div class="cards">
+  <section style="border: 20px solid black;">
+    <!-- Card Section -->
+    <div class="card-container">
       <div class="card">
         <h2># of Employees</h2>
         <p>4.25k</p>
@@ -23,7 +25,6 @@
         <p>40</p>
         <span>86 Terminations</span>
       </div>
-
       <div class="card">
         <h2>Completed Training Ratio</h2>
         <p>4.6%</p>
@@ -33,6 +34,15 @@
         <p>48.7%</p>
       </div>
     </div>
+
+    <!-- Chart Section -->
+    <div class="chart-container">
+      <h2>Project Overview</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </section>
+  <div class="dashboard-container" style="border: 20px solid black;">
+    <div class="cards">
     <div class="box">
     <div class="container">
         <div class="bar-graph-container">
@@ -118,5 +128,29 @@
       </div>
   </div>
 </div>
+<script>
+          // Pie Chart for Project Overview
+          const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Completed Projects', 'Ongoing Projects', 'Pending Projects'],
+                datasets: [{
+                    label: 'Projects',
+                    data: [50, 20, 10], // Replace with dynamic data if available
+                    backgroundColor: ['#4caf50', '#ff9800', '#f44336'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+</script>
 </body>
 </html>

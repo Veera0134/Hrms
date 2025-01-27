@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Task Management</title>
-    <link rel="stylesheet" href="./Task_Management.css"> <!-- External CSS for styling -->
+    <link rel="stylesheet" href="./Task_Management.css"> 
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <h1>HR Task Management</h1>
         <p>Manage and track tasks assigned to employees</p>
@@ -34,18 +33,20 @@
             <label for="taskName">Task Name</label>
             <input type="text" id="taskName" pattern="[A-Za-z\s]+" minlength="4" 
                    title="Task Name must contain at least 4 alphabetic characters and spaces only." required>
-            <span id="taskNameError" class="error-message"></span>
+            <span id="taskNameError" class="error-message" style="color: red;"></span>
             
             <label for="assignedTo">Assigned To</label>
             <input type="text" id="assignedTo" pattern="[A-Za-z\s]+" minlength="4" 
                    title="Assigned To must contain at least 4 alphabetic characters and spaces only." required>
-            <span id="assignedToError" class="error-message"></span>
+            <span id="assignedToError" class="error-message" style="color: red;"></span>
             
             <label for="startDate">Start Date</label>
             <input type="date" id="startDate" required>
-            
+            <span id="startDateError" class="error-message" style="color: red;"></span>
+        
             <label for="endDate">End Date</label>
             <input type="date" id="endDate" required>
+            <span id="endDateError" class="error-message" style="color: red;"></span>
             
             <label for="taskStatus">Status:</label>
             <select id="taskStatus" name="taskStatus" required>
@@ -160,6 +161,30 @@ function loadReviews() {
         const assignedTo = document.getElementById('assignedTo').value.trim();
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
+        const today = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
+
+        let isValid = true;
+
+        // Validate Start Date
+        if (startDate > today) {
+            document.getElementById('startDateError').textContent = 'Start Date cannot be a future date.';
+            isValid = false;
+        } else {
+            document.getElementById('startDateError').textContent = '';
+        }
+
+        // Validate End Date
+        if (endDate <= startDate) {
+            document.getElementById('endDateError').textContent = 'End Date must be after the Start Date.';
+            isValid = false;
+        } else {
+            document.getElementById('endDateError').textContent = '';
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
         const status = document.getElementById('taskStatus').value;
 
         if (validateForm(taskName, assignedTo)) {

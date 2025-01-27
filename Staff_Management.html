@@ -159,34 +159,83 @@
     <h3>Edit Employee</h3>
     <form id="employeeEditForm">
         <div class="form-group">
-            <label for="empID">Employee ID</label>
-            <input id="empID" type="text" name="empID" placeholder="Employee ID">
+          <label for="empID">Employee ID</label>
+          <input 
+            id="empID" 
+            type="text" 
+            name="empID" 
+            placeholder="Employee ID" 
+            pattern="[A-Z]{3}[0-9]{4}" 
+            required 
+            title="Employee ID must start with 3 letters followed by 4 numbers (e.g., ABC1234)."
+          >
         </div>
+      
         <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input id="fullName" type="text" name="fullName" placeholder="Full Name">
+          <label for="fullName">Full Name</label>
+          <input 
+            id="fullName" 
+            type="text" 
+            name="fullName" 
+            placeholder="Full Name" 
+            pattern="[A-Za-z\s]+" 
+            required 
+            title="Full Name must contain only letters and spaces."
+          >
         </div>
+      
         <div class="form-group">
-            <label for="editDepartment">Department</label>
-            <input id="editDepartment" type="text" name="department" placeholder="Department">
+          <label for="editDepartment">Department</label>
+          <input 
+            id="editDepartment" 
+            type="text" 
+            name="department" 
+            placeholder="Department" 
+            pattern="[A-Za-z\s]+" 
+            required 
+            title="Department must contain only letters and spaces."
+          >
         </div>
+      
         <div class="form-group">
-            <label for="editPosition">Position</label>
-            <input id="editPosition" type="text" name="position" placeholder="Position">
+          <label for="editPosition">Position</label>
+          <input 
+            id="editPosition" 
+            type="text" 
+            name="position" 
+            placeholder="Position" 
+            pattern="[A-Za-z\s]+" 
+            required 
+            title="Position must contain only letters and spaces."
+          >
         </div>
+      
         <div class="form-group">
-            <label for="editStartDate">Start Date</label>
-            <input id="editStartDate" type="date" name="startDate" placeholder="Start Date">
+          <label for="editStartDate">Start Date</label>
+          <input 
+            id="editStartDate" 
+            type="date" 
+            name="startDate" 
+            max="" 
+            required 
+            title="Please select a valid start date. Future dates are not allowed."
+          >
         </div>
+      
         <div class="form-group">
-            <label for="editStatus">Status</label>
-            <select id="editStatus" name="status">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
+          <label for="editStatus">Status</label>
+          <select id="editStatus" name="status" required title="Please select a status.">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
         </div>
+      
         <button type="submit">Save</button>
-    </form>
+      </form>
+      
+  
+      
+      
 </div>
 
 
@@ -277,6 +326,8 @@
     </div>
 
     <script>
+  document.getElementById('editStartDate').max = new Date().toISOString().split('T')[0];
+
 const employeeData = {
     'EMP001': {
         name: 'Veera Raghava',

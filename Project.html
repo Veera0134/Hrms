@@ -120,30 +120,58 @@
             <h2>Add New Project</h2>
             <form id="projectForm">
                 <label for="projectName">Project Name:</label>
-                <input type="text" id="projectName" pattern="[A-Za-z\s]+" minlength="4" 
-                       title="Project Name must contain at least 4 alphabetic characters and spaces only." required>
-                <span id="projectNameError" class="error-message"></span>
-    
+                <input 
+                    type="text" 
+                    id="projectName" 
+                    name="projectName" 
+                    pattern="[A-Za-z\s]+" 
+                    minlength="4" 
+                    title="Project Name must contain at least 4 alphabetic characters and spaces only." 
+                    required
+                >
+                <span id="projectNameError" class="error-message" style="color: red;"></span>
+        
                 <label for="assignedTo">Assigned To:</label>
-                <input type="text" id="assignedTo" pattern="[A-Za-z\s]+" minlength="4" 
-                       title="Assigned To must contain at least 4 alphabetic characters and spaces only." required>
-                <span id="assignedToError" class="error-message"></span>
-    
+                <input 
+                    type="text" 
+                    id="assignedTo" 
+                    name="assignedTo" 
+                    pattern="[A-Za-z\s]+" 
+                    minlength="4" 
+                    title="Assigned To must contain at least 4 alphabetic characters and spaces only." 
+                    required
+                >
+                <span id="assignedToError" class="error-message" style="color: red;"></span>
+        
                 <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" max="" required>
-    
+                <input 
+                    type="date" 
+                    id="startDate" 
+                    name="startDate" 
+                    max="" 
+                    required
+                >
+        
                 <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" max="" required>
-    
+                <input 
+                    type="date" 
+                    id="endDate" 
+                    name="endDate" 
+                    max="" 
+                    required
+                >
+                <span id="dateError" class="error-message" style="color: red;"></span>
+        
                 <label for="status">Status:</label>
-                <select id="status">
+                <select id="status" name="status" required>
                     <option value="pending">Pending</option>
                     <option value="ongoing">Ongoing</option>
                     <option value="completed">Completed</option>
                 </select>
-    
-                <button type="button" onclick="addProject()">Add Project</button>
+        
+                <button type="button" onclick="validateAndAddProject()">Add Project</button>
             </form>
+        
         </div>
     </div>
     
@@ -223,6 +251,35 @@ function addProject() {
     closeAddProjectForm();
     document.getElementById('projectForm').reset();
 }
+
+function validateAndAddProject() {
+            const fields = ["projectName", "assignedTo"];
+            let valid = true;
+
+            // Validate fields
+            fields.forEach(field => {
+                if (!validateField(field)) valid = false;
+            });
+
+            // Validate dates
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const dateError = document.getElementById("dateError");
+
+            if (startDate === "" || endDate === "") {
+                dateError.textContent = "Start Date and End Date are required.";
+                valid = false;
+            } else if (endDate < startDate) {
+                dateError.textContent = "End Date cannot be earlier than Start Date.";
+                valid = false;
+            } else {
+                dateError.textContent = "";
+            }
+
+            if (valid) {
+                addProject();
+            }
+        }
 const fields = ["projectName", "assignedTo"];
     fields.forEach(field => {
         document.getElementById(field).addEventListener("input", function () {
@@ -231,20 +288,27 @@ const fields = ["projectName", "assignedTo"];
     });
 
     function validateField(field) {
-        const input = document.getElementById(field);
-        const error = document.getElementById(`${field}Error`);
-        const regex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
-        if (input.value.trim().length < 4) {
-            error.textContent = `${field.replace(/([A-Z])/g, " $1")} must be at least 4 characters long.`;
-            input.classList.add("invalid");
-        } else if (!regex.test(input.value)) {
-            error.textContent = `${field.replace(/([A-Z])/g, " $1")} must contain only alphabets.`;
-            input.classList.add("invalid");
-        } else {
-            error.textContent = "";
-            input.classList.remove("invalid");
+            const input = document.getElementById(field);
+            const error = document.getElementById(`${field}Error`);
+            const regex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
+            let valid = true;
+
+            if (input.value.trim().length < 4) {
+                error.textContent = `${field.replace(/([A-Z])/g, " $1")} must be at least 4 characters long.`;
+                input.classList.add("invalid");
+                valid = false;
+            } else if (!regex.test(input.value)) {
+                error.textContent = `${field.replace(/([A-Z])/g, " $1")} must contain only alphabets.`;
+                input.classList.add("invalid");
+                valid = false;
+            } else {
+                error.textContent = "";
+                input.classList.remove("invalid");
+            }
+
+            return valid;
         }
-    }
+
 
 
     </script>

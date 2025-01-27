@@ -135,7 +135,10 @@
           <span id="empNameError" class="error-message"></span>
     
           <label for="empId">Employee ID:</label>
-          <input type="text" id="empId" name="empId" required />
+          <input type="text" id="empId" name="empId" pattern="[A-Z]{3}[0-9]{4}" 
+          required 
+          title="Employee ID must start with 3 captial letters followed by 4 numbers (e.g., ABC1234)." 
+          />
     
           <label for="empPosition">Position:</label>
           <input

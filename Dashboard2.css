@@ -1,230 +1,253 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5;
-    overflow: hidden;
-  }
-                      ::-webkit-scrollbar {
-                        display: none;
-                    }
-                
-                    body {
-                        -ms-overflow-style: none;  
-                        scrollbar-width: none;  
-                    }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+                    ::-webkit-scrollbar {
+                      display: none;
+                  }
+              
+                  body {
+                      -ms-overflow-style: none;  
+                      scrollbar-width: none;  
+                  }
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    padding: 20px;
-    position: fixed;
-    top: 10px;
-    width: 98%;
-    height: 100px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 1s ease-in-out;
-    animation: buttonGlow 1.5s infinite ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #d4e4e8;; */
+  color: #fff;
+  padding: 20px;
+  position: fixed;
+  top: 10px;
+  /* width: calc(100% - 334px); */
+  width: 98%;
+  height: 100px;
+  /* z-index: 1000; */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* border: #000 solid 2px; */
+  animation: fadeIn 1s ease-in-out;
+  animation: buttonGlow 1.5s infinite ease-in-out;
 }
 .logo img{
-    width: 250px;
-    height: 100px;
-    border-radius: 50px;
-    cursor: pointer;
-    animation: logoZoom 3s infinite;
-    transition: transform 0.3s ease-in-out;
-  }
-  .logo img:hover {
-    transform: rotate(360deg) scale(1.1); 
-    transition: transform 0.6s ease-in-out;
+  width: 250px;
+  height: 100px;
+  /* border: #000 solid 2px; */
+  border-radius: 50px;
+  cursor: pointer;
+  animation: logoZoom 3s infinite;
+  transition: transform 0.3s ease-in-out;
+}
+.logo img:hover {
+  transform: rotate(360deg) scale(1.1); /* Rotate and zoom slightly on hover */
+  transition: transform 0.6s ease-in-out;
 }
 @keyframes logoZoom {
-  0% {
-      transform: scale(1);
-  }
-  50% {
-      transform: scale(1.2);
-  }
-  100% {
-      transform: scale(1);
-  }
+0% {
+    transform: scale(1);
+}
+50% {
+    transform: scale(1.2);
+}
+100% {
+    transform: scale(1);
+}
 }
 
 header h1 {
-    margin: 0;
-    text-align: center;
-    font-size: 28px;
-    border-radius: 50px 50px 50px 50px / 20px;
-
-    animation: buttonGlow 1.5s infinite ease-in-out;
+  margin: 0;
+  text-align: center;
+  font-size: 28px;
+  /* border: #000 solid 5px; */
+  border-radius: 50px 50px 50px 50px / 20px; /*
+  /* background-color: #aaa; */
+  background-color: #8ecadb;
+  padding: 20px;
+  width: 45%;
+  /* margin-left: -200px; */
+  animation: buttonGlow 1.5s infinite ease-in-out;
 }
 
 header .As {
-    color: white;
-    font-size: 40px;
+  color: white;
+  font-size: 40px;
 }
 
 header .Te {
-    color: red;
-    font-size: 40px;
+  color: red;
+  font-size: 40px;
 
 }
 
 header .So {
-    color: blue;
-    font-size: 40px;
+  color: blue;
+  font-size: 40px;
 
 }
+/* Profile Section */
 .profile {
-    display: flex;
-    align-items: center;
-  }
-  .profile img {
-    height: 120px;
-    width: 150px;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: buttonGlow 1.5s infinite ease-in-out;
-  }
-  
-  .profile-info{
-    display: flex;
-    flex-direction: column;
-
-    border-radius: 10px;
-    padding: 10px;
-
-  }
-  .userDisplay{
-    color: #000;
-    font-size: 1rem;
-  }
-  .status {
-    font-size: 0.9em;
-    color: green;
-    margin-top: 2px;
-  }
-  .notification-icon {
-    position: relative;
-    margin-left: 15px;
-    font-size: 30px;
-    color: #f4dd08; 
-  }
-  .logout-icon {
-    font-size: 40px;
-    color: #000;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* margin-left: 15px; */
 }
-  button{
-    background-color: #8ecadb;
-    margin-left: 30px;
-    padding: 10px;
-    text-decoration: none;
-    animation: buttonGlow 1.5s infinite ease-in-out;
+.profile img {
+  height: 120px;
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 5px;
+  animation: buttonGlow 1.5s infinite ease-in-out;
+  /* border: 5px solid rgb(6, 6, 6); */
+}
+
+.profile-info{
+  display: flex;
+  flex-direction: column;
+  /* border: #000 solid 5px; */
+  /* margin-left: 20px; */
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.userDisplay{
+  color: #000;
+  font-size: 1rem;
+}
+.status {
+  font-size: 0.9em;
+  color: green;
+  margin-top: 2px;
+}
+.notification-icon {
+  position: relative;
+  margin-left: 15px;
+  font-size: 30px;
+  color: #f4dd08; /* Tomato color for the bell */
+}
+.logout-icon {
+  font-size: 40px;
+  color: #000;
+  cursor: pointer;
+}
+button{
+  background-color: #8ecadb;
+  margin-left: 30px;
+  padding: 10px;
+  /* font-size: 20px; */
+  text-decoration: none;
+  /* border-radius: 5px; */
+  animation: buttonGlow 1.5s infinite ease-in-out;
 }
 .sidenav {
-    display: flex; 
-   margin-top: 145px;
-    padding: 10px 0px;
-    align-items: flex-start;
+  display: flex; 
+ margin-top: 145px;/* Position below header */
+  padding: 10px 0px;
+  align-items: flex-start; /* Align items to the left */
 }
 
 .menu-button {
- 
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 25px;
-    
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+/* position: fixed; */
+  /* background-color: #333; */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  /* border-radius: 5px; */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu-button i {
-    font-size: 35px;
-    display: inline-block;
-    transition: transform 0.3s ease;
+  font-size: 35px;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .menu-button.open i {
-    transform: rotate(90deg);
+  transform: rotate(90deg); /* Rotate icon */
 }
 
 .menu-button:hover {
-    color: #000;
+  /* background-color: #f4dd08; */
+  color: #000;
 }
 
+/* Horizontal Menu */
 .horizontal-menu {
-    display: none; 
-    flex-direction: row; 
-    justify-content: flex-start; 
-    color: #333;
-    padding: 10px 0;
-    width: 98%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    animation: slideIn 0.5s ease-in-out;
+  display: none; /* Hidden initially */
+  flex-direction: row; /* Align items horizontally */
+  justify-content: flex-start; /* Align to the left */
+  color: #333;
+  padding: 10px 0;
+  width: 98%; /* Full width */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-in-out;
 }
 
 .horizontal-menu a {
-    color: #070707;
-    text-decoration: none;
-    padding: 10px 40px;
-    margin-left: 20px;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    animation: buttonGlow 1.5s infinite ease-in-out;
+  color: #070707;
+  text-decoration: none;
+  padding: 10px 40px;
+  margin-left: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  animation: buttonGlow 1.5s infinite ease-in-out;
 }
 
 .horizontal-menu a:hover {
-    color: #000;
-    animation: pulse 0.4s ease-in-out;
+  /* background-color: #c9f4f4da; */
+  color: #000;
+  animation: pulse 0.4s ease-in-out;
 }
 @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  @keyframes buttonGlow {
-    0% {
-      box-shadow: 0 0 5px #8ecadb;
-    }
-    50% {
-      box-shadow: 0 0 30px #8ecadb;
-    }
-    100% {
-      box-shadow: 0 0 5px #8ecadb;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(0);
-    }
+}
+
+/* Animation for button hover effect */
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 0 0 5px #8ecadb;
   }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
+  50% {
+    box-shadow: 0 0 30px #8ecadb;
   }
-  main {
-    overflow: auto; 
-    max-height: 60vh; 
-   
+  100% {
+    box-shadow: 0 0 5px #8ecadb;
+  }
+}
+
+/* Animation for horizontal menu slide-in */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Animation for menu item hover */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+main {
+  overflow: auto; /* Enable scrolling if the content overflows */
+  max-height: 60vh; /* Adjust this value as needed */
+ 
 }

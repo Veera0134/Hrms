@@ -5,455 +5,459 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Onboarding Form</title>
     <link rel="stylesheet" href="./Personalinfo_Dashboard.html">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-         
-            height: 100vh;
-            overflow-x: hidden;
-            background-image: url('https://img.freepik.com/premium-vector/school-frame-hand-drawn-style-education-frame-background_698782-3308.jpg?w=740');
-            background-position: center;
-            background-size: cover;
-        }
-    
-        .form-container {
 
-            display: flex;
-            width: 1000px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-    
-        .form-content {
-            flex: 1;
-            padding-right: 40px;
-        }
-    
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #f9f9f9;
-        }
-    
-        .form-card {
-            width: 500px;
-            background: #f8f8f8;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            margin-left: 25px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-    
-        .form-card fieldset {
-            border: 1px solid #000000;
-            padding: 15px;
-            border-radius: 6px;
-        }
-    
-        .form-card legend {
-            font-size: 1.2em;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-    
-        .form-group {
-            margin-bottom: 15px;
-        }
-    
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-    
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #000000;
-            border-radius: 4px;
-        }
-    
-        .form-group input:valid {
-            border-color: green;
-        }
-    
-        .form-group .error {
-            color: red;
-            font-size: 0.875em;
-            display: none;
-        }
-    
-        .form-actions {
-            text-align: center;
-        }
-    
-        .form-actions button {
-            background-color: #fafafa;
-            color: rgb(0, 0, 0);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 300px;
-            font-size: 20px;
-        }
-    
-        .form-actions button:hover {
-            background-color: #b9c0ba;
-        }
-    
-        .rows, .row1, .row2 {
-            display: flex;
-            justify-content: flex-start;
-            gap: 0px;
-            flex-wrap: nowrap;
-        }
-    
- 
-    </style>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.801);
+}
+
+.form-content h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.776);
+}
+
+.form-content .rows {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.form-actions button {
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: #0056b3;
+}
+
+
+</style>
     
 </head>
 <body>
-    <div class="form-container">
-        <div class="form-content">
-            <h1>Employee Onboarding Form</h1>
-    
-            <form id="onboardingForm">
-                <div class="rows">
-                <div class="form-card">
-                    <fieldset>
-                        <legend>Personal Information</legend>
-                        <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input 
-                                type="text" 
-                                id="fullName" 
-                                name="fullName" 
-                                required 
-                                pattern="^[A-Z][a-zA-Z\s]+$" 
-                                title="Name must start with a capital letter and contain only letters and spaces."
-                            >
-                            <div class="error" id="errorFullName">Please enter your full name starting with a capital letter (letters only).</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="Empid">Emp-Id</label>
-                            <input 
-                                type="text" 
-                                id="Empid" 
-                                name="Empid" 
-                                required 
-                                pattern="^[A-Z]{3}[0-9]+$" 
-                                title="Emp-ID must start with 3 uppercase letters followed by numbers."
-                            >
-                            <div class="error" id="errorEmpId">Please enter your Emp-ID (e.g., ABC123).</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                            <div class="error" id="errorEmail">Please enter a valid email address.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required pattern="^[0-9]{10}$">
-                            <div class="error" id="errorPhone">Please enter a 10-digit phone number.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" id="dob" name="dob" required>
-                            <div class="error" id="errorDob">Please enter your date of birth.</div>
-                        </div>
-                        <legend>Address</legend>
-                        <div class="form-group">
-                            <label for="streetAddress">Street Address</label>
-                            <input type="text" id="streetAddress" name="streetAddress" required>
-                            <div class="error" id="errorStreetAddress">Please enter your street address.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city" required>
-                            <div class="error" id="errorCity">Please enter your city.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="state">State</label>
-                            <input type="text" id="state" name="state" required>
-                            <div class="error" id="errorState">Please enter your state.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="zipCode">Zip Code</label>
-                            <input type="text" id="zipCode" name="zipCode" required pattern="^\d{6}(-\d{5})?$">
-                            <div class="error" id="errorZipCode">Please enter a valid zip code.</div>
-                        </div>
-                        <legend>Banking Information</legend>
-                        <div class="form-group">
-                            <label for="bankName">Bank Name</label>
-                            <input type="text" id="bankName" name="bankName" required>
-                            <div class="error" id="errorBankName">Please enter the name of your bank.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phonenumber">Mobile Number</label>
-                            <input type="text" id="phonenumber" name="phonenumber" required>
-                            <div class="error" id="errorBankName">Please enter the phonenumber .</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="accountNumber">Account Number</label>
-                            <input type="text" id="accountNumber" name="accountNumber" required pattern="^[0-9]{8,20}$">
-                            <div class="error" id="errorAccountNumber">Please enter a valid account number.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="accountNumber">Confrom-Account Number</label>
-                            <input type="text" id="confrom-accountNumber" name="accountNumber" required pattern="^[0-9]{8,20}$">
-                            <div class="error" id="errorAccountNumber">Please enter a valid account number.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="IFSCNumber">IFSC Number</label>
-                            <input type="text" id="IFSCNumber" name="IFSCNumber" required pattern="^[A-Z]{4}0[A-Z0-9]{6}$" title="Enter a valid IFSC Code (e.g., SBIN0001234)."
-                            >
-                            <div class="error" id="errorRoutingNumber">Please enter a valid routing number.</div>
-                        </div>
-                    </fieldset>
-                </div>
-    
-                <div class="form-card">
-                    <fieldset>
-                        
-                        <legend>Qualification</legend>
-                        <div class="form-group">
-                            <label for="degree">Highest Degree</label>
-                            <input type="text" id="degree" name="degree" required>
-                            <div class="error" id="errorDegree">Please enter your highest degree.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="institution">Institution</label>
-                            <input type="text" id="institution" name="institution" required>
-                            <div class="error" id="errorInstitution">Please enter the name of your institution.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="graduationYear">Year of Graduation</label>
-                            <input type="number" id="graduationYear" name="graduationYear" required min="1900" max="2099">
-                            <div class="error" id="errorGraduationYear">Please enter a valid graduation year.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="degreeCertificate">Upload Degree Certificate</label>
-                            <input type="file" id="degreeCertificate" name="degreeCertificate" accept=".jpg, .jpeg, .png, .pdf" required>
-                            <div class="error" id="errorDegreeCertificate">Please upload your degree certificate.</div>
-                        </div>
-                       
+    <div class="form-content">
+        <h1>Employee Onboarding Form</h1>
+        
+        <form id="onboardingForm" novalidate>
+            <div class="rows">
+                <fieldset>
+                    <legend>Personal Information</legend>
                     
-                              <legend>Experience</legend>
-                              <div class="form-group">
-                                <label for="job-title">Job Title</label>
-                                <input type="text" id="job-title" name="jobTitle"  minlength="2" maxlength="100">
-                                <small class="error" id="job-title-error"></small>
-                              </div>
-                              <div class="form-group">
-                                <label for="company-name">Company Name</label>
-                                <input type="text" id="company-name" name="companyName"  minlength="2" maxlength="100">
-                                <small class="error" id="company-name-error"></small>
-                              </div>
-                              <div class="form-group">
-                                <label for="location">Location</label>
-                                <input type="text" id="location" name="location"  minlength="2" maxlength="100">
-                                <small class="error" id="location-error"></small>
-                              </div>
-                              <div class="form-group">
-                                <label for="start-date">Start Date</label>
-                                <input type="date" id="start-date" name="startDate">
-                                <small class="error" id="start-date-error"></small>
-                              </div>
-                              <div class="form-group">
-                                <label for="end-date">End Date</label>
-                                <input type="date" id="end-date" name="endDate">
-                                <small class="error" id="end-date-error"></small>
-                              </div>
-                              <div class="form-group">
-                                <label for="experienceCertificate">Upload Experience Certificate</label>
-                                <input type="file" id="experienceCertificate" name="experienceCertificate" accept=".jpg, .jpeg, .png, .pdf" >
-                            </div>
-                            
-                        
-                      
-                      
-                        <legend>Position Details</legend>
-                        <div class="form-group">
-                            <label for="jobTitle">Job Title</label>
-                            <input type="text" id="jobTitle" name="jobTitle" required>
-                            <div class="error" id="errorJobTitle">Please enter your job title.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="startDate">Start Date</label>
-                            <input type="date" id="startDate" name="startDate" required>
-                            <div class="error" id="errorStartDate">Please enter your start date.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="department">Department</label>
-                            <input type="text" id="department" name="department" required>
-                            <div class="error" id="errorDepartment">Please enter your department.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="position">Position</label>
-                            <input type="text" id="position" name="position" required>
-                            <div class="error" id="errorDepartment">Please enter your position.</div>
-                        </div>
-                    
-                    </fieldset>
-                </div>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            required 
+                            pattern="^[A-Z][a-zA-Z\s]+$"
+                            title="Name must start with a capital letter and contain only letters and spaces."
+                        >
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="Empid">Emp-Id</label>
+                        <input 
+                            type="text" 
+                            id="Empid" 
+                            name="Empid" 
+                            required 
+                            pattern="^[A-Z]{3}[0-9]+$"
+                            title="Emp-ID must start with 3 uppercase letters followed by numbers."
+                        >
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phonenumber" 
+                            name="phone" 
+                            required 
+                            pattern="^[0-9]{10}$"
+                            title="Phone number must be 10 digits."
+                        >
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required min="<?php echo date('Y-m-d'); ?>">
+                        <small class="error-message"></small>
+                    </div>
+                </fieldset>
+                
+             
+                <fieldset>
+                    <legend>Address</legend>
+    
+                    <div class="form-group">
+                        <label for="streetAddress">Street Address</label>
+                        <input type="text" id="streetAddress" name="streetAddress" required>
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="zipCode">Zip Code</label>
+                        <input 
+                            type="text" 
+                            id="zipCode" 
+                            name="zipCode" 
+                            required 
+                            pattern="^\d{6}$"
+                            title="Zip code must be in the format: 12345 or 12345-6789."
+                        >
+                        <small class="error-message"></small>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Banking Information</legend>
+    
+                    <div class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <input type="text" id="bankName" name="bankName" required>
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="phonenumber">Mobile Number</label>
+                        <input type="text" id="phonenumber" name="phonenumber" required pattern="^[0-9]{10}$">
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" id="accountNumber" name="accountNumber" required pattern="^[0-9]{8,20}$">
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="confirmAccountNumber">Confirm Account Number</label>
+                        <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" required pattern="^[0-9]{8,20}$">
+                        <small class="error-message"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="IFSCNumber">IFSC Number</label>
+                        <input type="text" id="IFSCNumber" name="IFSCNumber" required pattern="^[A-Za-z]{4}[0-9]{7}$">
+                        <small class="error-message"></small>
+                    </div>
+                </fieldset>
+    
+                <fieldset>
+                    <legend>Qualification</legend>
+                    <div class="form-group">
+                        <label for="degree">Highest Degree</label>
+                        <input type="text" id="degree" name="degree" required>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="institution">Institution</label>
+                        <input type="text" id="institution" name="institution" required>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="graduationYear">Year of Graduation</label>
+                        <input type="number" id="graduationYear" name="graduationYear" required min="1900" max="2099">
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="degreeCertificate">Upload Degree Certificate</label>
+                        <input type="file" id="degreeCertificate" name="degreeCertificate" accept=".jpg, .jpeg, .png, .pdf" required>
+                        <small class="error-message"></small>
+                    </div>
+                </fieldset>
+    
+                <fieldset>  
+                    <legend>Experience(optional)</legend>
+                    <div class="form-group">
+                        <label for="job-title">Job Title</label>
+                        <input type="text" id="job-title" name="jobTitle" minlength="2" maxlength="100">
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-name">Company Name</label>
+                        <input type="text" id="company-name" name="companyName" minlength="2" maxlength="100">
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" minlength="2" maxlength="100">
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date" name="startDate">
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">End Date</label>
+                        <input type="date" id="end-date" name="endDate">
+                        <small class="error-message"></small>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Job Details</legend>
+                    <div class="form-group">
+                        <label for="job-role">Job Role</label>
+                        <input type="text" id="job-role" name="jobRole" required>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" required min="<?php echo date('Y-m-d'); ?>">
+                        <small class="error-message"></small>
+
+                    </div>
+         
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" name="department" required>
+                        <small class="error-message"></small>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" id="position" name="position" required>
+                        <small class="error-message"></small>
+
+                    </div>
+                </fieldset>
             </div>
-           
-                <div class="form-actions">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-        
-    </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("onboardingForm");
-    const submitButton = form.querySelector('button[type="submit"]');
-    const errorMessages = document.querySelectorAll(".error");
-
-    errorMessages.forEach(error => {
-        error.style.display = "none";
-    });
-
-    function validateField(input) {
-        const value = input.value.trim();
-        const errorId = `error${input.id.charAt(0).toUpperCase() + input.id.slice(1)}`;
-        const error = document.getElementById(errorId);
-        
-        if (!error) return true; 
-
-        let isValid = true;
-
-        switch (input.id) {
-            case "fullName":
-            case "Empid":
-            isValid = /^[A-Za-z\s]+$/.test(value);
-            break;
-            case "state":
-            case "city":
-            case "streetAddress":
-            case "bankName":
-            case "degree":
-            case "institution":
-            case "jobTitle":
-            case "department":
-            case "Skills":
-            case "location":
-            case "company-name":
-                isValid = /^[A-Za-z\s]+$/.test(value);
-                break;
-            case "email":
-                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                break;
-            case "phone":
-            case "phonenumber":
-                isValid = /^[0-9]{10}$/.test(value);
-                break;
-            case "zipCode":
-                isValid = /^\d{6}(-\d{5})?$/.test(value);
-                break;
-            case "accountNumber":
-                isValid = /^[0-9]{8,20}$/.test(value);
-                break;
-            case "IFSCNumber":
-                isValid = /"^[A-Z]{4}0[A-Z0-9]{6}$"/.test(value);
-                break;
-            case "graduationYear":
-                const year = parseInt(value, 10);
-                isValid = year >= 1900 && year <= 2099;
-                break;
-            case "startDate":
-            case "endDate":
-            case "dob":
-                isValid = value !== "";
-                break;
-        }
-
-        error.style.display = isValid ? "none" : "block";
-
-        return isValid;
-    }
-
-    function checkFormValidity() {
-        let isFormValid = true;
-
-        form.querySelectorAll("input").forEach((input) => {
-            if (!validateField(input)) {
-                isFormValid = false;
-            }
-        });
-
-        submitButton.disabled = !isFormValid;
-    }
-
-    form.querySelectorAll("input").forEach((input) => {
-        input.addEventListener("input", () => {
-            validateField(input);
-            checkFormValidity();
-        });
-    });
-
-    form.addEventListener("submit", (event) => {
-        let isFormValid = true;
-
-        form.querySelectorAll("input").forEach((input) => {
-            if (!validateField(input)) {
-                isFormValid = false;
-            }
-        });
-
-        if (!isFormValid) {
-            event.preventDefault();
-            alert("Please fix the errors before submitting the form.");
-        }
-    });
-
-    checkFormValidity();
-    document.getElementById('onboardingForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent form submission to server
-
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value; 
-            });
-
-            localStorage.setItem('onboardingData', JSON.stringify(data));
-
     
-            window.location.href = 'Assert.html'
-        });
-});
-form.addEventListener("submit", (event) => {
-    let isFormValid = true;
-    form.querySelectorAll("input").forEach(input => {
-        if (!validateField(input)) {
-            isFormValid = false;
-        }
+            <div class="form-actions">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+   <script>document.getElementById("onboardingForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    document.getElementById("dob").max = new Date().toISOString().split("T")[0];
+    document.getElementById("startDate").max = new Date().toISOString().split("T")[0];
+
+
+
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
     });
 
-    if (!isFormValid) {
-        event.preventDefault();
-        alert("Please correct the highlighted errors before submitting.");
+    const fields = [
+        { id: "bankName", pattern: /.+/, errorMessage: "Please enter the name of your bank." },
+        { id: "phonenumber", pattern: /^[0-9]{10}$/, errorMessage: "Please enter a valid 10-digit phone number." },
+        { id: "accountNumber", pattern: /^[0-9]{8,20}$/, errorMessage: "Please enter a valid account number." },
+        { id: "confirmAccountNumber", pattern: /^[0-9]{8,20}$/, errorMessage: "Account numbers must match." },
+        { id: "IFSCNumber", pattern: /^[A-Za-z]{4}[0-9]{7}$/, errorMessage: "Please enter a valid IFSC number." },
+        { id: "fullName", pattern: /^[A-Z][a-zA-Z\s]+$/, errorMessage: "Name must start with a capital letter." },
+{
+    id: "dob",
+    pattern: /.+/, 
+    errorMessage: "Please select your date of birth.",
+},
+        { id: "email", pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: "Please enter a valid email address." },
+        {
+            id: "Empid",
+            pattern: /^[A-Z]{3}[0-9]+$/,
+            errorMessage: "Emp-ID must start with 3 uppercase letters followed by numbers.",
+        },
+        {
+            id: "streetAddress",
+            pattern: /.+/,
+            errorMessage: "Please enter your street address.",
+        },
+        {
+            id: "city",
+            pattern: /.+/,
+            errorMessage: "Please enter your city.",
+        },
+        {
+            id: "state",
+            pattern: /.+/,
+            errorMessage: "Please enter your state.",
+        },
+        {
+            id: "zipCode",
+            pattern: /^\d{6}$/,
+            errorMessage: "Please enter a valid zip code (e.g., 123456).",
+        },
+        {
+    id: "degree",
+    pattern: /.+/,
+    errorMessage: "Please enter your highest degree.",
+},
+{
+    id: "institution",
+    pattern: /.+/,
+    errorMessage: "Please enter the name of your institution.",
+},
+{
+    id: "graduationYear",
+    pattern: /^(19|20)\d{2}$/,
+    errorMessage: "Please enter a valid graduation year between 1900 and 2099.",
+},
+{
+    id: "degreeCertificate",
+    pattern: /.+/,
+    errorMessage: "Please upload your degree certificate.",
+},
+{
+    id: "job-role",
+    pattern: /^[a-zA-Z\s]{2,100}$/,
+    errorMessage: "Job Title must be at least 2 characters long and only contain letters and spaces.",
+},
+{
+    id: "startDate",
+    pattern: /.+/,
+    errorMessage: "Start Date must be a valid date .",
+},
+{
+    id: "department",
+    pattern: /^[a-zA-Z\s]{2,100}$/,
+    errorMessage: "Department must be at least 2 characters long and only contain letters and spaces.",
+},
+{
+    id: "position",
+    pattern: /^[a-zA-Z\s]{2,100}$/,
+    errorMessage: "Position must be at least 2 characters long and only contain letters and spaces.",
+}
+
+];
+
+    let isValid = true;
+    
+
+    fields.forEach((field) => {
+        const inputElement = document.getElementById(field.id);
+        if (!inputElement) return; // Skip if element not found
+        const errorElement = inputElement.nextElementSibling;
+
+        if (!field.pattern.test(inputElement.value.trim())) {
+            errorElement.textContent = field.errorMessage;
+            errorElement.style.color = "red";
+            isValid = false;
+        } else {
+            errorElement.textContent = "";
+        }
+    });
+    
+    const accountNumber = document.getElementById("accountNumber")?.value.trim();
+    const confirmAccountNumber = document.getElementById("confirmAccountNumber")?.value.trim();
+    if (accountNumber !== confirmAccountNumber) {
+        const confirmErrorElement = document.getElementById("confirmAccountNumber")?.nextElementSibling;
+        confirmErrorElement.textContent = "Account numbers must match.";
+        confirmErrorElement.style.color = "red";
+        isValid = false;
+    }
+
+    if (isValid) {
+        localStorage.setItem("onboardingData", JSON.stringify(data));
+        alert("Form successfully submitted!");
+        window.location.href = "Assert.html";
     }
 });
-
-
 </script>
-
 
 </body>
 </html>

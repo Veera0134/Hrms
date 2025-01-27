@@ -114,10 +114,20 @@
       <h2>Employee Details</h2>
       <div class="details">
         <label for="employee-name"><strong>Emp Name:</strong></label>
-        <input type="text" id="employee-name" name="employee-name" placeholder="Enter Employee Name" required>
+        <input 
+        type="text" 
+        id="employee-name" 
+        name="employee-name" 
+        placeholder="Enter Employee Name" 
+        required 
+        pattern="[A-Z][a-zA-Z\s]*" 
+        title="The name must start with a capital letter and can contain only letters and spaces."
+    >
         
         <label for="employee-id"><strong>Employee ID:</strong></label>
-        <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID" required>
+        <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID" pattern="[A-Za-z]{3}[0-9]{4}" 
+        title="Employee ID must start with 3 alphabets followed by 4 digits (e.g., ABC1234)." 
+        required>
         
         <label for="designation"><strong>Designation:</strong></label>
         <input type="text" id="designation" name="designation" placeholder="Enter Designation" required>

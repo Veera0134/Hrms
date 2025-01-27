@@ -129,10 +129,17 @@
         <h2>Create an Account</h2>
         <form id="signup-form">
             <label for="name"><i class="fas fa-user"></i> User Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed">
-
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required  pattern="[A-Z][a-zA-Z\s]*" title="1st letter should captial,alphabets and spaces are allowed">
             <label for="email"><i class="fas fa-envelope"></i> Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Enter your email" 
+            required 
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" 
+            title="Please enter a valid email address. Example: example@domain.com"
+        >
 
             <label for="password"><i class="fas fa-lock"></i> Password</label>
             <input type="password" id="password" name="password" placeholder="Create a password" required minlength="8">
@@ -159,13 +166,25 @@ document.getElementById("confirm-password").addEventListener("input", validateCo
 const errorMessage = document.getElementById("error-message");
 
 function validateName() {
-    const name = document.getElementById("name").value;
+    const nameInput = document.getElementById("name");
+    const errorMessage = document.getElementById("error-message");
+    const name = nameInput.value;
+
     if (name.trim() === "") {
         errorMessage.textContent = "Name cannot be empty.";
-    } else {
-        errorMessage.textContent = "";
+        return false;
     }
+
+    const namePattern = /^[A-Z][a-zA-Z\s]*$/;
+    if (!namePattern.test(name)) {
+        errorMessage.textContent = "The name must start with a capital letter and contain only alphabets and spaces.";
+        return false;
+    }
+
+    errorMessage.textContent = "";
+    return true;
 }
+
 
 function validateEmail() {
     const email = document.getElementById("email").value;

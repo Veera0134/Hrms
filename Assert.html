@@ -174,48 +174,55 @@
             <img src="./logo.png" alt="Company Logo">
             <h2>Asset Delivery Form</h2>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="emp-name">Employee Name</label>
-                <input type="text" id="emp-name" name="emp-name" required pattern="[A-Za-z\s]+" minlength="4" title="Name must be at least 4 characters long and contain only letters and spaces." oninput="validateName()">
-                <span id="name-error" style="color: red; font-size: 0.9em;"></span>
+        <form onsubmit="return handleFormSubmission()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="emp-name">Employee Name</label>
+                    <input type="text" id="emp-name" name="emp-name" required pattern="^[A-Z][a-zA-Z\s]+$" minlength="4" 
+                        title="Name must be at least 4 characters long and contain only letters and spaces." oninput="validateName()">
+                    <span id="name-error" style="color: red; font-size: 0.9em;"></span>
+                </div>
+                <div class="form-group">
+                    <label for="emp-id">Employee ID</label>
+                    <input type="text" id="emp-id" name="emp-id" required 
+                           pattern="^[A-Za-z]{3}[0-9]{4}$" 
+                           title="Employee ID must start with 3 letters followed by 4 numbers.">
+                    <span id="id-error" style="color: red; font-size: 0.9em;"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="IT">IT</option>
+                        <option value="HR">HR</option>
+                        <option value="Associates">Associates</option>
+                        <option value="Database">Database</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="emp-id">Employee ID</label>
-                <input type="text" id="emp-id" name="emp-id" required>
+            <div class="asset-group">
+                <label>Assigned Assets:</label>
+                <label><input type="checkbox" name="assets" value="Laptop"> Laptop</label>
+                <label><input type="checkbox" name="assets" value="Laptop Charger"> Laptop Charger</label>
+                <label><input type="checkbox" name="assets" value="Mouse"> Mouse</label>
+                <label><input type="checkbox" name="assets" value="Keyboard"> Keyboard</label>
+                <label><input type="checkbox" name="assets" value="Monitor"> Monitor</label>
+                <label><input type="checkbox" name="assets" value="Headset"> Laptop Bag</label>
             </div>
-            <div class="form-group">
-                <label for="department">Department</label>
-                <select id="department" name="department">
-                    <option value="Select">Select</option>
-                    <option value="IT">IT</option>
-                    <option value="HR">HR</option>
-                    <option value="Associates">Associates</option>
-                    <option value="Database">Database</option>
-                </select>
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit">Submit</button>
+                <button type="button" class="btn btn-submit" onclick="openModal()">Request Additional Assets</button>
+                <button type="reset" class="btn btn-clear">Clear</button>
             </div>
-        </div>
-        <div class="asset-group">
-            <label>Assigned Assets:</label>
-            <label><input type="checkbox" name="assets" value="Laptop"> Laptop</label>
-            <label><input type="checkbox" name="assets" value="Laptop Charger"> Laptop Charger</label>
-            <label><input type="checkbox" name="assets" value="Mouse"> Mouse</label>
-            <label><input type="checkbox" name="assets" value="Keyboard"> Keyboard</label>
-            <label><input type="checkbox" name="assets" value="Monitor"> Monitor</label>
-            <label><input type="checkbox" name="assets" value="Headset"> Laptop Bag</label>
-        </div>
-        <div class="button-group">
-            <button type="button" class="btn btn-submit" onclick="showAlert()">Submit</button>
-            <button type="button" class="btn btn-submit" onclick="openModal()">Request Additional Assets</button>
-            <button type="reset" class="btn btn-clear">Clear</button>
-        </div>
+        </form>
     </div>
     <div class="modal" id="modal">
         <div class="modal-content">
             <h3>Request Additional Asset</h3>
             <div class="form-group">
                 <label for="additional-asset">Asset Name:</label>
-                <input type="text" id="additional-asset" name="additional-asset" required >
+                <input type="text" id="additional-asset" name="additional-asset" required>
             </div>
             <div class="form-group">
                 <label for="reason">Reason for Request:</label>
@@ -226,11 +233,6 @@
         </div>
     </div>
     <script>
-        function showAlert() {
-            alert("Assets are delivered successfully.");
-            window.location.href = "Profile.html";
-        }
-
         function openModal() {
             document.getElementById("modal").style.display = "flex";
         }
@@ -239,32 +241,66 @@
             document.getElementById("modal").style.display = "none";
         }
 
-        function submitRequest() {
-            alert("Your request for additional assets has been submitted.");
-            closeModal();
-        }
         function validateName() {
-        const nameInput = document.getElementById('emp-name');
-        const errorMessage = document.getElementById('name-error');
-        
-        const regex = /^[A-Za-z\s]{4,}$/;
+            const nameInput = document.getElementById('emp-name');
+            const errorMessage = document.getElementById('name-error');
 
-        if (!nameInput.value.match(regex)) {
-            errorMessage.textContent = "Name must be at least 4 characters long and contain only letters and spaces.";
-        } else {
-            errorMessage.textContent = "";
+            const regex = /^[A-Za-z\s]{4,}$/;
+
+            if (!nameInput.value.match(regex)) {
+                errorMessage.textContent = "Name must be at least 4 characters long and contain only letters and spaces.";
+            } else {
+                errorMessage.textContent = "";
+            }
         }
-    }
-    function submitRequest() {
-        const assetName = document.getElementById('additional-asset').value;
-        const reason = document.getElementById('reason').value;
+        function validateEmployeeID() {
+    const empIdInput = document.getElementById('emp-id');
+    const errorMessage = document.getElementById('id-error');
+    
+    const regex = /^[A-Za-z]{3}[0-9]{4}$/;
 
-        localStorage.setItem('assetName', assetName);
-        localStorage.setItem('reason', reason);
-
-        alert("Your request for additional assets has been submitted.");
-        closeModal();
+    if (!empIdInput.value.match(regex)) {
+        errorMessage.textContent = "Employee ID must start with 3 letters followed by 4 numbers.";
+        return false;
+    } else {
+        errorMessage.textContent = "";
+        return true;
     }
+}
+
+        function validateAssets() {
+            const checkboxes = document.querySelectorAll('input[name="assets"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one asset.");
+                return false;
+            }
+            return true;
+        }
+
+        function handleFormSubmission() {
+            if (validateAssets()) {
+                alert("Assets are delivered successfully.");
+                window.location.href = "Profile.html";
+                return true; 
+            } else {
+                return false; 
+            }
+        }
+
+        function submitRequest() {
+            const assetName = document.getElementById('additional-asset').value;
+            const reason = document.getElementById('reason').value;
+
+            if (assetName && reason) {
+                localStorage.setItem('assetName', assetName);
+                localStorage.setItem('reason', reason);
+
+                alert("Your request for additional assets has been submitted.");
+                closeModal();
+            } else {
+                alert("Please fill out all fields before submitting your request.");
+            }
+        }
     </script>
 </body>
 </html>
