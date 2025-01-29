@@ -136,14 +136,14 @@
     document.getElementById('claim-form').addEventListener('submit', function (e) {
         e.preventDefault();
         
-        // Get form data
+        
         const claimType = document.getElementById('claim-type').value;
         const date = document.getElementById('date').value;
         const amount = document.getElementById('amount').value;
         const description = document.getElementById('description').value;
         const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
 
-        // Create claim object
+       
         const claim = {
             claimType,
             date,
@@ -152,36 +152,36 @@
             receipt
         };
 
-        // Get existing claims from local storage
+       
         let claims = JSON.parse(localStorage.getItem('claims')) || [];
         claims.push(claim);
 
-        // Save updated claims to local storage
+     
         localStorage.setItem('claims', JSON.stringify(claims));
 
-        // Reset the form
+      
         this.reset();
 
-        // Update claim history
+       
         renderClaimHistory();
 
-        // Send success alert
+       
         alert('Your claim has been successfully submitted!');
     });
 
-    // Render claim history on page load
+   
     document.addEventListener('DOMContentLoaded', renderClaimHistory);
         document.getElementById('claim-form').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent form from reloading the page
             
-            // Get form data
+           
             const claimType = document.getElementById('claim-type').value;
             const date = document.getElementById('date').value;
             const amount = document.getElementById('amount').value;
             const description = document.getElementById('description').value;
             const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
     
-            // Create claim object
+            
             const claim = {
                 claimType,
                 date,
@@ -190,17 +190,16 @@
                 receipt
             };
     
-            // Get existing claims from local storage
+            
             let claims = JSON.parse(localStorage.getItem('claims')) || [];
             claims.push(claim);
     
-            // Save updated claims to local storage
             localStorage.setItem('claims', JSON.stringify(claims));
     
-            // Send success alert
+            
             alert('Your claim has been successfully submitted!');
     
-            // Reset the form
+          
             this.reset();
         });
     </script> 
