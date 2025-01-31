@@ -20,7 +20,9 @@
                 <span class="So">Solutions</span>
             </h1>
             <div class="profile">
-                <img src="https://th.bing.com/th/id/OIP.wNtVN5VOrnRZ6SYYGALeogEyDM?w=230&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="">
+                <img id="profile-picture-display" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+
+                <!-- <img src="https://th.bing.com/th/id/OIP.wNtVN5VOrnRZ6SYYGALeogEyDM?w=230&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt=""> -->
                 <div class="profile-info">
 
                  <span id="username" class="userDisplay"></span>
@@ -98,7 +100,13 @@
             }
         }
                const username = localStorage.getItem("currentUser");
-        const punchInTime = localStorage.getItem("punchInTime");
+               const storedProfilePicture = localStorage.getItem("profile-picture");   
+               const punchInTime = localStorage.getItem("punchInTime");
+        if (storedProfilePicture) {
+        document.getElementById("profile-picture-display").src = storedProfilePicture; // Set the image source
+    } else {
+        document.getElementById("profile-picture-display").alt = "No profile picture uploaded.";
+    }
 
         document.getElementById("username").textContent = username || "Not available";
         document.getElementById("punch-time").textContent = punchInTime || "Not available";
