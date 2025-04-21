@@ -5,7 +5,424 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Payslip</title>
   <link rel="stylesheet" href="Emp_payslip.css">
+  <style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.company-info {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Form Container */
+#payslip-form {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+
+
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
+}
+
+th {
+  background-color: #2c3e50;
+  color: rgb(0, 0, 0);
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Net Pay Section */
+.net-pay1 {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.net-pay1 p {
+  font-size: 1.1rem;
+  margin: 0.75rem 0;
+}
+
+.net-pay1 strong {
+  color: #2c3e50;
+}
+
+#total-earnings,
+#total-deductions,
+#net-pay {
+  font-weight: bold;
+  color: #27ae60;
+}
+
+#total-deductions {
+  color: #e74c3c;
+}
+
+/* Button Styles */
+.submit-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 0.5rem;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.btn {
+  background-color: #27ae60;
+}
+
+.btn:hover {
+  background-color: #219653;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .employee-details .details {
+    grid-template-columns: 1fr;
+  }
+  
+  #payslip-form {
+    padding: 1rem;
+  }
+  
+  section {
+    padding: 1rem;
+  }
+}
+
+/* Validation Styles */
+input:invalid {
+  border-color: #e74c3c;
+}
+
+input:valid {
+  border-color: #2ecc71;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button-container button {
+  margin: 0; 
+  flex: 0 0 auto; 
+}
+.employee-details .details {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Creates 2 equal columns */
+  gap: 1.5rem;
+}
+
+.employee-details .details > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevents overflow issues */
+}
+
+.employee-details label {
+  margin-bottom: 0.5rem;
+}
+
+.employee-details input {
+  width: 100%;
+}
+  </style>
+ <body>
+  <!-- <header class="header">
+    <div class="company-info">
+    </div>
+  </header> -->
+
+  <form id="payslip-form" onsubmit="validateForm(event)">
+    <section class="employee-details">
+      <h2>Employee Details</h2>
+      <div class="details">
+        <div>
+          <label for="employee-name"><strong>Emp Name:</strong></label>
+          <input type="text" id="employee-name" name="employee-name" placeholder="Enter Employee Name" required maxlength="20">
+          <span class="error-message" id="name-error"></span>
+        </div>
+        
+        <div>
+          <label for="employee-id"><strong>Employee ID:</strong></label>
+          <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID (ATS0123)" maxlength="7" required>
+          <span class="error-message" id="id-error"></span>
+        </div>
+        
+        <div>
+          <label for="designation"><strong>Designation:</strong></label>
+          <input type="text" id="designation" name="designation" placeholder="Enter Designation" required maxlength="20">
+          <span class="error-message" id="designation-error"></span>
+        </div>
+        
+        <div>
+          <label for="department"><strong>Department:</strong></label>
+          <input type="text" id="department" name="department" placeholder="Enter Department" required maxlength="20">
+          <span class="error-message" id="department-error"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="pay-details">
+      <h2>Earnings and Deductions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic Salary</td>
+            <td><input type="number" name="basic-salary" placeholder="Enter Amount" required  oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>HRA (House Rent Allowance)</td>
+            <td><input type="number" name="hra" placeholder="Enter Amount" oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>Special Allowance</td>
+            <td><input type="number" name="special-allowance" placeholder="Enter Amount" oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>Bonus</td>
+            <td><input type="number" name="bonus" placeholder="Enter Amount" oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>Income Tax Deduction</td>
+            <td><input type="number" name="income-tax-deduction" placeholder="Enter Amount"  oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>Provident Fund (PF)</td>
+            <td><input type="number" name="pf" placeholder="Enter Amount" oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+          <tr>
+            <td>Health Insurance</td>
+            <td><input type="number" name="health-insurance" placeholder="Enter Amount" oninput="if(this.value.length > 7) this.value = this.value.slice(0, 7);"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="net-pay">
+      <h2>Net Pay</h2>
+      <div class="net-pay1">
+        <p><strong>Total Earnings:</strong> <span id="total-earnings"></span></p>
+        <p><strong>Total Deductions:</strong> <span id="total-deductions"></span></p>
+        <p><strong>Net Pay:</strong> <span id="net-pay"></span></p>
+      </div>
+    </section>
+
+    <div class="button-container">
+      <button type="submit">Submit</button>     
+      <button class="btn" onclick="location.href='Payroll_Management.html'">Generate</button>
+    </div>
+  </form>
+
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Get all text inputs that need validation
+    const validatedInputs = [
+        document.getElementById('employee-name'),
+        document.getElementById('designation'),
+        document.getElementById('department')
+    ];
+
+    // Set up validation for each input
+    validatedInputs.forEach(input => {
+        let previousValue = '';
+        let previousCaretPos = 0;
+
+        input.addEventListener('input', function(e) {
+            const caretPos = this.selectionStart;
+            let value = this.value;
+            const originalLength = value.length;
+            
+            // 1. Remove all non-letter characters (keeping spaces)
+            value = value.replace(/[^a-zA-Z ]/g, '');
+            
+            // 2. Replace multiple spaces with single space
+            value = value.replace(/\s{2,}/g, ' ');
+            
+            // 3. Trim leading/trailing spaces
+            value = value.trim();
+            
+            // 4. Capitalize first letter of each word
+            value = value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { 
+                return a.toUpperCase(); 
+            });
+            
+            // Calculate caret position adjustment
+            const lengthDiff = value.length - originalLength;
+            let newCaretPos = caretPos + lengthDiff;
+            newCaretPos = Math.max(0, Math.min(newCaretPos, value.length));
+            
+            // Only update if value changed
+            if (value !== previousValue) {
+                this.value = value;
+                previousValue = value;
+                
+                // Restore caret position
+                this.setSelectionRange(newCaretPos, newCaretPos);
+                
+                // Validate the field
+                validateField(this);
+            }
+        });
+
+        // Validate on blur as well
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+    });
+
+    // Employee ID validation
+    const employeeIdInput = document.getElementById('employee-id');
+    employeeIdInput.addEventListener('input', function() {
+        // Format: ATS followed by 4 digits (ATS0123)
+        this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        
+        // Ensure it starts with ATS
+        if (!this.value.startsWith('ATS')) {
+            this.value = 'ATS' + this.value.replace(/ATS/g, '');
+        }
+        
+        // Limit to 7 characters (ATS + 4 digits)
+        if (this.value.length > 7) {
+            this.value = this.value.substring(0, 7);
+        }
+    });
+
+    // Form submission validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Validate all text fields
+        validatedInputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+                if (isValid) { // Focus on first invalid field
+                    input.focus();
+                }
+            }
+        });
+
+        // Validate employee ID
+        const employeeId = employeeIdInput.value.trim();
+        if (!employeeId || !/^ATS0\d{3}$/.test(employeeId)) {
+            alert('Employee ID must be in the format ATS followed by 4 digits (e.g., ATS0123)');
+            employeeIdInput.focus();
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+
+    // Helper function to validate a field
+    function validateField(input) {
+        const value = input.value.trim();
+        const isValid = /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/.test(value) && value.length >= 2;
+        
+        if (isValid) {
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+        } else {
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+        }
+        
+        return isValid;
+    }
+});
     function validateForm(event) {
       event.preventDefault();
 
@@ -13,7 +430,6 @@
       const employeeId = document.getElementById('employee-id');
       const designation = document.getElementById('designation');
       const department = document.getElementById('department');
-      const payPeriod = document.getElementById('pay-period');
 
       const basicSalary = document.querySelector('[name="basic-salary"]');
       const hra = document.querySelector('[name="hra"]');
@@ -43,11 +459,6 @@
       if (!department.value.trim() || !alphabetRegex.test(department.value)) {
         alert("Please enter a valid department (alphabets only).");
         department.focus();
-        return false;
-      }
-      if (!payPeriod.value.trim()) {
-        alert("Please enter the pay period.");
-        payPeriod.focus();
         return false;
       }
 
@@ -86,195 +497,42 @@
         healthInsurance.focus();
         return false;
       }
-      function saveToLocalStorage(event) {
-      event.preventDefault();
 
-      const employeeName = document.getElementById('employee-name').value;
-      const department = document.getElementById('department').value;
+      const totalEarnings = Number(basicSalary.value) + Number(hra.value) + Number(specialAllowance.value) + Number(bonus.value);
+      const totalDeductions = Number(incomeTaxDeduction.value) + Number(pf.value) + Number(healthInsurance.value);
+      const netPay = totalEarnings - totalDeductions;
 
-      localStorage.setItem('employeeName', employeeName);
-      localStorage.setItem('department', department);
+      document.getElementById('total-earnings').textContent = totalEarnings.toFixed(2);
+      document.getElementById('total-deductions').textContent = totalDeductions.toFixed(2);
+      document.getElementById('net-pay').textContent = netPay.toFixed(2);
 
-      window.location.href = 'payslip.html';
-    }
+      const payslipData = {
+        employeeName: employeeName.value.trim(),
+        employeeId: employeeId.value.trim(),
+        designation: designation.value.trim(),
+        department: department.value.trim(),
+        earnings: {
+          basicSalary: basicSalary.value.trim(),
+          hra: hra.value.trim(),
+          specialAllowance: specialAllowance.value.trim(),
+          bonus: bonus.value.trim(),
+        },
+        deductions: {
+          incomeTaxDeduction: incomeTaxDeduction.value.trim(),
+          pf: pf.value.trim(),
+          healthInsurance: healthInsurance.value.trim(),
+        },
+        totals: {
+          totalEarnings,
+          totalDeductions,
+          netPay,
+        },
+      };
 
+      localStorage.setItem("payslipData", JSON.stringify(payslipData));
       alert("Form submitted successfully!");
-      document.getElementById('payslip-form').submit();
+      return true;
     }
-  </script>
-</head>
-<body>
-  <header class="header">
-    <div class="company-info">
-    </div>
-  </header>
-
-  <form id="payslip-form" onsubmit="validateForm(event)">
-    <section class="employee-details">
-      <h2>Employee Details</h2>
-      <div class="details">
-        <label for="employee-name"><strong>Emp Name:</strong></label>
-        <input 
-        type="text" 
-        id="employee-name" 
-        name="employee-name" 
-        placeholder="Enter Employee Name" 
-        required 
-        pattern="[A-Z][a-zA-Z\s]*" 
-        title="The name must start with a capital letter and can contain only letters and spaces."
-    >
-        
-        <label for="employee-id"><strong>Employee ID:</strong></label>
-        <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID" pattern="[A-Za-z]{3}[0-9]{4}" 
-        title="Employee ID must start with 3 alphabets followed by 4 digits (e.g., ABC1234)." 
-        required>
-        
-        <label for="designation"><strong>Designation:</strong></label>
-        <input type="text" id="designation" name="designation" placeholder="Enter Designation" required>
-        
-        <label for="department"><strong>Department:</strong></label>
-        <input type="text" id="department" name="department" placeholder="Enter Department" required>
-        
-        <label for="pay-period"><strong>Pay Period:</strong></label>
-        <input type="text" id="pay-period" name="pay-period" placeholder="Enter Pay Period (e.g., September 2024)" required>
-      </div>
-    </section>
-
-    <section class="pay-details">
-      <h2>Earnings and Deductions</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Basic Salary</td>
-            <td><input type="number" name="basic-salary" placeholder="Enter Amount" required></td>
-          </tr>
-          <tr>
-            <td>HRA (House Rent Allowance)</td>
-            <td><input type="number" name="hra" placeholder="Enter Amount"></td>
-          </tr>
-          <tr>
-            <td>Special Allowance</td>
-            <td><input type="number" name="special-allowance" placeholder="Enter Amount"></td>
-          </tr>
-          <tr>
-            <td>Bonus</td>
-            <td><input type="number" name="bonus" placeholder="Enter Amount"></td>
-          </tr>
-          <tr>
-            <td>Income Tax Deduction</td>
-            <td><input type="number" name="income-tax-deduction" placeholder="Enter Amount"></td>
-          </tr>
-          <tr>
-            <td>Provident Fund (PF)</td>
-            <td><input type="number" name="pf" placeholder="Enter Amount"></td>
-          </tr>
-          <tr>
-            <td>Health Insurance</td>
-            <td><input type="number" name="health-insurance" placeholder="Enter Amount"></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="net-pay">
-      <h2>Net Pay</h2>
-      <div class="net-pay1">
-        <p><strong>Total Earnings:</strong> <span id="total-earnings"></span></p>
-        <p><strong>Total Deductions:</strong> <span id="total-deductions"></span></p>
-        <p><strong>Net Pay:</strong> <span id="net-pay"></span></p>
-      </div>
-    </section>
-
-    <div class="submit-section">
-      <button type="submit">submit</button>     
-    </div>
-   <button class="btn" onclick="location.href='Payroll_Management.html'"> Generate</button>
-  </form>
-  <script>
-  function validateForm(event) {
-  event.preventDefault();
-
-  const employeeName = document.getElementById('employee-name').value.trim();
-  const employeeId = document.getElementById('employee-id').value.trim();
-  const designation = document.getElementById('designation').value.trim();
-  const department = document.getElementById('department').value.trim();
-  const payPeriod = document.getElementById('pay-period').value.trim();
-
-  const basicSalary = document.querySelector('[name="basic-salary"]').value.trim();
-  const hra = document.querySelector('[name="hra"]').value.trim();
-  const specialAllowance = document.querySelector('[name="special-allowance"]').value.trim();
-  const bonus = document.querySelector('[name="bonus"]').value.trim();
-  const incomeTaxDeduction = document.querySelector('[name="income-tax-deduction"]').value.trim();
-  const pf = document.querySelector('[name="pf"]').value.trim();
-  const healthInsurance = document.querySelector('[name="health-insurance"]').value.trim();
-
-  const alphabetRegex = /^[A-Za-z\s]+$/;
-
-  if (!employeeName || !alphabetRegex.test(employeeName)) {
-    alert("Please enter a valid name (alphabets only).");
-    return;
-  }
-  if (!employeeId) {
-    alert("Please enter the employee ID.");
-    return;
-  }
-  if (!designation || !alphabetRegex.test(designation)) {
-    alert("Please enter a valid designation (alphabets only).");
-    return;
-  }
-  if (!department || !alphabetRegex.test(department)) {
-    alert("Please enter a valid department (alphabets only).");
-    return;
-  }
-  if (!payPeriod) {
-    alert("Please enter the pay period.");
-    return;
-  }
-
-  const totalEarnings = Number(basicSalary) + Number(hra) + Number(specialAllowance) + Number(bonus);
-  const totalDeductions = Number(incomeTaxDeduction) + Number(pf) + Number(healthInsurance);
-  const netPay = totalEarnings - totalDeductions;
-
-  document.getElementById('total-earnings').textContent = totalEarnings.toFixed(2);
-  document.getElementById('total-deductions').textContent = totalDeductions.toFixed(2);
-  document.getElementById('net-pay').textContent = netPay.toFixed(2);
-
-  const payslipData = {
-    employeeName,
-    employeeId,
-    designation,
-    department,
-    payPeriod,
-    earnings: {
-      basicSalary,
-      hra,
-      specialAllowance,
-      bonus,
-    },
-    deductions: {
-      incomeTaxDeduction,
-      pf,
-      healthInsurance,
-    },
-    totals: {
-      totalEarnings,
-      totalDeductions,
-      netPay,
-    },
-  };
-
-  localStorage.setItem("payslipData", JSON.stringify(payslipData));
-
-
-}
-
-
   </script>
 </body>
 </html>

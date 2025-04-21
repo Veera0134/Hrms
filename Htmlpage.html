@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Page</title>
+    <link rel="stylesheet" href="Htmlpage.css">
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+   background-color: #fff;
+}
+
+ .logo img{
+ width: 200px;
+ height: 100px;
+} 
+
+.search-bar {
+    flex: 1;
+    margin: 0 100px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #989797;
+}
+
+.search-btn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    margin-right: 100px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hero-section {
+    position: relative;
+    background: url('https://as2.ftcdn.net/v2/jpg/00/60/21/55/1000_F_60215519_VIilBXRz0Uk0UsPYQpM4t0O8QLkcdWlz.jpg') center/cover no-repeat;
+    height: 400px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    padding: 20px;
+}
+
+.get-started-btn {
+    padding: 10px 20px;
+    background-color: #645cff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 60%;
+    margin: 20px auto; 
+}
+
+
+.course-content {
+    background-color: #f9f9f9;
+}
+
+.content-table {
+    margin-top: 10px;
+}
+
+.content-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.completion-section {
+    display: flex;
+    grid-template-columns:repeat(2 , 1fr);
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+}
+
+.course-details {
+    width: 60%;
+}
+.course-details p{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.progress-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.completion-status {
+    text-align: center;
+}
+.course-details {
+    width: 60%;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.progress-container {
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.progress-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f3f3f3; 
+    border: 10px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-left: 120px;
+}
+
+.progress-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5a3bfc;
+}
+.completion-status {
+    margin-top: 10px;
+    font-size: 18px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+    </style>
+</head>
+<body>
+  
+    <section class="hero-section">
+        <div class="overlay">
+            <h1>HTML (Hypertext Markup Language)</h1><br>
+            <a href="page_notfound.html"><button class="get-started-btn">Get Started</button></a>
+<br>
+            <p>01 Hrs 29 Min 50 Sec On Demand</p><br>
+            <p>3 Sections</p>
+        </div>
+    </section>
+
+   
+    <section class="card course-content">
+        <h2>Course Content</h2>
+        <div class="content-table">
+            <div class="content-row">
+                <div>Introduction</div>
+                <div>00 Hrs 00 Min 51 Sec</div>
+            </div>
+            <div class="content-row">
+                <div>Introductory Video</div>
+                <div>5 Lessons - 00 Hrs 27 Min 34 Sec</div>
+            </div>
+            <div class="content-row">
+                <div>Section One</div>
+                <div>6 Lessons - 00 Hrs 36 Min 38 Sec</div>
+            </div>
+        </div>
+    </section>
+
+   
+    <section class="card completion-section">
+        <div class="course-details">
+            <h3>Introduction</h3><br>
+            <p>HTML, or HyperText Markup Language, is the standard markup language used to create web pages. It combines Hypertext, which defines the link between web pages, and Markup, which defines the text document within tags to structure the web pages. HTML is human-readable and uses tags to define what manipulation has to be done on the text</p><br>
+            <h3>Description</h3><br>
+            <p>The Hyper test markup language is a course will provide you with informative tools and practical strategies that can be used to help empower the team to work towards achieving the benefits of accountability. Forntend developers employees will fuel performance and productivity and generate an enhanced workplace.</p><br>
+            <h3>Prerequisites</h3>
+            <p>None</p>
+        </div>
+    <div class="circle">
+        <div class="progress-circle">
+            <span class="progress-text">10%</span>
+        </div>
+        <div class="completion-status">
+            <h3>Your Completion Percentage</h3>
+            <p>10% Complete</p>
+            <p>Complete 100% of this course to earn your certificate</p>
+        </div>
+    </div>
+    </section>
+
+</body>
+</html>

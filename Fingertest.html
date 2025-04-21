@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20210902/pngtree-intelligent-artificial-intelligence-blue-technology-background-image_782883.jpg');
+            padding-top: 70px;
+        }
+
+        .background-half {
+            flex: 1;
+            background-image: url('https://th.bing.com/th/id/OIP.L_Iq2oSnC9ft5CuSFA0D_QHaHa?rs=1&pid=ImgDetMain');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
-        .signin-container {
+        .signin-half {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: white;
+        }
+
+        .signin-container {
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
+            border-radius: 8px;
         }
 
         .signin-container h2 {
             margin-bottom: 1rem;
-            color: #333;
+            color: blue;
             text-align: center;
+            font-size: 30px;
         }
 
         .signin-container label {
@@ -57,35 +68,39 @@
 
         .signin-container input:focus {
             outline: none;
-            border-color: #ff7f3e;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .signin-container button {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.6rem;
             background: linear-gradient(to right, black, blue);
             color: white;
-            font-size: 1rem;
+            font-size: 0.9rem;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s;
         }
 
         .signin-container button:hover {
-            background-color: #ff6f61;
+            background: linear-gradient(to right, #333, #555);
         }
 
         .signin-container a {
-            display: block;
+            display: inline-block;
             text-align: center;
             margin-top: 1rem;
-            color: #0b0b0b;
+            color: #007BFF;
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.3s, text-decoration 0.3s;
         }
 
         .signin-container a:hover {
+            color: #0056b3;
             text-decoration: underline;
         }
 
@@ -95,49 +110,236 @@
             text-align: center;
         }
 
-        .punch-time {
-            color: green;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 1rem;
+        .options-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 8px;
+            margin-bottom: 0;
+        }
+
+        .remember-me label {
+            margin-bottom: 0;
+            font-weight: normal;
         }
     </style>
 </head>
-        <body>
-            <div class="signin-container">
-                <h2>Sign In</h2>
-                <form id="signin-form">
-                    <label for="username"><i class="fas fa-user"></i> Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-        
-                    <label for="password"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        
-                    <button type="submit">Sign In</button>
-                </form>
-        
-                <!-- Hidden fingerprint icon initially -->
-                <i class="fas fa-fingerprint" 
-                   id="fingerprint-icon" 
-                   style="font-size: 50px; margin-left: 50%; margin-top: 20px; transform: translateX(-50%); cursor: pointer; display: none;">
-                </i>
-        
-                <p class="error-message" id="error-message"></p>
-                <p class="punch-time" id="punch-time"></p>
-                
-                <!-- Next button initially hidden -->
-                <button id="next-button" style="display: none; width: 100%; padding: 0.75rem; background: linear-gradient(to right, green, teal); color: white; font-size: 1rem; border: none; border-radius: 4px; cursor: pointer; margin-top: 1rem;">Next</button>
-                
-                <a href="./FingerSign_Uppage.html">Don't have an account? Sign Up</a>
-            </div>
-            <script>
-                // Elements
-const errorMessage = document.getElementById("error-message");
-const fingerprintIcon = document.getElementById("fingerprint-icon");
-const nextButton = document.getElementById("next-button");
+<body>
+    <header style="position: fixed; top: 0; width: 100%; background: linear-gradient(to right, #000000, #1a237e); color: white; padding: 1rem 2rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000;">
+        <div style="text-align: center;">
+            <h1 style="margin: 0; font-size: 1.5rem; font-weight: 600;">Sign In</h1>
+            <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; font-style: italic;">"Secure user authentication"</p>
+        </div>
+    </header>
+    <div class="background-half"></div>
+    <div class="signin-half">
+        <div class="signin-container">
+            <h2>Sign In</h2>
+            <form id="signin-form">
+                <label for="username"><i class="fas fa-user"></i> Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <p class="error-message" id="username-error"></p>
 
-// Replace with your Google Maps API key
-const googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY'; // Obtain from https://console.cloud.google.com/
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <p class="error-message" id="password-error"></p>
+
+                <div class="options-container">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember Me</label>
+                    </div>
+                    <a href="./forgot_password.html">Forgot Password?</a>
+                </div>
+
+                <button type="submit">Sign In</button>
+            </form>
+
+            <p style="text-align: center;">Don't have an account? <a href="FingerTest1.html">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('signin-form');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');;
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                usernameError.textContent = '';
+                passwordError.textContent = '';
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (!username) {
+                    usernameError.textContent = 'Username cannot be empty.';
+                    return;
+                }
+
+                if (!password) {
+                    passwordError.textContent = 'Password cannot be empty.';
+                    return;
+                }
+
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+                const user = users.find(user => user.name === username);
+
+                if (!user) {
+                    usernameError.textContent = 'Username not found.';
+                    return;
+                }
+
+                if (user.password !== password) {
+                    passwordError.textContent = 'Incorrect password.';
+                    return;
+                }
+
+                const rememberMe = document.getElementById('remember').checked;
+                if (rememberMe) {
+                    localStorage.setItem('rememberedUser', username);
+                } else {
+                    localStorage.removeItem('rememberedUser');
+                }
+
+                localStorage.setItem('loggedInUser', username);
+
+                try {
+                    const locationMessage = await showLocation();
+                    alert(`Sign In successful! \n${locationMessage}`);
+                } catch (error) {
+                    alert(`Sign In successful! \n${error}`);
+                }
+
+                window.location.href = 'Dashboard.html'; 
+            });
+
+            const rememberedUser = localStorage.getItem('rememberedUser');
+            if (rememberedUser) {
+                usernameInput.value = rememberedUser;
+                document.getElementById('remember').checked = true;
+            }
+        });
+
+        function fetchPlaceName(latitude, longitude) {
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+            return fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.display_name) {
+                        return `You are in: ${data.display_name}`;
+                    } else {
+                        return "Unable to determine location.";
+                    }
+                })
+                .catch(error => {
+                    return "Failed to fetch location. " + error.message;
+                });
+        }
+
+        function showLocation() {
+            return new Promise((resolve, reject) => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        async position => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+                            resolve(await fetchPlaceName(latitude, longitude));
+                        },
+                        error => {
+                            reject('Unable to fetch location. Please allow location access.');
+                        }
+                    );
+                } else {
+                    reject('Geolocation is not supported by this browser.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+  <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('signin-form');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            // Form submission
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Clear previous error messages
+                usernameError.textContent = '';
+                passwordError.textContent = '';
+
+                // Get input values
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                // Validate inputs
+                if (!username) {
+                    usernameError.textContent = 'Username cannot be empty.';
+                    return;
+                }
+
+                if (!password) {
+                    passwordError.textContent = 'Password cannot be empty.';
+                    return;
+                }
+
+                // Retrieve users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+                // Find the user by username
+                const user = users.find(user => user.name === username);
+
+                if (!user) {
+                    usernameError.textContent = 'Username not found.';
+                    return;
+                }
+
+                // Check if the password matches
+                if (user.password !== password) {
+                    passwordError.textContent = 'Incorrect password.';
+                    return;
+                }
+
+                // Login successful
+                // alert('Login successful!');
+                showLocation().then(locationMessage => {
+            alert(`Sign In successful! \n${locationMessage}`);
+        }).catch(error => {
+            alert(`Sign In successful! \n${error}`);
+        });
+
+                // Redirect to the dashboard or another page
+                window.location.href = 'Dashboard.html'; // Change this to your desired redirect page
+            });
+        });
+        const googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY'; // Obtain from https://console.cloud.google.com/
 
 // Initially hide fingerprint icon and next button
 fingerprintIcon.style.display = "none";
@@ -185,74 +387,4 @@ function showLocation() {
         }
     });
 }
-
-// Form submission for authentication
-document.getElementById("signin-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    // Retrieve stored data from localStorage
-    const storedUsername = localStorage.getItem("name");
-    const storedPassword = localStorage.getItem("password");
-
-    // Check if entered username and password match the stored ones
-    if (username === storedUsername && password === storedPassword) {
-        // Save authentication status
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("currentUser", username);
-
-        // Show the fingerprint icon
-        fingerprintIcon.style.display = "block";
-
-        // Clear any previous error message
-        errorMessage.textContent = "";
-
-        // Fetch and show location after successful login
-        showLocation().then(locationMessage => {
-            alert(`Sign In successful! \n${locationMessage}`);
-        }).catch(error => {
-            alert(`Sign In successful! \n${error}`);
-        });
-
-    } else {
-        errorMessage.textContent = "Invalid username or password. Please try again.";
-        localStorage.setItem("isAuthenticated", "false");
-    }
-});
-
-// Fingerprint icon click for punch-in
-fingerprintIcon.addEventListener("click", () => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-
-    if (isAuthenticated) {
-        const currentDateTime = new Date();
-
-        // Format the time to "HH:MM"
-        const punchInHours = currentDateTime.getHours().toString().padStart(2, '0'); // Ensures 2 digits (e.g., 08, 09)
-        const punchInMinutes = currentDateTime.getMinutes().toString().padStart(2, '0'); // Ensures 2 digits (e.g., 05, 10)
-        const punchInTime = `${punchInHours}:${punchInMinutes}`;
-
-        // Store the punch-in time in localStorage
-        localStorage.setItem("punchInTime", punchInTime);
-
-        // For testing, let's log the value to the console
-        console.log("Punch-In Time stored:", punchInTime);
-
-        // Show the Next button after punch-in
-        nextButton.style.display = "block";
-    } else {
-        alert("Please log in first to punch in!");
-    }
-});
-
-// Next button click to navigate to another page
-nextButton.addEventListener("click", () => {
-    window.location.href = "Dashboard2.html"; // Replace 'nextpage.html' with your target page URL
-});
-
-            </script>
-                
-</body>
-</html>
+    </script> -->

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+#jobDescriptionModal {
+  display: block; /* Change to none when implementing modal functionality */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  margin: 5% auto;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #333;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+h3 {
+  color: #2c3e50;
+  margin: 25px 0 15px 0;
+  font-size: 1.3rem;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 15px;
+}
+
+/* li::before {
+  content: "•";
+  color: #3498db;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+} */
+
+.btn-apply {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.btn-apply:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Add some color to important elements */
+strong {
+  color: #2c3e50;
+}
+
+/* Location styling */
+p strong {
+  display: inline-block;
+  margin-right: 5px;
+}
+    </style>
+</head>
+<body>
+    <div id="jobDescriptionModal">
+        <div class="modal-content">
+          <h2>DevOps Engineer - Job Description</h2>
+          <p><strong>Location:</strong> Pune , Bangalore</p>
+      
+          <h3>About the Role:</h3>
+          <p>We are seeking a motivated and skilled DevOps Engineer to join our dynamic team. The successful candidate will be responsible for designing, implementing, and maintaining automated systems to ensure smooth and reliable deployment of applications and services.</p>
+      
+          <h3>Responsibilities:</h3>
+          <ul>
+            <li>Design and maintain CI/CD pipelines for seamless deployments.</li>
+            <li>Monitor, troubleshoot, and optimize cloud infrastructure performance.</li>
+            <li>Collaborate with development teams to ensure scalable and secure deployments.</li>
+            <li>Implement automation strategies to reduce manual tasks and enhance productivity.</li>
+            <li>Ensure system security and data integrity through best practices.</li>
+          </ul>
+      
+          <h3>Requirements:</h3>
+          <ul>
+            <li>2+ years of experience in DevOps, cloud infrastructure, or similar roles.</li>
+            <li>Proficiency with cloud platforms like AWS, Azure, or GCP.</li>
+            <li>Experience with containerization tools such as Docker and Kubernetes.</li>
+            <li>Strong understanding of CI/CD tools like Jenkins, GitHub Actions, or CircleCI.</li>
+            <li>Excellent problem-solving and communication skills.</li>
+          </ul>
+      
+          <h3>Benefits:</h3>
+          <ul>
+            <li>Competitive salary and performance bonuses.</li>
+            <li>Flexible work hours and remote work options.</li>
+            <li>Health insurance and wellness programs.</li>
+            <li>Opportunities for professional growth and learning.</li>
+          </ul>
+         <a href="Test2.html">  <button class="btn-apply">Apply</button></a>
+        
+        </div>
+      </div>
+</body>
+</html>

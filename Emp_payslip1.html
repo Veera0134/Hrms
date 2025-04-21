@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payslip</title>
+    <!-- Add jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .payslip-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .payslip-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .payslip-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .payslip-details {
+            padding: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .payslip-details h3 {
+            color: #3f51b5;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .payslip-details div {
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .payslip-details div span:first-child {
+            font-weight: 600;
+            width: 150px;
+            color: #555;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .view-button, .download-button {
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .view-button:hover, .download-button:hover {
+            background-color: #303f9f;
+        }
+
+        .download-button {
+            background-color: #4caf50;
+        }
+
+        .download-button:hover {
+            background-color: #3d8b40;
+        }
+
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: #f9f9f9;
+        }
+
+        .payslip-details.active + .hidden-content {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .salary-deductions-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .payslip-salary, 
+        .payslip-deductions {
+            padding: 20px 25px;
+            flex: 1;
+            min-width: 300px;
+            box-sizing: border-box;
+        }
+
+        .payslip-salary {
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .payslip-salary h3 {
+            color: #4caf50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .payslip-deductions h3 {
+            color: #f44336;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .payslip-salary div, 
+        .payslip-deductions div {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .payslip-salary div span:first-child,
+        .payslip-deductions div span:first-child {
+            width: 150px;
+            font-weight: 500;
+        }
+
+        .payslip-salary div span:last-child,
+        .payslip-deductions div span:last-child {
+            font-weight: 600;
+        }
+
+        .payslip-summary {
+            padding: 20px 25px;
+            background-color: #e8f5e9;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 18px;
+            color: #2e7d32;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payslip-container">
+        <div class="payslip-header">
+            <h1>Employee Payslip</h1>
+        </div>
+
+        <div class="payslip-details">
+            <h3>Employee Details</h3>
+            <div><span>Employee ID:</span> <span id="empId"></span></div>
+            <div><span>Name:</span> <span id="empName"></span></div>
+            <div><span>Pay Date:</span> <span id="payperiod"></span></div>
+
+            <div class="button-container">
+                <button class="view-button" onclick="this.closest('.payslip-details').classList.toggle('active')">
+                    View Pay Slip
+                </button>
+                <button class="download-button" id="downloadPayslip">
+                    Download Payslip
+                </button>
+            </div>
+        </div>
+
+        <div class="hidden-content">
+            <div class="salary-deductions-container">
+                <div class="payslip-salary">
+                    <h3>Salary Breakdown</h3>
+                    <div><span>Basic Pay:</span> <span id="basicPay">3000</span></div>
+                    <div><span>HRA:</span> <span id="hra">500</span></div>
+                    <div><span>Other Allowances:</span> <span id="otherAllowances">200</span></div>
+                </div>
+        
+                <div class="payslip-deductions">
+                    <h3>Deductions</h3>
+                    <div><span>PF:</span> <span id="pf">150</span></div>
+                    <div><span>Tax:</span> <span id="tax">100</span></div>
+                    <div><span>Other Deductions:</span> <span id="otherDeductions">50</span></div>
+                </div>
+            </div>
+        
+            <div class="payslip-summary">
+                <span>Net Salary:</span> <span id="netSalary">3400</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const empName = localStorage.getItem("employeeName");
+            const empId = localStorage.getItem("employeeId");
+            const payperiod = localStorage.getItem("payPeriod");
+
+            document.getElementById("empName").textContent = empName || "Not Available";
+            document.getElementById("empId").textContent = empId || "Not Available";
+            document.getElementById("payperiod").textContent = payperiod || "Not Available";
+
+            document.getElementById("downloadPayslip").addEventListener("click", generatePDF);
+        });
+
+        function generatePDF() {
+            const doc = new jsPDF();
+            
+            // Add company logo or header
+            doc.setFontSize(20);
+            doc.setTextColor(63, 81, 181); // Blue color
+            doc.text("EMPLOYEE PAYSLIP", 105, 20, { align: 'center' });
+            
+            // Add line separator
+            doc.setDrawColor(63, 81, 181);
+            doc.setLineWidth(0.5);
+            doc.line(20, 25, 190, 25);
+            
+            // Employee details section
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0); // Black color
+            
+            doc.setFont(undefined, 'bold');
+            doc.text("Employee Details", 20, 35);
+            doc.setFont(undefined, 'normal');
+            
+            doc.text(`Employee ID: ${document.getElementById("empId").textContent}`, 20, 45);
+            doc.text(`Name: ${document.getElementById("empName").textContent}`, 20, 55);
+            doc.text(`Pay Date: ${document.getElementById("payperiod").textContent}`, 20, 65);
+            
+            // Salary breakdown section
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(76, 175, 80); // Green color
+            doc.text("Salary Breakdown", 20, 80);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(0, 0, 0);
+            
+            const salaryData = [
+                ["Basic Pay", document.getElementById("basicPay").textContent],
+                ["HRA", document.getElementById("hra").textContent],
+                ["Other Allowances", document.getElementById("otherAllowances").textContent]
+            ];
+            
+            // Deductions section
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(244, 67, 54); // Red color
+            doc.text("Deductions", 110, 80);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(0, 0, 0);
+            
+            const deductionsData = [
+                ["PF", document.getElementById("pf").textContent],
+                ["Tax", document.getElementById("tax").textContent],
+                ["Other Deductions", document.getElementById("otherDeductions").textContent]
+            ];
+            
+            // Create tables for salary and deductions
+            doc.autoTable({
+                startY: 85,
+                head: [['Earnings', 'Amount']],
+                body: salaryData,
+                margin: { left: 20 },
+                headStyles: { fillColor: [76, 175, 80], textColor: 255 },
+                theme: 'grid'
+            });
+            
+            doc.autoTable({
+                startY: 85,
+                head: [['Deductions', 'Amount']],
+                body: deductionsData,
+                margin: { left: 110 },
+                headStyles: { fillColor: [244, 67, 54], textColor: 255 },
+                theme: 'grid'
+            });
+            
+            // Net salary section
+            const lastTable = doc.lastAutoTable;
+            const finalY = lastTable.finalY + 10;
+            
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(46, 125, 50); // Dark green
+            doc.text("Net Salary:", 20, finalY);
+            doc.text(document.getElementById("netSalary").textContent, 60, finalY);
+            
+            // Footer
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text("This is a computer generated payslip. No signature required.", 105, 285, { align: 'center' });
+            
+            // Save the PDF
+            doc.save(`Payslip_${document.getElementById("empId").textContent}.pdf`);
+        }
+    </script>
+</body>
+</html>

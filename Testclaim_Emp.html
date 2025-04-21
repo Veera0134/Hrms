@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Portal - Claims Management</title>
+  <link rel="stylesheet" href="Testclaim.css">
+  <style>
+    :root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --dark-color: #34495e;
+    --light-color: #ecf0f1;
+    --text-color: #2c3e50;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    background: linear-gradient(135deg,  #2c3e50, #3498db);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  header h1 {
+    color: var(--dark-color);
+  }
+  
+  .portal-selection {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .portal-selection h2 {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+  }
+  
+  .portal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .portal-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+    min-width: 200px;
+  }
+  
+  .portal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .employee-btn {
+    background-color: var(--primary-color);
+  }
+  
+  .hr-btn {
+    background-color: var(--secondary-color);
+  }
+  
+  .portal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .portal-header h1 {
+    color: var(--dark-color);
+  }
+  
+  .portal-header .back-btn {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+  }
+  
+  .portal-header .back-btn:hover {
+    background-color: #2c3e50;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+  }
+  
+  .form-title {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: none;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button.secondary {
+    background-color: #95a5a6;
+    margin-right: 10px;
+  }
+  
+  button.secondary:hover {
+    background-color: #7f8c8d;
+  }
+  
+  .claims-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .claims-title {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .claims-list {
+    list-style: none;
+  }
+  
+  .claim-item {
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: var(--transition);
+  }
+  
+  .claim-item:hover {
+    box-shadow: var(--box-shadow);
+  }
+  
+  .claim-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .claim-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--dark-color);
+  }
+  
+  .claim-date {
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .claim-amount {
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  .claim-description {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .claim-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .status-pending {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .status-approved {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .status-rejected {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  .claim-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .claim-actions button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .approve-btn {
+    background-color: var(--secondary-color);
+  }
+  
+  .approve-btn:hover {
+    background-color: #27ae60;
+  }
+  
+  .reject-btn {
+    background-color: var(--accent-color);
+  }
+  
+  .reject-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .view-btn {
+    background-color: var(--primary-color);
+  }
+  
+  .view-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .response-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+  }
+  
+  .response-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+  }
+  
+  .response-text {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .modal {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    color: var(--dark-color);
+  }
+  
+  .close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #29c7d2;
+    padding: 0;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .portal-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .portal-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .form-actions button {
+      width: 100%;
+    }
+    
+    .claim-header {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .claim-actions {
+      flex-direction: column;
+    }
+    
+    .claim-actions button {
+      width: 100%;
+    }
+  }
+  
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .notification.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification.error {
+    background-color: var(--accent-color);
+  }
+  .error-message {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 style="color: white; font-size: 1.5rem;">Employee Claims Portal</h1>
+      <p class="quote">"Accuracy in documentation is the foundation of fair compensation and organizational trust."</p>
+    </header>
+    <div class="form-container">
+      <h2 class="form-title">Submit New Claim</h2>
+      <form id="claim-form">
+        <div class="form-group">
+          <label for="employee-id">Employee ID <span class="required" style="color: red;">*</span></label>
+          <input type="text" id="employee-id" required pattern="^ATS0(?!000)\d{3}$" maxlength="7"
+          title="Emp-ID must start with ATS0 uppercase letters, numbers.">
+          <div class="error-message" id="employee-id-error" style="color: red;"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="employee-name">Employee Name <span class="required" style="color: red;">*</span></label>
+          <input type="text" id="employee-name" required pattern="^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$" maxlength="30"
+          title="Employee Name must start with capital letters and contain only letters and single spaces between names.">
+          <div class="error-message" id="employee-name-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="claim-title">Claim Title <span class="required" style="color: red;">*</span></label>
+          <input 
+            type="text" 
+            id="claim-title" 
+            maxlength="30" 
+            pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" 
+            title="Claim Title must contain only alphabets and single spaces between words." 
+            required
+          >
+          <div class="error-message" id="claim-title-error" style="color: red; font-size: 0.85rem;"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="claim-amount">
+              Claim Amount (₹) 
+              <span class="required" style="color: red;">*</span>
+          </label>
+          <input type="text" 
+                 id="claim-amount" 
+                 inputmode="numeric" 
+                 pattern="[0-9]*" 
+                 required
+                 oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length > 7) this.value = this.value.slice(0,7);">
+          <div class="error-message" id="claim-amount-error" style="color: #d32f2f; font-size: 0.8rem; margin-top: 4px; display: none;"></div>
+      </div>
+        
+        <div class="form-group">
+          <label for="claim-category">Category <span class="required" style="color: red;">*</span></label>
+          <select id="claim-category" required>
+            <option value="">Select a category</option>
+            <option value="Travel">Travel</option>
+            <option value="Office Supplies">Office Supplies</option>
+            <option value="Training">Training</option>
+            <option value="Equipment">Equipment</option>
+            <option value="Medical">Medical</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error-message" id="claim-category-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="claim-description">Description <span class="required" style="color: red;">*</span></label>
+          <textarea 
+            id="claim-description" 
+            maxlength="200" 
+            title="Description must contain only alphabets, numbers, and single spaces." 
+            required
+          ></textarea>
+          <div class="error-message" id="claim-description-error" style="color: red; font-size: 0.85rem;"></div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" id="reset-form-btn" class="secondary">Reset</button>
+          <button type="submit">Submit Claim</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="claims-container">
+      <h2 class="claims-title">My Claims</h2>
+      <div class="form-group">
+        <label for="filter-employee-id">Enter Your Employee ID to View Claims</label>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="filter-employee-id" pattern="^ATS0(?!000)\d{3}$" maxlength="7"
+                 title="Emp-ID must start with ATS0 uppercase letters, numbers.">
+          <button id="view-claims-btn">View Claims</button>
+        </div>
+        <div class="error-message" id="filter-employee-id-error"></div>
+      </div>
+      
+      <ul class="claims-list" id="employee-claims-list">
+      </ul>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="view-claim-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="claim-modal-title">Claim Details</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="claim-modal-body">
+      </div>
+      <div class="modal-footer">
+        <!-- <button class="close-modal">Close</button> -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const CLAIMS_STORAGE_KEY = 'claimsData';
+
+    function initializeClaimsData() {
+      if (!localStorage.getItem(CLAIMS_STORAGE_KEY)) {
+        const initialClaims = [
+          {
+            id: 1,
+            employeeId: 'ATS0123',
+            employeeName: 'Veera',
+            title: 'Travel Expense Reimbursement',
+            date: '2025-05-15',
+            amount: 450.75,
+            category: 'Travel',
+            description: 'Expenses for client meeting in New York including flight, hotel, and meals.',
+            status: 'pending',
+            response: '',
+            attachments: []
+          },
+          {
+            id: 2,
+            employeeId: 'ATS0456',
+            employeeName: 'Pavan',
+            title: 'Office Supplies Purchase',
+            date: '2025-05-10',
+            amount: 125.30,
+            category: 'Office Supplies',
+            description: 'Purchased notebooks, pens, and printer paper for the marketing department.',
+            status: 'approved',
+            response: 'Approved. Reimbursement will be processed in the next payroll cycle.',
+            attachments: []
+          },
+        ];
+        
+        localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(initialClaims));
+      }
+    }
+    
+    function getAllClaims() {
+      const claimsData = localStorage.getItem(CLAIMS_STORAGE_KEY);
+      return claimsData ? JSON.parse(claimsData) : [];
+    }
+    
+    function getEmployeeClaims(employeeId) {
+      const claims = getAllClaims();
+      return claims.filter(claim => claim.employeeId === employeeId);
+    }
+    
+    function addClaim(claimData) {
+      const claims = getAllClaims();
+      const newId = claims.length > 0 ? Math.max(...claims.map(c => c.id)) + 1 : 1;
+      
+      const newClaim = {
+        id: newId,
+        ...claimData,
+        status: 'pending',
+        response: '',
+        date: new Date().toISOString().split('T')[0]
+      };
+      
+      claims.push(newClaim);
+      localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(claims));
+      
+      return newClaim;
+    }
+    
+    function getClaimById(claimId) {
+      const claims = getAllClaims();
+      return claims.find(c => c.id === claimId);
+    }
+    
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+    
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+    
+    function showNotification(message, isError = false) {
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+        existingNotification.remove();
+      }
+      
+      const notification = document.createElement('div');
+      notification.className = `notification ${isError ? 'error' : ''}`;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 10);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 3000);
+    }
+    
+    document.addEventListener('DOMContentLoaded', initializeClaimsData);
+  </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const claimForm = document.getElementById('claim-form');
+      const resetFormBtn = document.getElementById('reset-form-btn');
+      const viewClaimsBtn = document.getElementById('view-claims-btn');
+      const employeeClaimsList = document.getElementById('employee-claims-list');
+      const filterEmployeeIdInput = document.getElementById('filter-employee-id');
+      const filterEmployeeIdError = document.getElementById('filter-employee-id-error');
+      const viewClaimModal = document.getElementById('view-claim-modal');
+      const claimModalTitle = document.getElementById('claim-modal-title');
+      const claimModalBody = document.getElementById('claim-modal-body');
+      
+      const employeeIdInput = document.getElementById('employee-id');
+      const employeeNameInput = document.getElementById('employee-name');
+      const claimTitleInput = document.getElementById('claim-title');
+      const claimAmountInput = document.getElementById('claim-amount');
+      const claimCategoryInput = document.getElementById('claim-category');
+      const claimDescriptionInput = document.getElementById('claim-description');
+      const errorElement = document.getElementById('claim-title-error');
+      const errorElements = document.getElementById('claim-description-error');
+      
+      employeeIdInput.addEventListener('input', () => {
+        const errorElement = document.getElementById('employee-id-error');
+        if (!employeeIdInput.validity.valid) {
+          if (employeeIdInput.validity.patternMismatch) {
+            errorElement.textContent = 'Employee ID must start with ATS followed by 0 and numbers (e.g., ATS01234)';
+          } else if (employeeIdInput.validity.valueMissing) {
+            errorElement.textContent = 'Employee ID is required';
+          }
+          errorElement.style.display = 'block';
+        } else {
+          errorElement.style.display = 'none';
+        }
+      });
+      
+      employeeNameInput.addEventListener('input', () => {
+        const errorElement = document.getElementById('employee-name-error');
+        if (!employeeNameInput.validity.valid) {
+          if (employeeNameInput.validity.patternMismatch) {
+            errorElement.textContent = 'Name must start with capital letters and contain only letters and spaces';
+          } else if (employeeNameInput.validity.valueMissing) {
+            errorElement.textContent = 'Employee name is required';
+          }
+          errorElement.style.display = 'block';
+        } else {
+          errorElement.style.display = 'none';
+        }
+      });
+      
+      claimTitleInput.addEventListener('input', () => {
+    const value = claimTitleInput.value;
+
+   
+    if (/\s{2,}/.test(value)) {
+      errorElement.textContent = 'Multiple consecutive spaces are not allowed';
+      errorElement.style.display = 'block';
+      return;
+    }
+
+  
+    if (!claimTitleInput.validity.valid) {
+      if (claimTitleInput.validity.patternMismatch) {
+        errorElement.textContent = 'Claim title can only contain letters and single spaces';
+      } else if (claimTitleInput.validity.valueMissing) {
+        errorElement.textContent = 'Claim title is required';
+      }
+      errorElement.style.display = 'block';
+    } else {
+      errorElement.style.display = 'none';
+    }
+  });
+      
+// Improved claim amount validation
+claimAmountInput.addEventListener('input', () => {
+    const errorElement = document.getElementById('claim-amount-error');
+    const value = claimAmountInput.value.trim();
+    
+    // Clear previous error
+    errorElement.textContent = '';
+    errorElement.style.display = 'none';
+    
+    // Validate required field
+    if (!value) {
+        errorElement.textContent = 'Amount is required';
+        errorElement.style.display = 'block';
+        return;
+    }
+    
+    // Validate numeric value
+    if (isNaN(value) || value.includes('e') || value.includes('E')) {
+        errorElement.textContent = 'Please enter a valid number';
+        errorElement.style.display = 'block';
+        claimAmountInput.value = '';
+        return;
+    }
+    
+    // Convert to number and validate range
+    const amount = parseFloat(value);
+    if (amount <= 500) {
+        errorElement.textContent = 'Amount must be greater than ₹500';
+        errorElement.style.display = 'block';
+    } else if (amount > 1000000) {
+        errorElement.textContent = 'Amount cannot exceed ₹10,00,000';
+        errorElement.style.display = 'block';
+    }
+    
+    // Format the number while typing (optional)
+    if (!isNaN(amount) && value === amount.toString()) {
+        claimAmountInput.value = amount.toLocaleString('en-IN');
+    }
+});
+      
+      claimCategoryInput.addEventListener('change', () => {
+        const errorElement = document.getElementById('claim-category-error');
+        if (!claimCategoryInput.value) {
+          errorElement.textContent = 'Please select a category';
+          errorElement.style.display = 'block';
+        } else {
+          errorElement.style.display = 'none';
+        }
+      });
+      
+      claimDescriptionInput.addEventListener('input', () => {
+  const value = claimDescriptionInput.value;
+
+  if (/\s{2,}/.test(value)) {
+    errorElements.textContent = 'Multiple consecutive spaces are not allowed';
+    errorElements.style.display = 'block';
+    return;
+  }
+
+  if (!/^[A-Za-z0-9\s]*$/.test(value)) {
+    errorElements.textContent = 'Description can only contain letters, numbers, and spaces';
+    errorElements.style.display = 'block';
+    return;
+  }
+
+  if (/^\d+$/.test(value.trim())) {
+    errorElements.textContent = 'Description cannot be only numbers';
+    errorElements.style.display = 'block';
+    return;
+  }
+
+  if (value.trim() === '') {
+    errorElements.textContent = 'Description is required';
+    errorElements.style.display = 'block';
+    return;
+  }
+
+  errorElements.textContent = '';
+  errorElements.style.display = 'none';
+});
+      
+      filterEmployeeIdInput.addEventListener('input', () => {
+        if (!filterEmployeeIdInput.validity.valid) {
+          if (filterEmployeeIdInput.validity.patternMismatch) {
+            filterEmployeeIdError.textContent = 'Employee ID must start with ATS followed by 0 and numbers (e.g., ATS01234)';
+          }
+          filterEmployeeIdError.style.display = 'block';
+        } else {
+          filterEmployeeIdError.style.display = 'none';
+        }
+      });
+      
+      resetFormBtn.addEventListener('click', () => {
+        claimForm.reset();
+        document.querySelectorAll('.error-message').forEach(el => {
+          el.style.display = 'none';
+        });
+      });
+      
+      claimForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let isValid = true;
+        
+        if (!employeeIdInput.validity.valid) {
+          document.getElementById('employee-id-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!employeeNameInput.validity.valid) {
+          document.getElementById('employee-name-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!claimTitleInput.validity.valid) {
+          document.getElementById('claim-title-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!claimAmountInput.value || parseFloat(claimAmountInput.value) <= 0) {
+          document.getElementById('claim-amount-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!claimCategoryInput.value) {
+          document.getElementById('claim-category-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!claimDescriptionInput.validity.valid) {
+          document.getElementById('claim-description-error').style.display = 'block';
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          showNotification('Please correct the errors in the form', true);
+          return;
+        }
+        
+        const employeeId = employeeIdInput.value;
+        const employeeName = employeeNameInput.value;
+        const title = claimTitleInput.value;
+        const amount = parseFloat(claimAmountInput.value);
+        const category = claimCategoryInput.value;
+        const description = claimDescriptionInput.value;
+        
+        const newClaim = addClaim({
+          employeeId,
+          employeeName,
+          title,
+          amount,
+          category,
+          description
+        });
+        
+        claimForm.reset();
+        document.querySelectorAll('.error-message').forEach(el => {
+          el.style.display = 'none';
+        });
+        
+        showNotification('Claim submitted successfully!');
+        
+        if (filterEmployeeIdInput.value === employeeId) {
+          loadEmployeeClaims(employeeId);
+        }
+      });
+      
+      viewClaimsBtn.addEventListener('click', () => {
+        const employeeId = filterEmployeeIdInput.value.trim();
+        
+        if (!employeeId) {
+          filterEmployeeIdError.textContent = 'Employee ID is required';
+          filterEmployeeIdError.style.display = 'block';
+          showNotification('Please enter your Employee ID', true);
+          return;
+        }
+        
+        if (!filterEmployeeIdInput.validity.valid) {
+          filterEmployeeIdError.textContent = 'Please enter a valid Employee ID';
+          filterEmployeeIdError.style.display = 'block';
+          showNotification('Please enter a valid Employee ID', true);
+          return;
+        }
+        
+        loadEmployeeClaims(employeeId);
+        localStorage.setItem('lastEmployeeId', employeeId);
+      });
+      
+      function loadEmployeeClaims(employeeId) {
+        const claims = getEmployeeClaims(employeeId);
+        employeeClaimsList.innerHTML = '';
+        
+        if (claims.length === 0) {
+          employeeClaimsList.innerHTML = '<li class="claim-item">No claims found for this employee ID.</li>';
+          return;
+        }
+        
+        claims.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        claims.forEach(claim => {
+          const claimItem = document.createElement('li');
+          claimItem.className = 'claim-item';
+          
+          claimItem.innerHTML = `
+            <div class="claim-header">
+              <span class="claim-title">${claim.title}</span>
+              <span class="claim-date">${formatDate(claim.date)}</span>
+            </div>
+            <div class="claim-amount">${formatCurrency(claim.amount)}</div>
+            <div class="claim-description">${claim.description.substring(0, 100)}${claim.description.length > 100 ? '...' : ''}</div>
+            <span class="claim-status status-${claim.status}">${claim.status.charAt(0).toUpperCase() + claim.status.slice(1)}</span>
+            
+            ${claim.status !== 'pending' ? `
+              <div class="response-section">
+                <div class="response-label">HR Response:</div>
+                <div class="response-text">${claim.response}</div>
+              </div>
+            ` : ''}
+            
+            <div class="claim-actions">
+              <button class="view-btn" data-id="${claim.id}">View Details</button>
+            </div>
+          `;
+          
+          employeeClaimsList.appendChild(claimItem);
+        });
+        
+        document.querySelectorAll('.view-btn').forEach(btn => {
+          btn.addEventListener('click', () => viewClaimDetails(parseInt(btn.dataset.id)));
+        });
+      }
+      
+      function viewClaimDetails(claimId) {
+        const claim = getClaimById(claimId);
+        
+        if (!claim) {
+          showNotification('Claim not found', true);
+          return;
+        }
+        
+        claimModalTitle.textContent = claim.title;
+        
+        claimModalBody.innerHTML = `
+          <div class="claim-details">
+            <p><strong>Employee:</strong> ${claim.employeeName} (${claim.employeeId})</p>
+            <p><strong>Date Submitted:</strong> ${formatDate(claim.date)}</p>
+            <p><strong>Amount:</strong> ${formatCurrency(claim.amount)}</p>
+            <p><strong>Category:</strong> ${claim.category}</p>
+            <p><strong>Status:</strong> <span class="claim-status status-${claim.status}">${claim.status.charAt(0).toUpperCase() + claim.status.slice(1)}</span></p>
+            
+            <h4>Description:</h4>
+            <p>${claim.description}</p>
+            
+            ${claim.status !== 'pending' ? `
+              <div class="response-section">
+                <h4>HR Response:</h4>
+                <div class="response-text">${claim.response}</div>
+              </div>
+            ` : '<p><em>This claim is pending review by HR.</em></p>'}
+          </div>
+        `;
+        
+        viewClaimModal.style.display = 'flex';
+      }
+      
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          viewClaimModal.style.display = 'none';
+        });
+      });
+      
+      viewClaimModal.addEventListener('click', (e) => {
+        if (e.target === viewClaimModal) {
+          viewClaimModal.style.display = 'none';
+        }
+      });
+      
+      const storedEmployeeId = localStorage.getItem('lastEmployeeId');
+      if (storedEmployeeId) {
+        filterEmployeeIdInput.value = storedEmployeeId;
+        loadEmployeeClaims(storedEmployeeId);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer of Employment</title>
+  <style>
+/* General Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Container for the offer letter */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Header Section: Company Name and Logo in a Row */
+.header {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* padding: 20px 0; */
+}
+
+.header img {
+  width: 200px; /* Adjust logo size */
+}
+
+.header .company-name {
+  font-size: 50px;
+  font-weight: bold;
+  padding-left: 10%;
+}
+
+.header .company-name .astrolite {
+  color: blue;
+}
+
+.header .company-name .tech {
+  color: red;
+}
+
+.header .company-name .solutions {
+  color: black;
+}
+
+
+/* Adjusted the offer container to include header styling */
+.offer-container {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+
+h1, h2 {
+  color: #2a4d6e;
+  margin: 10px 0;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+.letter-body {
+  text-align: left;
+  margin-top: 30px;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Employee Declaration Section */
+.declaration {
+  margin-top: 40px;
+  text-align: left;
+  font-size: 1.1em;
+  color: #444;
+}
+
+.declaration h3 {
+  font-size: 1.5em;
+  color: #2a4d6e;
+}
+
+.declaration p {
+  margin: 10px 0;
+}
+
+.declaration strong {
+  font-weight: bold;
+}
+
+/* Signature Section */
+.signature {
+  margin-top: 50px;
+  font-size: 1.1em;
+}
+
+.signature p {
+  margin: 5px 0;
+}
+
+/* Compensation Table */
+#compensationTableContainer {
+  margin-top: 40px;
+}
+
+#compensationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 1em;
+  color: #333;
+}
+
+#compensationTable th, #compensationTable td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#compensationTable th {
+  background-color: #2a4d6e;
+  color: white;
+}
+
+#compensationTable td {
+  background-color: #f9f9f9;
+}
+
+#compensationTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* QR Code Section */
+#qrcode {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#qrcode img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Navigation Button */
+button {
+  background-color: #2a4d6e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: #1a365d;
+}
+
+button:focus {
+  outline: none;
+}
+/* Signature Section aligned to the left */
+.signature {
+  text-align: left;
+  margin-top: 30px;
+  padding-left: 20px; /* Adjust left padding to position properly */
+}
+
+.signature p {
+  margin: 5px 0;
+  font-size: 1.1em;
+  font-weight: normal;
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .letter-body {
+    font-size: 1em;
+  }
+
+  .declaration p {
+    font-size: 1em;
+  }
+
+  .signature p {
+    font-size: 1em;
+  }
+
+  #compensationTable th, #compensationTable td {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+}
+
+  </style>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="./logo.png" alt="Company Logo" />
+            <div class="company-name">
+              <span class="astrolite">Astrolite</span>
+              <span class="tech">Tech</span>
+              <span class="solutions">Solutions</span>
+            </div>
+          </div>
+      <div class="offer-container">
+
+        <!-- <h2>Offer of Employment</h2> -->
+  
+        <div class="letter-body" id="offerLetterContent">
+          <!-- Dynamic content will be inserted here -->
+        </div>
+
+        <div id="qrcode" style="margin-top: 20px;"></div>
+
+        <div class="signature">
+          <p>Sincerely,</p>
+          <p><strong>HR Name</strong></p>
+          <p>HR Manager, Astrolite Tech Solution</p>
+        </div>
+
+        <div class="declaration">
+          <h3> Declaration</h3><hr style="color: black;">
+          <p>I, <strong id="employeeName"></strong>, hereby accept the offer of employment extended to me by Astrolite Tech Solution for the position of <strong id="employeePosition"></strong>.</p>
+          <p>I acknowledge that I have read, understood, and agree to the terms and conditions of my employment, including the compensation, job responsibilities, and other terms outlined in this offer letter.</p>
+          <p>I agree to abide by the company's policies, procedures, and guidelines, and understand that this offer is contingent upon the successful completion of any pre-employment requirements as specified by the company.</p>
+          <p>Signature: ____________________</p>
+          <p>Date: ____________________</p>
+        </div>
+  
+        <!-- Navigation button to go back to the form -->
+        <!-- <button onclick="location.href='formPage.html'">Back to Form</button> -->
+      </div>
+    </div>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    
+    <script>
+      window.onload = function() {
+        const data = JSON.parse(localStorage.getItem('offerDetails'));
+  
+        if (data) {
+          // Populate the offer letter content
+          const offerContent = `
+            <p>Dear ${data.candidateName},</p>
+            <p>We are pleased to offer you the position of <strong>${data.positionTitle}</strong> at Astrolite Tech Solution. Your skills and experience will be an invaluable asset to our company as we continue to innovate and grow.</p>
+            <p>Your start date will be <strong>${data.startDate}</strong>, and you will report directly to <strong>${data.managerName}</strong>. The terms of your employment include an annual compensation package of <strong>${data.compensationDetails}</strong>.</p>
+            <p>Please find attached the detailed employment terms. We look forward to having you on board and being part of our dynamic and forward-thinking team.</p>
+            <p>Should you have any questions, feel free to contact us.</p>
+            <p>Welcome to Astrolite Tech Solution!</p>
+          `;
+          document.getElementById('offerLetterContent').innerHTML = offerContent;
+  
+          // Display employee name and position in declaration
+          document.getElementById('employeeName').innerText = data.candidateName;
+          document.getElementById('employeePosition').innerText = data.positionTitle;
+  
+          // Get QR code data from localStorage
+          const qrData = localStorage.getItem("qrData");
+  
+          if (qrData) {
+            // Create the QR code using the QRCode library
+            new QRCode(document.getElementById('qrcode'), {
+              text: qrData,
+              width: 200,
+              height: 200,
+              colorDark: "#000000",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H,
+            });
+          } else {
+            document.getElementById('qrcode').innerHTML = "<p>No QR data found. Please fill the form first.</p>";
+          }
+        } else {
+          alert('No data found! Please go back and fill the form.');
+        }
+      };
+    </script>
+  </body>
+  
+</html>

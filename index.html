@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Form with Icons</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #e4e4e4;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.571);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    label svg {
+      margin-right: 8px;
+      color: #0077cc;
+    }
+
+    input, select {
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:hover, select:hover {
+      border-color: #0077cc;
+      background-color: #f0f9ff;
+    }
+
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: #0077cc;
+      box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
+    }
+
+    input[type="submit"] {
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      border: none;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005fa3;
+    }
+
+    input[type="submit"]:active {
+      transform: scale(0.98);
+    }
+    .container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.566);
+  border-radius: 8px;
+}
+
+/* Header Section: Company Name and Logo in a Row */
+.header {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* padding: 20px 0; */
+}
+
+.header img {
+  width: 100px; /* Adjust logo size */
+}
+
+.header .company-name {
+  font-size: 25px;
+  font-weight: bold;
+  padding-left: 10%;
+}
+
+.header .company-name .astrolite {
+  color: blue;
+}
+
+.header .company-name .tech {
+  color: red;
+}
+
+.header .company-name .solutions {
+  color: black;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        <img src="./logo.png" alt="Company Logo" />
+        <div class="company-name">
+          <span class="astrolite">Astrolite</span>
+          <span class="tech">Tech</span>
+          <span class="solutions">Solutions</span>
+        </div>
+      </div>
+  <h2>Candidate Form</h2>
+  <form id="candidateForm">
+    <label for="candidateName">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+        <path d="M480 696q-88 0-149-61t-61-149q0-88 61-149t149-61q88 0 149 61t61 149q0 88-61 149t-149 61Zm0-120q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM180 936v-60q0-58 29-105t79-69q70-31 142-31t142 31q50 21 79 69t29 105v60H180Zm60-60h480v-12q0-44-25-80t-67-54q-56-24-118-24t-118 24q-42 18-67 54t-25 80v12ZM480 576Z"/>
+      </svg>
+      Candidate Name:
+    </label>
+    <input type="text" id="candidateName" name="candidateName" placeholder="Enter your full name" required>
+
+    <label for="location1">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+        <path d="M480 936q-67-47-123-99.5T270 746q-45-67-65-130t-20-120q0-133 92.5-226T480 178q132 0 226 93.5T800 498q0 62-19 120t-65 130q-45 67-101 119.5T480 936Zm0-348q33 0 56.5-23.5T560 508q0-33-23.5-56.5T480 428q-33 0-56.5 23.5T400 508q0 33 23.5 56.5T480 588Zm0 270q89-66 144.5-131T720 498q0-108-72-179.5T480 247q-108 0-180 71.5T228 498q0 83 54 148t144 131Z"/>
+      </svg>
+      Preferred Location 1:
+    </label>
+    <select id="location1" name="location1" required>
+      <option value="">-- Select Location --</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Bangalore">Bangalore</option>
+
+      <option value="Pune">Pune</option>
+    
+    </select>
+
+    <label for="location2">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+        <path d="M480 936q-67-47-123-99.5T270 746q-45-67-65-130t-20-120q0-133 92.5-226T480 178q132 0 226 93.5T800 498q0 62-19 120t-65 130q-45 67-101 119.5T480 936Zm0-348q33 0 56.5-23.5T560 508q0-33-23.5-56.5T480 428q-33 0-56.5 23.5T400 508q0 33 23.5 56.5T480 588Zm0 270q89-66 144.5-131T720 498q0-108-72-179.5T480 247q-108 0-180 71.5T228 498q0 83 54 148t144 131Z"/>
+      </svg>
+      Preferred Location 2:
+    </label>
+    <select id="location2" name="location2" required>
+      <option value="">-- Select Location --</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Bangalore">Bangalore</option>
+      <option value="Pune">Pune</option>
+    </select>
+
+    <input type="submit" value="Submit">
+  </form>
+    <script>
+
+  // Handle location selection to prevent duplicate choices
+  const location1 = document.getElementById('location1');
+  const location2 = document.getElementById('location2');
+
+  // When location1 changes, update location2 options
+  location1.addEventListener('change', function () {
+    const selectedValue = location1.value;
+    updateLocationOptions(location2, selectedValue);
+  });
+
+  // When location2 changes, ensure location1 isn't duplicated
+  location2.addEventListener('change', function () {
+    const selectedValue = location2.value;
+    updateLocationOptions(location1, selectedValue);
+  });
+
+  // Function to update dropdown options
+  function updateLocationOptions(dropdown, selectedValue) {
+    const options = dropdown.querySelectorAll('option');
+    options.forEach(option => {
+      if (option.value !== "" && option.value === selectedValue) {
+        option.disabled = true;
+      } else {
+        option.disabled = false;
+      }
+    });
+  }
+
+  // Form submission logic
+  document.getElementById('candidateForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Capture form data
+    const candidateName = document.getElementById('candidateName').value;
+    const location1Value = location1.value;
+    const location2Value = location2.value;
+
+    // Save to Local Storage
+    const formData = { candidateName, location1: location1Value, location2: location2Value };
+    localStorage.setItem('candidateData', JSON.stringify(formData));
+
+    alert("Location form is submitted");
+
+    // Reset the form after user clicks "OK" in the alert
+    document.getElementById('candidateForm').reset();
+  });
+</script>
+
+
+</body>
+</html>

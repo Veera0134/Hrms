@@ -4,23 +4,898 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Staff Management Dashboard</title>
-    <link rel="stylesheet" href="Staff_Management.css">
+    <!-- <link rel="stylesheet" href="./Staff_Management.css"> -->
+  <style>
+      :root {
+          --primary-color: #2c3e50;
+          --secondary-color: #3498db;
+          --background-color: #f5f6fa;
+          --card-background: #ffffff;
+          --text-color: #2c3e50;
+          --border-radius: 12px;
+      }
 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-     <link rel="icon" href="favicon.ico" type="image/x-icon">
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
 
-    
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: var(--background-color);
+          color: var(--text-color);
+          line-height: 1.6;
+      }
 
+      .container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      header {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          padding: 20px;
+          border-radius: var(--border-radius);
+          margin-bottom: 30px;
+          animation: slideDown 0.5s ease-out;
+      }
+
+      @keyframes slideDown {
+          from {
+              transform: translateY(-100%);
+              opacity: 0;
+          }
+          to {
+              transform: translateY(0);
+              opacity: 1;
+          }
+      }  
+
+      header h1 {
+          color: white;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      .search-bar {
+          max-width: 400px;
+          margin-left: auto;
+      }
+
+      .search-bar input {
+          width: 100%;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 25px;
+          font-size: 16px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+      }
+
+      .search-bar input:focus {
+          outline: none;
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .employee-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 25px;
+          padding: 20px 0;
+      }
+
+      .employee-card {
+          background: var(--card-background);
+          border-radius: var(--border-radius);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          animation: fadeIn 0.5s ease-out forwards;
+          opacity: 0;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      .employee-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-header {
+          background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+          color: white;
+          padding: 20px;
+          text-align: center;
+      }
+
+      .profile-circle {
+          width: 80px;
+          height: 80px;
+          background: white;
+          border-radius: 50%;
+          margin: 0 auto 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          color: var(--primary-color);
+          font-weight: bold;
+          animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+          0% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+          }
+          70% {
+              transform: scale(1.05);
+              box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+          }
+          100% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+          }
+      }
+
+      .card-header h2 {
+          margin: 10px 0 5px;
+          font-size: 1.5em;
+      }
+
+      .employee-id {
+          font-size: 0.9em;
+          opacity: 0.9;
+      }
+
+      .card-body {
+          padding: 20px;
+      }
+
+      .info-group {
+          margin-bottom: 12px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .info-group label {
+          color: #7f8c8d;
+          font-weight: 500;
+      }
+
+      .info-group span {
+          color: var(--text-color);
+      }
+
+      .card-footer {
+          padding: 15px 20px;
+          border-top: 1px solid #eee;
+          text-align: center;
+      }
+
+      .btn-view {
+          width: 100%;
+          background: var(--secondary-color);
+          color: white;
+          border: none;
+          padding: 10px 25px;
+          border-radius: 25px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.3s ease;
+      }
+
+      .btn-view:hover {
+          background: #2980b9;
+          transform: translateY(-2px);
+      }
+
+      .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1000;
+          animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal-content {
+          position: relative;
+          background-color: #fff;
+          margin: 50px auto;
+          padding: 0;
+          width: 90%;
+          max-width: 800px;
+          border-radius: 15px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          animation: modalSlideIn 0.5s ease-out;
+          max-height: 90vh;
+          overflow-y: auto;
+      }
+
+      .modal-header {
+          background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+          color: white;
+          padding: 30px;
+          border-radius: 15px 15px 0 0;
+          text-align: center;
+          position: relative;
+      }
+
+      .modal-header .profile-circle {
+          width: 100px;
+          height: 100px;
+          font-size: 32px;
+          color: white;
+          margin-bottom: 20px;
+      }
+
+      .modal-header h2 {
+          font-size: 2em;
+          margin: 10px 0 5px;
+      }
+
+      .close-modal {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+          font-size: 28px;
+          color: white;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+      }
+
+      .close-modal:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: rotate(90deg);
+      }
+
+      .modal-body {
+          padding: 30px;
+      }
+
+      .details-section {
+          margin-bottom: 30px;
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .details-section h3 {
+          color: var(--primary-color);
+          margin-bottom: 20px;
+          padding-bottom: 10px;
+          border-bottom: 2px solid var(--secondary-color);
+      }
+
+      .details-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
+      }
+
+      .detail-item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+      }
+
+      .detail-item label {
+          color: #7f8c8d;
+          font-weight: 500;
+          font-size: 0.9em;
+      }
+
+      .detail-item span {
+          color: var(--text-color);
+          font-weight: 500;
+      }
+
+      @keyframes modalSlideIn {
+          from {
+              transform: translateY(-100px);
+              opacity: 0;
+          }
+          to {
+              transform: translateY(0);
+              opacity: 1;
+          }
+      }
+
+      .modal-content::-webkit-scrollbar {
+          width: 8px;
+      }
+
+      .modal-content::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 4px;
+      }
+
+      .modal-content::-webkit-scrollbar-thumb {
+          background: var(--secondary-color);
+          border-radius: 4px;
+      }
+
+      .modal-content::-webkit-scrollbar-thumb:hover {
+          background: #2980b9;
+      }
+
+      @media (max-width: 768px) {
+          .container {
+              padding: 10px;
+          }
+
+          .employee-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .modal-content {
+              width: 95%;
+              margin: 20px auto;
+          }
+
+          .details-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .modal-header {
+              padding: 20px;
+          }
+
+          .modal-header .profile-circle {
+              width: 80px;
+              height: 80px;
+              font-size: 24px;
+          }
+
+          .modal-body {
+              padding: 15px;
+          }
+
+          .details-section {
+              padding: 15px;
+          }
+      }
+      .hidden {
+          display: none;
+      }
+      :root {
+      --primary-color: #3498db;
+      --secondary-color: #8e44ad;
+      --text-color: #2c3e50;
+      --bg-color: #ecf0f1;
+      }
+
+      .data-container {
+      display: flex;
+      justify-content: center;
+      /* padding: 20px; */
+      }
+
+      .employee-card1{
+      width: 600px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 0.5s ease-out forwards;
+      overflow: hidden;
+      margin: 10px;
+      }
+      .employee-card1:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .card {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      }
+
+      .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .action-icons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+      }
+
+      .action-icons i {
+          font-size: 18px;
+          color: #333; 
+          cursor: pointer;
+          transition: color 0.3s, transform 0.3s;
+      }
+
+      .action-icons i:hover {
+          color: #ff7f3e; 
+          transform: scale(1.1); 
+      }
+
+      .action-icons .fa-edit {
+          color: #4CAF50; 
+      }
+
+      .action-icons .fa-trash {
+          color: #f44336; 
+      }
+
+      .action-icons .fa-download {
+          color: #2196F3; 
+      }
+
+      .card-footer .btn-view {
+          margin-bottom: 10px;
+      }
+
+      .edit-form {
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: #fff;
+          padding: 15px;
+          border-radius: 8px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+          width: 320px;
+          z-index: 1000;
+          font-family: Arial, sans-serif;
+          overflow: auto;
+      }
+
+      .edit-form h3 {
+          text-align: center;
+          font-size: 1.3rem;
+          color: #333;
+          margin-bottom: 15px;
+          font-weight: 600;
+      }
+
+      .form-group {
+          margin-bottom: 15px;
+      }
+
+      .form-group label {
+          display: block;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 3px;
+          font-size: 0.85rem;
+      }
+
+      .form-group input,
+      .form-group select {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 0.9rem;
+          color: #333;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+          border-color: #4CAF50;
+          outline: none;
+      }
+
+      .button-group {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          margin-top: 15px;
+      }
+
+      .button-group button {
+          flex: 1;
+          padding: 12px 18px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background-color 0.3s ease;
+          text-align: center;
+      }
+
+      .button-group button[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+      }
+
+      .button-group button[type="button"] {
+          background-color: #f44336;
+          color: white;
+      }
+
+      .button-group button:hover {
+          opacity: 0.8;
+      }
+
+      @media (max-width: 480px) {
+          .edit-form {
+              width: 85%;
+              padding: 12px;
+          }
+      }
+
+      .employee-card:nth-child(1) { animation-delay: 0.1s; }
+      .employee-card:nth-child(2) { animation-delay: 0.2s; }
+      .employee-card:nth-child(3) { animation-delay: 0.3s; }
+      .employee-card:nth-child(4) { animation-delay: 0.4s; }
+      .employee-card:nth-child(5) { animation-delay: 0.5s; }
+      .employee-card:nth-child(6) { animation-delay: 0.6s; }
+      .employee-card:nth-child(7) { animation-delay: 0.7s; }
+      .employee-card:nth-child(8) { animation-delay: 0.8s; }
+  #dataContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 20px;
+      padding: 20px;
+  }
+
+  /* Card Header */
+  .card-header {
+      padding: 20px;
+      text-align: center;
+      position: relative;
+  }
+
+  .profile-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 24px;
+      font-weight: bold;
+  }
+
+  .card-header h2 {
+      margin: 10px 0 5px;
+      font-size: 1.4rem;
+  }
+
+  .employee-id {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+  }
+
+  .card-body {
+      padding: 20px;
+  }
+
+  .info-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0f0f0;
+  }
+
+  .info-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+  }
+
+  .info-group label {
+      font-weight: 600;
+      color: #555;
+  }
+
+  .info-group span {
+      color: #333;
+      text-align: right;
+  }
+
+  .card-footer {
+      padding: 0 20px 20px;
+      text-align: center;
+  }
+
+  .btn-view {
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+  }
+
+  .btn-view:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+  }
+
+  #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      overflow-y: auto;
+  }
+
+  .modal-content {
+      background: white;
+      margin: 5% auto;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-header {
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+  }
+
+  #modalProfileCircle {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 32px;
+      font-weight: bold;
+  }
+
+  #modalHeader {
+      margin: 0;
+      font-size: 1.8rem;
+  }
+
+  .modal-body {
+      padding: 20px;
+      max-height: 60vh;
+      overflow-y: auto;
+  }
+
+  .details-section {
+      margin-bottom: 25px;
+  }
+
+  .details-section h3 {
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+  }
+
+  .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+  }
+
+  .detail-item {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 5px;
+  }
+
+  .detail-item label {
+      display: block;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+  }
+
+  .detail-item span {
+      color: #333;
+      word-break: break-word;
+  }
+
+  .modal-actions {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #eee;
+  }
+
+  #editForm {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      overflow-y: auto;
+  }
+
+  .edit-form-container {
+      background: white;
+      margin: 5% auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-group {
+      margin-bottom: 20px;
+  }
+
+  .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+  }
+
+  .form-group input,
+  .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+  }
+
+  .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 30px;
+  }
+
+  .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      border: none;
+  }
+
+  .btn-secondary {
+      background: #f0f0f0;
+      color: #555;
+      border: 1px solid #ddd;
+  }
+
+  .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+      #dataContainer {
+          grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+          width: 95%;
+          margin: 10% auto;
+      }
+      
+      .details-grid {
+          grid-template-columns: 1fr;
+      }
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 2% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.5s ease-out;
+    overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(#3498db, #2980b9);
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
+.modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: #3498db #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-height: 95vh;
+        margin: 1% auto;
+        width: 98%;
+    }
+}
+  </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>HR Staff Management Dashboard</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search employees by name, department, or ID...">
-            </div>
+            <h1>HR Staff Management</h1>
+
         </header>
-        
+        <div class="search-bar" >
+            <input type="text" placeholder="Search employees by name, department, or ID...">
+        </div>
         <main class="employee-grid">
             <div class="employee-card" data-employee-id="EMP001">
                 <div class="card-header">
@@ -80,7 +955,7 @@
                 </div>
             </div>
 
-            <div class="employee-card" data-employee-id="EMP004">
+            <div class="employee-card" data-employee-id="EMP003">
                 <div class="card-header">
                     <div class="profile-circle">TS</div>
                     <h2>Sindhuja</h2>
@@ -108,11 +983,12 @@
                     <button class="btn-view" onclick="showEmployeeDetails('EMP003')">View Details</button>
                 </div>
             </div>
-            <div class="employee-card" data-employee-id="EMP003">
+            
+            <div class="employee-card" data-employee-id="EMP004">
                 <div class="card-header">
                     <div class="profile-circle">LT</div>
                     <h2>Latish Tivari</h2>
-                    <span class="employee-id">EMP003</span>
+                    <span class="employee-id">EMP004</span>
                 </div>
                 <div class="card-body">
                     <div class="info-group">
@@ -133,16 +1009,16 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn-view" onclick="showEmployeeDetails('EMP003')">View Details</button>
+                    <button class="btn-view" onclick="showEmployeeDetails('EMP004')">View Details</button>
                 </div>
             </div>
+            
             <div id="dataContainer" class="data-container">
-                <!-- Employee cards will be dynamically generated here -->
+                <!-- New employees will be added here dynamically -->
             </div>
         </main>
     </div>
 
-    
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -155,637 +1031,319 @@
         </div>
     </div>
 
-<div id="editForm" class="edit-form">
-    <h3>Edit Employee</h3>
-    <form id="employeeEditForm">
-        <div class="form-group">
-          <label for="empID">Employee ID</label>
-          <input 
-            id="empID" 
-            type="text" 
-            name="empID" 
-            placeholder="Employee ID" 
-            pattern="[A-Z]{3}[0-9]{4}" 
-            required 
-            title="Employee ID must start with 3 letters followed by 4 numbers (e.g., ABC1234)."
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input 
-            id="fullName" 
-            type="text" 
-            name="fullName" 
-            placeholder="Full Name" 
-            pattern="[A-Za-z\s]+" 
-            required 
-            title="Full Name must contain only letters and spaces."
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="editDepartment">Department</label>
-          <input 
-            id="editDepartment" 
-            type="text" 
-            name="department" 
-            placeholder="Department" 
-            pattern="[A-Za-z\s]+" 
-            required 
-            title="Department must contain only letters and spaces."
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="editPosition">Position</label>
-          <input 
-            id="editPosition" 
-            type="text" 
-            name="position" 
-            placeholder="Position" 
-            pattern="[A-Za-z\s]+" 
-            required 
-            title="Position must contain only letters and spaces."
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="editStartDate">Start Date</label>
-          <input 
-            id="editStartDate" 
-            type="date" 
-            name="startDate" 
-            max="" 
-            required 
-            title="Please select a valid start date. Future dates are not allowed."
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="editStatus">Status</label>
-          <select id="editStatus" name="status" required title="Please select a status.">
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
-        </div>
-      
-        <button type="submit">Save</button>
-      </form>
-      
-  
-      
-      
-</div>
+    <script>
+        let employeeData = {
+            'EMP001': {
+                name: 'Veera Raghava',
+                initials: 'VR',
+                department: 'Engineering',
+                position: 'Senior Developer',
+                joinDate: '2023-01-15',
+                status: 'Active',
+                personalDetails: {
+                    dob: '1990-05-15',
+                    gender: 'Male',
+                    nationality: 'Indian',
+                    maritalStatus: 'Married',
+                    bloodGroup: 'O+'
+                },
+                contactDetails: {
+                    email: 'veera@company.com',
+                    phone: '+91 9876543210',
+                    address: '123 Tech Street',
+                    city: 'Bangalore',
+                    country: 'India'
+                },
+                emergencyContact: {
+                    name: 'Raghava',
+                    relationship: 'Spouse',
+                    phone: '+91 9876543211',
+                    address: '123 Tech Street, Bangalore, India'
+                }
+            },
+            'EMP002': {
+                name: 'Ajay Kumar',
+                initials: 'AK',
+                department: 'Marketing',
+                position: 'Marketing Manager',
+                joinDate: '2022-08-20',
+                status: 'Active',
+                personalDetails: {
+                    dob: '1988-08-22',
+                    gender: 'Male',
+                    nationality: 'Indian',
+                    maritalStatus: 'Single',
+                    bloodGroup: 'A+'
+                },
+                contactDetails: {
+                    email: 'ajay@company.com',
+                    phone: '+91 9876543212',
+                    address: '456 Marketing Ave',
+                    city: 'Mumbai',
+                    country: 'India'
+                },
+                emergencyContact: {
+                    name: 'Kumar',
+                    relationship: 'Brother',
+                    phone: '+91 9876543213',
+                    address: '789 Family Road, Mumbai, India'
+                }
+            },
+            'EMP003': {
+                name: 'Sindhuja',
+                initials: 'TS',
+                department: 'Finance',
+                position: 'Financial Analyst',
+                joinDate: '2023-03-10',
+                status: 'Active',
+                personalDetails: {
+                    dob: '1992-03-30',
+                    gender: 'Female',
+                    nationality: 'Indian',
+                    maritalStatus: 'Single',
+                    bloodGroup: 'B+'
+                },
+                contactDetails: {
+                    email: 'sindhuja@company.com',
+                    phone: '+91 9876543214',
+                    address: '789 Finance Street',
+                    city: 'Chennai',
+                    country: 'India'
+                },
+                emergencyContact: {
+                    name: 'Mary',
+                    relationship: 'Mother',
+                    phone: '+91 9876543215',
+                    address: '321 Family Lane, Chennai, India'
+                }
+            },
+            'EMP004': {
+                name: 'Latish Tivari',
+                initials: 'LT',
+                department: 'Finance',
+                position: 'Financial Analyst',
+                joinDate: '2023-03-10',
+                status: 'Active',
+                personalDetails: {
+                    dob: '1991-07-12',
+                    gender: 'Male',
+                    nationality: 'Indian',
+                    maritalStatus: 'Single',
+                    bloodGroup: 'AB+'
+                },
+                contactDetails: {
+                    email: 'latish@company.com',
+                    phone: '+91 9876543216',
+                    address: '456 Accounts Road',
+                    city: 'Delhi',
+                    country: 'India'
+                },
+                emergencyContact: {
+                    name: 'Ramesh',
+                    relationship: 'Father',
+                    phone: '+91 9876543217',
+                    address: '456 Accounts Road, Delhi, India'
+                }
+            }
+        };
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const acceptedEmployees = JSON.parse(localStorage.getItem('acceptedEmployees')) || [];
+            
+            acceptedEmployees.forEach(employee => {
+                employeeData[employee.id] = employee;
+            });
+            
+            renderEmployeeCards();
+            
+            document.querySelector('.search-bar input').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const cards = document.querySelectorAll('.employee-card');
 
-    <div id="employeeModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-header">
-                <div class="profile-circle large"></div>
-                <h2 id="modalEmployeeName"></h2>
-                <span id="modalEmployeeId"></span>
-            </div>
-            <div class="modal-body">
+                cards.forEach(card => {
+                    const employeeId = card.dataset.employeeId;
+                    const employee = employeeData[employeeId];
+                    const searchString = `${employee.name} ${employeeId} ${employee.department}`.toLowerCase();
+                    
+                    if (searchString.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        function renderEmployeeCards() {
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = ''; 
+            
+            Object.keys(employeeData).forEach(employeeId => {
+                if (['EMP001', 'EMP002', 'EMP003', 'EMP004'].includes(employeeId)) return;
+                
+                const employee = employeeData[employeeId];
+                const card = document.createElement('div');
+                card.className = 'employee-card';
+                card.dataset.employeeId = employeeId;
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="profile-circle">${employee.initials}</div>
+                        <h2>${employee.name}</h2>
+                        <span class="employee-id">${employeeId}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-group">
+                            <label>Department:</label>
+                            <span>${employee.department}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Position:</label>
+                            <span>${employee.position}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Join Date:</label>
+                            <span>${employee.joinDate}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Status:</label>
+                            <span>${employee.status}</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-view" onclick="showEmployeeDetails('${employeeId}')">View Details</button>
+                    </div>
+                `;
+                
+                dataContainer.appendChild(card);
+            });
+        }
+
+        function showEmployeeDetails(employeeId) {
+            const modal = document.getElementById('modal');
+            const employee = employeeData[employeeId];
+
+            if (!employee) return;
+
+            document.getElementById('modalHeader').textContent = employee.name;
+            document.getElementById('modalProfileCircle').textContent = employee.initials;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="details-section">
+                    <h3>Basic Information</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Employee ID:</label>
+                            <span>${employeeId}</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Department:</label>
+                            <span>${employee.department}</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Position:</label>
+                            <span>${employee.position}</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Join Date:</label>
+                            <span>${employee.joinDate}</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Status:</label>
+                            <span>${employee.status}</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="details-section">
                     <h3>Personal Details</h3>
                     <div class="details-grid">
                         <div class="detail-item">
                             <label>Date of Birth:</label>
-                            <span id="dob"></span>
+                            <span>${employee.personalDetails.dob || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Gender:</label>
-                            <span id="gender"></span>
+                            <span>${employee.personalDetails.gender || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Nationality:</label>
-                            <span id="nationality"></span>
+                            <span>${employee.personalDetails.nationality || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Marital Status:</label>
-                            <span id="maritalStatus"></span>
+                            <span>${employee.personalDetails.maritalStatus || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Blood Group:</label>
-                            <span id="bloodGroup"></span>
+                            <span>${employee.personalDetails.bloodGroup || 'N/A'}</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="details-section">
                     <h3>Contact Details</h3>
                     <div class="details-grid">
                         <div class="detail-item">
                             <label>Email:</label>
-                            <span id="email"></span>
+                            <span>${employee.contactDetails.email || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Phone:</label>
-                            <span id="phone"></span>
+                            <span>${employee.contactDetails.phone || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Address:</label>
-                            <span id="address"></span>
+                            <span>${employee.contactDetails.address || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>City:</label>
-                            <span id="city"></span>
+                            <span>${employee.contactDetails.city || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Country:</label>
-                            <span id="country"></span>
+                            <span>${employee.contactDetails.country || 'N/A'}</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="details-section">
                     <h3>Emergency Contact</h3>
                     <div class="details-grid">
                         <div class="detail-item">
                             <label>Name:</label>
-                            <span id="emergencyName"></span>
+                            <span>${employee.emergencyContact.name || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Relationship:</label>
-                            <span id="emergencyRelation"></span>
+                            <span>${employee.emergencyContact.relationship || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Phone:</label>
-                            <span id="emergencyPhone"></span>
+                            <span>${employee.emergencyContact.phone || 'N/A'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Address:</label>
-                            <span id="emergencyAddress"></span>
+                            <span>${employee.emergencyContact.address || 'N/A'}</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            `;
 
-    <script>
-  document.getElementById('editStartDate').max = new Date().toISOString().split('T')[0];
-
-const employeeData = {
-    'EMP001': {
-        name: 'Veera Raghava',
-        initials: 'JD',
-        personalDetails: {
-            dob: '1990-05-15',
-            gender: 'Male',
-            nationality: 'American',
-            maritalStatus: 'Married',
-            bloodGroup: 'O+'
-        },
-        contactDetails: {
-            email: 'veera@company.com',
-            phone: '+1 234-567-8900',
-            address: '123 Tech Street',
-            city: 'San Francisco',
-            country: 'USA'
-        },
-        emergencyContact: {
-            name: 'Raghava',
-            relationship: 'Spouse',
-            phone: '+1 234-567-8901',
-            address: '123 Tech Street, San Francisco, USA'
-        }
-    },
-    'EMP002': {
-        name: 'Ajay Kumar',
-        initials: 'AS',
-        personalDetails: {
-            dob: '1988-08-22',
-            gender: 'Female',
-            nationality: 'Canadian',
-            maritalStatus: 'Single',
-            bloodGroup: 'A+'
-        },
-        contactDetails: {
-            email: 'Ajay@company.com',
-            phone: '+1 234-567-8902',
-            address: '456 Marketing Ave',
-            city: 'Toronto',
-            country: 'Canada'
-        },
-        emergencyContact: {
-            name: 'Kumar',
-            relationship: 'Brother',
-            phone: '+1 234-567-8903',
-            address: '789 Family Road, Toronto, Canada'
-        }
-    },
-    'EMP003': {
-        name: 'Sindhuja',
-        initials: 'RJ',
-        personalDetails: {
-            dob: '1992-03-30',
-            gender: 'Male',
-            nationality: 'British',
-            maritalStatus: 'Single',
-            bloodGroup: 'B+'
-        },
-        contactDetails: {
-            email: 'Sinduja@company.com',
-            phone: '+1 234-567-8904',
-            address: '789 Finance Street',
-            city: 'London',
-            country: 'UK'
-        },
-        emergencyContact: {
-            name: 'Mary Johnson',
-            relationship: 'Mother',
-            phone: '+1 234-567-8905',
-            address: '321 Family Lane, London, UK'
-        }
-    }
-};
-
-function showEmployeeDetails(employeeId) {
-    const modal = document.getElementById('employeeModal');
-    const employee = employeeData[employeeId];
-
-    if (!employee) return;
-
-    document.getElementById('modalEmployeeName').textContent = employee.name;
-    document.getElementById('modalEmployeeId').textContent = employeeId;
-    document.querySelector('.modal-header .profile-circle').textContent = employee.initials;
-
-    document.getElementById('dob').textContent = employee.personalDetails.dob;
-    document.getElementById('gender').textContent = employee.personalDetails.gender;
-    document.getElementById('nationality').textContent = employee.personalDetails.nationality;
-    document.getElementById('maritalStatus').textContent = employee.personalDetails.maritalStatus;
-    document.getElementById('bloodGroup').textContent = employee.personalDetails.bloodGroup;
-
-    document.getElementById('email').textContent = employee.contactDetails.email;
-    document.getElementById('phone').textContent = employee.contactDetails.phone;
-    document.getElementById('address').textContent = employee.contactDetails.address;
-    document.getElementById('city').textContent = employee.contactDetails.city;
-    document.getElementById('country').textContent = employee.contactDetails.country;
-
-    document.getElementById('emergencyName').textContent = employee.emergencyContact.name;
-    document.getElementById('emergencyRelation').textContent = employee.emergencyContact.relationship;
-    document.getElementById('emergencyPhone').textContent = employee.emergencyContact.phone;
-    document.getElementById('emergencyAddress').textContent = employee.emergencyContact.address;
-
-    modal.style.display = 'block';
-}
-
-document.querySelector('.close-modal').addEventListener('click', () => {
-    document.getElementById('employeeModal').style.display = 'none';
-});
-
-window.addEventListener('click', (event) => {
-    const modal = document.getElementById('employeeModal');
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-document.querySelector('.modal-content').addEventListener('click', (event) => {
-    event.stopPropagation();
-});
-
-document.querySelector('.search-bar input').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const cards = document.querySelectorAll('.employee-card');
-
-    cards.forEach(card => {
-        const employeeId = card.dataset.employeeId;
-        const employee = employeeData[employeeId];
-        const searchString = `${employee.name} ${employeeId}`.toLowerCase();
-        
-        if (searchString.includes(searchTerm)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-});
-const storedData = JSON.parse(localStorage.getItem('onboardingData'));
-
-if (storedData) {
-    const container = document.getElementById('dataContainer');
-    
-    const card = document.createElement('div');
-    card.classList.add('employee-card1');
-    card.setAttribute('empID', storedData.Empid);
-
-    const cardHeader = document.createElement('div');
-    cardHeader.classList.add('card-header');
-
-    const profileCircle = document.createElement('div');
-    profileCircle.classList.add('profile-circle');
-    profileCircle.textContent = storedData.fullName ? storedData.fullName.charAt(0).toUpperCase() : '?';
-    cardHeader.appendChild(profileCircle);
-
-    const headerTitle = document.createElement('h3');
-    headerTitle.textContent = storedData.fullName || 'N/A';
-    cardHeader.appendChild(headerTitle);
-        
-    const empid=document.createElement('p');
-    empid.textContent=storedData.Empid || 'N/A';
-    cardHeader.appendChild(empid);
-
-    card.appendChild(cardHeader);
-
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
-
-    const basicInfo = ['department', 'startDate', 'position'];
-    basicInfo.forEach((key) => {
-        if (storedData[key]) {
-            const infoGroup = document.createElement('div');
-            infoGroup.classList.add('info-group');
-
-            const label = document.createElement('label');
-            label.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}:`;
-            infoGroup.appendChild(label);
-
-            const value = document.createElement('span');
-            value.textContent = storedData[key];
-            infoGroup.appendChild(value);
-
-            cardBody.appendChild(infoGroup);
-        }
-    });
-
-    card.appendChild(cardBody);
-
-    const cardFooter = document.createElement('div');
-    cardFooter.classList.add('card-footer');
-
-    const btnView = document.createElement('button');
-    btnView.classList.add('btn-view');
-    btnView.textContent = 'View Details';
-    btnView.addEventListener('click', () => showOverlay(storedData));
-    cardFooter.appendChild(btnView);
-
-    const actionIcons = document.createElement('div');
-    actionIcons.classList.add('action-icons');
-
-    const editIcon = document.createElement('i');
-    editIcon.classList.add('fa', 'fa-edit');
-    editIcon.title = 'Edit';
-    editIcon.addEventListener('click', () => editEmployee(storedData));
-    actionIcons.appendChild(editIcon);
-
-    const deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fa', 'fa-trash');
-    deleteIcon.title = 'Delete';
-    deleteIcon.addEventListener('click', () => deleteEmployee(storedData));
-    actionIcons.appendChild(deleteIcon);
-
-    const downloadIcon = document.createElement('i');
-    downloadIcon.classList.add('fa', 'fa-download');
-    downloadIcon.title = 'Download';
-    downloadIcon.addEventListener('click', () => downloadEmployeeData(storedData));
-    actionIcons.appendChild(downloadIcon);
-
-    cardFooter.appendChild(actionIcons);
-
-    card.appendChild(cardFooter);
-
-    container.appendChild(card);
-} else {
-    document.getElementById('dataContainer').textContent = 'No data available.';
-}
-
-function editEmployee(employee) {
-    alert(`Edit employee: ${employee.fullName}`);
-}
-
-function deleteEmployee(employee) {
-    const confirmation = confirm(`Are you sure you want to delete ${employee.fullName}?`);
-    if (confirmation) {
-        const employeeCard = document.querySelector(`.employee-card1[empID="${employee.Empid}"]`);
-        if (employeeCard) {
-            employeeCard.remove();
+            modal.style.display = 'block';
+            setTimeout(() => {
+        modalBody.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
         }
 
-        delete employeeData[employee.Empid];
-
-        localStorage.setItem('onboardingData', JSON.stringify(employeeData));
-
-        alert(`Deleted employee: ${employee.fullName}`);
-    }
-}
-
-
-function downloadEmployeeData(employee) {
-    const employeeJson = JSON.stringify(employee, null, 2); // Pretty print JSON
-
-    const blob = new Blob([employeeJson], { type: 'application/json' });
-
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${employee.fullName.replace(/ /g, '_')}_data.json`;
-    document.body.appendChild(a);
-
-    a.click();
-
-    document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-}
-
-
-function showOverlay(data) {
-    const modal = document.getElementById('modal');
-    const modalHeader = document.getElementById('modalHeader');
-    const modalProfileCircle = document.getElementById('modalProfileCircle');
-    const modalBody = document.getElementById('modalBody');
-
-    modalHeader.textContent = data.fullName || 'Employee Name';
-    modalProfileCircle.textContent = data.fullName ? data.fullName.charAt(0).toUpperCase() : '?';
-
-    modalBody.innerHTML = '';
-    Object.keys(data).forEach((key) => {
-        const detailsSection = document.createElement('div');
-        detailsSection.classList.add('details-section');
-
-        const detailTitle = document.createElement('h3');
-        detailTitle.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}`;
-        detailsSection.appendChild(detailTitle);
-
-        const detailsGrid = document.createElement('div');
-        detailsGrid.classList.add('details-grid');
-
-        const detailItem = document.createElement('div');
-        detailItem.classList.add('detail-item');
-
-        const label = document.createElement('label');
-        label.textContent = `${key}:`;
-        detailItem.appendChild(label);
-
-        const value = document.createElement('span');
-        value.textContent = data[key];
-        detailItem.appendChild(value);
-
-        detailsGrid.appendChild(detailItem);
-        detailsSection.appendChild(detailsGrid);
-        modalBody.appendChild(detailsSection);
-    });
-
-    modal.style.display = 'block';
-}
-
-function hideModal() {
-    const modal = document.getElementById('modal');
-    modal.style.display = 'none';
-}
-function editEmployee(employee) {
-    console.log('Editing employee:', employee);
-
-    const form = document.getElementById('editForm');
-
-    if (!form) {
-        console.error('Edit form not found in DOM.');
-        return;
-    }
-
-    form.style.display = 'block';
-
-    const fullNameInput = document.getElementById('fullName');
-    const departmentInput = document.getElementById('editDepartment');
-    const positionInput = document.getElementById('editPosition');
-    const startDateInput = document.getElementById('editStartDate');
-    const statusInput = document.getElementById('editStatus');
-
-    if (!fullNameInput || !departmentInput || !positionInput || !startDateInput || !statusInput) {
-        console.error('One or more form fields are missing in the DOM.');
-        return;
-    }
-
-    fullNameInput.value = employee.fullName || '';
-    departmentInput.value = employee.department || '';
-    positionInput.value = employee.position || '';
-    startDateInput.value = employee.startDate || '';
-    statusInput.value = employee.status || '';
-
-    document.getElementById('employeeEditForm').onsubmit = function(e) {
-    e.preventDefault(); 
-
-    const updatedEmployee = {
-        Empid: document.getElementById('empID').value,
-        fullName: document.getElementById('fullName').value,
-        department: document.getElementById('editDepartment').value,
-        position: document.getElementById('editPosition').value,
-        startDate: document.getElementById('editStartDate').value,
-        status: document.getElementById('editStatus').value
-    };
-
-    updateEmployeeCard(updatedEmployee, updatedEmployee);
-
-    closeEditForm();
-};
-
-}
-
-
-function closeEditForm() {
-    document.getElementById('editForm').style.display = 'none';
-}
-
-function updateEmployeeCard(employee, updatedEmployee) {
-    if (!updatedEmployee.Empid || !updatedEmployee.fullName) {
-        console.error('Invalid updatedEmployee object:', updatedEmployee);
-        return;
-    }
-
-    console.log('Updating card for EmpID:', updatedEmployee.Empid);
-
-    const card = document.querySelector(`.employee-card1[empID="${updatedEmployee.Empid.trim()}"]`);
-
-    if (!card) {
-        console.error(`Employee card not found for EmpID: ${updatedEmployee.Empid.trim()}`);
-        alert(`No card found for EmpID: ${updatedEmployee.Empid.trim()}`);
-        return;
-    }
-
-    console.log('Card found for EmpID:', updatedEmployee.Empid);
-
-    Object.assign(employee, updatedEmployee);
-
-    card.innerHTML = '';
-
-    const cardHeader = document.createElement('div');
-    cardHeader.classList.add('card-header');
-    
-    const profileCircle = document.createElement('div');
-    profileCircle.classList.add('profile-circle');
-    profileCircle.textContent = updatedEmployee.fullName.charAt(0).toUpperCase();
-    cardHeader.appendChild(profileCircle);
-
-    const headerTitle = document.createElement('h3');
-    headerTitle.textContent = updatedEmployee.fullName;
-    cardHeader.appendChild(headerTitle);
-
-    const empId = document.createElement('p');
-    empId.textContent = updatedEmployee.Empid;
-    cardHeader.appendChild(empId);
-
-    card.appendChild(cardHeader);
-
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
-
-    const basicInfo = ['department', 'position', 'startDate', 'status'];
-    basicInfo.forEach((key) => {
-        if (updatedEmployee[key]) {
-            const infoGroup = document.createElement('div');
-            infoGroup.classList.add('info-group');
-            
-            const label = document.createElement('strong');
-            label.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: `;
-            infoGroup.appendChild(label);
-
-            const value = document.createElement('span');
-            value.textContent = updatedEmployee[key];
-            infoGroup.appendChild(value);
-
-            cardBody.appendChild(infoGroup);
+        function hideModal() {
+            document.getElementById('modal').style.display = 'none';
         }
-    });
 
-    card.appendChild(cardBody);
-
-    const cardFooter = document.createElement('div');
-    cardFooter.classList.add('card-footer');
-
-    const btnView = document.createElement('button');
-    btnView.classList.add('btn-view');
-    btnView.textContent = 'View Details';
-    btnView.addEventListener('click', () => showOverlay(employee));
-    cardFooter.appendChild(btnView);
-
-    const actionIcons = document.createElement('div');
-    actionIcons.classList.add('action-icons');
-
-    const editIcon = document.createElement('i');
-    editIcon.classList.add('fa', 'fa-edit');
-    editIcon.title = 'Edit';
-    editIcon.addEventListener('click', () => editEmployee(employee));
-    actionIcons.appendChild(editIcon);
-
-    const deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fa', 'fa-trash');
-    deleteIcon.title = 'Delete';
-    deleteIcon.addEventListener('click', () => deleteEmployee(employee));
-    actionIcons.appendChild(deleteIcon);
-
-    const downloadIcon = document.createElement('i');
-    downloadIcon.classList.add('fa', 'fa-download');
-    downloadIcon.title = 'Download';
-    downloadIcon.addEventListener('click', () => downloadEmployeeData(employee));
-    actionIcons.appendChild(downloadIcon);
-
-    cardFooter.appendChild(actionIcons);
-    card.appendChild(cardFooter);
-}
-
-
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

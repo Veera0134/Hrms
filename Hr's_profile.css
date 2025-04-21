@@ -9,135 +9,132 @@ body {
     background-color: #f4f7fa;
 }
 
-
 .profile {
     display: flex;
     justify-content: center;
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 .profile-container {
     display: flex;
     background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 1200px;
-    align-items: stretch; 
+    max-width: 1000px;
+    align-items: stretch;
 }
 
 .profile-left {
     text-align: center;
-    margin-right: 50px;
-    flex: 0 0 350px; 
+    margin-right: 40px;
+    flex: 0 0 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .profile-left img {
-    width: 350px;
-    height:350px;
+    width: 280px;
+    height: 280px;
     object-fit: cover;
-    border: 5px solid #ececec;
-    margin-bottom: 20px;
+    border: 4px solid #ececec;
+    margin-bottom: 16px;
 }
 
 .profile-info {
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .profile-info h2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .profile-info p {
-    font-size: 18px;
+    font-size: 16px;
     color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .status p {
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
     color: #444;
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
 .status img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
 }
 
 .profile-right {
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 320px;
 }
+
 .personal-details,
 .company-details {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     list-style-type: none;
 }
 
 .profile-right h3 {
-    padding: 10px;
-    font-size: 20px;
+    padding: 8px;
+    font-size: 18px;
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     background: linear-gradient(135deg, #ff7f3e, #04cc3e);
     width: fit-content;
     border-radius: 4px;
 }
 
 .profile-right ul {
-    font-size: 10px; 
-    line-height: 1.5;  
-    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 16px;
 }
 
 .profile-right ul li {
-    font-size: 20px;
+    font-size: 16px;
     color: #333;
-    margin-bottom: 10px;
-    color: #333;
-   
+    margin-bottom: 8px;
 }
+
 .personal-details ul, .company-details ul {
     list-style: none;
-    padding-left: 20;
 }
 
 .part3 {
     display: flex;
     flex-direction: column;
-   
 }
 
 .achievements-rewards, .certificates, .skills {
     background-color: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .achievements-rewards h3, .certificates h3, .skills h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #444;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
     background: linear-gradient(135deg, #ff7f3e, #04cc3e);
     color: white;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 4px;
+    border-radius: 4px;
 }
 
 .achievements-rewards ul, .certificates ul, .skills ul {
@@ -148,13 +145,13 @@ body {
 .achievements-rewards li, .certificates li, .skills li {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin-bottom: 8px;
+    font-size: 16px;
     color: #555;
 }
 
 .achievements-rewards li img, .certificates li img, .skills li img {
-    width: 35px;
-    height: 35px;
-    margin-right: 10px;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
 }

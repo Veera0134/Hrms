@@ -1,0 +1,2087 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form with Preview and Edit</title>
+ <style>
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header img {
+  width: 200px; /* Adjust logo size */
+}
+
+.header .company-name {
+  font-size: 35px;
+  font-weight: bold;
+  padding-left: 10%;
+}
+
+.header .company-name .astrolite {
+  color: blue;
+}
+
+.header .company-name .tech {
+  color: red;
+}
+
+.header .company-name .solutions {
+  color: black;
+}
+
+
+.form-container {
+  background-color: white;
+  width: 60%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Fieldset Styles */
+fieldset {
+  display: none;
+  border: none;
+  margin-bottom: 20px;
+}
+
+fieldset.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+legend {
+  grid-column: 1 / -1;
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* Form Group Styles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+input[type="description"],
+textarea,
+select,
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 80px;
+}
+
+input[type="file"] {
+  padding: 5px;
+  background-color: #f3f3f3;
+}
+
+.navigation-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  fieldset.active {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+ </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Job Application Form</h2>
+  <form id="jobForm">
+<fieldset class="active">
+  <legend>Personal Information</legend>
+
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" pattern="[A-Za-z ]{3,50}" title="Full Name must contain only letters and spaces (min 3 characters)." placeholder="John Doe" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@domain.com" required>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number." placeholder="1234567890" required>
+  </div>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <div>
+      <input type="radio" name="gender" id="male" value="Male" required> <label for="male">Male</label>
+      <input type="radio" name="gender" id="female" value="Female" required> <label for="female">Female</label>
+      <input type="radio" name="gender" id="other" value="Other" required> <label for="other">Other</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" min="1950-01-01" max="2005-12-31" title="Enter a valid date between 1950 and 2005." required>
+  </div>
+
+  <div class="form-group">
+    <label for="marital-status">Marital Status</label>
+    <select id="marital-status" required>
+      <option value="">Select</option>
+      <option value="Single">Single</option>
+      <option value="Married">Married</option>
+      <option value="Divorced">Divorced</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="nationality">Nationality</label>
+    <input type="text" id="nationality" pattern="[A-Za-z]{3,30}" title="Nationality must be alphabetic (3-30 characters)." placeholder="Indian" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="street">Street Address</label>
+    <input type="text" id="street" placeholder="123 Main St" required>
+  </div>
+
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" id="city" pattern="[A-Za-z ]{2,50}" title="City name must be alphabetic." placeholder="Bangalore" required>
+  </div>
+
+  <div class="form-group">
+    <label for="state">State/Province</label>
+    <input type="text" id="state" pattern="[A-Za-z ]{2,50}" title="State must be alphabetic." placeholder="Karnataka" required>
+  </div>
+
+  <div class="form-group">
+    <label for="zipcode">Postal/ZIP Code</label>
+    <input type="text" id="zipcode" pattern="[0-9]{5,6}" title="Enter a 5-6 digit postal code." placeholder="560001" required>
+  </div>
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input type="text" id="country" pattern="[A-Za-z ]{3,50}" title="Country must be alphabetic." placeholder="India" required>
+  </div>
+</fieldset>
+
+
+<fieldset>
+    <legend>Education Details</legend>
+  
+    <div class="form-group">
+      <label for="qualification">Highest Qualification</label>
+      <select id="qualification" required oninput="validateQualification()">
+        <option value="">Select Qualification</option>
+        <option value="Bachelors">Bachelors</option>
+        <option value="Masters">Masters</option>
+        <option value="Diploma">Diploma</option>
+        <option value="PhD">PhD</option>
+      </select>
+      <small id="qualificationError" style="color: red; display: none;">
+        Please select a qualification.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="university">University/College Name</label>
+      <input type="text" id="university" required
+        oninput="validateUniversity()"
+        placeholder="Enter full university/college name"
+        minlength="3">
+      <small id="universityError" style="color: red; display: none;">
+        University name must be at least 3 characters long.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="yearGraduated">Year of Graduation</label>
+      <input type="number" id="yearGraduated" required
+        oninput="validateYear()"
+        placeholder="Enter 4-digit year (e.g., 2022)" 
+        min="1900" max="2100">
+      <small id="yearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2100.
+      </small>
+    </div>
+      <div class="form-group">
+      <label for="grade">Final Grade/Percentage</label>
+      <input type="number" id="grade" step="0.01" required
+        oninput="validateGrade()"
+        placeholder="Enter percentage or CGPA (0-100)" min="0" max="100">
+      <small id="gradeError" style="color: red; display: none;">
+        Grade must be between 0 and 100.
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="interBoard">Intermediate Board</label>
+      <input type="text" id="interBoard" required
+        oninput="validateInterBoard()"
+        placeholder="Enter Intermediate board name">
+      <small id="interBoardError" style="color: red; display: none;">
+        Board name is required.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="interYear">Intermediate Year of Passing</label>
+      <input type="number" id="interYear" required
+        oninput="validateInterYear()"
+        placeholder="Enter 4-digit year (e.g., 2017)" 
+        min="1900" max="2100">
+      <small id="interYearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2100.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="interGrade">Intermediate Percentage</label>
+      <input type="number" id="interGrade" step="0.01" required
+        oninput="validateInterGrade()"
+        placeholder="Enter percentage (0-100)" min="0" max="100">
+      <small id="interGradeError" style="color: red; display: none;">
+        Percentage must be between 0 and 100.
+      </small>
+    </div>
+   
+  
+    <div class="form-group">
+      <label for="sscBoard">SSC Board</label>
+      <input type="text" id="sscBoard" required
+        oninput="validateSSCBoard()"
+        placeholder="Enter SSC board name">
+      <small id="sscBoardError" style="color: red; display: none;">
+        Board name is required.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="sscYear">SSC Year of Passing</label>
+      <input type="number" id="sscYear" required
+        oninput="validateSSCYear()"
+        placeholder="Enter 4-digit year (e.g., 2015)" 
+        min="1900" max="2100">
+      <small id="sscYearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2100.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="sscGrade">SSC Percentage</label>
+      <input type="number" id="sscGrade" step="0.01" required
+        oninput="validateSSCGrade()"
+        placeholder="Enter percentage (0-100)" min="0" max="100">
+      <small id="sscGradeError" style="color: red; display: none;">
+        Percentage must be between 0 and 100.
+      </small>
+    </div>
+
+  </fieldset>
+  
+
+<fieldset>
+    <legend>Work Experience</legend>
+  
+    <div class="form-group">
+      <label for="company">Most Recent Employer</label>
+      <input type="text" id="company" placeholder="Enter full company name" 
+             oninput="validateCompany()" minlength="2" required>
+      <small id="companyError" style="color: red; display: none;">
+        Company name must be at least 2 characters long.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="role">Job Title</label>
+      <input type="text" id="role" placeholder="Enter job title" 
+             oninput="validateRole()" minlength="2" required>
+      <small id="roleError" style="color: red; display: none;">
+        Job title must be at least 2 characters long.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate" oninput="validateDates()" required>
+      <small id="startDateError" style="color: red; display: none;">
+        Please enter a valid start date.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" id="endDate" oninput="validateDates()">
+      <small id="endDateError" style="color: red; display: none;">
+        End date cannot be earlier than the start date.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="employmentType">Employment Type</label>
+      <select id="employmentType" required oninput="validateEmploymentType()">
+        <option value="">Select Employment Type</option>
+        <option value="Full-Time">Full-Time</option>
+        <option value="Part-Time">Part-Time</option>
+        <option value="Contract">Contract</option>
+        <option value="Internship">Internship</option>
+      </select>
+      <small id="employmentTypeError" style="color: red; display: none;">
+        Please select an employment type.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="responsibilities">Key Responsibilities</label>
+      <textarea id="responsibilities" rows="4" placeholder="Describe your responsibilities (max 500 characters)" 
+                oninput="validateResponsibilities()" maxlength="500"></textarea>
+      <small id="responsibilitiesError" style="color: red; display: none;">
+        Responsibilities cannot be empty and must be within 500 characters.
+      </small>
+    </div>
+  </fieldset>
+
+    <fieldset>
+        <legend>Final Documentation</legend>
+      
+        <div class="form-group">
+          <label for="resume">Upload Resume (PDF)</label>
+          <input type="file" id="resume" accept=".pdf" required 
+                 oninput="validateResume()">
+          <small id="resumeError" style="color: red; display: none;">
+            Please upload a PDF file smaller than 2 MB.
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="idProof">Upload ID Proof (PDF or Image)</label>
+          <input type="file" id="idProof" accept=".pdf, .jpg, .jpeg, .png" required 
+                 oninput="validateIdProof()">
+          <small id="idProofError" style="color: red; display: none;">
+            Please upload a file (PDF, JPG, JPEG, PNG) smaller than 2 MB.
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="certificates">Upload Certificates (Multiple Files Allowed)</label>
+          <input type="file" id="certificates" accept=".pdf, .jpg, .jpeg, .png" multiple 
+                 oninput="validateCertificates()">
+          <small id="certificatesError" style="color: red; display: none;">
+            Each file should be smaller than 2 MB.
+          </small>
+        </div>
+      </fieldset>
+
+    <div class="navigation-buttons">
+      <button type="button" id="prevBtn" disabled>Previous</button>
+      <button type="button" id="nextBtn">Next</button>
+    </div>
+  </form>
+
+  <div id="previewSection" class="preview-container" style="display:none;">
+    <h3>Application Preview</h3>
+    <div class="preview-details" id="previewDetails"></div>
+    <div class="navigation-buttons">
+      <button class="edit-btn" onclick="editForm()">Edit</button>
+      <button onclick="finalSubmit()">Confirm & Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("jobForm");
+  const fieldsets = form.querySelectorAll("fieldset");
+  const previewSection = document.getElementById("previewSection");
+  const previewDetails = document.getElementById("previewDetails");
+  
+  let currentStep = 0;
+  
+  // Buttons
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  
+  // Initialize form
+  showStep(currentStep);
+  
+  // Navigation functions
+  function navigateToStep(step) {
+    currentStep = step;
+    showStep(currentStep);
+  }
+  
+  function showStep(step) {
+    fieldsets.forEach((fieldset, index) => {
+      fieldset.classList.toggle("active", index === step);
+    });
+  
+    prevBtn.disabled = step === 0;
+    nextBtn.textContent = step === fieldsets.length - 1 ? "Preview" : "Next";
+    
+    validateCurrentStep();
+  }
+  
+  // Navigation event handlers
+  prevBtn.addEventListener("click", () => navigateToStep(currentStep - 1));
+  
+  nextBtn.addEventListener("click", () => {
+    if (validateCurrentStep()) {
+      if (currentStep < fieldsets.length - 1) {
+        navigateToStep(currentStep + 1);
+      } else {
+        showPreview();
+      }
+    }
+  });
+  
+  // Validation functions
+  function validatePersonalInfo() {
+    let isValid = true;
+    
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+  
+    // Name validation
+    if (!name.value.match(/^[A-Za-z ]{3,50}$/)) {
+      name.style.borderColor = 'red';
+      isValid = false;
+    } else {
+      name.style.borderColor = '#ddd';
+    }
+  
+    // Email validation
+    if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      email.style.borderColor = 'red';
+      isValid = false;
+    } else {
+      email.style.borderColor = '#ddd';
+    }
+  
+    // Phone validation
+    if (!phone.value.match(/^[0-9]{10}$/)) {
+      phone.style.borderColor = 'red';
+      isValid = false;
+    } else {
+      phone.style.borderColor = '#ddd';
+    }
+  
+    return isValid;
+  }
+  
+  function validateEducation() {
+    let isValid = true;
+    
+    const qualification = document.getElementById("qualification");
+    const university = document.getElementById("university");
+  
+    if (qualification.value === "") {
+      qualification.style.borderColor = 'red';
+      isValid = false;
+    } else {
+      qualification.style.borderColor = '#ddd';
+    }
+  
+    if (university.value.length < 3) {
+      university.style.borderColor = 'red';
+      isValid = false;
+    } else {
+      university.style.borderColor = '#ddd';
+    }
+  
+    return isValid;
+  }
+  
+  function validateExperience() {
+    let isValid = true;
+    const company = document.getElementById("company");
+    const role = document.getElementById("role");
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+  
+    // Only validate if any field is filled
+    if (company.value || role.value || startDate.value || endDate.value) {
+      if (company.value && company.value.length < 2) {
+        company.style.borderColor = 'red';
+        isValid = false;
+      } else {
+        company.style.borderColor = '#ddd';
+      }
+  
+      if (role.value && role.value.length < 2) {
+        role.style.borderColor = 'red';
+        isValid = false;
+      } else {
+        role.style.borderColor = '#ddd';
+      }
+  
+      if (startDate.value && !endDate.value) {
+        // Start date provided but no end date is acceptable
+        startDate.style.borderColor = '#ddd';
+      } else if (startDate.value && endDate.value) {
+        if (new Date(endDate.value) < new Date(startDate.value)) {
+          endDate.style.borderColor = 'red';
+          isValid = false;
+        } else {
+          endDate.style.borderColor = '#ddd';
+        }
+      }
+    }
+  
+    return true; // Always valid since experience is optional
+  }
+  
+  function validateDocuments() {
+    let isValid = true;
+    const resume = document.getElementById("resume");
+    const resumeError = document.getElementById("resumeError");
+  
+    if (resume.files.length === 0) {
+      resume.style.borderColor = 'red';
+      resumeError.style.display = 'block';
+      isValid = false;
+    } else {
+      const file = resume.files[0];
+      if (file.size > 2 * 1024 * 1024 || !file.name.toLowerCase().endsWith('.pdf')) {
+        resume.style.borderColor = 'red';
+        resumeError.style.display = 'block';
+        isValid = false;
+      } else {
+        resume.style.borderColor = '#ddd';
+        resumeError.style.display = 'none';
+      }
+    }
+  
+    return isValid;
+  }
+  
+  function validateCurrentStep() {
+    let isValid = true;
+    
+    switch(currentStep) {
+      case 0: isValid = validatePersonalInfo(); break;
+      case 1: isValid = validateEducation(); break;
+      case 2: isValid = validateExperience(); break;
+      case 3: isValid = validateDocuments(); break;
+    }
+  
+    nextBtn.disabled = !isValid;
+    return isValid;
+  }
+  
+  // Preview and submission functions
+  function showPreview() {
+    const formData = getFormData();
+    
+    previewDetails.innerHTML = `
+      <div class="preview-section">
+        <h4>Personal Information</h4>
+        <p><strong>Name:</strong> ${formData.name}</p>
+        <p><strong>Email:</strong> ${formData.email}</p>
+        <p><strong>Phone:</strong> ${formData.phone}</p>
+      </div>
+      
+      <div class="preview-section">
+        <h4>Education</h4>
+        <p><strong>Highest Qualification:</strong> ${formData.qualification}</p>
+        <p><strong>University:</strong> ${formData.university}</p>
+      </div>
+      
+      <div class="preview-section">
+        <h4>Experience</h4>
+        <p><strong>Company:</strong> ${formData.company}</p>
+        <p><strong>Role:</strong> ${formData.role}</p>
+      </div>
+      
+      <div class="preview-section">
+        <h4>Documents</h4>
+        <p><strong>Resume:</strong> ${formData.resume}</p>
+      </div>
+    `;
+  
+    form.style.display = "none";
+    previewSection.style.display = "block";
+  }
+  
+  function getFormData() {
+    return {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      qualification: document.getElementById("qualification").value,
+      university: document.getElementById("university").value,
+      company: document.getElementById("company").value || "Not provided",
+      role: document.getElementById("role").value || "Not provided",
+      resume: document.getElementById("resume").files[0]?.name || "Not provided"
+    };
+  }
+  
+  function editForm() {
+    form.style.display = "block";
+    previewSection.style.display = "none";
+    showStep(currentStep);
+  }
+  
+  function finalSubmit() {
+    const formData = getFormData();
+    localStorage.setItem("jobApplicationData", JSON.stringify(formData));
+    console.log("Form data:", formData);
+    alert("Application submitted successfully!");
+    // location.href = "confirmation.html"; 
+  }
+  
+  // Real-time validation
+  document.querySelectorAll("input, select").forEach(input => {
+    input.addEventListener("input", function() {
+      validateCurrentStep();
+    });
+  });
+  </script>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form with Preview and Edit</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+      margin: 0;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .company-name {
+      font-size: 35px;
+      font-weight: bold;
+      padding-left: 10%;
+    }
+    
+    .company-name .astrolite {
+      color: blue;
+    }
+    
+    .company-name .tech {
+      color: red;
+    }
+    
+    .company-name .solutions {
+      color: black;
+    }
+    .form-container {
+      background-color: white;
+      width: 60%;
+      max-width: 800px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    
+    fieldset {
+      display: none;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      background-color: #f9f9f9;
+    }
+    
+    fieldset.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    legend {
+      grid-column: 1 / -1;
+      font-size: 23px;
+      font-weight: bold;
+      color: #333;
+      padding: 0 10px;
+    }
+      .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    
+    /* .optional-label::after {
+      content: " (Optional)";
+      font-weight: normal;
+      font-style: italic;
+      color: #666;
+    } */
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    textarea,
+    select,
+    input[type="file"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    
+    input[type="file"] {
+      padding: 5px;
+      background-color: #f3f3f3;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+      .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .checkbox-container label {
+      font-weight: normal;
+      color: #333;
+    }
+      .navigation-buttons {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    button[disabled] {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+      #workExperienceFields {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    #workExperienceFields .form-group {
+      margin-bottom: 0;
+    }
+    
+    #noExperienceMessage {
+      text-align: center;
+      color: #888;
+      font-style: italic;
+      margin-top: 15px;
+    }
+    
+    .preview-container {
+      margin-top: 20px;
+    }
+    
+    .preview-item {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .success-message {
+      color: #28a745;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    
+    @media screen and (max-width: 768px) {
+      fieldset.active {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .form-container {
+        width: 100%;
+        padding: 15px;
+      }
+    
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  
+#workExperienceFields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-container #hasWorkExperience {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-container label {
+  font-weight: normal;
+  color: #333;
+}
+
+/* Optional Label */
+/* .optional-label::after {
+  content: " (Optional)";
+  font-weight: normal;
+  font-style: italic;
+  color: #666;
+} */
+
+/* Input Fields */
+#company,
+#role,
+#startDate,
+#endDate,
+#employmentType,
+#responsibilities {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#responsibilities {
+  height: 80px;
+  resize: vertical;
+}
+#companyError,
+#roleError,
+#startDateError,
+#endDateError,
+#employmentTypeError,
+#responsibilitiesError {
+  font-size: 12px;
+  color: red;
+  display: none;
+  margin-top: 5px;
+}
+
+/* No Experience Message */
+#noExperienceMessage {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  #workExperienceFields {
+    grid-template-columns: 1fr;
+  }
+}
+header {
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  /* padding: 2rem 1rem; */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  /* margin-bottom: 2rem; */
+  border-radius: 8px;
+}
+    
+ </style>
+</head>
+<body>
+
+<div class="form-container">
+  <header>
+    <h1 style="text-align: center; color: white;">Job Application Form</h1>
+  </header>
+  
+    <!-- <div class="company-name" style="text-align: center;">
+      <span class="astrolite">Job</span>
+      <span class="tech">Application</span>
+      <span class="solutions">Form</span>
+    </div> -->
+  <form id="jobForm">
+<fieldset class="active">
+  <legend style="text-align: center; font-size: 23px;" >Personal Information</legend>
+
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" pattern="[A-Za-z ]{3,30}" title="Full Name must contain only letters and spaces (min 3 characters)." placeholder="Enter name" required>
+    <small id="nameError" style="color: red; display: none;">
+      Please enter a valid name (min 3 characters, letters and spaces only).
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@domain.com" required>
+    <small id="emailError" style="color: red; display: none;">
+      Please enter a valid email address.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number." placeholder="1234567890" maxlength="10" required>
+    <small id="phoneError" style="color: red; display: none;">
+      Please enter a valid 10-digit phone number.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="gender">Gender</label>
+    <select id="gender" name="gender" required>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <small id="genderError" style="color: red; display: none;">
+      Please select a gender.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" min="1950-01-01" max="2005-12-31" title="Enter a valid date between 1950 and 2005." required>
+    <small id="dobError" style="color: red; display: none;">
+      Please enter a valid date of birth (between 1950 and 2005).
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="marital-status">Marital Status</label>
+    <select id="marital-status" required>
+      <option value="">Select</option>
+      <option value="Single">Single</option>
+      <option value="Married">Married</option>
+      <option value="Divorced">Divorced</option>
+    </select>
+    <small id="maritalStatusError" style="color: red; display: none;">
+      Please select your marital status.
+    </small>
+  </div>
+  
+  <div class="form-group">
+    <label for="street"> Address </label>
+    <input type="text" id="street" placeholder="123 Main St" required>
+    <small id="streetError" style="color: red; display: none;">
+      Please enter your street address.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="zipcode">Postal/ZIP Code</label>
+    <input type="text" id="zipcode" pattern="[0-9]{6}" title="Enter a 5-6 digit postal code." placeholder="560001" maxlength="6" required>
+    <small id="zipcodeError" style="color: red; display: none;">
+      Please enter a valid 5-6 digit postal code.
+    </small>
+  </div>
+</fieldset>
+
+
+<fieldset>
+    <legend style="text-align: center; font-size: 23px;">Education Details</legend>
+  
+    <div class="form-group">
+      <label for="qualification">Highest Qualification</label>
+      <select id="qualification" required oninput="validateQualification()">
+        <option value="">Select Qualification</option>
+        <option value="Bachelors">Bachelors</option>
+        <option value="Masters">Masters</option>
+        <option value="Diploma">Diploma</option>
+        <option value="PhD">PhD</option>
+      </select>
+      <small id="qualificationError" style="color: red; display: none;">
+        Please select a qualification.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="university">University/College Name</label>
+      <input type="text" id="university" required
+        oninput="validateUniversity()"
+        placeholder="Enter full university/college name"
+        minlength="3">
+      <small id="universityError" style="color: red; display: none;">
+        University name must be at least 3 characters long.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="yearGraduated">Year of Graduation</label>
+      <input type="number" id="yearGraduated" required
+        oninput="validateYear()"
+        placeholder="Enter 4-digit year (e.g., 2022)" 
+        min="1900" max="2025">
+      <small id="yearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2025.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="grade">Final Grade/Percentage</label>
+      <input type="number" id="grade" step="0.01" required
+        oninput="validateGrade()"
+        placeholder="Enter percentage or CGPA (0-100)" min="0" max="100">
+      <small id="gradeError" style="color: red; display: none;">
+        Grade must be between 0 and 100.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="interBoard">Intermediate Board</label>
+      <input type="text" id="interBoard" required
+        oninput="validateInterBoard()"
+        placeholder="Enter Intermediate board name">
+      <small id="interBoardError" style="color: red; display: none;">
+        Board name is required.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="interYear">Intermediate Year of Passing</label>
+      <input type="number" id="interYear" required
+        oninput="validateInterYear()"
+        placeholder="Enter 4-digit year (e.g., 2017)" 
+        min="1900" max="2025" maxlength="4">
+      <small id="interYearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2025.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="interGrade">Intermediate Percentage</label>
+      <input type="number" id="interGrade" step="0.01" required
+        oninput="validateInterGrade()"
+        placeholder="Enter percentage (0-100)" min="0" max="100">
+      <small id="interGradeError" style="color: red; display: none;">
+        Percentage must be between 0 and 100.
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="sscBoard">SSC Board</label>
+      <input type="text" id="sscBoard" required
+        oninput="validateSSCBoard()"
+        placeholder="Enter SSC board name">
+      <small id="sscBoardError" style="color: red; display: none;">
+        Board name is required.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="sscYear">SSC Year of Passing</label>
+      <input type="number" id="sscYear" required
+        oninput="validateSSCYear()"
+        placeholder="Enter 4-digit year (e.g., 2015)" 
+        min="1900" max="2025" maxlength="4">
+      <small id="sscYearError" style="color: red; display: none;">
+        Enter a valid 4-digit year between 1900 and 2025.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="sscGrade">SSC Percentage</label>
+      <input type="number" id="sscGrade" step="0.01" required
+        oninput="validateSSCGrade()"
+        placeholder="Enter percentage (0-100)" min="0" max="100">
+      <small id="sscGradeError" style="color: red; display: none;">
+        Percentage must be between 0 and 100.
+      </small>
+    </div>
+  </fieldset>
+  
+
+<fieldset>
+    <legend style="text-align: center; font-size: 23px;">Work Experience</legend>
+    <div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+      <div class="checkbox-container">
+        <input type="checkbox" id="hasWorkExperience" checked>
+        <label for="hasWorkExperience">I have previous work experience</label>
+      </div>
+    </div>
+    
+    <div id="workExperienceFields" style="width:600px">
+      <div class="form-group">
+        <label for="company">Most Recent Employer</label>
+        <input type="text" id="company" placeholder="Enter full company name" 
+               oninput="validateCompany()" minlength="2">
+        <small id="companyError" style="color: red; display: none;">
+          Company name must be at least 2 characters long.
+        </small>
+      </div>
+    
+      <div class="form-group">
+        <label for="role" >Job Title</label>
+        <input type="text" id="role" placeholder="Enter job title" 
+               oninput="validateRole()" minlength="2">
+        <small id="roleError" style="color: red; display: none;">
+          Job title must be at least 2 characters long.
+        </small>
+      </div>
+    
+      <div class="form-group">
+        <label for="startDate" >Start Date</label>
+        <input type="date" id="startDate" oninput="validateDates()">
+        <small id="startDateError" style="color: red; display: none;">
+          Please enter a valid start date.
+        </small>
+      </div>
+    
+      <div class="form-group">
+        <label for="endDate" >End Date</label>
+        <input type="date" id="endDate" oninput="validateDates()">
+        <small id="endDateError" style="color: red; display: none;">
+          End date cannot be earlier than the start date.
+        </small>
+      </div>
+    
+      <div class="form-group">
+        <label for="employmentType" >Employment Type</label>
+        <select id="employmentType" oninput="validateEmploymentType()">
+          <option value="">Select Employment Type</option>
+          <option value="Full-Time">Full-Time</option>
+          <option value="Part-Time">Part-Time</option>
+          <option value="Contract">Contract</option>
+          <option value="Internship">Internship</option>
+        </select>
+        <small id="employmentTypeError" style="color: red; display: none;">
+          Please select an employment type.
+        </small>
+      </div>
+    
+      <div class="form-group">
+        <label for="responsibilities" >Key Responsibilities</label>
+        <textarea id="responsibilities" rows="4" placeholder="Describe your responsibilities (max 500 characters)" 
+                  oninput="validateResponsibilities()" maxlength="500"></textarea>
+        <small id="responsibilitiesError" style="color: red; display: none;">
+          Responsibilities must be within 500 characters.
+        </small>
+      </div>
+    </div>
+    
+    <div id="noExperienceMessage" style="grid-column: 1 / -1; display: none;">
+      <p>No work experience selected. You can proceed to the next section.</p>
+    </div>
+  </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Final Documentation</legend>
+  
+    <div class="form-group">
+      <label for="currentLocation">Current Location</label>
+      <select id="currentLocation" required oninput="validateCurrentLocation()">
+        <option value="">Select Current Location</option>
+        <option value="New York">Hyderabad</option>
+        <option value="San Francisco">Banglore</option>
+      </select>
+      <small id="currentLocationError" style="color: red; display: none;">
+        Please select your current location.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="preferredLocation">Preferred Location</label>
+      <select id="preferredLocation" required oninput="validatePreferredLocation()">
+        <option value="">Select Preferred Location</option>
+        <option value="New York">Hyderabad</option>
+        <option value="San Francisco">Banglore</option>
+      </select>
+      <small id="preferredLocationError" style="color: red; display: none;">
+        Please select your preferred location.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="resume">Upload Resume (PDF)</label>
+      <input type="file" id="resume" accept=".pdf" required oninput="validateResume()">
+      <small id="resumeError" style="color: red; display: none;">
+        Please upload a PDF file smaller than 2 MB.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="idProof">Upload ID Proof (PDF or Image)</label>
+      <input type="file" id="idProof" accept=".pdf, .jpg, .jpeg, .png" required oninput="validateIdProof()">
+      <small id="idProofError" style="color: red; display: none;">
+        Please upload a file (PDF, JPG, JPEG, PNG) smaller than 2 MB.
+      </small>
+    </div>
+  
+    <div class="form-group">
+      <label for="certificates">Upload Certificates (Multiple Files Allowed)</label>
+      <input type="file" id="certificates" accept=".pdf, .jpg, .jpeg, .png" multiple oninput="validateCertificates()">
+      <small id="certificatesError" style="color: red; display: none;">
+        Each file should be smaller than 2 MB.
+      </small>
+    </div>
+  </fieldset>
+
+    <div class="navigation-buttons">
+      <button type="button" id="prevBtn" disabled>Previous</button>
+      <button type="button" id="nextBtn">Next</button>
+    </div>
+  </form>
+
+  <div id="previewSection" class="preview-container" style="display:none;">
+    <h3>Application Preview</h3>
+    <div class="preview-details" id="previewDetails"></div>
+    <div class="navigation-buttons">
+      <button class="edit-btn" onclick="editForm()">Edit</button>
+      <button onclick="finalSubmit()">Confirm & Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+ const form = document.getElementById("jobForm");
+const fieldsets = form.querySelectorAll("fieldset");
+const previewSection = document.getElementById("previewSection");
+const previewDetails = document.getElementById("previewDetails");
+
+let currentStep = 0;
+let resumeFileName = "";
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const hasWorkExperienceCheckbox = document.getElementById("hasWorkExperience");
+const workExperienceFields = document.getElementById("workExperienceFields");
+const noExperienceMessage = document.getElementById("noExperienceMessage");
+
+hasWorkExperienceCheckbox.addEventListener("change", function() {
+  if (this.checked) {
+    workExperienceFields.style.display = "grid";
+    noExperienceMessage.style.display = "none";
+  } else {
+    workExperienceFields.style.display = "none";
+    noExperienceMessage.style.display = "block";
+    
+    document.getElementById("company").value = "";
+    document.getElementById("role").value = "";
+    document.getElementById("startDate").value = "";
+    document.getElementById("endDate").value = "";
+    document.getElementById("employmentType").value = "";
+    document.getElementById("responsibilities").value = "";
+    
+    document.getElementById("companyError").style.display = "none";
+    document.getElementById("roleError").style.display = "none";
+    document.getElementById("startDateError").style.display = "none";
+    document.getElementById("endDateError").style.display = "none";
+    document.getElementById("employmentTypeError").style.display = "none";
+    document.getElementById("responsibilitiesError").style.display = "none";
+  }
+  
+  validateStep();
+});
+
+function validatePersonalInfo(event) {
+  let isValid = true;
+
+  const validateField = (field, errorElement, pattern = null, isRequired = true) => {
+    if (isRequired && (!field.value || (pattern && !pattern.test(field.value)))) {
+      errorElement.style.display = "block";
+      isValid = false;
+    } else {
+      errorElement.style.display = "none";
+    }
+  };
+
+  const name = document.getElementById("name");
+  const nameError = document.getElementById("nameError");
+  const namePattern = /^[A-Za-z ]{3,50}$/;
+  validateField(name, nameError, namePattern);
+
+  const email = document.getElementById("email");
+  const emailError = document.getElementById("emailError");
+  const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  validateField(email, emailError, emailPattern);
+
+  const phone = document.getElementById("phone");
+  const phoneError = document.getElementById("phoneError");
+  const phonePattern = /^[0-9]{10}$/;
+  validateField(phone, phoneError, phonePattern);
+
+  const genderSelect = document.getElementById("gender");
+  const genderError = document.getElementById("genderError");
+  validateField(genderSelect, genderError);
+
+  const dob = document.getElementById("dob");
+  const dobError = document.getElementById("dobError");
+  if (dob.value) {
+    const dobDate = new Date(dob.value);
+    const minDate = new Date("1950-01-01");
+    const maxDate = new Date("2005-12-31");
+    if (dobDate < minDate || dobDate > maxDate) {
+      dobError.style.display = "block";
+      isValid = false;
+    } else {
+      dobError.style.display = "none";
+    }
+  } else {
+    dobError.style.display = "block";
+    isValid = false;
+  }
+
+  const maritalStatus = document.getElementById("marital-status");
+  const maritalStatusError = document.getElementById("maritalStatusError");
+  validateField(maritalStatus, maritalStatusError);
+
+  const street = document.getElementById("street");
+  const streetError = document.getElementById("streetError");
+  validateField(street, streetError, null, true);
+
+  const zipcode = document.getElementById("zipcode");
+  const zipcodeError = document.getElementById("zipcodeError");
+  const zipcodePattern = /^[0-9]{6}$/;
+  validateField(zipcode, zipcodeError, zipcodePattern);
+
+  if (!isValid && event) {
+    event.preventDefault();
+  }
+
+  return isValid;
+}
+
+function validateQualification() {
+  const qualification = document.getElementById("qualification");
+  const qualificationError = document.getElementById("qualificationError");
+  
+  if (!qualification.value) {
+    qualificationError.style.display = "block";
+    return false;
+  } else {
+    qualificationError.style.display = "none";
+    return true;
+  }
+}
+
+function validateUniversity() {
+  const university = document.getElementById("university");
+  const universityError = document.getElementById("universityError");
+  
+  if (!university.value || university.value.length < 3) {
+    universityError.style.display = "block";
+    return false;
+  } else {
+    universityError.style.display = "none";
+    return true;
+  }
+}
+
+function validateYear() {
+  const yearGraduated = document.getElementById("yearGraduated");
+  const yearError = document.getElementById("yearError");
+  const year = parseInt(yearGraduated.value);
+  
+  if (!yearGraduated.value || isNaN(year) || year < 1900 || year > 2025) {
+    yearError.style.display = "block";
+    return false;
+  } else {
+    yearError.style.display = "none";
+    return true;
+  }
+}
+
+function validateGrade() {
+  const grade = document.getElementById("grade");
+  const gradeError = document.getElementById("gradeError");
+  const gradeValue = parseFloat(grade.value);
+  
+  if (!grade.value || isNaN(gradeValue) || gradeValue < 0 || gradeValue > 100) {
+    gradeError.style.display = "block";
+    return false;
+  } else {
+    gradeError.style.display = "none";
+    return true;
+  }
+}
+
+function validateSSCBoard() {
+  const sscBoard = document.getElementById("sscBoard");
+  const sscBoardError = document.getElementById("sscBoardError");
+  
+  if (!sscBoard.value.trim()) {
+    sscBoardError.style.display = "block";
+    return false;
+  } else {
+    sscBoardError.style.display = "none";
+    return true;
+  }
+}
+
+function validateSSCYear() {
+  const sscYear = document.getElementById("sscYear");
+  const sscYearError = document.getElementById("sscYearError");
+  const year = parseInt(sscYear.value);
+  
+  if (!sscYear.value || isNaN(year) || year < 1900 || year > 2025) {
+    sscYearError.style.display = "block";
+    return false;
+  } else {
+    sscYearError.style.display = "none";
+    return true;
+  }
+}
+
+function validateSSCGrade() {
+  const sscGrade = document.getElementById("sscGrade");
+  const sscGradeError = document.getElementById("sscGradeError");
+  const gradeValue = parseFloat(sscGrade.value);
+  
+  if (!sscGrade.value || isNaN(gradeValue) || gradeValue < 0 || gradeValue > 100) {
+    sscGradeError.style.display = "block";
+    return false;
+  } else {
+    sscGradeError.style.display = "none";
+    return true;
+  }
+}
+
+function validateInterBoard() {
+  const interBoard = document.getElementById("interBoard");
+  const interBoardError = document.getElementById("interBoardError");
+  
+  if (!interBoard.value.trim()) {
+    interBoardError.style.display = "block";
+    return false;
+  } else {
+    interBoardError.style.display = "none";
+    return true;
+  }
+}
+
+function validateInterYear() {
+  const interYear = document.getElementById("interYear");
+  const interYearError = document.getElementById("interYearError");
+  const year = parseInt(interYear.value);
+  
+  if (!interYear.value || isNaN(year) || year < 1900 || year > 2025) {
+    interYearError.style.display = "block";
+    return false;
+  } else {
+    interYearError.style.display = "none";
+    return true;
+  }
+}
+
+function validateInterGrade() {
+  const interGrade = document.getElementById("interGrade");
+  const interGradeError = document.getElementById("interGradeError");
+  const gradeValue = parseFloat(interGrade.value);
+  
+  if (!interGrade.value || isNaN(gradeValue) || gradeValue < 0 || gradeValue > 100) {
+    interGradeError.style.display = "block";
+    return false;
+  } else {
+    interGradeError.style.display = "none";
+    return true;
+  }
+}
+
+function validateCompany() {
+  if (!hasWorkExperienceCheckbox.checked) return true;
+  
+  const company = document.getElementById("company");
+  const companyError = document.getElementById("companyError");
+  
+  if (company.value && company.value.length < 2) {
+    companyError.style.display = "block";
+    return false;
+  } else {
+    companyError.style.display = "none";
+    return true;
+  }
+}
+
+function validateRole() {
+  if (!hasWorkExperienceCheckbox.checked) return true;
+  
+  const role = document.getElementById("role");
+  const roleError = document.getElementById("roleError");
+  
+  if (role.value && role.value.length < 2) {
+    roleError.style.display = "block";
+    return false;
+  } else {
+    roleError.style.display = "none";
+    return true;
+  }
+}
+
+function validateDates() {
+  if (!hasWorkExperienceCheckbox.checked) return true;
+  
+  const startDate = document.getElementById("startDate");
+  const endDate = document.getElementById("endDate");
+  const startDateError = document.getElementById("startDateError");
+  const endDateError = document.getElementById("endDateError");
+  
+  let isValid = true;
+  
+  if (startDate.value && endDate.value) {
+    const start = new Date(startDate.value);
+    const end = new Date(endDate.value);
+    
+    if (end < start) {
+      endDateError.style.display = "block";
+      isValid = false;
+    } else {
+      endDateError.style.display = "none";
+    }
+  } else {
+    endDateError.style.display = "none";
+  }
+  
+  return isValid;
+}
+
+function validateEmploymentType() {
+  if (!hasWorkExperienceCheckbox.checked) return true;
+  
+  const employmentType = document.getElementById("employmentType");
+  const employmentTypeError = document.getElementById("employmentTypeError");
+  
+  if (employmentType.value || !hasWorkExperienceCheckbox.checked) {
+    employmentTypeError.style.display = "none";
+    return true;
+  } else {
+    if (document.getElementById("company").value || 
+        document.getElementById("role").value || 
+        document.getElementById("startDate").value) {
+      employmentTypeError.style.display = "block";
+      return false;
+    }
+    return true;
+  }
+}
+
+function validateResponsibilities() {
+  if (!hasWorkExperienceCheckbox.checked) return true;
+  
+  const responsibilities = document.getElementById("responsibilities");
+  const responsibilitiesError = document.getElementById("responsibilitiesError");
+  
+  if (responsibilities.value.length > 500) {
+    responsibilitiesError.style.display = "block";
+    return false;
+  } else {
+    responsibilitiesError.style.display = "none";
+    return true;
+  }
+}
+function validateResume() {
+  const resume = document.getElementById("resume");
+  const resumeError = document.getElementById("resumeError");
+
+  if (!resume.files || resume.files.length === 0) {
+    resumeError.style.display = "block";
+    return false;
+  }
+
+  const file = resume.files[0];
+  const fileType = file.type;
+  const fileSize = file.size / 1024 / 1024; 
+
+  if (fileType !== "application/pdf" || fileSize > 2) {
+    resumeError.style.display = "block";
+    return false;
+  } else {
+    resumeError.style.display = "none";
+    return true;
+  }
+}
+
+function validateIdProof() {
+  const idProof = document.getElementById("idProof");
+  const idProofError = document.getElementById("idProofError");
+  
+  if (!idProof.files || idProof.files.length === 0) {
+    idProofError.style.display = "block";
+    return false;
+  }
+  
+  const file = idProof.files[0];
+  const fileType = file.type;
+  const fileSize = file.size / 1024 / 1024; 
+  
+  const validTypes = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+  
+  if (!validTypes.includes(fileType) || fileSize > 2) {
+    idProofError.style.display = "block";
+    return false;
+  } else {
+    idProofError.style.display = "none";
+    return true;
+  }
+}
+function validateCurrentLocation() {
+  const currentLocation = document.getElementById("currentLocation");
+  const currentLocationError = document.getElementById("currentLocationError");
+
+  if (!currentLocation.value) {
+    currentLocationError.style.display = "block";
+    return false;
+  } else {
+    currentLocationError.style.display = "none";
+    return true;
+  }
+}
+
+function validatePreferredLocation() {
+  const preferredLocation = document.getElementById("preferredLocation");
+  const preferredLocationError = document.getElementById("preferredLocationError");
+
+  if (!preferredLocation.value) {
+    preferredLocationError.style.display = "block";
+    return false;
+  } else {
+    preferredLocationError.style.display = "none";
+    return true;
+  }
+}
+
+function validateCertificates() {
+  const certificates = document.getElementById("certificates");
+  const certificatesError = document.getElementById("certificatesError");
+  
+  if (!certificates.files || certificates.files.length === 0) {
+    certificatesError.style.display = "none";
+    return true; 
+  }
+  
+  const validTypes = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+  let isValid = true;
+  
+  for (let i = 0; i < certificates.files.length; i++) {
+    const file = certificates.files[i];
+    const fileType = file.type;
+    const fileSize = file.size / 1024 / 1024; 
+    
+    if (!validTypes.includes(fileType) || fileSize > 2) {
+      isValid = false;
+      break;
+    }
+  }
+  
+  if (!isValid) {
+    certificatesError.style.display = "block";
+    return false;
+  } else {
+    certificatesError.style.display = "none";
+    return true;
+  }
+}
+
+function validateEducation() {
+  return (
+    validateQualification() &&
+    validateUniversity() &&
+    validateYear() &&
+    validateGrade() &&
+    validateInterBoard() &&
+    validateInterYear() &&
+    validateInterGrade()&&
+    validateSSCBoard() &&
+    validateSSCYear() &&
+    validateSSCGrade() 
+
+  );
+}
+
+function validateWorkExperience() {
+  if (!hasWorkExperienceCheckbox.checked) {
+    return true; 
+  }
+  
+  const company = document.getElementById("company").value;
+  const role = document.getElementById("role").value;
+  const startDate = document.getElementById("startDate").value;
+  
+  if (company || role || startDate) {
+    return (
+      validateCompany() &&
+      validateRole() &&
+      validateDates() &&
+      validateEmploymentType() &&
+      validateResponsibilities()
+    );
+  }
+  
+  return true;
+}
+
+function validateDocumentation() {
+  return (
+    validateCurrentLocation()&&
+    validatePreferredLocation()&&
+    validateResume() &&
+    validateIdProof() &&
+    validateCertificates()
+  );
+}
+
+function validateStep() {
+  let isValid = false;
+  
+  switch(currentStep) {
+    case 0: 
+      isValid = validatePersonalInfo();
+      break;
+    case 1: 
+      isValid = validateEducation();
+      break;
+    case 2: 
+      isValid = validateWorkExperience();
+      break;
+    case 3: 
+      isValid = validateDocumentation();
+      break;
+    default:
+      isValid = true;
+  }
+
+  nextBtn.disabled = !isValid;
+}
+
+document.querySelectorAll("input, select, textarea").forEach(element => {
+  element.addEventListener("input", validateStep);
+});
+
+function showStep(step) {
+  fieldsets.forEach((fieldset, index) => {
+    fieldset.classList.toggle("active", index === step);
+  });
+
+  prevBtn.disabled = step === 0;
+  nextBtn.textContent = step === fieldsets.length - 1 ? "Preview" : "Next";
+
+  validateStep();
+}
+
+prevBtn.addEventListener("click", () => {
+  if (currentStep > 0) {
+    currentStep--;
+    showStep(currentStep);
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentStep < fieldsets.length - 1) {
+    currentStep++;
+    showStep(currentStep);
+  } else {
+    showPreview();
+  }
+});
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
+async function handleFileUploads() {
+  const resumeInput = document.getElementById("resume");
+  const idProofInput = document.getElementById("idProof");
+
+  let resumeBase64 = null;
+  let idProofBase64 = null;
+
+  if (resumeInput.files.length > 0) {
+    resumeBase64 = await fileToBase64(resumeInput.files[0]);
+  }
+
+  if (idProofInput.files.length > 0) {
+    idProofBase64 = await fileToBase64(idProofInput.files[0]);
+  }
+
+  return { resumeBase64, idProofBase64 };
+}
+async function showPreview() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+const gender = document.getElementById("gender").value;
+  const dob = document.getElementById("dob").value;
+  const maritalStatus = document.getElementById("marital-status").value;
+  const qualification = document.getElementById("qualification").value;
+  const university = document.getElementById("university").value;
+
+  let workExperienceHtml = '';
+  if (hasWorkExperienceCheckbox.checked) {
+    const company = document.getElementById("company").value;
+    const role = document.getElementById("role").value;
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+    const employmentType = document.getElementById("employmentType").value;
+
+    if (company || role) {
+      workExperienceHtml = `
+        <div class="preview-item"><strong>Most Recent Employer:</strong> ${company || 'Not provided'}</div>
+        <div class="preview-item"><strong>Job Title:</strong> ${role || 'Not provided'}</div>
+        <div class="preview-item"><strong>Employment Period:</strong> ${startDate ? new Date(startDate).toLocaleDateString() : 'Not provided'} ${endDate ? ' to ' + new Date(endDate).toLocaleDateString() : ''}</div>
+        <div class="preview-item"><strong>Employment Type:</strong> ${employmentType || 'Not provided'}</div>
+      `;
+    } else {
+      workExperienceHtml = `<div class="preview-item"><strong>Work Experience:</strong> No details provided</div>`;
+    }
+  } else {
+    workExperienceHtml = `<div class="preview-item"><strong>Work Experience:</strong> None</div>`;
+  }
+
+  const { resumeBase64, idProofBase64 } = await handleFileUploads();
+
+  const resumeFileName = document.getElementById("resume").files[0]?.name || 'Not provided';
+  const idProofFileName = document.getElementById("idProof").files[0]?.name || 'Not provided';
+
+  let resumeLink = '';
+  if (resumeBase64) {
+    resumeLink = `<a href="${resumeBase64}" download="${resumeFileName}" class="file-link">Download Resume</a>`;
+  } else {
+    resumeLink = 'No resume uploaded';
+  }
+
+  let idProofLink = '';
+  if (idProofBase64) {
+    idProofLink = `<a href="${idProofBase64}" download="${idProofFileName}" class="file-link">Download ID Proof</a>`;
+  } else {
+    idProofLink = 'No ID proof uploaded';
+  }
+
+  previewDetails.innerHTML = `
+  <div class="preview-item"><strong>Full Name:</strong> ${name}</div>
+  <div class="preview-item"><strong>Email:</strong> ${email}</div>
+  <div class="preview-item"><strong>Phone:</strong> ${phone}</div>
+  <div class="preview-item"><strong>Gender:</strong> ${gender}</div>
+  <div class="preview-item"><strong>Date of Birth:</strong> ${dob ? new Date(dob).toLocaleDateString() : ''}</div>
+  <div class="preview-item"><strong>Marital Status:</strong> ${maritalStatus}</div>
+  <div class="preview-item"><strong>Highest Qualification:</strong> ${qualification}</div>
+  <div class="preview-item"><strong>University/College:</strong> ${university}</div>
+  ${workExperienceHtml}
+  <div class="preview-item"><strong>Resume:</strong> ${resumeLink}</div>
+  <div class="preview-item"><strong>ID Proof:</strong> ${idProofLink}</div>
+`;
+
+  form.style.display = "none";
+  previewSection.style.display = "block";
+}
+
+function editForm() {
+  form.style.display = "block";
+  previewSection.style.display = "none";
+  showStep(currentStep);
+}
+
+async function finalSubmit() {
+  const { resumeBase64, idProofBase64 } = await handleFileUploads();
+
+  const formData = {
+    personalInfo: {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      gender:document.getElementById("gender").value,
+      dob: document.getElementById("dob").value,
+      maritalStatus: document.getElementById("marital-status").value,
+      street: document.getElementById("street").value,
+      zipcode: document.getElementById("zipcode").value,
+    },
+    education: {
+      qualification: document.getElementById("qualification").value,
+      university: document.getElementById("university").value,
+      yearGraduated: document.getElementById("yearGraduated").value,
+      grade: document.getElementById("grade").value,
+      ssc: {
+        board: document.getElementById("sscBoard").value,
+        year: document.getElementById("sscYear").value,
+        grade: document.getElementById("sscGrade").value
+      },
+      intermediate: {
+        board: document.getElementById("interBoard").value,
+        year: document.getElementById("interYear").value,
+        grade: document.getElementById("interGrade").value
+      }
+    },
+    workExperience: hasWorkExperienceCheckbox.checked ? {
+      hasExperience: true,
+      company: document.getElementById("company").value,
+      role: document.getElementById("role").value,
+      startDate: document.getElementById("startDate").value,
+      endDate: document.getElementById("endDate").value,
+      employmentType: document.getElementById("employmentType").value,
+      responsibilities: document.getElementById("responsibilities").value
+    } : {
+      hasExperience: false
+    },
+    documents: {
+      resumeFileName: document.getElementById("resume").files[0]?.name,
+      idProofFileName: document.getElementById("idProof").files[0]?.name,
+      certificatesCount: document.getElementById("certificates").files.length,
+      resume: resumeBase64,
+      idProof: idProofBase64
+    }
+  };
+
+  localStorage.setItem("jobApplicationData", JSON.stringify(formData));
+  console.log("data: ", formData);
+
+  previewSection.innerHTML = `
+    <h3>Application Submitted Successfully!</h3>
+    <p class="success-message" style="display: block; margin-top: 20px;">
+      Thank you for submitting your application. We have received your information and will review it shortly.
+      You will be contacted via email at ${formData.personalInfo.email} regarding the next steps.
+    </p>
+  `;
+}
+showStep(currentStep);
+</script>
+
+</body>
+</html>

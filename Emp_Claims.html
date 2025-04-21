@@ -31,8 +31,9 @@
                 <button class="claim-button" onclick="openClaimForm()">Claim</button>
             </div>
         </div>
-        
+        <div id="overlay" class="overlay"></div>
         <section class="claim-form">
+            <span class="close-btn" onclick="closeClaimForm()">&#10005;</span>
             <h2>Submit a New Claim</h2>
             <form id="claim-form">
                 <label for="claim-type">Claim Type:</label>
@@ -95,93 +96,65 @@
         </section>
     </main>
     <script>
-          const dateInput = document.getElementById("date");
-  const today = new Date().toISOString().split("T")[0]; // Format today's date as YYYY-MM-DD
-  dateInput.setAttribute("max", today);
+        function closeClaimForm() {
+    document.querySelector('.claim-form').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none'; 
+}
 
-                function openClaimForm() {
+        function openClaimForm() {
+    document.querySelector('.claim-form').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+    window.scrollTo({ top: document.querySelector('.claim-form').offsetTop, behavior: 'smooth' });
+}
+
+
+function closeClaimForm() {
+    document.querySelector('.claim-form').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+        localStorage.clear();
+        const dateInput = document.getElementById("date");
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.setAttribute("max", today);
+    
+        function openClaimForm() {
             document.querySelector('.claim-form').style.display = 'block';
             window.scrollTo({ top: document.querySelector('.claim-form').offsetTop, behavior: 'smooth' });
         }
+    
         function renderClaimHistory() {
-        const claims = JSON.parse(localStorage.getItem('claims')) || [];
-        const cardContainer = document.querySelector('.claim-history .card-container');
-        claims.forEach((claim) => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = `
-                <div class="info">
-                    <strong>Date:</strong> ${claim.date}
-                </div>
-                <div class="info">
-                    <strong>Type:</strong> ${claim.claimType}
-                </div>
-                <div class="info">
-                    <strong>Amount:</strong> $${claim.amount}
-                </div>
-                <div class="info">
-                    <strong>Status:</strong> Pending
-                </div>
-                <div class="info">
-                    <strong>Description:</strong> ${claim.description}
-                </div>
-                <div class="info">
-                    <strong>Receipt:</strong> ${claim.receipt}
-                </div>
-            `;
-            cardContainer.appendChild(card);
-        });
-    }
-
-    document.getElementById('claim-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        
-        
-        const claimType = document.getElementById('claim-type').value;
-        const date = document.getElementById('date').value;
-        const amount = document.getElementById('amount').value;
-        const description = document.getElementById('description').value;
-        const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
-
-       
-        const claim = {
-            claimType,
-            date,
-            amount,
-            description,
-            receipt
-        };
-
-       
-        let claims = JSON.parse(localStorage.getItem('claims')) || [];
-        claims.push(claim);
-
-     
-        localStorage.setItem('claims', JSON.stringify(claims));
-
-      
-        this.reset();
-
-       
-        renderClaimHistory();
-
-       
-        alert('Your claim has been successfully submitted!');
-    });
-
-   
-    document.addEventListener('DOMContentLoaded', renderClaimHistory);
+            const claims = JSON.parse(localStorage.getItem('claims')) || [];
+            const cardContainer = document.querySelector('.claim-history .card-container');
+            claims.forEach((claim) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <div class="info">
+                        <strong>Date:</strong> ${claim.date}
+                    </div>
+                    <div class="info">
+                        <strong>Type:</strong> ${claim.claimType}
+                    </div>
+                    <div class="info">
+                        <strong>Amount:</strong> $${claim.amount}
+                    </div>
+                    <div class="info">
+                        <strong>Status:</strong> Pending
+                    </div>
+                `;
+                cardContainer.appendChild(card);
+            });
+        }
+    
         document.getElementById('claim-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent form from reloading the page
+            e.preventDefault(); 
             
-           
             const claimType = document.getElementById('claim-type').value;
             const date = document.getElementById('date').value;
             const amount = document.getElementById('amount').value;
             const description = document.getElementById('description').value;
             const receipt = document.getElementById('receipt').files[0]?.name || 'No file uploaded';
     
-            
             const claim = {
                 claimType,
                 date,
@@ -190,19 +163,21 @@
                 receipt
             };
     
-            
             let claims = JSON.parse(localStorage.getItem('claims')) || [];
             claims.push(claim);
     
             localStorage.setItem('claims', JSON.stringify(claims));
     
-            
-            alert('Your claim has been successfully submitted!');
-    
-          
             this.reset();
+    
+            renderClaimHistory();
+    
+            alert('Your claim has been successfully submitted!');
         });
-    </script> 
+    
+        document.addEventListener('DOMContentLoaded', renderClaimHistory);
+    </script>
+    
     
     
 </body>

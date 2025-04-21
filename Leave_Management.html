@@ -5,138 +5,324 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leave History</title>
   <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+  
+    header {
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+header p {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+header {
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  h1 {
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1.8rem 1rem;
   }
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+  
+  header h1 {
+    font-size: 2rem;
   }
-  .card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
+  
+  header p {
+    font-size: 1rem;
+    padding: 0 1rem;
   }
-  .card p {
-    margin: 5px 0;
-    color: #555;
-  }
-  .status {
-    font-weight: bold;
-    color: #007BFF;
-  }
-  .button-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .approve-btn, .reject-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .approve-btn {
-    background-color: #4CAF50;
-    color: white;
-  }
-  .reject-btn {
-    background-color: #f44336;
-    color: white;
-  }
-</style>
+}
+  
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-top: 5px solid;
+    }
+  
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+  
+    .card h3 {
+      margin-top: 0;
+      color: #3498db;
+      font-size: 1.5rem;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+  
+    .card p {
+      margin: 12px 0;
+      color: #555;
+    }
+  
+    .card p strong {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+  
+    .status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: capitalize;
+    }
+  
+    .status[data-status="Approved"],
+    .status:contains("Approved"),
+    .status:contains("Approve") {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+  
+    .status[data-status="Rejected"],
+    .status:contains("Rejected"),
+    .status:contains("Reject") {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+  
+    .status[data-status="Pending"],
+    .status:contains("Pending") {
+      background-color: #fff8e1;
+      color: #ff8f00;
+    }
+  
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed #ddd;
+    }
+  
+    .approve-btn, .reject-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  
+    .approve-btn {
+      background: linear-gradient(135deg, #4CAF50, #8BC34A);
+      color: white;
+    }
+  
+    .approve-btn:hover {
+      background: linear-gradient(135deg, #3d8b40, #7cb342);
+      transform: translateY(-2px);
+    }
+  
+    .reject-btn {
+      background: linear-gradient(135deg, #f44336, #e53935);
+      color: white;
+    }
+  
+    .reject-btn:hover {
+      background: linear-gradient(135deg, #d32f2f, #c62828);
+      transform: translateY(-2px);
+    }
+  
+    /* Different border colors based on leave type */
+    .card h3:contains("Annual") ~ .card {
+      border-top-color: #3498db;
+    }
+    .card h3:contains("Sick") ~ .card {
+      border-top-color: #9C27B0;
+    }
+    .card h3:contains("Casual") ~ .card {
+      border-top-color: #FF9800;
+    }
+  
+    @media (max-width: 768px) {
+      .card-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
     
 </head>
 <body>
-  <h1>Leave Management</h1>
+  <header>
+    <h1>Leave Management</h1>
+    <p>"Empowering employees through flexible leave solutions"</p>
+  </header>
+
+  <!-- Notification area for messages -->
+  <div id="notification" style="display: none;"></div>
+
   <div class="card-container" id="leaveHistoryContainer">
     <div class="card">
-        <h3>Annual Leave</h3>
-        <p><strong>Date Range:</strong> 2024-01-15 - 2024-01-20</p>
-        <p><strong>Status:</strong> <span class="status">Approve</span></p>
-        <p><strong>Reason:</strong> Family vacation</p>
-
-      </div>
-      <div class="card">
-        <h3>Sick Leave</h3>
-        <p><strong>Date Range:</strong> 2024-02-01 - 2024-02-03</p>
-        <p><strong>Status:</strong> <span class="status">Approve</span></p>
-        <p><strong>Reason:</strong> Flu</p>
-     
-      </div>
-      <div class="card">
-        <h3>Casual Leave</h3>
-        <p><strong>Date Range:</strong> 2024-03-05 - 2024-03-06</p>
-        <p><strong>Status:</strong> <span class="status">Reject</span></p>
-        <p><strong>Reason:</strong> Personal errands</p>
-
-      </div>
+      <h3>Annual Leave</h3>
+      <p><strong>Employee Id:</strong>EMP0123</p>
+      <p><strong>Date Range:</strong> 2024-01-15 - 2024-01-20</p>
+      <p><strong>Status:</strong> <span class="status">Approve</span></p>
+      <p><strong>Reason:</strong> Family vacation</p>
+    </div>
+    <div class="card">
+      <h3>Sick Leave</h3>
+      <p><strong>Employee Id:</strong>EMP0124</p>
+      <p><strong>Date Range:</strong> 2024-02-01 - 2024-02-03</p>
+      <p><strong>Status:</strong> <span class="status">Approve</span></p>
+      <p><strong>Reason:</strong> Flu</p>
+    </div>
+    <div class="card">
+      <h3>Casual Leave</h3>
+      <p><strong>Employee Id:</strong>EMP0123</p>
+      <p><strong>Date Range:</strong> 2024-03-05 - 2024-03-06</p>
+      <p><strong>Status:</strong> <span class="status">Reject</span></p>
+      <p><strong>Reason:</strong> Personal errands</p>
+    </div>
   </div>
 
   <script>
     const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
-
     const container = document.getElementById("leaveHistoryContainer");
+    const notification = document.getElementById("notification");
 
+    // Function to show notification message
+    function showNotification(message, isSuccess) {
+      notification.textContent = message;
+      notification.style.display = "block";
+      notification.style.backgroundColor = isSuccess ? "#4CAF50" : "#f44336";
+      notification.style.color = "white";
+      notification.style.padding = "10px";
+      notification.style.margin = "10px 0";
+      notification.style.borderRadius = "4px";
+      
+      // Hide notification after 3 seconds
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 3000);
+    }
+
+    // Function to confirm action
+    function confirmAction(action, callback) {
+      if (confirm(`Are you sure you want to ${action} this leave request?`)) {
+        callback();
+      }
+    }
+
+    // Function to update status
+    function updateStatus(index, status, button) {
+      leaveRequests[index].status = status;
+      localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
+      
+      // Update status display
+      const card = button.closest(".card");
+      const statusElement = card.querySelector(".status");
+      if (statusElement) {
+        statusElement.textContent = status;
+      }
+      
+      // Remove the entire button container
+      const buttonContainer = card.querySelector(".button-container");
+      if (buttonContainer) {
+        buttonContainer.remove();
+      }
+      
+      // Show success message
+      showNotification(`Leave request ${status.toLowerCase()} successfully!`, true);
+    }
+
+    // Render leave requests
     leaveRequests.forEach((request, index) => {
       const card = document.createElement("div");
       card.className = "card";
 
+      // Only show buttons if status is Pending
+      const buttonsHtml = request.status === "Pending" 
+        ? `<div class="button-container">
+             <button class="approve-btn" data-index="${index}">Approve</button>
+             <button class="reject-btn" data-index="${index}">Reject</button>
+           </div>`
+        : "";
+
       card.innerHTML = `
         <h3>${request.leaveType} Leave</h3>
+        <p><strong>Employee Id:</strong> ${request.Empid}</p>
         <p><strong>Date Range:</strong> ${request.startDate} - ${request.endDate}</p>
         <p><strong>Status:</strong> <span class="status">${request.status}</span></p>
         <p><strong>Reason:</strong> ${request.reason}</p>
-        <div class="button-container">
-          <button class="approve-btn" data-index="${index}">Approve</button>
-          <button class="reject-btn" data-index="${index}">Reject</button>
-        </div>
+        ${buttonsHtml}
       `;
 
       container.appendChild(card);
     });
 
-
-container.addEventListener("click", (e) => {
-  if (e.target.classList.contains("approve-btn")) {
-    updateStatus(e.target.dataset.index, "Approved", e.target);
-  } else if (e.target.classList.contains("reject-btn")) {
-    updateStatus(e.target.dataset.index, "Rejected", e.target);
-  }
-});
-
-function updateStatus(index, status, button) {
-  leaveRequests[index].status = status;
-
-  localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
-
-  const card = button.closest(".card");
-
-  const buttonContainer = card.querySelector(".button-container");
-  if (buttonContainer) {
-    buttonContainer.style.display = "none";
-  }
-
-}
-
+    // Handle button clicks
+    container.addEventListener("click", (e) => {
+      if (e.target.classList.contains("approve-btn")) {
+        confirmAction("approve", () => {
+          updateStatus(e.target.dataset.index, "Approved", e.target);
+        });
+      } else if (e.target.classList.contains("reject-btn")) {
+        confirmAction("reject", () => {
+          updateStatus(e.target.dataset.index, "Rejected", e.target);
+        });
+      }
+    });
   </script>
 </body>
 </html>

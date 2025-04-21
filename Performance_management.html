@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +85,7 @@
       }
 
         .kpi-card {
-            width: 280px;
+            width: 250px;
             color: rgb(0, 0, 0);
             border-radius: 10px;
             padding: 15px;
@@ -185,7 +185,7 @@
     </header>
 
     <section id="goal-tracking">
-        <h2>Goal Setting and Tracking</h2>
+        <h2 style="text-align: center; color: #5780d8;">Goal Setting and Tracking</h2>
         <div class="goal">
             <p>Goal: Complete HRMS Module by Q4</p>
             <div class="progress">
@@ -197,7 +197,7 @@
 
 
     <section id="feedback">
-        <h2>360-Degree Feedback</h2>
+        <h2 style="text-align: center; color: #5780d8;">360-Degree Feedback</h2>
         <div class="feedback-container">
             <div class="pie-chart">
                 <h4>Project Performance</h4>
@@ -231,7 +231,7 @@
     </section>
 
     <section id="kpis">
-        <h2>Key Performance Indicators (KPIs)</h2>
+        <h2 style="text-align: center; color: #5780d8;">Key Performance Indicators (KPIs)</h2>
         <div id="kpi-card">
         <div class="kpi-card">
             <h3>Developer Productivity</h3>
@@ -254,7 +254,7 @@
         // Data for project performance pie chart
         const projectPerformanceData = {
             labels: ["Timely Delivery", "Client Satisfaction", "Budget Adherence"],
-            values: [40, 35, 25], // Values related to project performance
+            values: [40, 35, 25], 
             colors: ["#57d8d8", "#57a8d8", "#57d857"]
         };
     
@@ -305,6 +305,372 @@
         // Draw the pie chart
         document.addEventListener("DOMContentLoaded", () => {
             drawPieChart("performancePieChart", projectPerformanceData);
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(135deg,  #2c3e50, #3498db);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .review-button-container {
+            text-align: right; 
+            margin: 20px 20px 20px 0; 
+        }
+
+        #reviewButton {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #reviewButton:hover {
+            background-color: #5fb4ec;
+        }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center;  */
+    padding: 20px;
+    gap: 20px; 
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 285px;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card .details {
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #777;
+    text-align: center;
+}
+
+.review {
+    margin-top: 15px;
+    text-align: center; 
+    width: 100%;
+}
+
+.review h3 {
+    margin: 10px 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.review .review-text {
+    font-size: 0.9em;
+    color: #555;
+    text-align: center; 
+}
+
+.rating {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center; 
+}
+
+.star {
+    cursor: pointer;
+    color: #ffcc00;
+    font-size: 1em;
+    margin: 0 2px; 
+}
+
+/* .star.active {
+    color: #ffcc00;
+} */
+.graph-container {
+    display: none;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.graph {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%; 
+    box-sizing: border-box; 
+}
+
+.graph h1 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Employee Performance Reviews</h1>
+        <p class="quote">"Your appraisal today fuels tomorrow's success."</p>
+    </header>
+
+    <div class="review-button-container">
+        <button id="reviewButton">360 Review</button>
+    </div>
+<div id="graphContainer" class="graph-container">
+    <div class="graph">
+        <h1 style="color: #3498db;">360 degree Review</h1>
+        <canvas id="barGraph" width="600px" height="400px"></canvas>
+    </div>
+    <div class="graph">
+        <h1 style="color: #3498db;">Hrms project Review</h1>
+        <canvas id="pieChart" width="400px" height="400px"></canvas>
+    </div>
+</div>
+<div class="card-container">
+    <div class="card">
+        <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Employee Photo">
+        <div class="details">
+            <h2  style="color: #3498db;">Shravan Reddy</h2>
+            <p>Department: Developer</p>
+            <p>Role: Senior Software Engineer</p>
+
+        
+              
+                <div class="rating">
+                    <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                </div>
+                <p class="review-text">He has shown excellent problem-solving skills and dedication.</p>
+           
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+        <img src="https://thumbs.dreamstime.com/b/profile-picture-caucasian-male-employee-posing-office-happy-young-worker-look-camera-workplace-headshot-portrait-smiling-190186649.jpg" alt="Employee Photo">
+        <div class="details">
+            <h2  style="color: #3498db;">Ilyas Zubair</h2>
+            <p>Department: HR</p>
+            <p>Role: HR Manager</p>
+
+                <div class="rating">
+                    <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                </div>
+                <p class="review-text">He is a great team player and handles employee relations effectively.</p>
+           
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://hirebee.ai/wp-content/uploads/2021/07/testimonial4-1-1024x569.png" alt="Employee Photo">
+        <div class="details">
+            <h2  style="color: #3498db;">Srikant Nalla</h2>
+            <p>Department: Manager</p>
+            <p>Role: Project Manager</p>
+
+                <div class="rating">
+                    <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                    <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                </div>
+                <p class="review-text">He is a strong leader and ensures timely project delivery.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://th.bing.com/th/id/OIP.py1AB2TdU0VSEoDB6PiTNgHaE8?pid=ImgDet&w=178&h=118&c=7&dpr=1.5" alt="Employee Photo">
+            <div class="details">
+                <h2  style="color: #3498db;">Jay Simha</h2>
+                <p>Department: Manager</p>
+                <p>Role: Manager</p>
+    
+                    <div class="rating">
+                        <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                    </div>
+                    <p class="review-text">He is a strong leader and ensures timely project delivery.</p>
+                </div>
+            </div>
+    </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const reviewButton = document.getElementById('reviewButton');
+        const graphContainer = document.getElementById('graphContainer');
+        const barGraphCanvas = document.getElementById('barGraph');
+        const pieChartCanvas = document.getElementById('pieChart');
+
+        reviewButton.addEventListener('click', () => {
+            graphContainer.style.display = graphContainer.style.display === 'flex' ? 'none' : 'flex';
+
+            // Create the bar graph
+            const barCtx = barGraphCanvas.getContext('2d');
+            const barGraph = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024'], 
+                    datasets: [
+                        {
+                            label: 'HR Review',
+                            data: [4, 3.5, 4.2, 4.8], 
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                        },
+                        {
+                            label: 'Senior Employee Review',
+                            data: [3.8, 4.1, 4.5, 4.7], 
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: false, 
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            title: {
+                                display: true,
+                                text: 'Rating',
+                            },
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year',
+                            },
+                        },
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Year-wise Employee Reviews',
+                        },
+                    },
+                },
+            });
+
+            const pieCtx = pieChartCanvas.getContext('2d');
+            const pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Excellent (5)', 'Good (4)', 'Average (3)', 'Poor (2)', 'Very Poor (1)'],
+                    datasets: [
+                        {
+                            label: 'Rating Distribution',
+                            data: [20, 30, 25, 15, 10], 
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(153, 102, 255, 1)',
+                            ],
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: false, 
+                    plugins: {
+                        legend: {
+                display: true,
+                position: 'left', 
+                labels: {
+                    boxWidth: 15,
+                    padding: 10, 
+                },
+            },
+                        title: {
+                            display: true,
+                        },
+                    },
+                },
+            });
         });
     </script>
 </body>

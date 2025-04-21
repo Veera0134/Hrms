@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -166,5 +166,1351 @@
     <footer>
         <p>&copy; 2024 Astrolite Tech Solution. All rights reserved.</p>
     </footer>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Management Portal</title>
+    <link rel="stylesheet" href="Training_Management.css">
+    <!-- Add to head -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+}
+.top-header {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.logo h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0; 
+}
+
+/* .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+} */
+
+/* .search-container {
+  display: flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  padding: 0.5rem;
+} */
+
+/* #searchInput {
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  width: 300px;
+  font-size: 0.95rem;
+} */
+
+/* #searchInput:focus {
+  outline: none;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+} */
+.main-content {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+.navigation-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.nav-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.nav-card h2 {
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.nav-card p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: #1e293b;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  color: #2563eb;
+}
+
+.stat-info h3 {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.stat-trend {
+  font-size: 0.875rem;
+}
+
+.stat-trend.positive {
+  color: #10b981;
+}
+
+.stat-trend.negative {
+  color: #ef4444;
+}
+
+.stat-trend.neutral {
+  color: #6b7280;
+}
+.recent-activities {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.activity-timeline {
+  margin-top: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+
+.activity-dot.completed {
+  background-color: #10b981;
+}
+
+.activity-dot.started {
+  background-color: #2563eb;
+}
+
+.activity-dot.certificate {
+  background-color: #f59e0b;
+}
+
+.activity-content h4 {
+  margin-bottom: 0.25rem;
+}
+
+.activity-time {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.training-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.training-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.training-card:hover {
+  transform: translateY(-4px);
+}
+
+.training-image {
+  position: relative;
+  height: 160px;
+}
+
+.training-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.in-progress {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+.status-badge.completed {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.status-badge.not-started {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.training-content {
+  padding: 1.5rem;
+}
+
+.progress-container {
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.progress {
+  height: 100%;
+  background-color: #2563eb;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.training-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.duration {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.certificate-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.certificate-preview {
+  position: relative;
+  height: 200px;
+}
+
+.certificate-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certificate-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificate-preview:hover .certificate-overlay {
+  opacity: 1;
+}
+
+.certificate-info {
+  padding: 1.5rem;
+}
+
+.certificate-meta {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.certificate-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.report-period {
+  display: flex;
+  align-items: center;
+}
+
+#reportPeriod {
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.report-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #64748b;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close-btn {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .header-actions {
+      width: 100%;
+      flex-direction: column;
+  }
+
+  .search-container {
+      width: 100%;
+  }
+
+  #searchInput {
+      width: 100%;
+  }
+
+  .section-header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+  }
+
+  .filter-buttons {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+  }
+
+  .filter-btn {
+      white-space: nowrap;
+  }
+}
+.training-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.training-item {
+  background: #f8f9fa;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+.delete-btn {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.3s;
+  align-self: flex-end;
+  margin-top: 5px;
+}
+.delete-btn:hover {
+  background: #cc0000;
+}
+.reports-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .report-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .report-period-select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .report-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .header-actions {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.search-container:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+#searchInput {
+    border: none;
+    background: transparent;
+    padding: 8px 12px;
+    width: 200px;
+    font-size: 14px;
+    outline: none;
+    transition: width 0.3s ease;
+}
+
+#searchInput:focus {
+    width: 250px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #666;
+    transition: transform 0.2s ease;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    color: #333;
+}
+
+/* Remove the inline float:right since we're using flexbox */
+.search-container {
+    margin-right: 1px;
+    margin-bottom: 20px;
+    /* float: right; - Remove this line */
+}
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Training Management System</h1>
+                <p style="color: white;">"Empowering growth through continuous learning"</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+      <div class="header-actions">
+        <div class="search-container" style="margin-right: 1px; margin-bottom: 20px; float: right;">
+            <input type="text" id="searchInput" placeholder="Search trainings...">
+            <button class="search-btn">🔍</button>
+        </div>
+    </div>
+        <div class="navigation-cards">
+            <div class="nav-card" data-section="dashboard">
+                <div class="nav-card-icon">📊</div>
+                <h2>Dashboard</h2>
+                <p>View your training progress and statistics</p>
+            </div>
+            <div class="nav-card" data-section="trainings">
+                <div class="nav-card-icon">📚</div>
+                <h2>Trainings</h2>
+                <p>Browse and manage your training courses</p>
+            </div>
+            <div class="nav-card" data-section="certificates">
+                <div class="nav-card-icon">🎓</div>
+                <h2>Certificates</h2>
+                <p>Access your earned certificates</p>
+            </div>
+            <div class="nav-card" data-section="reports">
+                <div class="nav-card-icon">📈</div>
+                <h2>Reports</h2>
+                <p>View detailed training analytics</p>
+            </div>
+        </div>
+
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h2>Training Overview</h2>
+                <button class="btn-primary" id="newTrainingBtn">+ New Training</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <h3>Active Trainings</h3>
+                        <p class="stat-number">12</p>
+                        <p class="stat-trend positive">↑ 8% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3>Completed</h3>
+                        <p class="stat-number">45</p>
+                        <p class="stat-trend positive">↑ 12% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-info">
+                        <h3>Certificates</h3>
+                        <p class="stat-number">38</p>
+                        <p class="stat-trend neutral">→ Same as last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <h3>Success Rate</h3>
+                        <p class="stat-number">92%</p>
+                        <p class="stat-trend positive">↑ 3% from last month</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activities">
+                <h3>Recent Activities</h3>
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-dot completed"></div>
+                        <div class="activity-content">
+                            <h4>Web Development Basics completed</h4>
+                            <p>Veera completed with 95% score</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot started"></div>
+                        <div class="activity-content">
+                            <h4>New Training Started</h4>
+                            <p>Raghava began Data Science Fundamentals</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot certificate"></div>
+                        <div class="activity-content">
+                            <h4>Certificate Issued</h4>
+                            <p>Veera Raghava received Advanced UI/UX certificate</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trainings" class="content-section">
+            <div class="section-header">
+                <h2>Available Trainings</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="in-progress">In Progress</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="not-started">Not Started</button>
+                </div>
+            </div>
+            <div class="training-grid">
+                <div class="training-card">
+                    <div class="training-image">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="Web Development">
+                        <span class="status-badge in-progress">In Progress</span>
+                    </div>
+                    <div class="training-content">
+                        <h3>Advanced Web Development</h3>
+                        <p>Master modern web technologies and frameworks</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%"></div>
+                            </div>
+                            <span class="progress-text">60% Complete</span>
+                        </div>
+                        <div class="training-footer">
+                            <span class="duration">8 weeks</span>
+                            <button class="btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800" alt="UI/UX Design">
+                        <span class="status-badge completed">Completed</span>
+                    </div>
+                    <div class="training-content">
+                        <h3>UI/UX Design Masterclass</h3>
+                        <p>Create beautiful and user-friendly interfaces</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-text">Completed</span>
+                        </div>
+                        <div class="training-footer">
+                            <span class="duration">6 weeks</span>
+                            <button class="btn-secondary" onclick="document.getElementById('certificates').scrollIntoView({behavior: 'smooth'})">
+                                View Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="training-card">
+                    <div class="training-image">
+                        <img src="https://images.unsplash.com/photo-1527474305487-b87b222841cc?w=800" alt="Data Science">
+                        <span class="status-badge not-started">Not Started</span>
+                    </div>
+                    <div class="training-content">
+                        <h3>Data Science Fundamentals</h3>
+                        <p>Learn data analysis and visualization</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-text">Not Started</span>
+                        </div>
+                        <div class="training-footer">
+                            <span class="duration">10 weeks</span>
+                            <button class="btn-primary">Start Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="content-section">
+            <div class="section-header">
+                <h2>Your Certificates</h2>
+            </div>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-preview">
+                        <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800" alt="Certificate">
+                        <div class="certificate-overlay">
+                            <button class="btn-primary">View Full Size</button>
+                        </div>
+                    </div>
+                    <div class="certificate-info">
+                        <h3>UI/UX Design Masterclass</h3>
+                        <div class="certificate-meta">
+                            <span>Completed: March 15, 2024</span>
+                            <span>Grade: A (95%)</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="btn-secondary">Download</button>
+                            <!-- <button class="btn-primary">Share</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reports" class="content-section">
+            <div class="report-controls">
+                <h2>Training Analytics</h2>
+                <div class="report-filters">
+                    <select id="reportPeriod" class="report-period-select">
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                        <!-- <option value="custom">Custom Range</option> -->
+                    </select>
+                    <div id="customRange" class="custom-range" style="display:none;">
+                        <input type="date" id="startDate">
+                        <span>to</span>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reports-grid">
+                <div class="report-card">
+                    <h3>Training Progress</h3>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                    <div class="chart-legend"></div>
+                </div>
+                
+                <div class="report-card">
+                    <h3>Completion Rates</h3>
+                    <div class="chart-container">
+                        <canvas id="completionChart"></canvas>
+                    </div>
+                    <div class="chart-legend"></div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Assign New Training</h2>
+            <form id="assignForm">
+                <div class="form-group">
+                    <label for="employeeName">Employee Name</label>
+                    <input type="text" id="employeeName" required maxlength="30" 
+                           pattern="^[A-Z][a-zA-Z]*(?: [A-Z][a-zA-Z]*)*$"
+                           title="Only letters allowed with single spaces between names (e.g., John Doe)">
+                    <small class="error-message" id="name-error"></small>
+                </div>
+                <div class="form-group">
+                    <label for="trainingSelect">Select Training</label>
+                    <select id="trainingSelect" required>
+                        <option value="">Choose a training...</option>
+                        <option value="web-dev">Advanced Web Development</option>
+                        <option value="ui-ux">UI/UX Design Masterclass</option>
+                        <option value="data-science">Data Science Fundamentals</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDates" required>
+                    <small class="error-message" id="date-error"></small>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority Level</label>
+                    <select id="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Assign Training</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    <script>
+        document.querySelectorAll('.btn-secondary').forEach(button => {
+  if (button.textContent === 'View Certificate') {
+    button.addEventListener('click', () => {
+      document.getElementById('certificates').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  }
+});
+const navCards = document.querySelectorAll('.nav-card');
+const contentSections = document.querySelectorAll('.content-section');
+const searchInput = document.getElementById('searchInput');
+const modal = document.getElementById('modal');
+const closeBtn = document.querySelector('.close-btn');
+const assignForm = document.getElementById('assignForm');
+const newTrainingBtn = document.getElementById('newTrainingBtn');
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+navCards.forEach(card => {
+    card.addEventListener('click', () => {
+        contentSections.forEach(section => section.classList.remove('active'));
+        
+        const targetSection = document.getElementById(card.dataset.section);
+        targetSection.classList.add('active');
+        
+        navCards.forEach(c => c.style.transform = '');
+        card.style.transform = 'scale(1.02)';
+    });
+});
+
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const trainingCards = document.querySelectorAll('.training-card');
+    
+    trainingCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const description = card.querySelector('p').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+function openModal() {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; 
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; 
+}
+
+newTrainingBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up date restrictions
+    const startDateInput = document.getElementById('startDates');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 1); // 1 month from now
+    
+    // Format dates for input[type="date"]
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+    
+    startDateInput.min = formatDate(today);
+    startDateInput.max = formatDate(maxDate);
+    
+    // Name validation
+    const employeeNameInput = document.getElementById('employeeName');
+    employeeNameInput.addEventListener('input', function() {
+        // Remove any non-letter characters except spaces
+        this.value = this.value.replace(/[^a-zA-Z ]/g, '');
+        // Replace multiple spaces with single space
+        this.value = this.value.replace(/\s{2,}/g, ' ');
+        // Capitalize first letter of each word
+        this.value = this.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+            return a.toUpperCase();
+        });
+    });
+
+ // Form submission
+ document.getElementById('assignForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Get form values
+        const employeeName = employeeNameInput.value.trim();
+        const training = document.getElementById('trainingSelect').value;
+        const startDate = startDateInput.value;
+        const priority = document.getElementById('priority').value;
+        
+        // Validate name format
+        const nameRegex = /^[A-Z][a-zA-Z]*(?: [A-Z][a-zA-Z]*)*$/;
+        if (!nameRegex.test(employeeName)) {
+            document.getElementById('name-error').textContent = 
+                'Please enter a valid name (only letters, single spaces, each word capitalized)';
+            return;
+        } else {
+            document.getElementById('name-error').textContent = '';
+        }
+        
+        // Validate date
+        const selectedDate = new Date(startDate);
+        if (selectedDate < today) {
+            document.getElementById('date-error').textContent = 
+                'Start date cannot be in the past';
+            return;
+        } else if (selectedDate > maxDate) {
+            document.getElementById('date-error').textContent = 
+                'Start date cannot be more than 1 month in the future';
+            return;
+        } else {
+            document.getElementById('date-error').textContent = '';
+        }
+        
+        // If all validations pass
+        const trainingData = {
+            employeeName,
+            training,
+            startDate,
+            priority
+        };
+        
+        let trainings = JSON.parse(localStorage.getItem('trainings')) || [];
+        trainings.push(trainingData);
+        localStorage.setItem('trainings', JSON.stringify(trainings));
+        
+        alert('Training successfully assigned!');
+        this.reset();
+
+    });
+});
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const filter = button.dataset.filter;
+        const trainingCards = document.querySelectorAll('.training-card');
+        
+        trainingCards.forEach(card => {
+            const status = card.querySelector('.status-badge').classList;
+            if (filter === 'all' || status.contains(filter)) {
+                card.style. display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+document.querySelectorAll('.certificate-actions button').forEach(button => {
+    button.addEventListener('click', () => {
+        const action = button.textContent.toLowerCase();
+        if (action === 'download') {
+            alert('Certificate download started!');
+        } else if (action === 'share') {
+            alert('Share dialog opened! (Simulation)');
+        }
+    });
+});
+
+document.querySelectorAll('.certificate-preview').forEach(preview => {
+    preview.addEventListener('click', () => {
+        const imgSrc = preview.querySelector('img').src;
+        window.open(imgSrc, '_blank');
+    });
+});
+
+let progressChart, completionChart, participationChart;
+
+function initCharts() {
+    const progressCtx = document.getElementById('progressChart').getContext('2d');
+    progressChart = new Chart(progressCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Training Progress',
+                data: [65, 59, 80, 81, 56, 72],
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Completion %'
+                    }
+                }
+            }
+        }
+    });
+
+    const completionCtx = document.getElementById('completionChart').getContext('2d');
+    completionChart = new Chart(completionCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Completion Rate',
+                data: [75, 82, 68, 90, 76, 88],
+                fill: false,
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Completion %'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function generateReport(period) {
+    let labels, progressData, completionData;
+    
+    switch(period) {
+        case 'monthly':
+            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            progressData = [65, 59, 80, 81, 56, 72];
+            completionData = [75, 82, 68, 90, 76, 88];
+            break;
+        case 'quarterly':
+            labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            progressData = [68, 72, 65, 80];
+            completionData = [75, 78, 72, 85];
+            break;
+        case 'yearly':
+            labels = ['2020', '2021', '2022', '2023'];
+            progressData = [65, 72, 78, 82];
+            completionData = [70, 75, 80, 85];
+            break;
+    }
+    
+    progressChart.data.labels = labels;
+    progressChart.data.datasets[0].data = progressData;
+    progressChart.update();
+    
+    completionChart.data.labels = labels;
+    completionChart.data.datasets[0].data = completionData;
+    completionChart.update();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    initCharts();
+    generateReport('monthly');
+    
+    document.getElementById('reportPeriod').addEventListener('change', function() {
+        if(this.value === 'custom') {
+            document.getElementById('customRange').style.display = 'flex';
+        } else {
+            document.getElementById('customRange').style.display = 'none';
+            generateReport(this.value);
+        }
+    });
+});;
+
+document.querySelector('[data-section="dashboard"]').click();
+
+    const trainingList = document.createElement("ul");
+    trainingList.classList.add("training-list");
+    document.body.appendChild(trainingList);
+
+    function loadTrainings() {
+        console.log("Loading trainings from local storage...");
+        trainingList.innerHTML = "";
+        let trainings = JSON.parse(localStorage.getItem("trainings")) || [];
+
+  
+
+        trainings.forEach((training, index) => {
+            console.log("Training Entry:", training); 
+
+            let li = document.createElement("li");
+            li.classList.add("training-item");
+
+            li.innerHTML = `<strong>Employee:</strong> ${training.employeeName || "N/A"} <br>
+                            <strong>Training:</strong> ${training.training || "N/A"} <br>
+                            <strong>Start Date:</strong> ${training.startDate || "N/A"} <br>
+                            <strong>Priority:</strong> ${training.priority || "N/A"}`;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.onclick = function () {
+                deleteTraining(index);
+            };
+            li.appendChild(deleteBtn);
+            trainingList.appendChild(li);
+        });
+
+        console.log("Loaded trainings:", trainings);
+    }
+
+    function deleteTraining(index) {
+        let trainings = JSON.parse(localStorage.getItem("trainings")) || [];
+        trainings.splice(index, 1);
+        localStorage.setItem("trainings", JSON.stringify(trainings));
+        loadTrainings();
+    }
+
+
+
+    loadTrainings();
+    </script>
 </body>
 </html>

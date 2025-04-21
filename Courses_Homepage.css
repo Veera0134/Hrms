@@ -78,7 +78,7 @@ nav {
 }
 
 .illustration {
-    width: 800px;
+    width: 100%;
     height: 300px;
     background: url('https://as1.ftcdn.net/v2/jpg/09/15/87/88/1000_F_915878819_B74Ej5j5pbucE528MWDeyVOL9sEbiMi8.jpg') no-repeat center center;
     background-size: cover;

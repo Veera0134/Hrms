@@ -21,7 +21,7 @@
               </select>
 
             <button id="addTaskBtn" class="add-task-btn">+</button>
-                <button onclick="loadReviews()">Show Reviews</button>
+                <!-- <button onclick="loadReviews()">Show Reviews</button> -->
 
         </nav>
     </header>
@@ -71,42 +71,6 @@
 
 
     <script>
-function loadReviews() {
-  const reviewList = document.getElementById('reviewList');
-  const reviews = JSON.parse(localStorage.getItem('reviews')) || {}; 
-  reviewList.innerHTML = '';
-
-  if (Object.keys(reviews).length === 0) {
-    reviewList.innerHTML = '<p>No reviews available yet.</p>';
-    return;
-  }
-
-  Object.entries(reviews).forEach(([taskName, review]) => {
-    const reviewCard = document.createElement('div');
-    reviewCard.classList.add('review-card');
-
-    reviewCard.innerHTML = `
-      <h3>${taskName}</h3>
-      <p>${review}</p>
-      <button class="done-btn">Done</button>
-      <button class="close-btn">Close</button>
-    `;
-
-    reviewCard.querySelector('.done-btn').addEventListener('click', () => {
-      alert(`Review for ${taskName} marked as Done`);
-    });
-
-    reviewCard.querySelector('.close-btn').addEventListener('click', () => {
-      reviewList.removeChild(reviewCard);  
-      delete reviews[taskName];            
-      localStorage.setItem('reviews', JSON.stringify(reviews));  
-    });
-
-    reviewList.appendChild(reviewCard);
-  });
-}
-
-
   document.addEventListener('DOMContentLoaded', () => {
     const filterStatus = document.getElementById('filterStatus');
     const taskForm = document.getElementById('taskForm');
@@ -119,17 +83,20 @@ function loadReviews() {
         const statusFilter = filterStatus.value;
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-        taskList.innerHTML = ''; 
+        taskList.innerHTML = ''; // Clear existing tasks
 
         tasks.forEach(task => {
-            const taskStatus = task.status.toLowerCase();
-            const isStatusMatch = statusFilter === 'all' || taskStatus.includes(statusFilter.toLowerCase());
-
-            if (isStatusMatch) {
+            if (statusFilter === 'all' || task.status === statusFilter) {
                 createTaskCard(task);
             }
         });
     }
+
+    // Ensure filter changes trigger filtering
+    filterStatus.addEventListener('change', filterTasks);
+
+    // Initial load
+    filterTasks();
 
     function createTaskCard(task) {
         const taskCard = document.createElement('div');
@@ -161,7 +128,7 @@ function loadReviews() {
         const assignedTo = document.getElementById('assignedTo').value.trim();
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
-        const today = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
 
         let isValid = true;
 

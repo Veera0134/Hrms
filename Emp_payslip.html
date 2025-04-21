@@ -6,181 +6,510 @@
     <title>Employee Payslip</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f5f6fa;
+            --card-background: #ffffff;
+        }
+    
         body {
             font-family: Arial, sans-serif;
-            color: #5E503F;
+            color: var(--primary-color);
             margin: 0;
             padding: 0;
+            background-color: var(--background-color);
         }
+    
         .payslip-container {
             width: 80%;
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgb(0, 0, 0);
+            background-color: var(--card-background);
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
+    
         .payslip-header {
             text-align: center;
             margin-bottom: 20px;
         }
+    
         .payslip-header h1 {
             font-size: 24px;
-            color: #1a1a1a;
+            color: var(--primary-color);
         }
+    
         .payslip-details {
             margin-bottom: 20px;
             padding: 10px;
-            background-color: #ebdfcd;
+            background-color: var(--background-color);
             border-radius: 8px;
         }
-        .payslip-details div {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
+    
         .view-button {
             display: inline-block;
             margin-top: 10px;
             padding: 8px 15px;
-            background-color: #ff7f3e;
+            background-color: var(--secondary-color);
             color: white;
             text-align: center;
             border-radius: 5px;
             cursor: pointer;
             border: none;
             text-decoration: none;
+            transition: 0.3s ease-in-out;
         }
-        .calendar-btn, .download-btn {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            color: #ff7f3e;
-            margin-right: 10px;
+    
+        .view-button:hover {
+            background-color: #217dbb;
         }
+    
         .hidden-content {
             display: none;
         }
-        .payslip-details.active + .hidden-content {
-            display: block;
-        }
+    
         .payslip-salary,
         .payslip-deductions,
         .payslip-summary {
             margin-bottom: 20px;
             padding: 10px;
-            background-color: #ebdfcd;
+            background-color: var(--background-color);
             border-radius: 8px;
         }
+    
         .payslip-salary div,
         .payslip-deductions div,
         .payslip-summary {
             display: flex;
             justify-content: space-between;
         }
+    
         .payslip-summary {
             font-weight: bold;
-            background-color: #d0bca8;
+            background-color: var(--secondary-color);
+            color: white;
         }
-    </style>
-        
+    
+        .form-group {
+            margin-bottom: 15px;
+        }
+    
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    
+        .form-group input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+    
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+    
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .submit-btn:hover {
+            background-color: #217dbb;
+        }
     </style>
 </head>
 <body>
+    <div id="payslip-details">
+        <div class="payslip-container">
+            <div class="payslip-header">
+                <h1 style="color: blue; font-size: 30px;">Employee Payslip</h1>
+            </div>
+            <p style="text-align: center; font-size: 18px; color: #000000;">Enter details to view payslip:</p>
+            <form id="payslipForm" style="max-width: 400px; margin: 0 auto;">
+                <div class="form-group">
+                    <label for="empName">Employee Name:</label>
+                    <input type="text" id="empName" name="empName" required 
+                           pattern="^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$" 
+                           title="Name must start with capital letters and contain only letters and single spaces." 
+                           maxlength="50">
+                    <small class="error-message" id="empNameError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="empid">Employee ID:</label>
+                    <input type="text" id="empid" name="empid" required 
+                           pattern="^ATS0(?!000)\d{3}$" 
+                           title="Employee ID must start with ATS0 followed by 3 numbers (e.g., ATS0123)" 
+                           maxlength="7">
+                    <small class="error-message" id="empIdError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="month">Month:</label>
+                    <input type="month" id="month" name="month" required
+                           min="2020-01">
+                    <small class="error-message" id="monthError"></small>
+                </div>
+                <button type="submit" class="submit-btn">View Payslip</button>
+            </form>
 
-<div id="payslip-details">
-    <!-- Payslip details will be dynamically inserted here -->
-  </div>
-
-<script>
- const payslipData = JSON.parse(localStorage.getItem("payslipData"));
-
- if (payslipData) {
-      const payslipSection = document.getElementById("payslip-details");
-      payslipSection.innerHTML = `
-       <div class="payslip-container">
-          <div class="payslip-header">
-        <h1>Employee Payslip</h1>
+            <div id="payslipContent" style="display: none;">
+            </div>
+        </div>
     </div>
-      <div class="payslip-details">
-        <h2>${payslipData.employeeName} - Payslip</h2>
-        <p><strong>Employee ID:</strong> ${payslipData.employeeId}</p>
-        <p><strong>Designation:</strong> ${payslipData.designation}</p>
-        <p><strong>Department:</strong> ${payslipData.department}</p>
-        <p><strong>Pay Period:</strong> ${payslipData.payPeriod}</p>
-         <h3>Net Pay: ${payslipData.totals.netPay}</h3>
 
-        <button id="view-details-btn" class="view-button">View Details</button>
-        </div>
-        <div id="hidden-content" class="hidden-content">
-            <div class="payslip-salary">
-          <h3>Earnings</h3>
-          <ul>
-            <li>Basic Salary: ${payslipData.earnings.basicSalary}</li>
-            <li>HRA: ${payslipData.earnings.hra}</li>
-            <li>Special Allowance: ${payslipData.earnings.specialAllowance}</li>
-            <li>Bonus: ${payslipData.earnings.bonus}</li>
-          </ul>
-          </div>
-          <div class="payslip-deductions">
-          <h3>Deductions</h3>
-          <ul>
-            <li>Income Tax: ${payslipData.deductions.incomeTaxDeduction}</li>
-            <li>Provident Fund: ${payslipData.deductions.pf}</li>
-            <li>Health Insurance: ${payslipData.deductions.healthInsurance}</li>
-          </ul>
-          </div>
-          <h3>Net Pay: ${payslipData.totals.netPay}</h3>
-        </div>
-        
-         <button id="download-payslip-btn" class="download-btn">📥 Download Payslip</button>
-        </div>
-      `;
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const payslipForm = document.getElementById("payslipForm");
+            const payslipContent = document.getElementById("payslipContent");
+            const monthInput = document.getElementById("month");
+            const currentDate = new Date();
+            const currentMonth = currentDate.toISOString().slice(0, 7);
+            
+            monthInput.max = currentMonth;
+            monthInput.min = "2020-01";
 
-      const viewDetailsBtn = document.getElementById("view-details-btn");
-      const hiddenContent = document.getElementById("hidden-content");
-      const downloadBtn = document.getElementById("download-payslip-btn");
+            monthInput.addEventListener('input', function() {
+                validateMonth();
+            });
 
-      viewDetailsBtn.addEventListener("click", () => {
-        hiddenContent.style.display = hiddenContent.style.display === "none" || !hiddenContent.style.display ? "block" : "none";
-      });
+            document.getElementById("empName").addEventListener('input', function() {
+                validateName();
+            });
 
-      downloadBtn.addEventListener("click", () => {
-        const payslipContent = `
-          ${payslipData.employeeName} - Payslip
-          Employee ID: ${payslipData.employeeId}
-          Designation: ${payslipData.designation}
-          Department: ${payslipData.department}
-          Pay Period: ${payslipData.payPeriod}
+            document.getElementById("empid").addEventListener('input', function() {
+                validateId();
+            });
 
-          Earnings:
-          - Basic Salary: ${payslipData.earnings.basicSalary}
-          - HRA: ${payslipData.earnings.hra}
-          - Special Allowance: ${payslipData.earnings.specialAllowance}
-          - Bonus: ${payslipData.earnings.bonus}
+            function validateName() {
+                const empName = document.getElementById("empName").value;
+                const errorElement = document.getElementById("empNameError");
+                
+                if (!empName.match(/^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$/)) {
+                    errorElement.textContent = "Name must start with capital letters and contain only letters and single spaces.";
+                    return false;
+                }
+                errorElement.textContent = "";
+                return true;
+            }
 
-          Deductions:
-          - Income Tax: ${payslipData.deductions.incomeTaxDeduction}
-          - Provident Fund: ${payslipData.deductions.pf}
-          - Health Insurance: ${payslipData.deductions.healthInsurance}
+            function validateId() {
+                const empId = document.getElementById("empid").value;
+                const errorElement = document.getElementById("empIdError");
+                
+                if (!empId.match(/^ATS0(?!000)\d{3}$/)) {
+                    errorElement.textContent = "Invalid format. Must be ATS0 followed by 3 numbers (e.g., ATS0123)";
+                    return false;
+                }
+                errorElement.textContent = "";
+                return true;
+            }
 
-          Net Pay: ${payslipData.totals.netPay}
-        `;
+            function validateMonth() {
+                const monthValue = monthInput.value;
+                const errorElement = document.getElementById("monthError");
+                
+                if (!monthValue) {
+                    errorElement.textContent = "Month is required";
+                    return false;
+                }
+                
+                const selectedDate = new Date(monthValue);
+                const minDate = new Date("2020-01");
+                const maxDate = new Date(currentMonth);
+                
+                if (selectedDate < minDate) {
+                    errorElement.textContent = "Date cannot be before January 2020";
+                    return false;
+                }
+                
+                if (selectedDate > maxDate) {
+                    errorElement.textContent = "Date cannot be in the future";
+                    return false;
+                }
+                
+                errorElement.textContent = "";
+                return true;
+            }
 
-        const blob = new Blob([payslipContent], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `${payslipData.employeeName}_Payslip.txt`;
-        link.click();
-      });
-    } else {
-      alert("No payslip data found.");
-    }
+            payslipForm.addEventListener("submit", function (e) {
+                e.preventDefault();
 
+                document.getElementById("empNameError").textContent = "";
+                document.getElementById("empIdError").textContent = "";
+                document.getElementById("monthError").textContent = "";
 
-</script>
+                const isNameValid = validateName();
+                const isIdValid = validateId();
+                const isMonthValid = validateMonth();
 
+                if (!isNameValid || !isIdValid || !isMonthValid) {
+                    return;
+                }
+
+                const empName = document.getElementById("empName").value;
+                const empId = document.getElementById("empid").value;
+                const monthValue = monthInput.value;
+
+                localStorage.setItem("employeeName", empName);
+                localStorage.setItem("employeeId", empId);
+                localStorage.setItem("payPeriod", monthValue);
+
+                if (monthValue === currentMonth) {
+                    const payslipData = JSON.parse(localStorage.getItem("payslipData"));
+                    if (payslipData) {
+                        payslipData.employeeName = empName;
+                        payslipData.employeeId = empId;
+                        payslipData.payPeriod = monthValue;
+                        renderPayslip();
+                        payslipContent.style.display = "block";
+                    } else {
+                        alert("Payslip data not found for the current month.");
+                    }
+                } else {
+                    window.location.href = "./Emp_payslip1.html";
+                }
+            });
+
+            function renderPayslip() {
+            }
+        });
+    </script>
 </body>
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payslip</title>
+    <link rel="stylesheet" href="Emp_payslip.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="payslip-header">
+            <div class="company-info">
+                <img src="https://via.placeholder.com/100" alt="Company Logo" class="company-logo">
+                <h1>TechCorp India Pvt. Ltd.</h1>
+                <p>123 Tech Park, Electronic City</p>
+                <p>Bangalore, Karnataka - 560100</p>
+            </div>
+            <div class="document-title">
+                <h2>Payslip for March 2025</h2>
+            </div>
+        </div>
+
+        <div class="employee-details">
+            <div class="detail-row">
+                <div class="detail-group">
+                    <label>Employee Name:</label>
+                    <span id="emp-name">Arjun Patel</span>
+                </div>
+                <div class="detail-group">
+                    <label>Employee ID:</label>
+                    <span id="emp-id">EMP0472</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-group">
+                    <label>Department:</label>
+                    <span id="department">Engineering</span>
+                </div>
+                <div class="detail-group">
+                    <label>Designation:</label>
+                    <span id="designation">Senior Software Architect</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-group">
+                    <label>PAN:</label>
+                    <span id="pan">ABCDE1234F</span>
+                </div>
+                <div class="detail-group">
+                    <label>UAN:</label>
+                    <span id="uan">101234567890</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="salary-details">
+            <div class="earnings">
+                <h3>Earnings</h3>
+                <div class="salary-row">
+                    <span>Basic Salary</span>
+                    <span class="amount">₹85,000</span>
+                </div>
+                <div class="salary-row">
+                    <span>HRA</span>
+                    <span class="amount">₹34,000</span>
+                </div>
+                <div class="salary-row">
+                    <span>Special Allowance</span>
+                    <span class="amount">₹25,000</span>
+                </div>
+                <div class="salary-row">
+                    <span>Transport Allowance</span>
+                    <span class="amount">₹3,000</span>
+                </div>
+                <div class="salary-row total">
+                    <span>Total Earnings</span>
+                    <span class="amount">₹1,47,000</span>
+                </div>
+            </div>
+
+            <div class="deductions">
+                <h3>Deductions</h3>
+                <div class="salary-row">
+                    <span>PF</span>
+                    <span class="amount">₹1,800</span>
+                </div>
+                <div class="salary-row">
+                    <span>Professional Tax</span>
+                    <span class="amount">₹200</span>
+                </div>
+                <div class="salary-row">
+                    <span>Income Tax</span>
+                    <span class="amount">₹15,000</span>
+                </div>
+                <div class="salary-row">
+                    <span>Health Insurance</span>
+                    <span class="amount">₹1,000</span>
+                </div>
+                <div class="salary-row total">
+                    <span>Total Deductions</span>
+                    <span class="amount">₹18,000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="net-salary">
+            <div class="salary-row">
+                <span>Net Salary</span>
+                <span class="amount">₹1,29,000</span>
+            </div>
+            <p class="amount-in-words">Rupees One Lakh Twenty Nine Thousand Only</p>
+        </div>
+
+        <div class="payslip-footer">
+            <p>This is a computer-generated payslip and does not require a signature.</p>
+            <div class="actions">
+                <button id="downloadBtn" class="download-btn">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+                <button id="printBtn" class="print-btn">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      const payslipData = JSON.parse(localStorage.getItem("payslipData"));
+     
+      if (payslipData) {
+           const payslipSection = document.getElementById("payslip-details");
+           payslipSection.innerHTML = `
+            <div class="payslip-container">
+               <div class="payslip-header">
+             <h1>Employee Payslip</h1>
+         </div>
+           <div class="payslip-details">
+             <h2>${payslipData.employeeName} - Payslip</h2>
+             <p><strong>Employee ID:</strong> ${payslipData.employeeId}</p>
+             <p><strong>Designation:</strong> ${payslipData.designation}</p>
+             <p><strong>Department:</strong> ${payslipData.department}</p>
+             <p><strong>Pay Period:</strong> ${payslipData.payPeriod}</p>
+              <h3>Net Pay: ${payslipData.totals.netPay}</h3>
+     
+             <button id="view-details-btn" class="view-button">View Details</button>
+             </div>
+             <div id="hidden-content" class="hidden-content">
+                 <div class="payslip-salary">
+               <h3>Earnings</h3>
+               <ul>
+                 <li>Basic Salary: ${payslipData.earnings.basicSalary}</li>
+                 <li>HRA: ${payslipData.earnings.hra}</li>
+                 <li>Special Allowance: ${payslipData.earnings.specialAllowance}</li>
+                 <li>Bonus: ${payslipData.earnings.bonus}</li>
+               </ul>
+               </div>
+               <div class="payslip-deductions">
+               <h3>Deductions</h3>
+               <ul>
+                 <li>Income Tax: ${payslipData.deductions.incomeTaxDeduction}</li>
+                 <li>Provident Fund: ${payslipData.deductions.pf}</li>
+                 <li>Health Insurance: ${payslipData.deductions.healthInsurance}</li>
+               </ul>
+               </div>
+               <h3>Net Pay: ${payslipData.totals.netPay}</h3>
+             </div>
+             
+              <button id="download-payslip-btn" class="download-btn">📥 Download Payslip</button>
+             </div>
+           `;
+     
+           const viewDetailsBtn = document.getElementById("view-details-btn");
+           const hiddenContent = document.getElementById("hidden-content");
+           const downloadBtn = document.getElementById("download-payslip-btn");
+     
+           viewDetailsBtn.addEventListener("click", () => {
+             hiddenContent.style.display = hiddenContent.style.display === "none" || !hiddenContent.style.display ? "block" : "none";
+           });
+     
+           downloadBtn.addEventListener("click", () => {
+             const payslipContent = `
+               ${payslipData.employeeName} - Payslip
+               Employee ID: ${payslipData.employeeId}
+               Designation: ${payslipData.designation}
+               Department: ${payslipData.department}
+               Pay Period: ${payslipData.payPeriod}
+     
+               Earnings:
+               - Basic Salary: ${payslipData.earnings.basicSalary}
+               - HRA: ${payslipData.earnings.hra}
+               - Special Allowance: ${payslipData.earnings.specialAllowance}
+               - Bonus: ${payslipData.earnings.bonus}
+     
+               Deductions:
+               - Income Tax: ${payslipData.deductions.incomeTaxDeduction}
+               - Provident Fund: ${payslipData.deductions.pf}
+               - Health Insurance: ${payslipData.deductions.healthInsurance}
+     
+               Net Pay: ${payslipData.totals.netPay}
+             `;
+     
+             const blob = new Blob([payslipContent], { type: "text/plain" });
+             const link = document.createElement("a");
+             link.href = URL.createObjectURL(blob);
+             link.download = `${payslipData.employeeName}_Payslip.txt`;
+             link.click();
+           });
+         } else {
+           alert("No payslip data found.");
+         }
+     
+     
+     </script>
+</body>
+</html> -->

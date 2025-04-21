@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+}
+
+/* Main Dashboard Layout */
+.main-container {
+    display: flex;
+        flex-direction: column;
+        gap: 20px; /* Reduced from 30px */
+        max-width: 1200px;
+        margin: 0 auto;
+}
+
+/* Cards Grid */
+.dashboard {
+    display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px; /* Reduced from 20px */
+        width: 100%
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    /* padding: 20px; */
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Full-card hover overlay */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+}
+
+/* Animation effects */
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover::after {
+    opacity: 1;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+/* Color schemes */
+.card.blue:hover::after {
+    background: linear-gradient(135deg, rgba(0, 132, 255, 0.1) 0%, rgba(0, 132, 255, 0.2) 100%);
+    box-shadow: inset 0 0 100px rgba(0, 132, 255, 0.1);
+}
+
+.card.red:hover::after {
+    background: linear-gradient(135deg, rgba(255, 50, 50, 0.1) 0%, rgba(255, 50, 50, 0.2) 100%);
+    box-shadow: inset 0 0 100px rgba(255, 50, 50, 0.1);
+}
+
+.card.black:hover::after {
+    background: linear-gradient(135deg, rgba(100, 100, 100, 0.1) 0%, rgba(100, 100, 100, 0.2) 100%);
+    box-shadow: inset 0 0 100px rgba(100, 100, 100, 0.1);
+}
+
+/* Border animation */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 12px;
+    z-index: -2;
+    background: transparent;
+    transition: all 0.5s ease;
+}
+
+.card.blue:hover::before {
+    background: linear-gradient(45deg, rgba(0, 132, 255, 0.203), rgba(0, 132, 255, 0));
+    animation: borderRotate 3s linear infinite;
+}
+
+.card.red:hover::before {
+    background: linear-gradient(45deg, rgba(255, 50, 50, 0.356), rgba(255, 50, 50, 0));
+    animation: borderRotate 3s linear infinite;
+}
+
+.card.black:hover::before {
+    background: linear-gradient(45deg, rgba(100, 100, 100, 0.404), rgba(100, 100, 100, 0));
+    animation: borderRotate 3s linear infinite;
+}
+
+@keyframes borderRotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.stats {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+}
+
+.card:hover .stats {
+    transform: scale(1.05);
+}
+
+.stats1 {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin: 5px 0 15px;
+    transition: all 0.3s ease;
+}
+
+.card:hover .stats1 {
+    color: #5d6d7e;
+}
+
+.card img {
+    width: 200px;
+    height: 80px;
+    margin: 10px auto;
+    object-fit: contain;
+    transition: all 0.5s ease;
+    filter: grayscale(20%);
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
+
+.gender-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.gender-item {
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.card:hover .gender-item {
+    transform: translateY(-3px);
+}
+
+.gender-item .number {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.card:hover .gender-item .number {
+    color: #1a252f;
+}
+
+.gender-item .label {
+    font-size: 0.75rem;
+    color: #95a5a6;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.card:hover .gender-item .label {
+    color: #7f8c8d;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 600px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats {
+        font-size: 1.8rem;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card img {
+        width: 120px;
+        height: 70px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1277dc;
+    margin: 0 auto;
+}
+
+.card-icon {
+    font-size: 24px;
+    color: #4a90e2;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.project-list {
+    margin-top: 15px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.project-name {
+    font-weight: 500;
+}
+
+.project-count {
+    background-color: #4a90e2;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.department-chart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.department-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.department-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.department-info {
+    flex: 1;
+}
+
+.department-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.department-count {
+    font-size: 11px;
+    color: #7f8c8d;
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .department-chart {
+        grid-template-columns: 1fr;
+    }
+}
+.row-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px; /* Reduced from 20px */
+        width: 100%;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 15px; /* Reduced from 20px */
+        transition: all 0.3s ease;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px; /* Reduced from 15px */
+        padding-bottom: 8px; /* Reduced from 10px */
+        border-bottom: 1px solid #eee;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 200px; /* Reduced from 250px (20% reduction) */
+        width: 100%;
+    }
+
+    /* Other styles remain the same */
+    .project-list {
+        margin-top: 12px; /* Reduced from 15px */
+    }
+
+    .department-chart {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px; /* Reduced from 15px */
+        margin-top: 12px; /* Reduced from 15px */
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+        .dashboard {
+            grid-template-columns: 1fr;
+        }
+        
+        .row-container {
+            grid-template-columns: 1fr;
+        }
+        
+        .department-chart {
+            grid-template-columns: 1fr;
+        }
+        
+        .chart-container {
+            height: 180px; /* Slightly less reduction on mobile */
+        }
+    }
+             /* Core card styling */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.card-icon {
+    font-size: 22px;
+    color: #3498db;
+}
+
+/* Chart container */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    margin-bottom: 20px;
+}
+
+/* Project cards grid */
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.project-card {
+    position: relative;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Hover background */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+/* Colorful backgrounds on hover */
+.project-card:nth-child(1):hover::after { background: rgba(52, 152, 219, 0.1); }
+.project-card:nth-child(2):hover::after { background: rgba(232, 67, 147, 0.1); }
+.project-card:nth-child(3):hover::after { background: rgba(46, 204, 113, 0.1); }
+.project-card:nth-child(4):hover::after { background: rgba(243, 156, 18, 0.1); }
+.project-card:nth-child(5):hover::after { background: rgba(155, 89, 182, 0.1); }
+.project-card:nth-child(6):hover::after { background: rgba(26, 188, 156, 0.1); }
+
+/* Color bar indicator */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Indicator bar colors */
+.project-card:nth-child(1)::before { background-color: #3498db; }
+.project-card:nth-child(2)::before { background-color: #e84393; }
+.project-card:nth-child(3)::before { background-color: #2ecc71; }
+.project-card:nth-child(4)::before { background-color: #f39c12; }
+.project-card:nth-child(5)::before { background-color: #9b59b6; }
+.project-card:nth-child(6)::before { background-color: #1abc9c; }
+
+/* Hover lift */
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover::before {
+    height: 6px;
+}
+
+.project-card-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.project-card-content {
+    flex: 1;
+}
+
+/* Project name styling */
+.project-card-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* Project value styling */
+.project-card-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+/* Hover text color change */
+.project-card:nth-child(1):hover .project-card-name { color: #3498db; }
+.project-card:nth-child(2):hover .project-card-name { color: #e84393; }
+.project-card:nth-child(3):hover .project-card-name { color: #2ecc71; }
+.project-card:nth-child(4):hover .project-card-name { color: #f39c12; }
+.project-card:nth-child(5):hover .project-card-name { color: #9b59b6; }
+.project-card:nth-child(6):hover .project-card-name { color: #1abc9c; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .project-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Department Cards Styles */
+.department-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.department-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Colorful hover background */
+.department-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+/* Different colors for each department */
+.department-card:nth-child(1):hover::after { background: rgba(52, 152, 219, 0.1); }
+.department-card:nth-child(2):hover::after { background: rgba(232, 67, 147, 0.1); }
+.department-card:nth-child(3):hover::after { background: rgba(46, 204, 113, 0.1); }
+.department-card:nth-child(4):hover::after { background: rgba(243, 156, 18, 0.1); }
+.department-card:nth-child(5):hover::after { background: rgba(155, 89, 182, 0.1); }
+.department-card:nth-child(6):hover::after { background: rgba(26, 188, 156, 0.1); }
+
+/* Color indicator bar */
+.department-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Different colors for each department */
+.department-card:nth-child(1)::before { background-color: #3498db; }
+.department-card:nth-child(2)::before { background-color: #e84393; }
+.department-card:nth-child(3)::before { background-color: #2ecc71; }
+.department-card:nth-child(4)::before { background-color: #f39c12; }
+.department-card:nth-child(5)::before { background-color: #9b59b6; }
+.department-card:nth-child(6)::before { background-color: #1abc9c; }
+
+/* Hover effects */
+.department-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.department-card:hover::before {
+    height: 6px;
+}
+
+.department-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.department-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.department-content {
+    flex: 1;
+}
+
+.department-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.department-count {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+/* Text color change on hover */
+.department-card:hover .department-name {
+    color: #3498db;
+}
+
+.department-card:nth-child(1):hover .department-name { color: #3498db; }
+.department-card:nth-child(2):hover .department-name { color: #e84393; }
+.department-card:nth-child(3):hover .department-name { color: #2ecc71; }
+.department-card:nth-child(4):hover .department-name { color: #f39c12; }
+.department-card:nth-child(5):hover .department-name { color: #9b59b6; }
+.department-card:nth-child(6):hover .department-name { color: #1abc9c; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .department-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .department-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Cards Section -->
+        <div class="dashboard">
+            <div class="card blue">
+                <p class="stats">500</p>
+                <p class="stats1">Total Employees</p>
+                <img src="https://img.favpng.com/18/18/10/advertising-business-marketing-service-system-png-favpng-6NyRXqqNufXXgf88ue5DUqpqs.jpg" alt="Demographics Image">
+                <div class="gender-container">
+                    <div class="gender-item">
+                        <div class="number">300</div>
+                        <div class="label">Male</div>
+                    </div>
+                    <div class="gender-item">
+                        <div class="number">200</div>
+                        <div class="label">Female</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card red">
+                <p class="stats">90</p>
+                <p class="stats1">New Hires</p>
+                <img src="https://www.tempest.ie/wp-content/uploads/2023/06/Why-Choose-Tempest-Recruitment-Client-Benefits.png" alt="Demographics Image">
+                <div class="gender-container">
+                    <div class="gender-item">
+                        <div class="number">40</div>
+                        <div class="label">Juniors</div>
+                    </div>
+                    <div class="gender-item">
+                        <div class="number">50</div>
+                        <div class="label">Seniors</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card black">
+                <p class="stats">500</p>
+                <p class="stats1">Employees</p>
+                <img src="https://icon-library.com/images/53-512_18427.png" alt="Demographics Image">
+                <div class="gender-container">
+                    <div class="gender-item">
+                        <div class="number">420</div>
+                        <div class="label">Active</div>
+                    </div>
+                    <div class="gender-item">
+                        <div class="number">80</div>
+                        <div class="label">Inactive</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card blue">
+                <p class="stats">10</p>
+                <p class="stats1">Projects</p>
+                <img src="https://th.bing.com/th/id/OIP.MRxSeDl7SjEPS-abPNma6QHaHa?w=194&h=194&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Demographics Image">
+                <div class="gender-container">
+                    <div class="gender-item">
+                        <div class="number">04</div>
+                        <div class="label">completed</div>
+                    </div>
+                    <div class="gender-item">
+                        <div class="number">06</div>
+                        <div class="label">Ongoing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects and Department in a row -->
+        <div class="row-container">
+            <!-- Projects Card -->
+            <div class="row-container">
+                <!-- Projects Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" style="color: #1277dc;">Projects</h3>
+                        <i class="fas fa-project-diagram card-icon"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="projectsChart"></canvas>
+                    </div>
+                    <div class="project-cards">
+                        <div class="project-card">
+                            <div class="project-card-icon">
+                                <img src="https://th.bing.com/th/id/OIP.MA62NVD3FJ4fTy4wwZ_MygHaHa?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">Qatar</div>
+                                <div class="project-card-value">12</div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-icon">
+                                <img src="https://th.bing.com/th/id/OIP.kQPE1sriYk51qtZvSWESwwHaDt?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">HRMS</div>
+                                <div class="project-card-value">8</div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-icon">
+                                <img src="https://static.vecteezy.com/system/resources/previews/020/408/746/large_2x/crm-letter-logo-design-on-white-background-crm-creative-circle-letter-logo-concept-crm-letter-design-vector.jpg" alt="">
+                            </div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">CRM</div>
+                                <div class="project-card-value">15</div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-icon">
+                                <img src="https://th.bing.com/th/id/OIP.MPTE79EiMBN26TIiQQ9mtQHaEK?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">MRF</div>
+                                <div class="project-card-value">6</div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-icon">
+                                <img src="https://th.bing.com/th/id/OIP.Abykpj43pyASZoDFuN0Z-QHaFj?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">Banking</div>
+                                <div class="project-card-value">16</div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-card-icon"><img src="https://img.freepik.com/premium-vector/financial-bull-vector-logo-design-template_825834-12798.jpg" alt=""></div>
+                            <div class="project-card-content">
+                                <div class="project-card-name">Trading</div>
+                                <div class="project-card-value">8</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Department Distribution Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"  style="color: #1277dc;">Department Wise</h3>
+                        <i class="fas fa-sitemap card-icon"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="departmentChart"></canvas>
+                    </div>
+                    <div class="department-cards">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://marketplace.canva.com/EAEt-7rAROE/1/0/1600w/canva-gradient-modern-technology-company-developers-logo-9qIf7dAGTXU.jpg" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">Development</div>
+                                <div class="department-count">45</div>
+                            </div>
+                        </div>
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://thumbs.dreamstime.com/z/devops-symbol-icon-software-development-operations-concept-plan-code-build-test-release-deploy-operate-monitor-flat-191780458.jpg" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">Devops</div>
+                                <div class="department-count">22</div>
+                            </div>
+                        </div>
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://th.bing.com/th/id/OIP.6VjiLdVnVcNBxsc0z7XcygHaER?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">HR</div>
+                                <div class="department-count">18</div>
+                            </div>
+                        </div>
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://th.bing.com/th/id/OIP.iTJGVn4ckRqWMfFNWWlBLQHaCC?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">Testing</div>
+                                <div class="department-count">30</div>
+                            </div>
+                        </div>
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://th.bing.com/th/id/OIP.BxFzED7F2bP4RAKkjOpstgHaEK?rs=1&pid=ImgDetMain" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">Power BI</div>
+                                <div class="department-count">15</div>
+                            </div>
+                        </div>
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <img src="https://cdn3.f-cdn.com/contestentries/124801/8333182/5472a733d2ff2_thumb900.jpg" alt="">
+                            </div>
+                            <div class="department-content">
+                                <div class="department-name">Operations</div>
+                                <div class="department-count">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+              // Projects Chart
+        const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+        const projectsChart = new Chart(projectsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Qatar', 'HRMS', 'CRM', 'MRF', 'Banking','Trading'],
+                datasets: [{
+                    label: 'Employees per Project',
+                    data: [12, 8, 15, 6 , 16, 8],
+                    backgroundColor: [
+                    '#3498db',
+                        '#e84393',
+                        '#2ecc71',
+                        '#f39c12',
+                        '#9b59b6',
+                        '#1abc9c'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+          // Department Distribution Chart
+          const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+const departmentChart = new Chart(departmentCtx, {
+    type: 'polarArea',
+    data: {
+        labels: ['Development', 'Devops', 'HR', 'Testing', 'Power BI', 'Operations'],
+        datasets: [{
+            data: [45, 22, 18, 30, 15, 10],
+            backgroundColor: [
+                '#3498db',
+                '#e84393',
+                '#2ecc71',
+                '#f39c12',
+                '#9b59b6',
+                '#1abc9c'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            r: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    display: false // ✅ Hides the numbers
+                }
+            }
+        }
+    }
+});
+
+        </script>
+        <!-- <script>
+ const ctx1 = document.getElementById('workingFormatChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Remote', 'On Site'],
+            datasets: [{
+                data: [75, 33],
+                backgroundColor: ['#6a0dad', '#d3c3f3']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',  // Slightly smaller hole for better text display
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
+            }
+        },
+        plugins: [{
+            id: 'centerText',
+            beforeDraw: function(chart) {
+                const { width, height, ctx } = chart;
+                ctx.restore();
+                
+                // Center coordinates
+                const centerX = width / 2;
+                const centerY = height / 2;
+                
+                // Font settings
+                const labelFontSize = Math.min(width, height) * 0.08;
+                const valueFontSize = Math.min(width, height) * 0.12;
+                const lineSpacing = valueFontSize * 0.5;
+                
+                // Draw "Total" (top line)
+                ctx.font = `600 ${labelFontSize}px 'Arial'`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#666';
+                ctx.fillText('Total', centerX, centerY - lineSpacing);
+                
+                // Draw "108" (bottom line)
+                ctx.font = `bold ${valueFontSize}px 'Arial'`;
+                ctx.textBaseline = 'top';
+                ctx.fillStyle = '#000';
+                ctx.fillText('108', centerX, centerY + lineSpacing);
+                
+                ctx.save();
+            }
+        }]
+    });
+            
+            // Project Employment Chart (Bar) - unchanged
+            const ctx2 = document.getElementById('projectEmploymentChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    datasets: [
+                        {
+                            label: 'Project',
+                            data: [80, 90, 150, 200, 120, 210, 300],
+                            backgroundColor: '#007bff'
+                        },
+                        {
+                            label: 'Bench',
+                            data: [40, 60, 120, 180, 100, 170, 250],
+                            backgroundColor: '#b3d7ff'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        </script> -->
+</body>
+</html>

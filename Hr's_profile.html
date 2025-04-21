@@ -5,9 +5,179 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile Page</title>
         <link rel="stylesheet" href="Hr's_profile.css">
+        <style>
+            * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.profile-container {
+    display: flex;
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+    align-items: stretch;
+}
+
+.profile-left {
+    text-align: center;
+    margin-right: 40px;
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-left img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border: 4px solid #ececec;
+    margin-bottom: 16px;
+}
+
+.profile-info {
+    text-align: center;
+    font-size: 14px;
+}
+
+.profile-info h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.profile-info p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.status p {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #444;
+    margin: 4px 0;
+}
+
+.status img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.profile-right {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+.personal-details,
+.company-details {
+    margin-bottom: 24px;
+    list-style-type: none;
+}
+
+.profile-right h3 {
+    padding: 8px;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #ff7f3e, #04cc3e);
+    width: fit-content;
+    border-radius: 4px;
+}
+
+.profile-right ul {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 16px;
+}
+
+.profile-right ul li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.personal-details ul, .company-details ul {
+    list-style: none;
+}
+
+.part3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.achievements-rewards, .certificates, .skills {
+    background-color: #f7f7f7;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.achievements-rewards h3, .certificates h3, .skills h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 8px;
+    text-align: center;
+    background: linear-gradient(135deg, #ff7f3e, #04cc3e);
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.achievements-rewards ul, .certificates ul, .skills ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.achievements-rewards li, .certificates li, .skills li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.achievements-rewards li img, .certificates li img, .skills li img {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+}
+header{
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+
+}
+
+        </style>
     </head>
     <body>
-
+        <header>
+            <h1>Profile</h1>
+            <p class="quote">"Your profile is your digital identity—craft it with purpose."</p>
+        </header>
         <main class="profile">
             <div class="profile-container">
                 <div class="profile-left">
@@ -49,7 +219,7 @@
                     <div class="company-details">
                         <h3>Company Details</h3>
                         <ul>
-                            <li><strong>Employee ID:</strong> 123432</li>
+                            <li><strong>Employee ID:</strong> ATS0123</li>
                             <li><strong>Department:</strong> Software</li>
                             <li><strong>Designation:</strong> Hr Manager</li>
                         </ul>
@@ -70,8 +240,10 @@
                         <ul>
                             <li><img src="https://img.icons8.com/color/48/certificate.png" alt="Certificate Icon"> Certified HR Professional</li>
                             <li><img src="https://img.icons8.com/color/48/document.png" alt="Document Icon"> Advanced Leadership Training</li>
-                            <li><img src="https://img.icons8.com/color/48/graduate.png" alt="Graduate Icon"> Master’s in Human Resources</li>
-                        </ul>
+                            <li>
+                                <img src="https://img.icons8.com/color/48/diploma.png" alt="Diploma Icon"> 
+                                Master’s in Human Resources
+                              </li>                        </ul>
                     </div>
                 
                     <div class="skills">
@@ -80,8 +252,10 @@
                             <li><img src="https://img.icons8.com/color/48/teamwork.png" alt="Teamwork Icon"> Team Management</li>
                             <li><img src="https://img.icons8.com/color/48/leadership.png" alt="Leadership Icon"> Leadership</li>
                             <li><img src="https://img.icons8.com/color/48/communication.png" alt="Communication Icon"> Communication Skills</li>
-                            <li><img src="https://img.icons8.com/color/48/hr.png" alt="HR Icon"> HR Analytics</li>
-                        </ul>
+                            <li>
+                                <img src="https://img.icons8.com/color/48/analytics.png" alt="Analytics Icon"> 
+                                HR Analytics
+                              </li>                        </ul>
                     </div>
                 </div>
                 

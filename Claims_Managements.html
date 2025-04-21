@@ -110,35 +110,66 @@
 
         filterStatus.addEventListener('change', filterClaims);
     });
-    const claims = JSON.parse(localStorage.getItem('claims')) || [];
 
+    const claims = JSON.parse(localStorage.getItem('claims')) || [];
 const claimsContainer = document.getElementById('claims-container');
 
-function createClaimCard(claim) {
+function createClaimCard(claim, index) {
     const statusClass = claim.status ? claim.status.toLowerCase() : 'pending';
     const statusText = claim.status ? claim.status.charAt(0).toUpperCase() + claim.status.slice(1) : 'Pending';
 
     return `
         <div class="claim-card">
-            <h3>${claim.claimType} Claim</h3>
-            <p><strong>Description:</strong> ${claim.description}</p>
-            <p><strong></strong>Submitted: ${claim.date}</p>
-            <p><strong>Amount:</strong> $${Number(claim.amount).toFixed(2)}</p>
-            <p><strong>Receipt:</strong> ${claim.receipt}</p>
-            <span class="status ${statusClass}">${statusText}</span>
+            <div class="claim-info">
+                <h3>${claim.claimType} Claim</h3>
+                <p><strong>Description:</strong> ${claim.description}</p>
+                <p><strong>Submitted:</strong> ${claim.date}</p>
+                <p><strong>Receipt:</strong> ${claim.receipt}</p>
+                <div class="claim-actions">
+                    <button class="approve-btn" data-index="${index}">Approve</button>
+                    <button class="reject-btn" data-index="${index}">Reject</button>
+                </div>
+            </div>
+            <div class="claim-meta">
+                <span class="status ${statusClass}">${statusText}</span>
+                <p class="claim-amount">$${Number(claim.amount).toFixed(2)}</p>
+            </div>
         </div>
     `;
 }
 
 function renderClaims() {
     if (claims.length === 0) {
-        // claimsContainer.innerHTML = '<p>No claims to display.</p>';
+        claimsContainer.innerHTML = '<p>No claims to display.</p>';
     } else {
-        claimsContainer.innerHTML = claims.map(createClaimCard).join('');
+        claimsContainer.innerHTML = claims.map((claim, index) => createClaimCard(claim, index)).join('');
     }
+
+    // Attach event listeners after rendering
+    document.querySelectorAll('.approve-btn').forEach((button) => {
+        button.addEventListener('click', function () {
+            const index = button.getAttribute('data-index');
+            updateClaimStatus(index, 'Approved');
+        });
+    });
+
+    document.querySelectorAll('.reject-btn').forEach((button) => {
+        button.addEventListener('click', function () {
+            const index = button.getAttribute('data-index');
+            updateClaimStatus(index, 'Rejected');
+        });
+    });
+}
+
+function updateClaimStatus(index, status) {
+    claims[index].status = status;
+    localStorage.setItem('claims', JSON.stringify(claims));
+    renderClaims();
 }
 
 renderClaims();
+
+
 </script>
 
     

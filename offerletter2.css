@@ -1,0 +1,267 @@
+
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eceaea;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    background: #ffffff;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.459);
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header img {
+    height:150px;
+}
+
+.company-name {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.company-name .astrolite {
+    color: blue;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.company-name .tech {
+    color: red;
+}
+
+.company-name .solutions {
+    color: black;
+}
+
+/* input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+} */
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Overlay Container Styling */
+.container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: #ffffff;
+    color: #333;
+    z-index: 9999;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.514);
+    overflow-y: auto;
+}
+
+.container h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+.container p {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .form-group label i {
+      margin-right: 8px;
+      color: #0077cc;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #0077cc;
+      box-shadow: 0 0 4px #0077cc;
+    }
+
+    input:hover {
+      background-color: #f0faff;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+#qrcode {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Card Animation */
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+#detailsCard {
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #333;
+      padding: 8px;
+      margin: 8px 0;
+    }
+
+    label i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    input {
+
+      width: 95%;
+      padding: 10px;
+      margin-left: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:hover {
+      background-color: #f0faff;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px #007bff;
+    }
+
+    input[readonly] {
+      background-color: #e9ecef;
+      cursor: pointer;
+    }
+    .hidden {
+  display: none;
+}
+
+.icon-candidate { color: #ff5722; }
+    .icon-position { color: #9c27b0; }
+    .icon-date { color: #2196f3; }
+    .icon-manager { color: #4caf50; }
+    .icon-compensation { color: #ff9800; }

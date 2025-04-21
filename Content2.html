@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            color: #4a90e2;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .male { color: #3498db; }
+        .female { color: #e84393; }
+        .active { color: #2ecc71; }
+        .inactive { color: #e74c3c; }
+
+        .project-list {
+            margin-top: 15px;
+        }
+
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .project-name {
+            font-weight: 500;
+        }
+
+        .project-count {
+            background-color: #4a90e2;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .department-chart {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .department-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .department-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        .department-info {
+            flex: 1;
+        }
+
+        .department-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .department-count {
+            font-size: 11px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .department-chart {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Gender Distribution Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Gender Distribution</h3>
+                <i class="fas fa-venus-mars card-icon"></i>
+            </div>
+            <div class="chart-container">
+                <canvas id="genderChart"></canvas>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value male">65%</div>
+                    <div class="stat-label">Male</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value female">35%</div>
+                    <div class="stat-label">Female</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active/Inactive Employees Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Employee Status</h3>
+                <i class="fas fa-user-check card-icon"></i>
+            </div>
+            <div class="chart-container">
+                <canvas id="statusChart"></canvas>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value active">78%</div>
+                    <div class="stat-label">Active</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value inactive">22%</div>
+                    <div class="stat-label">Inactive</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Projects</h3>
+                <i class="fas fa-project-diagram card-icon"></i>
+            </div>
+            <div class="chart-container">
+                <canvas id="projectsChart"></canvas>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <span class="project-name">Website Redesign</span>
+                    <span class="project-count">12</span>
+                </div>
+                <div class="project-item">
+                    <span class="project-name">Mobile App</span>
+                    <span class="project-count">8</span>
+                </div>
+                <div class="project-item">
+                    <span class="project-name">CRM System</span>
+                    <span class="project-count">15</span>
+                </div>
+                <div class="project-item">
+                    <span class="project-name">Marketing Campaign</span>
+                    <span class="project-count">6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Distribution Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Department Wise</h3>
+                <i class="fas fa-sitemap card-icon"></i>
+            </div>
+            <div class="chart-container">
+                <canvas id="departmentChart"></canvas>
+            </div>
+            <div class="department-chart">
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #3498db;"></div>
+                    <div class="department-info">
+                        <div class="department-name">Development</div>
+                        <div class="department-count">45 employees (32%)</div>
+                    </div>
+                </div>
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #e84393;"></div>
+                    <div class="department-info">
+                        <div class="department-name">Marketing</div>
+                        <div class="department-count">22 employees (16%)</div>
+                    </div>
+                </div>
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #2ecc71;"></div>
+                    <div class="department-info">
+                        <div class="department-name">HR</div>
+                        <div class="department-count">18 employees (13%)</div>
+                    </div>
+                </div>
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #f39c12;"></div>
+                    <div class="department-info">
+                        <div class="department-name">Sales</div>
+                        <div class="department-count">30 employees (21%)</div>
+                    </div>
+                </div>
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #9b59b6;"></div>
+                    <div class="department-info">
+                        <div class="department-name">Finance</div>
+                        <div class="department-count">15 employees (11%)</div>
+                    </div>
+                </div>
+                <div class="department-item">
+                    <div class="department-color" style="background-color: #1abc9c;"></div>
+                    <div class="department-info">
+                        <div class="department-name">Operations</div>
+                        <div class="department-count">10 employees (7%)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gender Distribution Chart
+        const genderCtx = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(genderCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    data: [65, 35],
+                    backgroundColor: ['#3498db', '#e84393'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Employee Status Chart
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        const statusChart = new Chart(statusCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Active', 'Inactive'],
+                datasets: [{
+                    data: [78, 22],
+                    backgroundColor: ['#2ecc71', '#e74c3c'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Projects Chart
+        const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+        const projectsChart = new Chart(projectsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Website', 'Mobile App', 'CRM', 'Marketing'],
+                datasets: [{
+                    label: 'Employees per Project',
+                    data: [12, 8, 15, 6],
+                    backgroundColor: '#4a90e2',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Department Distribution Chart
+        const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+        const departmentChart = new Chart(departmentCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Development', 'Marketing', 'HR', 'Sales', 'Finance', 'Operations'],
+                datasets: [{
+                    data: [45, 22, 18, 30, 15, 10],
+                    backgroundColor: [
+                        '#3498db',
+                        '#e84393',
+                        '#2ecc71',
+                        '#f39c12',
+                        '#9b59b6',
+                        '#1abc9c'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    r: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,32 +7,400 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Project Management</title>
     <link rel="stylesheet" href="Project.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+
+    color: white;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.project-dashboard {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.project-section {
+    margin-bottom: 30px;
+}
+
+.project-section h2 {
+    color: #4a90e2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout for Project Cards */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    animation: fadeInGrid 1s ease-in-out;
+}
+
+.project-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    word-wrap: break-word;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    background-color: #d6e4fc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    margin: 5px 0;
+}
+
+.status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+
+.status.pending {
+    background-color: #ff6347;
+}
+
+.status.ongoing {
+    background-color: #ffa500;
+    animation: blink 1.5s infinite;
+}
+
+.status.completed {
+    background-color: #4caf50;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; 
+    align-items: center; 
+    margin-left: auto; 
+    padding: 10px; 
+}
+
+/* The rest of your existing CSS can remain the same */
+.filter-container label {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#project-filter {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#project-filter:hover {
+    border-color: #888;
+    background-color: #f0f0f0;
+}
+
+.add-project-btn {
+    background-color: white; 
+    color: blue;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 2px 4px rgba(65, 56, 56, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.add-project-btn:hover {
+    background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+    color: white;
+}
+.add-project-btn i {
+    font-size: 20px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto; /* Enable scrolling if needed */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto; /* Changed from 15% to 10% for better centering */
+    padding: 20px; /* Increased padding */
+    border-radius: 8px;
+    width: 37.5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeInModal 0.5s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    max-height: 80vh; /* Limit height and enable scrolling */
+    overflow-y: auto; /* Enable scrolling for content */
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #4a90e2;
+    text-align: center;
+    font-size: 18px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content button {
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 11px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.modal-content button {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.modal-content button:hover {
+    background-color: #357abd;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.search-bar {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#project-search {
+    padding: 10px;
+    width: 80%;
+    max-width: 600px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#project-search:focus {
+    border-color: #4a90e2;
+}
+
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInGrid {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInGrid {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+.project-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.filter-container {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.project-section {
+    width: 100%;
+}
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.project-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+    </style>
 </head>
 <body>
     <header>
         <h1>HR Project Management</h1>
         <p>Track and manage ongoing projects efficiently</p>
-        
-        <div class="header-actions">
-            <div class="filter-container">
-                <label for="project-filter">Filter Projects:</label>
-                <select id="project-filter">
-                    <option value="all">All Projects</option>
-                    <option value="coming">Coming Projects</option>
-                    <option value="running">Running Projects</option>
-                    <option value="completed">Completed Projects</option>
-                </select>
-            </div>
-    
-            <!-- "+" Icon Button -->
+
+    </header>
+
+    <section class="project-dashboard">
+        <div class="filter-container" style="margin-right: 1px;">
+            <label for="project-filter" style="color: #333;">Filter Projects:</label>
+            <select id="project-filter">
+                <option value="all">All Projects</option>
+                <option value="coming">Coming Projects</option>
+                <option value="running">Running Projects</option>
+                <option value="completed">Completed Projects</option>
+            </select>
             <button class="add-project-btn" onclick="openAddProjectForm()">
                 <i class="fas fa-plus"></i> Add Project
             </button>
         </div>
-    </header>
 
-    <section class="project-dashboard">
-        
         <div class="project-section" id="coming-projects">
             <h2>Coming Projects</h2>
             <div class="project-list">
@@ -71,7 +440,7 @@
                 </div>
                 <div class="project-card">
                     <h3>Performance Review Module</h3>
-                    <p>Assigned to: Ajay kumar</p>
+                    <p>Assigned to: Ajay Kumar</p>
                     <p><strong>Start Date:</strong> 2024-11-10</p>
                     <p><strong>End Date:</strong> 2025-02-01</p>
                     <p class="status ongoing">Ongoing</p>
@@ -85,7 +454,6 @@
                 </div>
             </div>
         </div>
-    
 
         <div class="project-section" id="completed-projects">
             <h2>Completed Projects</h2>
@@ -114,205 +482,356 @@
             </div>
         </div>
     </section>
+
     <div id="addProjectModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddProjectForm()">&times;</span>
             <h2>Add New Project</h2>
             <form id="projectForm">
-                <label for="projectName">Project Name:</label>
-                <input 
-                    type="text" 
-                    id="projectName" 
-                    name="projectName" 
-                    pattern="[A-Za-z\s]+" 
-                    minlength="4" 
-                    title="Project Name must contain at least 4 alphabetic characters and spaces only." 
-                    required
-                >
-                <span id="projectNameError" class="error-message" style="color: red;"></span>
-        
-                <label for="assignedTo">Assigned To:</label>
-                <input 
-                    type="text" 
-                    id="assignedTo" 
-                    name="assignedTo" 
-                    pattern="[A-Za-z\s]+" 
-                    minlength="4" 
-                    title="Assigned To must contain at least 4 alphabetic characters and spaces only." 
-                    required
-                >
-                <span id="assignedToError" class="error-message" style="color: red;"></span>
-        
-                <label for="startDate">Start Date:</label>
-                <input 
-                    type="date" 
-                    id="startDate" 
-                    name="startDate" 
-                    max="" 
-                    required
-                >
-        
-                <label for="endDate">End Date:</label>
-                <input 
-                    type="date" 
-                    id="endDate" 
-                    name="endDate" 
-                    max="" 
-                    required
-                >
-                <span id="dateError" class="error-message" style="color: red;"></span>
-        
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="pending">Pending</option>
-                    <option value="ongoing">Ongoing</option>
-                    <option value="completed">Completed</option>
-                </select>
-        
+                <div class="form-group">
+                    <label for="projectName">Project Name:</label>
+                    <input 
+                        type="text" 
+                        id="projectName" 
+                        name="projectName"
+                        pattern="^[A-Za-z]+(?: [a-zA-Z]+)*$"  
+                        minlength="4" 
+                        maxlength="30"
+                        title="Project name must contain letters with single spaces between words" 
+                        required
+                        oninput="enforceSingleSpace(this)"
+                        onblur="trimAndFormatSpaces(this)"
+                    >
+                    <span id="projectNameError" class="error-message"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="assignedTo">Assigned To:</label>
+                    <input 
+                        type="text" 
+                        id="assignedTo" 
+                        name="assignedTo" 
+                        pattern="^[A-Z][a-z]*(?: [a-z][a-z]*)*$"
+                        minlength="4" 
+                        maxlength="30"
+                        title="Must start with capital letter followed by lowercase letters with single spaces" 
+                        required
+                        oninput="enforceSingleSpace(this)"
+                        onblur="trimAndFormatSpaces(this)"
+                    >
+                    <span id="assignedToError" class="error-message"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input 
+                        type="date" 
+                        id="startDate" 
+                        name="startDate" 
+                        required
+                        min=""
+                    >
+                    <span id="startDateError" class="error-message"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input 
+                        type="date" 
+                        id="endDate" 
+                        name="endDate" 
+                        required
+                        min="" 
+                    >
+                    <span id="endDateError" class="error-message"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="pending">Pending</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                
                 <button type="button" onclick="validateAndAddProject()">Add Project</button>
             </form>
-        
         </div>
     </div>
-    
-    </div>
-    
-    
 
-    <script>
-        const filter = document.getElementById('project-filter');
-        const comingProjects = document.getElementById('coming-projects');
-        const runningProjects = document.getElementById('running-projects');
-        const completedProjects = document.getElementById('completed-projects');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+    const currentYear = today.getFullYear();
+    const minYear = currentYear;
+    const maxYear = currentYear + 5; // Allow dates up to 5 years in future
+    const todayStr = today.toISOString().split('T')[0];
+    const maxDateStr = `${maxYear}-12-31`;
+    
+    // Set date constraints and defaults
+    const startDate = document.getElementById('startDate');
+    const endDate = document.getElementById('endDate');
+    
+    if (startDate && endDate) {
+        startDate.min = todayStr;
+        startDate.max = maxDateStr;
+        startDate.value = todayStr;
+        
+        endDate.min = todayStr;
+        endDate.max = maxDateStr;
+        endDate.value = todayStr;
+        
+        // Update end date constraints when start date changes
+        startDate.addEventListener('change', function() {
+            endDate.min = this.value;
+            
+            // If current end date is before new start date, reset it
+            if (new Date(endDate.value) < new Date(this.value)) {
+                endDate.value = this.value;
+            }
+            
+            validateDates();
+        });
+        
+        // Validate dates when end date changes
+        endDate.addEventListener('change', validateDates);
+    }
 
+    // Paste event handlers
+    ['projectName', 'assignedTo'].forEach(id => {
+        document.getElementById(id).addEventListener('paste', function(e) {
+            setTimeout(() => {
+                enforceSingleSpace(this);
+                trimAndFormatSpaces(this);
+            }, 0);
+        });
+    });
+
+    // Filter functionality
+    const filter = document.getElementById('project-filter');
+    if (filter) {
         filter.addEventListener('change', (event) => {
             const value = event.target.value;
-            switch (value) {
-                case 'all':
-                    comingProjects.style.display = 'block';
-                    runningProjects.style.display = 'block';
-                    completedProjects.style.display = 'block';
-                    break;
-                case 'coming':
-                    comingProjects.style.display = 'block';
-                    runningProjects.style.display = 'none';
-                    completedProjects.style.display = 'none';
-                    break;
-                case 'running':
-                    comingProjects.style.display = 'none';
-                    runningProjects.style.display = 'block';
-                    completedProjects.style.display = 'none';
-                    break;
-                case 'completed':
-                    comingProjects.style.display = 'none';
-                    runningProjects.style.display = 'none';
-                    completedProjects.style.display = 'block';
-                    break;
-                default:
-                    comingProjects.style.display = 'block';
-                    runningProjects.style.display = 'block';
-                    completedProjects.style.display = 'block';
-                    break;
-            }
+            ['coming', 'running', 'completed'].forEach(type => {
+                const element = document.getElementById(`${type}-projects`);
+                if (element) {
+                    element.style.display = 
+                        (value === 'all' || value === type) ? 'block' : 'none';
+                }
+            });
         });
-function openAddProjectForm() {
-    document.getElementById('addProjectModal').style.display = 'block';
+    }
+
+    // Event listeners for real-time validation
+    ["projectName", "assignedTo"].forEach(field => {
+        const element = document.getElementById(field);
+        if (element) {
+            element.addEventListener("input", function() {
+                validateField(field);
+            });
+        }
+    });
+});
+
+function validateDates() {
+    const startDate = document.getElementById('startDate');
+    const endDate = document.getElementById('endDate');
+    const startDateError = document.getElementById('startDateError');
+    const endDateError = document.getElementById('endDateError');
+    
+    if (!startDate || !endDate || !startDateError || !endDateError) return false;
+    
+    // Clear previous errors
+    startDateError.textContent = '';
+    endDateError.textContent = '';
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Compare just dates without time
+    const currentYear = today.getFullYear();
+    const maxYear = currentYear + 5; // Maximum allowed year
+    
+    // Validate start date
+    const startDateValue = new Date(startDate.value);
+    if (startDateValue < today) {
+        startDateError.textContent = 'Start date cannot be in the past';
+        return false;
+    }
+    
+    if (startDateValue.getFullYear() > maxYear) {
+        startDateError.textContent = `Cannot select dates beyond ${maxYear}`;
+        return false;
+    }
+    
+    // Validate end date
+    const endDateValue = new Date(endDate.value);
+    if (endDateValue < startDateValue) {
+        endDateError.textContent = 'End date cannot be before start date';
+        return false;
+    }
+    
+    if (endDateValue.getFullYear() > maxYear) {
+        endDateError.textContent = `Cannot select dates beyond ${maxYear}`;
+        return false;
+    }
+    
+    return true;
 }
 
-function closeAddProjectForm() {
-    document.getElementById('addProjectModal').style.display = 'none';
+function validateField(field) {
+    const input = document.getElementById(field);
+    const error = document.getElementById(`${field}Error`);
+    
+    if (!input || !error) return false;
+    
+    const patterns = {
+        projectName: {
+            regex: /^[A-Za-z]+(?: [a-zA-Z]+)*$/,
+            message: 'Only letters with single spaces between words'
+        },
+        assignedTo: {
+            regex: /^[A-Z][a-z]*(?: [a-z][a-z]*)*$/,
+            message: 'Start with capital letter, then lowercase with single spaces'
+        }
+    };
+    
+    const { regex, message } = patterns[field] || {};
+    if (!regex) return false;
+    
+    const isValid = regex.test(input.value);
+    
+    error.textContent = isValid ? "" : message;
+    input.classList.toggle("invalid", !isValid);
+    return isValid;
+}
+
+function validateAndAddProject() {
+    // Validate all fields
+    const nameValid = validateField('projectName');
+    const assignedValid = validateField('assignedTo');
+    const datesValid = validateDates();
+    
+    if (nameValid && assignedValid && datesValid) {
+        addProject();
+        return true;
+    }
+    return false;
 }
 
 function addProject() {
-    const name = document.getElementById('projectName').value;
+    // Get form values
+    const projectName = document.getElementById('projectName').value;
     const assignedTo = document.getElementById('assignedTo').value;
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
     const status = document.getElementById('status').value;
-
+    
+    // Determine which section to add the project to
+    let sectionId;
+    let statusClass;
+    let statusDisplay;
+    
+    switch(status) {
+        case 'pending':
+            sectionId = 'coming-projects';
+            statusClass = 'pending';
+            statusDisplay = 'Pending';
+            break;
+        case 'ongoing':
+            sectionId = 'running-projects';
+            statusClass = 'ongoing';
+            statusDisplay = 'Ongoing';
+            break;
+        case 'completed':
+            sectionId = 'completed-projects';
+            statusClass = 'completed';
+            statusDisplay = 'Completed';
+            break;
+        default:
+            console.error('Invalid status');
+            return;
+    }
+    
+    // Create the project card
     const projectCard = document.createElement('div');
-    projectCard.classList.add('project-card');
+    projectCard.className = 'project-card';
     projectCard.innerHTML = `
-        <h3>${name}</h3>
+        <h3>${projectName}</h3>
         <p>Assigned to: ${assignedTo}</p>
         <p><strong>Start Date:</strong> ${startDate}</p>
         <p><strong>End Date:</strong> ${endDate}</p>
-        <p class="status ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</p>
+        <p class="status ${statusClass}">${statusDisplay}</p>
     `;
-
-    if (status === 'pending') {
-        document.querySelector('#coming-projects .project-list').appendChild(projectCard);
-    } else if (status === 'ongoing') {
-        document.querySelector('#running-projects .project-list').appendChild(projectCard);
-    } else if (status === 'completed') {
-        document.querySelector('#completed-projects .project-list').appendChild(projectCard);
+    
+    // Add to the appropriate section
+    const targetList = document.querySelector(`#${sectionId} .project-list`);
+    if (targetList) {
+        targetList.appendChild(projectCard);
+        
+        // Reset form and close modal
+        document.getElementById('projectForm').reset();
+        closeAddProjectForm();
+        
+        // Reset dates to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').value = today;
+        document.getElementById('endDate').value = today;
     }
-
-    closeAddProjectForm();
-    document.getElementById('projectForm').reset();
 }
 
-function validateAndAddProject() {
-            const fields = ["projectName", "assignedTo"];
-            let valid = true;
+// Modal functions
+function openAddProjectForm() {
+    const modal = document.getElementById('addProjectModal');
+    if (modal) modal.style.display = 'block';
+}
 
-            // Validate fields
-            fields.forEach(field => {
-                if (!validateField(field)) valid = false;
-            });
+function closeAddProjectForm() {
+    const modal = document.getElementById('addProjectModal');
+    if (modal) modal.style.display = 'none';
+}
 
-            // Validate dates
-            const startDate = document.getElementById("startDate").value;
-            const endDate = document.getElementById("endDate").value;
-            const dateError = document.getElementById("dateError");
+// Space handling functions
+function enforceSingleSpace(input) {
+    if (!input) return;
+    
+    const cursorPos = input.selectionStart;
+    const originalValue = input.value;
+    const newValue = originalValue.replace(/\s{2,}/g, ' ');
+    
+    if (originalValue !== newValue) {
+        input.value = newValue;
+        const removedBeforeCursor = countRemovedSpaces(originalValue, newValue, cursorPos);
+        input.setSelectionRange(cursorPos - removedBeforeCursor, cursorPos - removedBeforeCursor);
+    }
+    
+    validateField(input.id);
+}
 
-            if (startDate === "" || endDate === "") {
-                dateError.textContent = "Start Date and End Date are required.";
-                valid = false;
-            } else if (endDate < startDate) {
-                dateError.textContent = "End Date cannot be earlier than Start Date.";
-                valid = false;
-            } else {
-                dateError.textContent = "";
-            }
-
-            if (valid) {
-                addProject();
-            }
+function countRemovedSpaces(original, modified, cursorPos) {
+    let removed = 0;
+    for (let i = 0; i < cursorPos && i < original.length; i++) {
+        if (original[i] === ' ' && (i >= modified.length || modified[i - removed] !== ' ')) {
+            removed++;
         }
-const fields = ["projectName", "assignedTo"];
-    fields.forEach(field => {
-        document.getElementById(field).addEventListener("input", function () {
-            validateField(field);
-        });
-    });
+    }
+    return removed;
+}
 
-    function validateField(field) {
-            const input = document.getElementById(field);
-            const error = document.getElementById(`${field}Error`);
-            const regex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
-            let valid = true;
-
-            if (input.value.trim().length < 4) {
-                error.textContent = `${field.replace(/([A-Z])/g, " $1")} must be at least 4 characters long.`;
-                input.classList.add("invalid");
-                valid = false;
-            } else if (!regex.test(input.value)) {
-                error.textContent = `${field.replace(/([A-Z])/g, " $1")} must contain only alphabets.`;
-                input.classList.add("invalid");
-                valid = false;
-            } else {
-                error.textContent = "";
-                input.classList.remove("invalid");
-            }
-
-            return valid;
-        }
-
-
-
-    </script>
-
+function trimAndFormatSpaces(input) {
+    if (!input) return;
+    
+    const cursorPos = input.selectionStart;
+    let newValue = input.value.trim().replace(/\s+/g, ' ');
+    
+    if (input.id === 'assignedTo' && newValue.length > 0) {
+        newValue = newValue.charAt(0).toUpperCase() + newValue.slice(1).toLowerCase();
+    }
+    
+    input.value = newValue;
+    input.setSelectionRange(Math.min(cursorPos, newValue.length), Math.min(cursorPos, newValue.length));
+    validateField(input.id);
+}
+</script>
 </body>
 </html>
 

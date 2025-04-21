@@ -52,18 +52,30 @@ main {
 }
 
 .card {
-    background: linear-gradient(to right, #f0dda5dd, #61ccd1e6); 
+    background: linear-gradient(180deg, #f5f1e6dd, #c7e2e4e6);
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
+/* Hover effect */
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(180deg, #c7e2e4e6, #ece1bfdd);
 }
+
+/* Optional: Add a subtle text color transition */
+.card:hover h3, 
+.card:hover p {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
 
 .icon {
     font-size: 40px;
@@ -101,7 +113,7 @@ main {
     background-color: #4196eb;
 }
 
-.claim-form {
+/* .claim-form {
     display: none;
     padding: 20px;
     margin: 40px auto;
@@ -109,7 +121,7 @@ main {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgb(0, 0, 0);
-}
+} */
 
 .claim-form h2 {
     margin-bottom: 20px;
@@ -200,6 +212,74 @@ main {
 
 .card .action a:hover {
     text-decoration: underline;
+}
+/* Close button styles */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Overlay styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%; /* Decrease the height to 70% of the screen */
+    background: rgba(0, 0, 0, 0.5); /* Dark background with some transparency */
+    display: none; /* Hidden by default */
+    z-index: 999;
+}
+
+
+/* Claim form styles */
+.claim-form {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.642);
+    z-index: 1000;
+}
+
+.claim-form h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.claim-form input,
+.claim-form select,
+.claim-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.claim-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.claim-form button:hover {
+    background-color: #0056b3;
 }
 
 

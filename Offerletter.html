@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Details</title>
+  <style>
+    /* Page Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e8f4ff);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 30px;
+    }
+
+    /* Main container */
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.416);
+      max-width: 500px;
+      width: 80%;
+      margin-top: 20px;
+    }
+
+    h2 {
+      color: #0077cc;
+      text-align: center;
+    }
+
+    /* Detail Box */
+    .detail {
+      margin: 15px 0;
+      padding: 15px;
+      background: #f1faff;
+      border-left: 6px solid #0077cc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s, background-color 0.3s;
+      margin: 10px 0;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+      transform: scale(1.02);
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Container for the offer letter */
+    .container1 {
+      width: 80%;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.425);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 20px;
+    }
+
+    .header img {
+      width: 250px;
+    }
+
+    .header .company-name {
+      font-size: 56px;
+      font-weight: bold;
+      padding-left: 10%;
+    }
+
+    .header .company-name .astrolite {
+      color: blue;
+    }
+
+    .header .company-name .tech {
+      color: red;
+    }
+
+    .header .company-name .solutions {
+      color: black;
+    }
+
+    /* Email Form Styles */
+    #emailForm {
+      display: none;
+      background: #f9f9f9;
+      padding: 20px;
+      margin-top: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #emailForm label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    #emailForm input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #emailForm button {
+      width: 100%;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .modal-content form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 10px;
+    }
+    input[type="text"], select, input[type="submit"] {
+      padding: 10px;
+      margin-top: 5px;
+    }
+    .close {
+      background: red;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      float: right;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container1">
+    <div class="header">
+      <img src="./logo.png" alt="Company Logo">
+      <div class="company-name">
+        <span class="astrolite">Astrolite</span>
+        <span class="tech">Tech</span>
+        <span class="solutions">Solutions</span>
+      </div>
+    </div>
+
+    <!-- Send Form Button -->
+    <button id="showFormButton">Send Form</button>
+
+    <!-- Email Form -->
+    <div id="emailForm">
+      <label for="emailInput">Enter your Email:</label>
+      <input type="email" id="emailInput" placeholder="example@email.com" required>
+      <button id="sendButton">Send</button>
+      <button id="viewButton">View Form</button>
+    </div>
+      <!-- Modal for View Form -->
+  <div id="viewModal" class="modal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal('viewModal')">X</button>
+      <h2>Candidate Form</h2>
+      <form id="candidateForm">
+        <label for="candidateName">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+            <path d="M480 696q-88 0-149-61t-61-149q0-88 61-149t149-61q88 0 149 61t61 149q0 88-61 149t-149 61Zm0-120q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM180 936v-60q0-58 29-105t79-69q70-31 142-31t142 31q50 21 79 69t29 105v60H180Zm60-60h480v-12q0-44-25-80t-67-54q-56-24-118-24t-118 24q-42 18-67 54t-25 80v12ZM480 576Z"/>
+          </svg>
+          Candidate Name:
+        </label>
+        <input type="text" id="candidateName" name="candidateName" placeholder="Enter your full name" required>
+    
+        <label for="location1">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+            <path d="M480 936q-67-47-123-99.5T270 746q-45-67-65-130t-20-120q0-133 92.5-226T480 178q132 0 226 93.5T800 498q0 62-19 120t-65 130q-45 67-101 119.5T480 936Zm0-348q33 0 56.5-23.5T560 508q0-33-23.5-56.5T480 428q-33 0-56.5 23.5T400 508q0 33 23.5 56.5T480 588Zm0 270q89-66 144.5-131T720 498q0-108-72-179.5T480 247q-108 0-180 71.5T228 498q0 83 54 148t144 131Z"/>
+          </svg>
+          Preferred Location 1:
+        </label>
+        <select id="location1" name="location1" required>
+          <option value="">-- Select Location --</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Chennai">Chennai</option>
+          <option value="Pune">Pune</option>
+          <option value="Delhi">Delhi</option>
+        </select>
+    
+        <label for="location2">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+            <path d="M480 936q-67-47-123-99.5T270 746q-45-67-65-130t-20-120q0-133 92.5-226T480 178q132 0 226 93.5T800 498q0 62-19 120t-65 130q-45 67-101 119.5T480 936Zm0-348q33 0 56.5-23.5T560 508q0-33-23.5-56.5T480 428q-33 0-56.5 23.5T400 508q0 33 23.5 56.5T480 588Zm0 270q89-66 144.5-131T720 498q0-108-72-179.5T480 247q-108 0-180 71.5T228 498q0 83 54 148t144 131Z"/>
+          </svg>
+          Preferred Location 2:
+        </label>
+        <select id="location2" name="location2" required>
+          <option value="">-- Select Location --</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Chennai">Chennai</option>
+          <option value="Pune">Pune</option>
+          <option value="Delhi">Delhi</option>
+        </select>
+    
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+    <div class="container">
+      <h2>Candidate Details</h2>
+      <div id="details"></div>
+    </div>
+  </div>
+
+  <script>
+    // Fetch stored data from Local Storage
+    const storedData = localStorage.getItem('candidateData');
+
+    if (storedData) {
+      const { candidateName, location1, location2 } = JSON.parse(storedData);
+
+      // Render candidate details
+      document.getElementById('details').innerHTML = `
+        <div class="detail"><strong>Name:</strong> ${candidateName}</div>
+        <div class="detail"><strong>Preferred Location 1:</strong> ${location1}</div>
+        <div class="detail"><strong>Preferred Location 2:</strong> ${location2}</div>
+        <button id="generateOffer">Generate Offer</button>
+      `;
+
+      // Handle Offer Generator button click
+      document.getElementById('generateOffer').addEventListener('click', () => {
+        const offerText = `Dear ${candidateName},\nWe are pleased to offer you a position based in ${location1} with flexibility to relocate to ${location2}. Congratulations!`;
+        localStorage.setItem('offerMessage', offerText);
+        window.location.href = 'offerletter2.html';
+      });
+    } else {
+      document.getElementById('details').innerHTML = `<p class="empty-message">No candidate data found.</p>`;
+    }
+
+    // Form toggle logic
+    const form = document.getElementById('emailForm');
+    const showFormButton = document.getElementById('showFormButton');
+
+    showFormButton.addEventListener('click', () => {
+      form.style.display = form.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Handle Send button
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const emailValue = document.getElementById('emailInput').value;
+      if (emailValue) {
+        alert(`Form link sent successfully to ${emailValue}`);
+        document.getElementById('emailInput').value = ''; // Reset form
+        form.style.display = 'none';
+      } else {
+        alert('Please enter a valid email address.');
+      }
+    });
+        // Show and close modals
+        document.getElementById('viewButton').addEventListener('click', function() {
+      document.getElementById('viewModal').style.display = 'flex';
+    });
+
+    document.getElementById('sendButton').addEventListener('click', function() {
+      document.getElementById('sendModal').style.display = 'flex';
+    });
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -4,120 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Onboarding Form</title>
-    <link rel="stylesheet" href="./Personalinfo_Dashboard.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
 
-.form-content {
-    width: 100%;
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 40px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.801);
-}
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.form-content h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-}
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
 
-fieldset {
-    border: none;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.776);
-}
+        .header-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-.form-content .rows {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
+        .form-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
 
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 10px;
-}
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
 
-.form-group {
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
+        fieldset {
+            border: 1px solid #4a4b4c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-}
+        legend {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #027cf5;
+            padding: 0 10px;
+        }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="date"],
-input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: border-color 0.3s ease;
-}
+        /* .form-group {
+            margin-bottom: 1.25rem;
+        } */
 
-input:focus {
-    border-color: #007BFF;
-    outline: none;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #000000;
+        }
+     
 
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-}
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #0a0b0b;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
 
-.form-actions {
-    text-align: center;
-    margin-top: 30px;
-}
+        .form-control:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
 
-.form-actions button {
-    padding: 12px 25px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .form-control-file {
+            padding: 0.5rem;
+            border: 1px dashed #cbd5e0;
+            background-color: #f8fafc;
+        }
 
-.form-actions button:hover {
-    background-color: #0056b3;
-}
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: block;
+            min-height: 1.25rem;
+            transition: opacity 0.3s ease;
+        }
 
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
 
-</style>
-    
+        .btn {
+            padding: 0.9rem 2rem;
+            background: linear-gradient(to right, #2b6cb0, #4299e1);
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #2c5282, #3182ce);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-reset {
+            background: linear-gradient(to right, #718096, #a0aec0);
+        }
+
+        .btn-reset:hover {
+            background: linear-gradient(to right, #4a5568, #718096);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="form-content">
+    <header>
         <h1>Employee Onboarding Form</h1>
-        
+        <div class="header-quote">"Great onboarding is the foundation for employee success and retention"</div>
+    </header>
+    
+    <div class="form-container">
         <form id="onboardingForm" novalidate>
-            <div class="rows">
+            <div class="form-grid">
                 <fieldset>
                     <legend>Personal Information</legend>
                     
@@ -127,72 +171,138 @@ input:focus {
                             type="text" 
                             id="fullName" 
                             name="fullName" 
+                            class="form-control"
                             required 
-                            pattern="^[A-Z][a-zA-Z\s]+$"
-                            title="Name must start with a capital letter and contain only letters and spaces."
+                            pattern="^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$"
+                            title="Name must start with capital letters and contain only letters and single spaces"
+                            maxlength="50"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
                         >
-                        <small class="error-message"></small>
+                        <span class="error-message" id="fullName-error"></span>
                     </div>
     
                     <div class="form-group">
-                        <label for="Empid">Emp-Id</label>
+                        <label for="empId">Employee ID</label>
                         <input 
                             type="text" 
-                            id="Empid" 
-                            name="Empid" 
+                            id="empId" 
+                            name="empId" 
+                            class="form-control"
                             required 
-                            pattern="^[A-Z]{3}[0-9]+$"
-                            title="Emp-ID must start with 3 uppercase letters followed by numbers."
+                            maxlength="7"
+                            pattern="^ATS0(?!000)\d{3}$" 
+                            title="Employee ID must start with ATS followed by 4 digits (e.g., ATS0987)"
+                            oninput="this.value = this.value.toUpperCase()"
                         >
-                        <small class="error-message"></small>
+                        <span class="error-message" id="empId-error"></span>
                     </div>
     
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-control"
+                            required
+                            pattern="^[a-zA-Z0-9]{3,}([._-]?[a-zA-Z0-9]+)*@[a-zA-Z]+([.-]?[a-zA-Z]+)*\.(com|org|net|edu|gov|co\.[a-z]{2}|[a-z]{2,3})$"
+                            title="Please enter a valid email address (e.g., user@example.com)"
+                            maxlength="100"
+                            oninput="trimSpaces(this)"
+                        >
+                        <span class="error-message" id="email-error"></span>
                     </div>
     
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input 
-                            type="tel" 
-                            id="phonenumber" 
-                            name="phone" 
-                            required 
-                            pattern="^[0-9]{10}$"
-                            title="Phone number must be 10 digits."
-                        >
-                        <small class="error-message"></small>
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        class="form-control"
+                        required 
+                        pattern="^(?!0{10})(?!.*(\d)\1{4})[6-9][0-9]{9}$"
+                        title="Phone number must start with 6, 7, 8, or 9, be 10 digits long, cannot be all zeros, and cannot have 5+ repeated digits"
+                        maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    />
+                        <span class="error-message" id="phone-error"></span>
                     </div>
     
                     <div class="form-group">
                         <label for="dob">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" required min="<?php echo date('Y-m-d'); ?>">
-                        <small class="error-message"></small>
+                        <input 
+                            type="date" 
+                            id="dob" 
+                            name="dob" 
+                            class="form-control"
+                            required
+                            min="1950-01-01"
+                            max="2005-12-31"
+                            onchange="validateDOB(this)"
+                            oninput="validateDOB(this)"
+                        >
+                        <span class="error-message" id="dob-error"></span>
                     </div>
                 </fieldset>
                 
-             
                 <fieldset>
                     <legend>Address</legend>
     
                     <div class="form-group">
                         <label for="streetAddress">Street Address</label>
-                        <input type="text" id="streetAddress" name="streetAddress" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="streetAddress" 
+                            name="streetAddress" 
+                            class="form-control"
+                            required
+                            pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9\s#.,-]+$"
+                            title="Must contain letters and can include numbers, spaces, #, ., -"
+                            maxlength="100"
+                            minlength="5"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="streetAddress-error"></span>
                     </div>
-    
+        
                     <div class="form-group">
                         <label for="city">City</label>
-                        <input type="text" id="city" name="city" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="city" 
+                            name="city" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
+                            title="Only letters with single spaces between words"
+                            maxlength="50"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="city-error"></span>
                     </div>
-    
+        
                     <div class="form-group">
                         <label for="state">State</label>
-                        <input type="text" id="state" name="state" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="state" 
+                            name="state" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
+                            title="Only letters with single spaces between words"
+                            maxlength="50"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="state-error"></span>
                     </div>
     
                     <div class="form-group">
@@ -201,11 +311,14 @@ input:focus {
                             type="text" 
                             id="zipCode" 
                             name="zipCode" 
+                            class="form-control"
                             required 
-                            pattern="^\d{6}$"
-                            title="Zip code must be in the format: 12345 or 12345-6789."
+                            pattern="^(?!0+$)\d{6}$"
+                            title="Zip code must be 6 digits and cannot be all zeros"
+                            maxlength="6"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                         >
-                        <small class="error-message"></small>
+                        <span class="error-message" id="zipCode-error"></span>
                     </div>
                 </fieldset>
                 
@@ -214,250 +327,1332 @@ input:focus {
     
                     <div class="form-group">
                         <label for="bankName">Bank Name</label>
-                        <input type="text" id="bankName" name="bankName" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="bankName" 
+                            name="bankName" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Bank name must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="bankName-error"></span>
                     </div>
     
                     <div class="form-group">
-                        <label for="phonenumber">Mobile Number</label>
-                        <input type="text" id="phonenumber" name="phonenumber" required pattern="^[0-9]{10}$">
-                        <small class="error-message"></small>
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input 
+                            type="tel" 
+                            id="mobileNumber" 
+                            name="mobileNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^(?!0{10})(?!.*(\d)\1{4})[6-9][0-9]{9}$"
+                            title="Phone number must start with 6, 7, 8, or 9, be 10 digits long, cannot be all zeros, and cannot have 5+ repeated digits"
+                            maxlength="10"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        >
+                        <span class="error-message" id="mobileNumber-error"></span>
                     </div>
     
                     <div class="form-group">
                         <label for="accountNumber">Account Number</label>
-                        <input type="text" id="accountNumber" name="accountNumber" required pattern="^[0-9]{8,20}$">
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="accountNumber" 
+                            name="accountNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[0-9]{8,20}$"
+                            title="Account number must be 8-20 digits"
+                            maxlength="20"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        >
+                        <span class="error-message" id="accountNumber-error"></span>
                     </div>
     
                     <div class="form-group">
                         <label for="confirmAccountNumber">Confirm Account Number</label>
-                        <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" required pattern="^[0-9]{8,20}$">
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="confirmAccountNumber" 
+                            name="confirmAccountNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[0-9]{8,20}$"
+                            title="Account number must be 8-20 digits"
+                            maxlength="20"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        >
+                        <span class="error-message" id="confirmAccountNumber-error"></span>
                     </div>
     
                     <div class="form-group">
-                        <label for="IFSCNumber">IFSC Number</label>
-                        <input type="text" id="IFSCNumber" name="IFSCNumber" required pattern="^[A-Za-z]{4}[0-9]{7}$">
-                        <small class="error-message"></small>
+                        <label for="ifscNumber">IFSC Number</label>
+                        <input 
+                            type="text" 
+                            id="ifscNumber" 
+                            name="ifscNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[A-Z]{4}0[A-Z0-9]{6}$"
+                            title="IFSC must be 11 characters: 4 letters, 0, then 6 alphanumeric (e.g., SBIN0001234)"
+                            maxlength="11"
+                            oninput="this.value = this.value.toUpperCase()"
+                        >
+                        <span class="error-message" id="ifscNumber-error"></span>
                     </div>
                 </fieldset>
-    
+                
                 <fieldset>
                     <legend>Qualification</legend>
                     <div class="form-group">
                         <label for="degree">Highest Degree</label>
-                        <input type="text" id="degree" name="degree" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="degree" 
+                            name="degree" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Degree must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="degree-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="institution">Institution</label>
-                        <input type="text" id="institution" name="institution" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="institution" 
+                            name="institution" 
+                            class="form-control"
+                            required
+                            maxlength="200"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="institution-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="graduationYear">Year of Graduation</label>
-                        <input type="number" id="graduationYear" name="graduationYear" required min="1900" max="2099">
-                        <small class="error-message"></small>
+                        <input 
+                            type="number" 
+                            id="graduationYear" 
+                            name="graduationYear" 
+                            class="form-control"
+                            required 
+                            min="1900"
+                            max="2026"
+                            oninput="if(this.value.length > 4) this.value = this.value.slice(0,4); validateGraduationYear()"
+                        >
+                        <span class="error-message" id="graduationYear-error"></span>
                     </div>
+                    
                     <div class="form-group">
                         <label for="degreeCertificate">Upload Degree Certificate</label>
-                        <input type="file" id="degreeCertificate" name="degreeCertificate" accept=".jpg, .jpeg, .png, .pdf" required>
-                        <small class="error-message"></small>
+                        <input 
+                            type="file" 
+                            id="degreeCertificate" 
+                            name="degreeCertificate" 
+                            class="form-control form-control-file"
+                            required
+                            accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                        >
+                        <span class="error-message" id="degreeCertificate-error"></span>
+                        <small>Allowed formats: PDF, JPG, PNG, DOC, DOCX (Max 5MB)</small>
                     </div>
                 </fieldset>
-    
+                
                 <fieldset>  
-                    <legend>Experience(optional)</legend>
+                    <legend>Experience (Optional)</legend>
                     <div class="form-group">
-                        <label for="job-title">Job Title</label>
-                        <input type="text" id="job-title" name="jobTitle" minlength="2" maxlength="100">
-                        <small class="error-message"></small>
+                        <label for="jobTitle">Job Title</label>
+                        <input 
+                            type="text" 
+                            id="jobTitle" 
+                            name="jobTitle" 
+                            class="form-control"
+                            pattern="^[A-Za-z\s]+$"
+                            title="Job title must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="jobTitle-error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="company-name">Company Name</label>
-                        <input type="text" id="company-name" name="companyName" minlength="2" maxlength="100">
-                        <small class="error-message"></small>
+                        <label for="companyName">Company Name</label>
+                        <input 
+                            type="text" 
+                            id="companyName" 
+                            name="companyName" 
+                            class="form-control"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="companyName-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" id="location" name="location" minlength="2" maxlength="100">
-                        <small class="error-message"></small>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            name="location" 
+                            class="form-control"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="location-error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="start-date">Start Date</label>
-                        <input type="date" id="start-date" name="startDate">
-                        <small class="error-message"></small>
+                        <label for="expStartDate">Start Date</label>
+                        <input 
+                            type="date" 
+                            id="expStartDate" 
+                            name="expStartDate" 
+                            class="form-control"
+                            max="2023-12-31"
+                            onchange="validateExperienceDates()"
+                        >
+                        <span class="error-message" id="expStartDate-error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="end-date">End Date</label>
-                        <input type="date" id="end-date" name="endDate">
-                        <small class="error-message"></small>
+                        <label for="expEndDate">End Date</label>
+                        <input 
+                            type="date" 
+                            id="expEndDate" 
+                            name="expEndDate" 
+                            class="form-control"
+                            max="2023-12-31"
+                            onchange="validateExperienceDates()"
+                        >
+                        <span class="error-message" id="expEndDate-error"></span>
                     </div>
                 </fieldset>
                 
                 <fieldset>
                     <legend>Job Details</legend>
                     <div class="form-group">
-                        <label for="job-role">Job Role</label>
-                        <input type="text" id="job-role" name="jobRole" required>
-                        <small class="error-message"></small>
+                        <label for="jobRole">Job Role</label>
+                        <input 
+                            type="text" 
+                            id="jobRole" 
+                            name="jobRole" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Job role must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="jobRole-error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="startDate">Start Date</label>
-                        <input type="date" id="startDate" name="startDate" required min="<?php echo date('Y-m-d'); ?>">
-                        <small class="error-message"></small>
-
+                        <label for="jobStartDate">Start Date</label>
+                        <input 
+                            type="date" 
+                            id="jobStartDate" 
+                            name="jobStartDate" 
+                            class="form-control"
+                            required
+                            onfocus="document.getElementById('jobStartDate-error').textContent = ''"
+                        >
+                        <span class="error-message" id="jobStartDate-error"></span>
+                        <!-- <small>Start Date must be today's date</small> -->
                     </div>
-         
                     <div class="form-group">
                         <label for="department">Department</label>
-                        <input type="text" id="department" name="department" required>
-                        <small class="error-message"></small>
-
+                        <input 
+                            type="text" 
+                            id="department" 
+                            name="department" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Department must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="department-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="position">Position</label>
-                        <input type="text" id="position" name="position" required>
-                        <small class="error-message"></small>
-
+                        <input 
+                            type="text" 
+                            id="position" 
+                            name="position" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Position must contain only letters and spaces"
+                            maxlength="100"
+                            minlength="2"
+                            oninput="enforceSingleSpace(this)"
+                            onblur="trimFinalSpaces(this)"
+                        >
+                        <span class="error-message" id="position-error"></span>
                     </div>
                 </fieldset>
             </div>
     
             <div class="form-actions">
-                <button type="submit">Submit</button>
-                <button type="reset">Reset</button>
+                <button type="submit" class="btn">Submit</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
             </div>
         </form>
     </div>
-   <script>document.getElementById("onboardingForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    document.getElementById("dob").max = new Date().toISOString().split("T")[0];
-    document.getElementById("startDate").max = new Date().toISOString().split("T")[0];
 
-
-
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    const fields = [
-        { id: "bankName", pattern: /.+/, errorMessage: "Please enter the name of your bank." },
-        { id: "phonenumber", pattern: /^[0-9]{10}$/, errorMessage: "Please enter a valid 10-digit phone number." },
-        { id: "accountNumber", pattern: /^[0-9]{8,20}$/, errorMessage: "Please enter a valid account number." },
-        { id: "confirmAccountNumber", pattern: /^[0-9]{8,20}$/, errorMessage: "Account numbers must match." },
-        { id: "IFSCNumber", pattern: /^[A-Za-z]{4}[0-9]{7}$/, errorMessage: "Please enter a valid IFSC number." },
-        { id: "fullName", pattern: /^[A-Z][a-zA-Z\s]+$/, errorMessage: "Name must start with a capital letter." },
-{
-    id: "dob",
-    pattern: /.+/, 
-    errorMessage: "Please select your date of birth.",
-},
-        { id: "email", pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: "Please enter a valid email address." },
-        {
-            id: "Empid",
-            pattern: /^[A-Z]{3}0[0-9]+$/,
-            errorMessage: "Emp-ID the first three characters are uppercase letters, followed by exactly one 0, and then any remaining numbers..",
-        },
-        {
-            id: "streetAddress",
-            pattern: /.+/,
-            errorMessage: "Please enter your street address.",
-        },
-        {
-            id: "city",
-            pattern: /.+/,
-            errorMessage: "Please enter your city.",
-        },
-        {
-            id: "state",
-            pattern: /.+/,
-            errorMessage: "Please enter your state.",
-        },
-        {
-            id: "zipCode",
-            pattern: /^\d{6}$/,
-            errorMessage: "Please enter a valid zip code (e.g., 123456).",
-        },
-        {
-    id: "degree",
-    pattern: /.+/,
-    errorMessage: "Please enter your highest degree.",
-},
-{
-    id: "institution",
-    pattern: /.+/,
-    errorMessage: "Please enter the name of your institution.",
-},
-{
-    id: "graduationYear",
-    pattern: /^(19|20)\d{2}$/,
-    errorMessage: "Please enter a valid graduation year between 1900 and 2099.",
-},
-{
-    id: "degreeCertificate",
-    pattern: /.+/,
-    errorMessage: "Please upload your degree certificate.",
-},
-{
-    id: "job-role",
-    pattern: /^[a-zA-Z\s]{2,100}$/,
-    errorMessage: "Job Title must be at least 2 characters long and only contain letters and spaces.",
-},
-{
-    id: "startDate",
-    pattern: /.+/,
-    errorMessage: "Start Date must be a valid date .",
-},
-{
-    id: "department",
-    pattern: /^[a-zA-Z\s]{2,100}$/,
-    errorMessage: "Department must be at least 2 characters long and only contain letters and spaces.",
-},
-{
-    id: "position",
-    pattern: /^[a-zA-Z\s]{2,100}$/,
-    errorMessage: "Position must be at least 2 characters long and only contain letters and spaces.",
-}
-
-];
-
-    let isValid = true;
+    <script>
+        const today = new Date().toISOString().split('T')[0];
     
-
-    fields.forEach((field) => {
-        const inputElement = document.getElementById(field.id);
-        if (!inputElement) return; // Skip if element not found
-        const errorElement = inputElement.nextElementSibling;
-
-        if (!field.pattern.test(inputElement.value.trim())) {
-            errorElement.textContent = field.errorMessage;
-            errorElement.style.color = "red";
-            isValid = false;
-        } else {
-            errorElement.textContent = "";
+        function enforceSingleSpace(input) {
+            const cursorPos = input.selectionStart;
+            const originalValue = input.value;
+            
+            let newValue = originalValue.replace(/\s+/g, ' ');
+            
+            if (originalValue !== newValue) {
+                input.value = newValue;
+                
+                const lengthDiff = originalValue.length - newValue.length;
+                const newCursorPos = Math.max(0, cursorPos - lengthDiff);
+                input.setSelectionRange(newCursorPos, newCursorPos);
+            }
         }
+    
+        function trimSpaces(input) {
+            const cursorPos = input.selectionStart;
+            
+            let value = input.value.trim().replace(/\s+/g, ' ');
+            
+            let newCursorPos = cursorPos;
+            if (input.value.length !== value.length) {
+                newCursorPos = Math.max(0, cursorPos - (input.value.length - value.length));
+            }
+            
+            input.value = value;
+            
+            input.setSelectionRange(newCursorPos, newCursorPos);
+        }
+    
+        function validateDOB(dobField) {
+            const errorElement = document.getElementById('dob-error');
+            if (!dobField.value) {
+                errorElement.textContent = 'Date of Birth is required';
+                return false;
+            }
+    
+            const dob = new Date(dobField.value);
+            const minDate = new Date('1950-01-01');
+            const maxDate = new Date('2005-12-31');
+            
+            const year = dob.getFullYear();
+            if (year < 1950 || year > 2005) {
+                errorElement.textContent = 'Date of Birth must be between 1950 and 2005';
+                return false;
+            }
+            
+            if (dob < minDate || dob > maxDate) {
+                errorElement.textContent = 'Date of Birth must be between 01/01/1950 and 12/31/2005';
+                return false;
+            }
+    
+            errorElement.textContent = '';
+            return true;
+        }
+        
+        function validateGraduationYear() {
+            const field = document.getElementById('graduationYear');
+            const errorElement = document.getElementById('graduationYear-error');
+            const dobField = document.getElementById('dob');
+            
+            if (!field.value) return true;
+            
+            const currentYear = new Date().getFullYear();
+            if (parseInt(field.value) > currentYear) {
+                errorElement.textContent = 'Graduation year cannot be in the future';
+                return false;
+            }
+            
+            if (dobField.value) {
+                const birthYear = new Date(dobField.value).getFullYear();
+                const minGradYear = birthYear + 16; // Minimum age 16 at graduation
+                
+                if (parseInt(field.value) <= birthYear) {
+                    errorElement.textContent = 'Graduation year must be after birth year';
+                    return false;
+                }
+                
+                if (parseInt(field.value) < minGradYear) {
+                    errorElement.textContent = `Graduation year must be at least ${minGradYear} (16 years after birth)`;
+                    return false;
+                }
+            }
+            
+            errorElement.textContent = '';
+            return true;
+        }
+        
+        function validateExperienceDates() {
+    const startDateField = document.getElementById('expStartDate');
+    const endDateField = document.getElementById('expEndDate');
+    const dobField = document.getElementById('dob');
+    const graduationYearField = document.getElementById('graduationYear');
+    
+    // Clear previous errors
+    document.getElementById('expStartDate-error').textContent = '';
+    document.getElementById('expEndDate-error').textContent = '';
+    
+    if (startDateField.value && dobField.value) {
+        const birthDate = new Date(dobField.value);
+        const startDate = new Date(startDateField.value);
+        const minStartDate = new Date(birthDate);
+        minStartDate.setFullYear(birthDate.getFullYear() + 16); // Minimum age 16
+        
+        if (startDate < minStartDate) {
+            document.getElementById('expStartDate-error').textContent = 'Experience cannot start before age 16';
+            return false;
+        }
+    }
+    
+    // Check against graduation year if available
+    if (startDateField.value && graduationYearField.value) {
+        const graduationDate = new Date(graduationYearField.value + '-06-01'); // Assume June graduation
+        const startDate = new Date(startDateField.value);
+        
+        if (startDate < graduationDate) {
+            document.getElementById('expStartDate-error').textContent = 'Experience cannot start before graduation';
+            return false;
+        }
+    }
+    
+    if (startDateField.value && endDateField.value) {
+        if (new Date(endDateField.value) < new Date(startDateField.value)) {
+            document.getElementById('expEndDate-error').textContent = 'End date cannot be before start date';
+            return false;
+        }
+    }
+    
+    return true;
+}
+    
+        function validateField(field) {
+            const errorElement = document.getElementById(`${field.id}-error`);
+            errorElement.textContent = '';
+            
+            if (field.required && !field.value.trim()) {
+                errorElement.textContent = 'This field is required';
+                return false;
+            }
+            
+            if (!field.required && !field.value.trim()) {
+                return true;
+            }
+            
+            if (/(^ )|(  )|( $)/.test(field.value)) {
+                errorElement.textContent = 'Only single space between words allowed';
+                return false;
+            }
+            
+            if (field.pattern && !new RegExp(field.pattern).test(field.value)) {
+                errorElement.textContent = field.title || 'Invalid format';
+                return false;
+            }
+            
+            if (field.minLength && field.value.length < field.minLength) {
+                errorElement.textContent = `Minimum ${field.minLength} characters required`;
+                return false;
+            }
+            
+            if (field.id === 'phone' || field.id === 'mobileNumber') {
+                if (/^0+$/.test(field.value)) {
+                    errorElement.textContent = 'Cannot be all zeros';
+                    return false;
+                }
+                if (/(\d)\1{4}/.test(field.value)) {
+                    errorElement.textContent = 'Cannot have 5+ repeated digits';
+                    return false;
+                }
+            }
+            
+            if (field.id === 'zipCode' && /^0+$/.test(field.value)) {
+                errorElement.textContent = 'Cannot be all zeros';
+                return false;
+            }
+            
+            if (field.id === 'confirmAccountNumber') {
+                const accountNumber = document.getElementById('accountNumber').value;
+                if (field.value !== accountNumber) {
+                    errorElement.textContent = 'Account numbers must match';
+                    return false;
+                }
+            }
+            
+            if (field.id === 'graduationYear' && field.value) {
+                return validateGraduationYear();
+            }
+            
+            if (field.id === 'expStartDate' && field.value) {
+                return validateExperienceDates();
+            }
+            
+            if (field.id === 'expEndDate' && field.value) {
+                return validateExperienceDates();
+            }
+            
+            if (field.id === 'jobStartDate') {
+                const todayDate = new Date().toISOString().split('T')[0];
+                if (field.value !== todayDate) {
+                    errorElement.textContent = 'Job start date must be today';
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('onboardingForm');
+            
+            document.getElementById('jobStartDate').setAttribute('max', today);
+            document.getElementById('jobStartDate').value = today;
+            
+            document.getElementById('expStartDate').setAttribute('max', today);
+            document.getElementById('expEndDate').setAttribute('max', today);
+            
+            function trimFinalSpaces(input) {
+                input.value = input.value.trim();
+                validateField(input);
+            }
+            
+            const formControls = form.querySelectorAll('input, select, textarea');
+            formControls.forEach(control => {
+                control.addEventListener('input', function() {
+                    validateField(this);
+                    
+                    if (this.id === 'accountNumber') {
+                        const confirmField = document.getElementById('confirmAccountNumber');
+                        if (confirmField.value) {
+                            validateField(confirmField);
+                        }
+                    }
+                    
+                    if (this.id === 'dob' && this.value) {
+                        const birthYear = new Date(this.value).getFullYear();
+                        const graduationYearInput = document.getElementById('graduationYear');
+                        graduationYearInput.setAttribute('min', birthYear + 16);
+                        
+                        if (graduationYearInput.value) {
+                            validateField(graduationYearInput);
+                        }
+                        
+                        const expStartDate = document.getElementById('expStartDate');
+                        if (expStartDate.value) {
+                            validateField(expStartDate);
+                        }
+                    }
+                    
+                    if (this.type === 'text' || this.type === 'email') {
+                        this.value = this.value.trimStart();
+                    }
+                });
+                
+                control.addEventListener('blur', function() {
+                    validateField(this);
+                    
+                    if (this.type === 'text' || this.type === 'email') {
+                        this.value = this.value.trim().replace(/\s+/g, ' ');
+                    }
+                });
+            });
+            
+            document.getElementById('expStartDate').addEventListener('change', function() {
+                validateField(this);
+                const startDate = this.value;
+                const endDateInput = document.getElementById('expEndDate');
+                
+                if (startDate) {
+                    endDateInput.setAttribute('min', startDate);
+                    if (endDateInput.value) {
+                        validateField(endDateInput);
+                    }
+                }
+            });
+            
+            document.getElementById('expEndDate').addEventListener('change', function() {
+                validateField(this);
+            });
+            
+            document.getElementById('dob').addEventListener('change', function() {
+                validateField(this);
+                const dob = this.value;
+                const graduationYearInput = document.getElementById('graduationYear');
+                
+                if (dob) {
+                    const birthYear = new Date(dob).getFullYear();
+                    graduationYearInput.setAttribute('min', birthYear + 16);
+                    if (graduationYearInput.value) {
+                        validateField(graduationYearInput);
+                    }
+                }
+            });
+            
+            document.getElementById('degreeCertificate').addEventListener('change', function() {
+                const file = this.files[0];
+                const errorElement = document.getElementById('degreeCertificate-error');
+                const allowedTypes = [
+                    'application/pdf',
+                    'image/jpeg',
+                    'image/png',
+                    'application/msword',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ];
+                
+                if (file) {
+                    if (!allowedTypes.includes(file.type)) {
+                        errorElement.textContent = 'Invalid file type. Please upload PDF, JPG, PNG, or DOC file';
+                        return false;
+                    } else if (file.size > 5 * 1024 * 1024) { 
+                        errorElement.textContent = 'File size must be less than 5MB';
+                        return false;
+                    } else {
+                        errorElement.textContent = '';
+                        return true;
+                    }
+                } else {
+                    errorElement.textContent = this.required ? 'This field is required' : '';
+                    return !this.required;
+                }
+            });
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+                
+                const fieldsToValidate = form.querySelectorAll('input, select, textarea');
+                fieldsToValidate.forEach(field => {
+                    if (field.id === 'degreeCertificate') {
+                        if (!document.getElementById('degreeCertificate').dispatchEvent(new Event('change'))) {
+                            isValid = false;
+                        }
+                    } else if (!validateField(field)) {
+                        isValid = false;
+                    }
+                });
+                
+                const accountNumber = document.getElementById('accountNumber').value;
+                const confirmAccountNumber = document.getElementById('confirmAccountNumber').value;
+                if (accountNumber !== confirmAccountNumber) {
+                    document.getElementById('confirmAccountNumber-error').textContent = 'Account numbers must match';
+                    isValid = false;
+                }
+                
+                const jobStartDate = document.getElementById('jobStartDate').value;
+                if (jobStartDate !== today) {
+                    document.getElementById('jobStartDate-error').textContent = 'Job start date must be today';
+                    isValid = false;
+                }
+                
+                if (!validateDOB(document.getElementById('dob'))) {
+                    isValid = false;
+                }
+                
+                if (!validateGraduationYear()) {
+                    isValid = false;
+                }
+                
+                if (!validateExperienceDates()) {
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    const formData = {};
+                    
+                    const formElements = form.elements;
+                    
+                    for (let element of formElements) {
+                        if (element.name && element.type !== 'file') {
+                            if (element.type === 'checkbox' || element.type === 'radio') {
+                                formData[element.name] = element.checked;
+                            } else {
+                                formData[element.name] = element.value;
+                            }
+                        }
+                    }
+                    
+                    const fileInput = document.getElementById('degreeCertificate');
+                    if (fileInput.files.length > 0) {
+                        formData['degreeCertificate'] = fileInput.files[0].name;
+                    }
+                    
+                    localStorage.setItem('onboardingData', JSON.stringify(formData));
+                    
+                    alert('Form submitted successfully!');
+                    location.reload();
+                }
+            });
+            
+            // form.addEventListener('reset', function() {
+            //     const errorMessages = form.querySelectorAll('.error-message');
+            //     errorMessages.forEach(error => {
+            //         error.textContent = '';
+            //     });
+                
+            //     document.getElementById('jobStartDate').value = today;
+            // });
+            form.addEventListener('reset', function() {
+    const errorMessages = form.querySelectorAll('.error-message');
+    errorMessages.forEach(error => {
+        error.textContent = '';
     });
     
-    const accountNumber = document.getElementById("accountNumber")?.value.trim();
-    const confirmAccountNumber = document.getElementById("confirmAccountNumber")?.value.trim();
-    if (accountNumber !== confirmAccountNumber) {
-        const confirmErrorElement = document.getElementById("confirmAccountNumber")?.nextElementSibling;
-        confirmErrorElement.textContent = "Account numbers must match.";
-        confirmErrorElement.style.color = "red";
-        isValid = false;
-    }
-
-    if (isValid) {
-        localStorage.setItem("onboardingData", JSON.stringify(data));
-        alert("Form successfully submitted!");
-        window.location.href = "Assert.html";
+    document.getElementById('jobStartDate').value = today;
+    
+    // Reset experience date min values
+    const graduationYear = document.getElementById('graduationYear').value;
+    if (graduationYear) {
+        const minDate = graduationYear + '-06-01';
+        document.getElementById('expStartDate').min = minDate;
+        document.getElementById('expEndDate').min = minDate;
+    } else {
+        document.getElementById('expStartDate').removeAttribute('min');
+        document.getElementById('expEndDate').removeAttribute('min');
     }
 });
-</script>
-
+        });
+        document.getElementById('graduationYear').addEventListener('input', function() {
+    if (this.value) {
+        const graduationYear = parseInt(this.value);
+        const minDate = graduationYear + '-06-01'; // June after graduation
+        document.getElementById('expStartDate').min = minDate;
+        document.getElementById('expEndDate').min = minDate;
+        
+        // Validate existing dates if any
+        const expStartDate = document.getElementById('expStartDate');
+        if (expStartDate.value) {
+            validateField(expStartDate);
+        }
+    }
+});
+    </script>
 </body>
 </html>
+<!-- <body>
+    <header>
+        <h1>Employee Onboarding Form</h1>
+        <div class="header-quote">"Great onboarding is the foundation for employee success and retention"</div>
+    </header>
+    
+    <div class="form-container">
+        <form id="onboardingForm" novalidate>
+            <div class="form-grid">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            class="form-control"
+                            required 
+                            pattern="^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$"
+                            title="Name must start with capital letters and contain only letters and single spaces"
+                            maxlength="50"
+                        >
+                        <span class="error-message" id="fullName-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="empId">Employee ID</label>
+                        <input 
+                            type="text" 
+                            id="empId" 
+                            name="empId" 
+                            class="form-control"
+                            required 
+                            pattern="^[ATS]{3}0[0-9]{3}$" 
+                            title="Employee ID must be 3 uppercase letters followed by 4 numbers (e.g., ATS0234)"
+                        >
+                        <span class="error-message" id="empId-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-control"
+                            required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Please enter a valid email address"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            class="form-control"
+                            required 
+                            pattern="^(?!0+$)[0-9]{10}$"
+                            title="Phone number must be 10 digits and cannot be all zeros"
+                        >
+                        <span class="error-message" id="phone-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input 
+                            type="date" 
+                            id="dob" 
+                            name="dob" 
+                            class="form-control"
+                            required
+                            max="2005-12-31"
+                            min="1950-01-01"
+                        >
+                        <span class="error-message" id="dob-error"></span>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Address</legend>
+    
+                    <div class="form-group">
+                        <label for="streetAddress">Street Address</label>
+                        <input 
+                            type="text" 
+                            id="streetAddress" 
+                            name="streetAddress" 
+                            class="form-control"
+                            required
+                            maxlength="200"
+                        >
+                        <span class="error-message" id="streetAddress-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input 
+                            type="text" 
+                            id="city" 
+                            name="city" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="City must contain only letters and spaces"
+                            maxlength="50"
+                        >
+                        <span class="error-message" id="city-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input 
+                            type="text" 
+                            id="state" 
+                            name="state" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="State must contain only letters and spaces"
+                            maxlength="50"
+                        >
+                        <span class="error-message" id="state-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="zipCode">Zip Code</label>
+                        <input 
+                            type="text" 
+                            id="zipCode" 
+                            name="zipCode" 
+                            class="form-control"
+                            required 
+                            pattern="^(?!0+$)\d{6}$"
+                            title="Zip code must be 6 digits and cannot be all zeros"
+                        >
+                        <span class="error-message" id="zipCode-error"></span>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Banking Information</legend>
+    
+                    <div class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <input 
+                            type="text" 
+                            id="bankName" 
+                            name="bankName" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Bank name must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="bankName-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input 
+                            type="tel" 
+                            id="mobileNumber" 
+                            name="mobileNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^(?!0+$)[0-9]{10}$"
+                            title="Mobile number must be 10 digits and cannot be all zeros"
+                        >
+                        <span class="error-message" id="mobileNumber-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input 
+                            type="text" 
+                            id="accountNumber" 
+                            name="accountNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[0-9]{8,20}$"
+                            title="Account number must be 8-20 digits"
+                        >
+                        <span class="error-message" id="accountNumber-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="confirmAccountNumber">Confirm Account Number</label>
+                        <input 
+                            type="text" 
+                            id="confirmAccountNumber" 
+                            name="confirmAccountNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[0-9]{8,20}$"
+                            title="Account number must be 8-20 digits"
+                        >
+                        <span class="error-message" id="confirmAccountNumber-error"></span>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="ifscNumber">IFSC Number</label>
+                        <input 
+                            type="text" 
+                            id="ifscNumber" 
+                            name="ifscNumber" 
+                            class="form-control"
+                            required 
+                            pattern="^[A-Z]{4}0[A-Z0-9]{6}$"
+                            title="IFSC must be 11 characters: 4 letters, 0, then 6 alphanumeric (e.g., SBIN0001234)"
+                        >
+                        <span class="error-message" id="ifscNumber-error"></span>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Qualification</legend>
+                    <div class="form-group">
+                        <label for="degree">Highest Degree</label>
+                        <input 
+                            type="text" 
+                            id="degree" 
+                            name="degree" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Degree must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="degree-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="institution">Institution</label>
+                        <input 
+                            type="text" 
+                            id="institution" 
+                            name="institution" 
+                            class="form-control"
+                            required
+                            maxlength="200"
+                        >
+                        <span class="error-message" id="institution-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="graduationYear">Year of Graduation</label>
+                        <input 
+                            type="number" 
+                            id="graduationYear" 
+                            name="graduationYear" 
+                            class="form-control"
+                            required 
+                            min="1900"
+                            max="2023"
+                        >
+                        <span class="error-message" id="graduationYear-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="degreeCertificate">Upload Degree Certificate</label>
+                        <input 
+                            type="file" 
+                            id="degreeCertificate" 
+                            name="degreeCertificate" 
+                            class="form-control form-control-file"
+                            required
+                            accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                        >
+                        <span class="error-message" id="degreeCertificate-error"></span>
+                        <small>Allowed formats: PDF, JPG, PNG, DOC, DOCX</small>
+                    </div>
+                </fieldset>
+                
+                <fieldset>  
+                    <legend>Experience (Optional)</legend>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input 
+                            type="text" 
+                            id="jobTitle" 
+                            name="jobTitle" 
+                            class="form-control"
+                            pattern="^[A-Za-z\s]+$"
+                            title="Job title must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="jobTitle-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input 
+                            type="text" 
+                            id="companyName" 
+                            name="companyName" 
+                            class="form-control"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="companyName-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            name="location" 
+                            class="form-control"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="location-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="expStartDate">Start Date</label>
+                        <input 
+                            type="date" 
+                            id="expStartDate" 
+                            name="expStartDate" 
+                            class="form-control"
+                        >
+                        <span class="error-message" id="expStartDate-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="expEndDate">End Date</label>
+                        <input 
+                            type="date" 
+                            id="expEndDate" 
+                            name="expEndDate" 
+                            class="form-control"
+                        >
+                        <span class="error-message" id="expEndDate-error"></span>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Job Details</legend>
+                    <div class="form-group">
+                        <label for="jobRole">Job Role</label>
+                        <input 
+                            type="text" 
+                            id="jobRole" 
+                            name="jobRole" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Job role must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="jobRole-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobStartDate">Start Date</label>
+                        <input 
+                            type="date" 
+                            id="jobStartDate" 
+                            name="jobStartDate" 
+                            class="form-control"
+                            required
+                        >
+                        <span class="error-message" id="jobStartDate-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input 
+                            type="text" 
+                            id="department" 
+                            name="department" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Department must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="department-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input 
+                            type="text" 
+                            id="position" 
+                            name="position" 
+                            class="form-control"
+                            required
+                            pattern="^[A-Za-z\s]+$"
+                            title="Position must contain only letters and spaces"
+                            maxlength="100"
+                        >
+                        <span class="error-message" id="position-error"></span>
+                    </div>
+                </fieldset>
+            </div>
+    
+            <div class="form-actions">
+                <button type="submit" class="btn">Submit</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('onboardingForm');
+            const today = new Date().toISOString().split('T')[0];
+            
+            document.getElementById('jobStartDate').setAttribute('max', today);
+            document.getElementById('jobStartDate').value = today;
+            
+            document.getElementById('expStartDate').setAttribute('max', today);
+            document.getElementById('expEndDate').setAttribute('max', today);
+            
+            function validateField(field) {
+                const errorElement = document.getElementById(`${field.id}-error`);
+                
+                if (!field.value.trim()) {
+                    if (field.required) {
+                        errorElement.textContent = 'This field is required';
+                    } else {
+                        errorElement.textContent = '';
+                    }
+                    return;
+                }
+                
+                if (field.pattern && !new RegExp(field.pattern).test(field.value)) {
+                    errorElement.textContent = field.title || 'Invalid format';
+                    return;
+                }
+                
+                if (field.id === 'phone' || field.id === 'mobileNumber') {
+                    if (/^0+$/.test(field.value)) {
+                        errorElement.textContent = 'Cannot be all zeros';
+                        return;
+                    }
+                }
+                
+                if (field.id === 'zipCode' && /^0+$/.test(field.value)) {
+                    errorElement.textContent = 'Cannot be all zeros';
+                    return;
+                }
+                
+                if (field.id === 'confirmAccountNumber') {
+                    const accountNumber = document.getElementById('accountNumber').value;
+                    if (field.value !== accountNumber) {
+                        errorElement.textContent = 'Account numbers must match';
+                        return;
+                    }
+                }
+                
+                errorElement.textContent = '';
+            }
+            
+            const formControls = form.querySelectorAll('input, select, textarea');
+            formControls.forEach(control => {
+                control.addEventListener('input', function() {
+                    validateField(this);
+                    
+                    if (this.id === 'accountNumber') {
+                        const confirmField = document.getElementById('confirmAccountNumber');
+                        if (confirmField.value) {
+                            validateField(confirmField);
+                        }
+                    }
+                    
+                    if (this.id === 'dob' && this.value) {
+                        const birthYear = new Date(this.value).getFullYear();
+                        const graduationYearInput = document.getElementById('graduationYear');
+                        graduationYearInput.setAttribute('min', birthYear + 16);
+                        
+                        if (graduationYearInput.value) {
+                            validateField(graduationYearInput);
+                        }
+                    }
+                    
+                    if (this.id === 'expStartDate' && this.value) {
+                        const endDateInput = document.getElementById('expEndDate');
+                        endDateInput.setAttribute('min', this.value);
+                        
+                        if (endDateInput.value) {
+                            validateField(endDateInput);
+                        }
+                    }
+                });
+                
+                control.addEventListener('blur', function() {
+                    validateField(this);
+                });
+            });
+            
+            document.getElementById('expStartDate').addEventListener('change', function() {
+                validateField(this);
+                const startDate = this.value;
+                const endDateInput = document.getElementById('expEndDate');
+                
+                if (startDate) {
+                    endDateInput.setAttribute('min', startDate);
+                    if (endDateInput.value) {
+                        validateField(endDateInput);
+                    }
+                }
+            });
+            
+            document.getElementById('expEndDate').addEventListener('change', function() {
+                validateField(this);
+            });
+            
+            document.getElementById('dob').addEventListener('change', function() {
+                validateField(this);
+                const dob = this.value;
+                const graduationYearInput = document.getElementById('graduationYear');
+                
+                if (dob) {
+                    const birthYear = new Date(dob).getFullYear();
+                    graduationYearInput.setAttribute('min', birthYear + 16);
+                    if (graduationYearInput.value) {
+                        validateField(graduationYearInput);
+                    }
+                }
+            });
+            
+            document.getElementById('confirmAccountNumber').addEventListener('input', function() {
+                validateField(this);
+            });
+            
+            document.getElementById('degreeCertificate').addEventListener('change', function() {
+                const file = this.files[0];
+                const errorElement = document.getElementById('degreeCertificate-error');
+                const allowedTypes = [
+                    'application/pdf',
+                    'image/jpeg',
+                    'image/png',
+                    'application/msword',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ];
+                
+                if (file) {
+                    if (!allowedTypes.includes(file.type)) {
+                        errorElement.textContent = 'Invalid file type. Please upload PDF, JPG, PNG, or DOC file';
+                    } else if (file.size > 5 * 1024 * 1024) { 
+                        errorElement.textContent = 'File size must be less than 5MB';
+                    } else {
+                        errorElement.textContent = '';
+                    }
+                } else {
+                    errorElement.textContent = this.required ? 'This field is required' : '';
+                }
+            });
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+                
+                const requiredFields = form.querySelectorAll('[required]');
+                requiredFields.forEach(field => {
+                    validateField(field);
+                    const errorElement = document.getElementById(`${field.id}-error`);
+                    if (errorElement.textContent) {
+                        isValid = false;
+                    }
+                });
+                
+                const accountNumber = document.getElementById('accountNumber').value;
+                const confirmAccountNumber = document.getElementById('confirmAccountNumber').value;
+                if (accountNumber !== confirmAccountNumber) {
+                    document.getElementById('confirmAccountNumber-error').textContent = 
+                        'Account numbers must match';
+                    isValid = false;
+                }
+                
+                const jobStartDate = document.getElementById('jobStartDate').value;
+                if (jobStartDate !== today) {
+                    document.getElementById('jobStartDate-error').textContent = 
+                        'Job start date must be today';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    const formData = new FormData(form);
+                    const data = {};
+                    formData.forEach((value, key) => {
+                        data[key] = value;
+                    });
+                    
+                    localStorage.setItem('onboardingData', JSON.stringify(data));
+                    
+                    alert('Form submitted successfully!');
+                    window.location.href = 'success.html'; 
+                }
+            });
+            
+            form.addEventListener('reset', function() {
+                const errorMessages = form.querySelectorAll('.error-message');
+                errorMessages.forEach(error => {
+                    error.textContent = '';
+                });
+                
+                document.getElementById('jobStartDate').value = today;
+            });
+        });
+    </script>
+</body> -->

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Letter</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eceaea;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    background: #ffffff;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.459);
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header img {
+    height:150px;
+}
+
+.company-name {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.company-name .astrolite {
+    color: blue;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.company-name .tech {
+    color: red;
+}
+
+.company-name .solutions {
+    color: black;
+}
+
+/* input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+} */
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Overlay Container Styling */
+.container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: #ffffff;
+    color: #333;
+    z-index: 9999;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.514);
+    overflow-y: auto;
+}
+
+.container h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+.container p {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .form-group label i {
+      margin-right: 8px;
+      color: #0077cc;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #0077cc;
+      box-shadow: 0 0 4px #0077cc;
+    }
+
+    input:hover {
+      background-color: #f0faff;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+#qrcode {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Card Animation */
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+#detailsCard {
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #333;
+      padding: 8px;
+      margin: 8px 0;
+    }
+
+    label i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    input {
+
+      width: 95%;
+      padding: 10px;
+      margin-left: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:hover {
+      background-color: #f0faff;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px #007bff;
+    }
+
+    input[readonly] {
+      background-color: #e9ecef;
+      cursor: pointer;
+    }
+
+.icon-candidate { color: #ff5722; }
+    .icon-position { color: #9c27b0; }
+    .icon-date { color: #2196f3; }
+    .icon-manager { color: #4caf50; }
+    .icon-compensation { color: #ff9800; }
+</style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <img src="./logo.png" alt="Company Logo" />
+            <div class="company-name">
+              <span class="astrolite">Astrolite</span>
+              <span class="tech">Tech</span>
+              <span class="solutions">Solutions</span>
+            </div>
+          </div>
+    <h1 style="color: blue;padding-left: 30%;">Offer Letter Generator</h1>
+    
+    <label for="candidateName"><i class="fa fa-user icon-candidate"></i>Candidate Name:</label>
+    <input type="text" id="candidateName" placeholder="Enter Candidate Name" required>
+    
+    <label for="positionTitle"> <i class="fa fa-briefcase icon-position"></i>Position Title:</label>
+    <input type="text" id="positionTitle" placeholder="Enter Position Title" required>
+    
+    <label for="startDate"> <i class="fa fa-calendar-alt icon-date"></i>Start Date:</label required>
+    <input type="date" id="startDate">
+    
+    <label for="managerName"><i class="fa fa-user-tie icon-manager"></i>Manager's Name:</label>
+    <input type="text" id="managerName" placeholder="Enter Manager's Name" required>
+    
+    <label for="compensationDetails"><i class="fa fa-money-bill-wave icon-compensation" ></i>Compensation Details:</label>
+    <input type="text" id="compensationDetails" placeholder="Click to fill details" readonly>
+    
+    <h1 id="compensationHeader" style="display:none;">Compensation Details Form</h1>
+    <form id="compensationForm" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Annual (₹)</th>
+            <th>Monthly (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic</td>
+            <td><input type="text" id="annualBasic" placeholder="e.g., 120000"></td>
+            <td><input type="text" id="monthlyBasic" placeholder="e.g., 10000"></td>
+          </tr>
+          <tr>
+            <td>House Rent Allowance</td>
+            <td><input type="text" id="annualHRA" placeholder="e.g., 60000"></td>
+            <td><input type="text" id="monthlyHRA" placeholder="e.g., 5000"></td>
+          </tr>
+          <tr>
+            <td>Education Allowance</td>
+            <td><input type="text" id="annualEducation" placeholder="e.g., 2400"></td>
+            <td><input type="text" id="monthlyEducation" placeholder="e.g., 200"></td>
+          </tr>
+          <tr>
+            <td>Bonus / Ex-gratia</td>
+            <td><input type="text" id="annualBonus" placeholder="e.g., 24000"></td>
+            <td><input type="text" id="monthlyBonus" placeholder="e.g., 2000"></td>
+          </tr>
+          <tr>
+            <td>Other Allowance</td>
+            <td><input type="text" id="annualOther" placeholder="e.g., 193600"></td>
+            <td><input type="text" id="monthlyOther" placeholder="e.g., 16133"></td>
+          </tr>
+          <tr>
+            <td>Deductions (Professional Tax)</td>
+            <td><input type="text" id="annualTax" placeholder="e.g., 2400"></td>
+            <td><input type="text" id="monthlyTax" placeholder="e.g., 200"></td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <button type="button" class="submit-btn" onclick="calculateCompensation()">Submit</button>
+    </form>
+    
+    <button onclick="saveData()">Save and Proceed</button>
+    <div class="container hidden">
+      <h2>QR Code Generator</h2>
+    
+      <div class="form-group">
+        <label for="emailInput">
+          <i class="fa fa-envelope"></i> Email
+        </label>
+        <input type="email" id="emailInput" placeholder="Enter your email" required 
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+          title="Please enter a valid email address.">
+      </div>
+    
+      <div class="form-group">
+        <label for="passwordInput">
+          <i class="fa fa-lock"></i> Password
+        </label>
+        <input type="password" id="passwordInput" placeholder="Enter your password" required minlength="8" 
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
+          title="Password must be at least 8 characters long and include at least one letter, one number, and one special character.">
+      </div>
+    
+      <div class="form-group">
+        <label for="numberInput">
+          <i class="fa fa-id-card"></i> Emp-Id
+        </label>
+        <input type="text" id="numberInput" placeholder="Enter 3 alphabets followed by 6 numbers" required 
+          pattern="^[a-zA-Z]{3}\d{6}$" 
+          title="Please enter 3 alphabets followed by 6 digits.">
+      </div>
+    
+      <button onclick="generateQRCode()">Generate QR Code</button>    
+      <div id="qrcode"></div>
+    </div>
+    
+    <div id="detailsCard" style="display: none; border: 1px solid #000; padding: 20px; margin-top: 20px;">
+      <h3>Offer Letter Details</h3>
+      <p id="offerCardDetails"></p>
+    </div>
+</div>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  
+    <script>
+       // Show the overlay
+  function showContainer() {
+    document.querySelector('.container').classList.remove('hidden');
+  }
+
+  // Hide the overlay
+  function hideContainer() {
+    document.querySelector('.container').classList.add('hidden');
+  }
+
+  // Example trigger to test functionality
+  document.querySelector("button[onclick='generateQRCode()']").addEventListener('click', showContainer);
+
+      function saveData() {
+        const data = {
+          candidateName: document.getElementById('candidateName').value,
+          positionTitle: document.getElementById('positionTitle').value,
+          startDate: document.getElementById('startDate').value,
+          managerName: document.getElementById('managerName').value,
+          compensationDetails: document.getElementById('compensationDetails').value
+        };
+  
+        localStorage.setItem('offerDetails', JSON.stringify(data));
+        alert('Data Saved!');
+  
+        // Show QR code generator section
+        document.querySelector('.container').style.display = 'block';
+  
+        // Display offer letter details as a card
+        const offerDetailsCard = document.getElementById("offerCardDetails");
+        offerDetailsCard.innerHTML = `
+          <strong>Candidate Name:</strong> ${data.candidateName}<br>
+          <strong>Position Title:</strong> ${data.positionTitle}<br>
+          <strong>Start Date:</strong> ${data.startDate}<br>
+          <strong>Manager's Name:</strong> ${data.managerName}<br>
+          <strong>Compensation Details:</strong> ${data.compensationDetails}<br>
+        `;
+        document.getElementById('detailsCard').style.display = 'block';
+      }
+  
+      function generateQRCode() {
+        const email = document.getElementById("emailInput").value;
+        const password = document.getElementById("passwordInput").value;
+        const number = document.getElementById("numberInput").value;
+        const qrCodeContainer = document.getElementById("qrcode");
+        qrCodeContainer.innerHTML = "";  // Reset previous QR code
+  
+        if (email && password && /^[a-zA-Z]{3}\d{6}$/.test(number)) {
+          const qrData = `Email: ${email}\nPassword: ${password}\nNumber: ${number}`;
+          
+          localStorage.setItem("qrData", qrData);
+          
+          new QRCode(qrCodeContainer, {
+            text: qrData,
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H,
+          });
+  
+          // Alert after QR code generation
+          alert("QR Code Generated!");
+          
+          // Reset form and card after QR code generation
+          document.getElementById("emailInput").value = "";
+          document.getElementById("passwordInput").value = "";
+          document.getElementById("numberInput").value = "";
+        } else {
+          qrCodeContainer.innerHTML = "<p>Please fill in all fields with valid data.</p>";
+        }
+      }
+  
+      document.getElementById("compensationDetails").addEventListener("click", function () {
+        document.getElementById("compensationHeader").style.display = "block";
+        document.getElementById("compensationForm").style.display = "block";
+      });
+  
+      function calculateCompensation() {
+        const annualBasic = parseFloat(document.getElementById('annualBasic').value) || 0;
+        const annualHRA = parseFloat(document.getElementById('annualHRA').value) || 0;
+        const annualBonus = parseFloat(document.getElementById('annualBonus').value) || 0;
+        const annualTax = parseFloat(document.getElementById('annualTax').value) || 0;
+        
+        const totalCompensation1 = annualBasic + annualHRA + annualBonus;
+        const totalCompensation2 = annualTax;
+        const totalCompensation = totalCompensation1 - totalCompensation2;
+  
+        document.getElementById("compensationDetails").value = `₹${totalCompensation.toFixed(2)}`;
+  
+        alert("Compensation details saved!");
+        document.getElementById("compensationHeader").style.display = "none";
+        document.getElementById("compensationForm").style.display = "none";
+      }
+     // Show the container
+function showContainer() {
+    document.querySelector('.container').classList.remove('hidden');
+    document.querySelector('.container').style.display = 'block';
+}
+
+// Hide the container
+function hideContainer() {
+    document.querySelector('.container').classList.add('hidden');
+    document.querySelector('.container').style.display = 'none';
+}
+
+// Trigger to show the container when generating the QR Code
+document.querySelector("button[onclick='generateQRCode()']").addEventListener('click', showContainer);
+
+// Add the submit button event to close the container
+function submitAndCloseContainer() {
+    alert('Offer letter generated successfully!');
+    hideContainer();
+}
+
+// Add a button inside the container for submission and attach the function
+const submitButton = document.createElement('button');
+submitButton.textContent = 'Submit';
+submitButton.style.marginTop = '20px';
+submitButton.onclick = submitAndCloseContainer;
+document.querySelector('.container').appendChild(submitButton);
+
+    </script>
+  </body>
+  
+  
+</html>

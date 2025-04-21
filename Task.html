@@ -4,38 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Task Board</title>
-  <link rel="stylesheet" href="Task.css">
+  <link rel="stylesheet" href="./Task.css">
 </head>
 <body>
+  <!-- Header Section -->
   <header class="header">
     <h1>Employee Task Board</h1>
   </header>
 
+  <!-- Kanban Board Container -->
   <div class="kanban-board">
 
+    <!-- To Do Column -->
     <div class="kanban-column" id="todoColumn">
       <h2>To Do</h2>
     </div>
 
+    <!-- In Progress Column -->
     <div class="kanban-column" id="inProgressColumn">
       <h2>In Progress</h2>
     </div>
 
+    <!-- Completed Column -->
     <div class="kanban-column" id="completedColumn">
       <h2>Completed</h2>
     </div>
   </div>
-  <div class="background">
+  <!-- <div class="background">
     <div class="circle"></div>
     <div class="line"></div>
     <div class="rhombus"></div>
-  </div>
+  </div> -->
 <script>
+  localStorage.clear();
   document.addEventListener('DOMContentLoaded', () => {
   const todoColumn = document.getElementById('todoColumn');
   const inProgressColumn = document.getElementById('inProgressColumn');
   const completedColumn = document.getElementById('completedColumn');
 
+  // Sample initial tasks
   const initialTasks = [
     { taskName: 'Task 1: Design Homepage', status: 'todo' },
     { taskName: 'Task 2: Develop Login Page', status: 'todo' },
@@ -44,13 +51,16 @@
     { taskName: 'Task 5: Update Website Content', status: 'completed' }
   ];
 
+  // Save initial tasks to localStorage if not already present
   if (!localStorage.getItem('tasks')) {
     localStorage.setItem('tasks', JSON.stringify(initialTasks));
   }
 
+  // Function to render tasks
   function renderTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+    // Clear columns before rendering
     todoColumn.innerHTML = '<h2>To Do</h2>';
     inProgressColumn.innerHTML = '<h2>In Progress</h2>';
     completedColumn.innerHTML = '<h2>Completed</h2>';
@@ -60,6 +70,7 @@
       taskCard.classList.add('task');
       taskCard.textContent = task.taskName;
 
+      // Add click event to move the task and open the review form when completed
       taskCard.addEventListener('click', () => {
         if (task.status === 'completed') {
           openReviewForm(task.taskName);
@@ -78,6 +89,7 @@
     });
   }
 
+  // Function to move a task between columns
   function moveTask(taskName) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -94,6 +106,36 @@
 
     renderTasks();
   }
+
+  // Function to open the review form when a task is completed
+  // function openReviewForm(taskName) {
+  //   let existingReviews = JSON.parse(localStorage.getItem('reviews')) || {};
+    
+  //   const form = document.createElement('div');
+  //   form.classList.add('review-form');
+
+  //   form.innerHTML = `
+  //     <h3>Review Form for ${taskName}</h3>
+  //     <label for="reviewDetails">Details</label>
+  //     <textarea id="reviewDetails" rows="4" cols="50"></textarea>
+  //     <button id="submitReviewBtn">Submit Review</button>
+  //   `;
+
+  //   form.querySelector('#submitReviewBtn').addEventListener('click', () => {
+  //     const reviewDetails = document.getElementById('reviewDetails').value;
+      
+  //     // Store the review in localStorage under taskName key
+  //     existingReviews[taskName] = reviewDetails;
+  //     localStorage.setItem('reviews', JSON.stringify(existingReviews));
+
+  //     console.log(`Review for ${taskName}: ${reviewDetails}`);
+  //     document.body.removeChild(form);
+  //   });
+
+  //   document.body.appendChild(form);
+  // }
+
+  // Render tasks on page load
   window.addEventListener('DOMContentLoaded', renderTasks);
 });
 </script>

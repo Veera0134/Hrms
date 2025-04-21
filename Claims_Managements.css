@@ -195,4 +195,66 @@ button:hover {
         opacity: 1;
     }
 }
-
+.claim-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 12px;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.153);
+}
+.claim-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.claim-actions {
+    margin-top: 10px;
+}
+.approve-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+.reject-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.status.approved {
+    background-color: #d4edda;
+    color: #155724;
+}
+.status.rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.claim-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.claim-amount {
+    color: #2c3e50;
+    font-weight: bold;
+    text-align: right;
+}

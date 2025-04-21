@@ -1,84 +1,341 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="Emp_Career_progression.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Tracking & Progression</title>
+    <!-- <link rel="stylesheet" href="./Emp_career_progression.css"> -->
+    <style>
+      :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light;
+    color: #213547;
+    background-color: #f3f4f6;
+  }
+  
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .employee-info {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .employee-info:hover {
+    transform: translateY(-2px);
+  }
+  
+  .employee-info h1 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 2rem;
+  }
+  
+  .info-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    gap: 0.5rem;
+  }
 
-    <div class="profile-card">
-        <div class="header">
-            <div class="profile-info">
-                <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Profile Picture">
-                <h1>Veera Raghava</h1>
-                <p>Senior Software Engineer</p>
-                <p>Engineering Department • Joined Jan 2022 • San Francisco, CA</p>
+  .name h1 {
+    text-align: left;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #4a5568;
+  }
+
+  .separator {
+    color: #a0aec0;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .name h1 {
+      font-size: 1.5rem;
+    }
+    
+    .content {
+      font-size: 0.9rem;
+      gap: 0.3rem;
+    }
+  }
+  
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .section {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .section:hover {
+    transform: translateY(-2px);
+  }
+  
+  .section h2 {
+    margin: 0 0 1.5rem 0;
+    color: #1a1a1a;
+    font-size: 1.5rem;
+    position: relative;
+  }
+  
+  .card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+  }
+  
+  .card:hover {
+    border-color: #e5e7eb;
+    transform: translateX(4px);
+  }
+  
+  .card:last-child {
+    margin-bottom: 0;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .date {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+  
+  .badge {
+    background-color: #e5e7eb;
+    color: #4b5563;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .badge:hover {
+    transform: scale(1.05);
+  }
+  
+  .badge.completed {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+  
+  .badge.in-progress {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  .card-content {
+    color: #4b5563;
+  }
+  
+  .card-content .title {
+    color: #1a1a1a;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .card-content .details,
+  .card-content .amount,
+  .card-content .type {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+  }
+  
+  .amount {
+    color: #059669;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+    
+    .career-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .employee-info {
+      padding: 1.5rem;
+    }
+    
+
+  
+    .section h2 {
+      font-size: 1.25rem;
+    }
+  
+    .section h2::after {
+      width: 40px;
+    }
+  }
+  
+  @media (hover: none) {
+    .employee-info:hover,
+    .section:hover,
+    .card:hover,
+    .badge:hover {
+      transform: none;
+    }
+  }
+    </style>
+  </head>
+  <body>
+    <header style="text-align: center;  background: linear-gradient(135deg,  #2c3e50, #3498db); color: white;   padding: 2px;">
+      <h1>Employee Career progression</h1>
+      <p class="quote">"Your efforts meeting our opportunities."</p>
+    </header>
+    <div class="container">
+      <div class="employee-info" style="display: flex; flex-direction: row;">
+        <div> 
+          <img src="./Man.jpg" alt=""  style="width: 150px; height: auto; border-radius: 50%;">
+        </div>
+       
+        <div class="info-details" style="padding-left: 20px;">
+          <div class="name">
+            <h1 style="color: blue;">Veera Raghava Reddy</h1>
+          </div>
+          <div class="content">
+            <span class="role">Software Developer</span>
+            <span class="separator">•</span>
+            <span class="department">Engineering</span>
+            <span class="separator">•</span>
+            <span class="join-date">Joined: January 15, 2022</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="career-grid">
+        <div class="section">
+          <h2 style="color: blue; text-align: center;">Promotions</h2>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">January 15, 2023</span>
+              <span class="badge">Promotion</span>
             </div>
-            <a href="./Profile.html">  <button class="view-profile">View Profile</button></a>
-          
+            <div class="card-content">
+              <p class="title">Junior Developer → Software Developer</p>
+              <p class="details">Promoted based on exceptional performance and technical growth</p>
+            </div>
+          </div>
         </div>
 
-        <div class="metrics">
-            <div class="metric">
-                <i class="fas fa-chart-line"></i>
-                <p>Salary Growth</p>
-                <h2>45%</h2>
+        <div class="section">
+          <h2 style="color: blue; text-align: center;">Salary Increments</h2>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">January 15, 2023</span>
+              <span class="badge">Annual</span>
             </div>
-            <div class="metric">
-                <i class="fas fa-award"></i>
-                <p>Awards</p>
-                <h2>3</h2>
+            <div class="card-content">
+              <p class="title">15% Increase</p>
+              <p class="amount">Amount: 10,000</p>
             </div>
-            <div class="metric">
-                <i class="fas fa-certificate"></i>
-                <p>Certifications</p>
-                <h2>4</h2>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">July 15, 2023</span>
+              <span class="badge">Performance</span>
             </div>
-            <div class="metric">
-                <i class="fas fa-bullseye"></i>
-                <p>Goals Met</p>
-                <h2>92%</h2>
+            <div class="card-content">
+              <p class="title">5% Increase</p>
+              <p class="amount">Amount: 4,000</p>
             </div>
+          </div>
         </div>
 
-        <div class="career-progress">
-            <h2>Career Progression</h2>
-            <div class="progress-item">
-                <i class="fas fa-gift"></i>
-                <div>
-                    <h3>Senior Software Engineer</h3>
-                    <p>Promoted to lead the frontend development team</p>
-                    <span>2024</span>
-                </div>
+        <div class="section">
+          <h2 style="color: blue; text-align: center;">Bonuses</h2>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">December 25, 2023</span>
+              <span class="badge">Year-end</span>
             </div>
-            <div class="progress-item">
-                <i class="fas fa-graduation-cap"></i>
-                <div>
-                    <h3>AWS Certification</h3>
-                    <p>Completed AWS Solutions Architect certification</p>
-                    <span>2023</span>
-                </div>
+            <div class="card-content">
+              <p class="title">25,000</p>
+              <p class="details">Outstanding performance in Q4 projects</p>
             </div>
-            <div class="progress-item">
-                <i class="fas fa-trophy"></i>
-                <div>
-                    <h3>Excellence Award</h3>
-                    <p>Recognized for outstanding project delivery</p>
-                    <span>2023</span>
-                </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">October 1, 2023</span>
+              <span class="badge">Project completion</span>
             </div>
-            <div class="progress-item">
-                <i class="fas fa-chart-line"></i>
-                <div>
-                    <h3>Performance Bonus</h3>
-                    <p>15% salary increment for exceptional performance</p>
-                    <span>2022</span>
-                </div>
+            <div class="card-content">
+              <p class="title">15,000</p>
+              <p class="details">Successful launch of customer portal</p>
             </div>
+          </div>
         </div>
+
+        <div class="section">
+          <h2 style="color: blue; text-align: center;">Education & Training</h2>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">May 20, 2023</span>
+              <span class="badge completed">Completed</span>
+            </div>
+            <div class="card-content">
+              <p class="title">AWS Solutions Architect</p>
+              <p class="type">Certification</p>
+              <p class="amount">Reimbursement: 12,000</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="date">August 15, 2023</span>
+              <span class="badge in-progress">In Progress</span>
+            </div>
+            <div class="card-content">
+              <p class="title">Advanced React Development</p>
+              <p class="type">Course</p>
+              <p class="amount">Reimbursement: 5,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

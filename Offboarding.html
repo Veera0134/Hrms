@@ -4,150 +4,441 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Offboarding Page</title>
-  <link rel="stylesheet" href="Offboarding.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+      color: white;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .header-quote {
+      position: relative;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    .header-quote p::before,
+    .header-quote p::after {
+      /* content: '"'; */
+      color: rgba(255, 255, 255, 0.7);
+      position: absolute;
+    }
+
+    .header-quote p::before {
+      left: 0;
+      top: -0.3rem;
+    }
+
+    .header-quote p::after {
+      right: 0;
+      bottom: -0.8rem;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 0.5rem;
+    }
+
+    fieldset {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      background-color: #fdfdfd;
+    }
+
+    legend {
+      padding: 0 10px;
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 1.1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    textarea {
+      resize: none;
+      min-height: 120px;
+    }
+
+    .final-submit {
+      margin-top: 1.5rem;
+    }
+
+    button[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      width: 100%;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    .required {
+      color: #e74c3c;
+    }
+
+    .error-message {
+      display: block;
+      margin-top: -0.8rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: #e74c3c;
+    }
+
+    .success-message {
+      color: #27ae60;
+      text-align: center;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 2rem 1rem;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 1.5rem;
+      }
+      
+      fieldset {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .header-quote {
+        font-size: 1rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      input[type="text"],
+      input[type="number"],
+      textarea {
+        padding: 0.7rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>OFFBOARDING FORM</h1>
+    <h1>Offboarding Form</h1>
+    <div class="header-quote">
+      <p>"Every ending is a new beginning. We appreciate your contributions and wish you success in your next chapter."</p>
+    </div>
   </header>
-  
+
   <main>
     <form id="offboardingForm">
       <div class="container">
-
-        <aside class="checklist">
-          <h2>Offboarding Checklist</h2>
-          <ul>
-            <li>
-              Asset Return: 
-              <label class="toggle">
-                <input type="checkbox" name="checklist[]" value="Asset Return">
-                <span class="slider"></span>
-              </label>
-            </li>
-            <li>
-              Access Revocation: 
-              <label class="toggle">
-                <input type="checkbox" name="checklist[]" value="Access Revocation">
-                <span class="slider"></span>
-              </label>
-            </li>
-            <li>
-              Knowledge Transfer: 
-              <label class="toggle">
-                <input type="checkbox" name="checklist[]" value="Knowledge Transfer">
-                <span class="slider"></span>
-              </label>
-            </li>
-            <li>
-              Exit Interview: 
-              <label class="toggle">
-                <input type="checkbox" name="checklist[]" value="Exit Interview">
-                <span class="slider"></span>
-              </label>
-            </li>
-            <li>
-              Final Settlement: 
-              <label class="toggle">
-                <input type="checkbox" name="checklist[]" value="Final Settlement">
-                <span class="slider"></span>
-              </label>
-            </li>
-          </ul>
-        </aside>
-        
-        
         <section class="details">
           <section class="employee-details">
             <h2>Employee Details</h2>
             <fieldset>
-              <legend>Personal Information</legend>
-          
-              <label for="empName">Employee Name:</label>
-              <input type="text" id="empName" name="empName" placeholder="Enter employee name" required 
-                     pattern="^[A-Za-z\s]{4,}$" 
-                     title="Employee Name must be at least 4 characters long and contain only letters and spaces.">
-              <span id="name-error" style="color: red; font-size: 0.9em;"></span>
-          
-              <label for="position">Position:</label>
-              <input type="text" id="position" name="position" placeholder="Enter position" required 
-                     pattern="^[A-Za-z\s]{3,}$" 
-                     title="Position must be at least 3 characters long and contain only letters and spaces.">
-              <span id="position-error" style="color: red; font-size: 0.9em;"></span>
-          
-              <label for="empId">Employee ID:</label>
-              <input type="text" id="empId" name="empId" placeholder="Enter employee ID" required 
-                     pattern="^[A-Za-z]{3}[0-9]{4}$" 
-                     title="Employee ID must start with 3 letters followed by 4 numbers.">
-              <span id="id-error" style="color: red; font-size: 0.9em;"></span>
-          </fieldset>
+              <label for="empName">Employee Name: <span class="required">*</span></label>
+              <input type="text" id="empName" name="empName" placeholder="Enter employee name" required maxlength="30"
+                pattern="^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$"
+                title="Employee Name must start with capital letters and contain only letters and single spaces between names.">
+              <span id="name-error" class="error-message"></span>
+
+              <label for="position">Position: <span class="required" style="color: red;">*</span></label>
+              <input type="text" id="position" name="position" placeholder="Enter position" required
+                pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" maxlength="30"
+                title="Position must contain only letters and single spaces between words.">
+              <span id="position-error" class="error-message" style="color: red; font-size: 0.85rem;"></span>
+
+              <label for="empId">Employee ID: <span class="required">*</span></label>
+              <input type="text" id="empId" name="empId" placeholder="Enter employee ID (e.g., ATS0124)" maxlength="7"
+                required pattern="^ATS0(?!000)\d{3}$"
+                title="Employee ID must be 3 uppercase letters followed by 5 numbers.">
+              <span id="id-error" class="error-message"></span>
+            </fieldset>
           </section>
+
           <div class="exit-interview">
             <h2>Exit Interview</h2>
             <fieldset>
-              <legend>Feedback Form</legend>
-              <label for="feedback">Your Feedback:</label>
-              <textarea id="feedback" name="feedback" rows="5" placeholder="Share your experience..."></textarea>
+              <label for="feedback">Your Feedback: <span class="required">*</span></label>
+              <textarea id="feedback" name="feedback" rows="5" placeholder="Share your experience..." required
+                maxlength="500"></textarea>
+              <span id="feedback-error" class="error-message"></span>
+              <div id="feedback-counter" style="text-align: right; color: #7f8c8d; font-size: 0.8rem;">500 characters remaining</div>
             </fieldset>
           </div>
-          
+
           <div class="final-settlement">
             <h2>Final Settlement</h2>
             <fieldset>
-              <legend>Final Settlement Details</legend>
-              <label for="final-salary">Final Salary Amount:</label>
-              <input type="number" id="final-salary" name="final_salary" placeholder="Enter final salary" required>
-              
-              <label for="bonus">Bonus Amount:</label>
-              <input type="number" id="bonus" name="bonus" placeholder="Enter bonus amount (if any)" required>
-              
-              <label for="acknowledgment">Acknowledgment:</label>
-              <textarea id="acknowledgment" name="acknowledgment" rows="3" placeholder="Enter acknowledgment details" required></textarea>
+              <label for="final-salary">Final Salary Amount: <span class="required">*</span></label>
+              <input type="number" id="final-salary" name="final_salary" placeholder="Enter final salary" required
+                min="1000" max="1000000" step="1"
+                oninput="if(this.value.length > 7) this.value = this.value.slice(0,7);">
+              <span id="final-salary-error" class="error-message"></span>
+
+              <label for="bonus">Bonus Amount: <span class="required">*</span></label>
+              <input type="number" id="bonus" name="bonus" placeholder="Enter bonus amount (if any)" required
+                min="1000" max="100000" step="0.01"
+                oninput="if(this.value.length > 7) this.value = this.value.slice(0,7);">
+              <span id="bonus-error" class="error-message"></span>
+
+              <label for="acknowledgment">Acknowledgment: <span class="required">*</span></label>
+              <textarea id="acknowledgment" name="acknowledgment" rows="3" placeholder="Enter acknowledgment details"
+                required maxlength="300"></textarea>
+              <span id="acknowledgment-error" class="error-message"></span>
+              <div id="acknowledgment-counter"
+                style="text-align: right; color: #7f8c8d; font-size: 0.8rem;">300 characters remaining</div>
             </fieldset>
           </div>
+
+          <div id="success-message" class="success-message" style="display: none;"></div>
+
           <div class="final-submit">
             <button type="submit">Final Submit</button>
           </div>
         </section>
-        
-       
       </div>
     </form>
   </main>
-  
+
   <script>
-    const form = document.getElementById('offboardingForm');
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('offboardingForm');
+      const feedbackTextarea = document.getElementById('feedback');
+      const feedbackCounter = document.getElementById('feedback-counter');
+      const acknowledgmentTextarea = document.getElementById('acknowledgment');
+      const acknowledgmentCounter = document.getElementById('acknowledgment-counter');
+      const successMessage = document.getElementById('success-message');
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
+      feedbackTextarea.addEventListener('input', function () {
+        this.value = this.value.replace(/\s{2,}/g, ' ');
+        const remaining = 500 - this.value.length;
+        feedbackCounter.textContent = `${remaining} characters remaining`;
+      });
 
-     
-      const empName = document.getElementById('empName').value;
-      const position = document.getElementById('position').value;
-      const empId = document.getElementById('empId').value;
+      acknowledgmentTextarea.addEventListener('input', function () {
+        this.value = this.value.replace(/\s{2,}/g, ' ');
+        const remaining = 300 - this.value.length;
+        acknowledgmentCounter.textContent = `${remaining} characters remaining`;
+      });
 
-  
-      const feedback = document.getElementById('feedback').value;
-      const finalSalary = document.getElementById('final-salary').value;
-      const bonus = document.getElementById('bonus').value;
-      const acknowledgment = document.getElementById('acknowledgment').value;
+      document.getElementById('empName').addEventListener('input', function () {
+        const nameError = document.getElementById('name-error');
+        const value = this.value.trim();
+        if (value === '') {
+          nameError.textContent = '';
+          return;
+        }
+        if (!/^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$/.test(value)) {
+          nameError.textContent = 'Name must start with capital letters and contain only letters and single spaces.';
+        } else {
+          nameError.textContent = '';
+        }
+      });
 
-      const status = "Pending";
+      document.getElementById('position').addEventListener('input', function () {
+        const positionError = document.getElementById('position-error');
+        const value = this.value;
+        if (value.trim() === '') {
+          positionError.textContent = '';
+          return;
+        }
+        if (!/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(value)) {
+          positionError.textContent = 'Position must contain only letters and single spaces between words.';
+        } else {
+          positionError.textContent = '';
+        }
+      });
 
-      localStorage.setItem('offboardingData', JSON.stringify({
-        empName,
-        position,
-        empId,
-        feedback,
-        finalSalary,
-        bonus,
-        acknowledgment,
-        status, 
-      }));
-      alert(`Thank you, ${empName}, for completing the offboarding process.`);
+      document.getElementById('empId').addEventListener('input', function () {
+        const idError = document.getElementById('id-error');
+        const value = this.value.trim();
+        if (value === '') {
+          idError.textContent = '';
+          return;
+        }
+        if (!/^ATS0(?!000)\d{3}$/.test(value)) {
+          idError.textContent = 'Employee ID must be ATS0 followed by 3 digits (e.g., ATS0123).';
+        } else {
+          idError.textContent = '';
+        }
+      });
 
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
+        const empName = document.getElementById('empName').value.trim();
+        const position = document.getElementById('position').value.trim();
+        const empId = document.getElementById('empId').value.trim();
+        const feedback = document.getElementById('feedback').value.trim();
+        const finalSalary = parseFloat(document.getElementById('final-salary').value);
+        const bonus = parseFloat(document.getElementById('bonus').value);
+        const acknowledgment = document.getElementById('acknowledgment').value.trim();
+
+        let isValid = true;
+
+        if (!/^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$/.test(empName)) {
+          document.getElementById('name-error').textContent = 'Please enter a valid name (letters only, starting with capital letters).';
+          isValid = false;
+        }
+
+        if (!/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(position)) {
+          document.getElementById('position-error').textContent = 'Please enter a valid position (letters only).';
+          isValid = false;
+        }
+
+        if (!/^ATS0(?!000)\d{3}$/.test(empId)) {
+          document.getElementById('id-error').textContent = 'Employee ID must be ATS0 followed by 3 digits (e.g., ATS0123).';
+          isValid = false;
+        }
+
+        // Updated Feedback Validation
+        if (feedback.length === 0) {
+          document.getElementById('feedback-error').textContent = 'Please provide your feedback.';
+          isValid = false;
+        } else if (feedback.length > 500) {
+          document.getElementById('feedback-error').textContent = 'Feedback must be 500 characters or less.';
+          isValid = false;
+        } else if (/^[0-9\s\W_]+$/.test(feedback)) {
+          document.getElementById('feedback-error').textContent = 'Feedback should include meaningful words, not just numbers or symbols.';
+          isValid = false;
+        } else {
+          document.getElementById('feedback-error').textContent = '';
+        }
+
+        // Updated Acknowledgment Validation
+        if (acknowledgment.length === 0) {
+          document.getElementById('acknowledgment-error').textContent = 'Please provide acknowledgment details.';
+          isValid = false;
+        } else if (acknowledgment.length > 300) {
+          document.getElementById('acknowledgment-error').textContent = 'Acknowledgment must be 300 characters or less.';
+          isValid = false;
+        } else if (/^[0-9\s\W_]+$/.test(acknowledgment)) {
+          document.getElementById('acknowledgment-error').textContent = 'Acknowledgment should include meaningful words, not just numbers or symbols.';
+          isValid = false;
+        } else {
+          document.getElementById('acknowledgment-error').textContent = '';
+        }
+
+        if (isNaN(finalSalary)) {
+          document.getElementById('final-salary-error').textContent = 'Please enter a valid salary amount.';
+          isValid = false;
+        } else if (finalSalary < 1000 || finalSalary > 1000000) {
+          document.getElementById('final-salary-error').textContent = 'Salary must be between $1,000 and $1,000,000.';
+          isValid = false;
+        }
+
+        if (isNaN(bonus)) {
+          document.getElementById('bonus-error').textContent = 'Please enter a valid bonus amount.';
+          isValid = false;
+        } else if (bonus < 0 || bonus > 100000) {
+          document.getElementById('bonus-error').textContent = 'Bonus must be between $0 and $100,000.';
+          isValid = false;
+        }
+
+        if (!isValid) return;
+
+        const status = "Complete";
+        localStorage.setItem('offboardingData', JSON.stringify({
+          empName, position, empId, feedback, finalSalary, bonus, acknowledgment, status,
+        }));
+
+        successMessage.textContent = `Thank you, ${empName}, for completing the offboarding process.`;
+        successMessage.style.display = 'block';
+        form.reset();
+        feedbackCounter.textContent = '500 characters remaining';
+        acknowledgmentCounter.textContent = '300 characters remaining';
+      });
     });
   </script>
 </body>
+
 </html>

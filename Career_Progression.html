@@ -4,37 +4,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Cards</title>
-    <link rel="stylesheet" href="Career_Progression.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f5f6fa;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }  
+        
+        header h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-container {
+            max-width: 400px;
+            margin: 0 auto 10px;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px 12px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(144, 139, 139, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+
+        .employee-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .card {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s; 
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+            animation: slideIn 0.4s ease; 
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     
     <header>
-        <h1>Career_Progression Tracker</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Search employees by name, department, or ID...">
-        </div>
+        <h1>Career Progression Tracker</h1>
+        <p style="text-align: center; color: white;">"Mapping your journey from growth to greatness"</p>
     </header>
-    <div class="employee-cards">
-        <div class="card" onclick="openModal('modal1')">
-            <img src="https://th.bing.com/th/id/OIP.mk4DihJ5AqVBvOja8MCvugHaE8?w=276&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic">
+    
+    <div class="search-container" style="margin-right: 1px;">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search employees by name..." oninput="searchEmployees()">
+    </div>
+    
+    <div class="employee-cards" id="employeeContainer">
+        <div class="card" onclick="openModal('modal1')" data-name="sindhuja">
+            <img src="https://th.bing.com/th/id/OIP.mk4DihJ5AqVBvOja8MCvugHaE8?w=276&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sindhuja" class="profile-pic">
             <h2>Sindhuja</h2>
             <p>Senior Software Engineer</p>
         </div>
 
-        <div class="card" onclick="openModal('modal2')">
-            <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="John Doe" class="profile-pic">
+        <div class="card" onclick="openModal('modal2')" data-name="veera raghava">
+            <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Veera Raghava" class="profile-pic">
             <h2>Veera Raghava</h2>
             <p>Product Manager</p>
         </div>
 
-        <div class="card" onclick="openModal('modal3')">
-            <img src="https://th.bing.com/th/id/OIP.1H4TjeN5dyNQdkXtz-q7IwHaE2?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Jane Smith" class="profile-pic">
+        <div class="card" onclick="openModal('modal3')" data-name="ajay kumar">
+            <img src="https://th.bing.com/th/id/OIP.1H4TjeN5dyNQdkXtz-q7IwHaE2?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Ajay Kumar" class="profile-pic">
             <h2>Ajay Kumar</h2>
             <p>UX Designer</p>
         </div>
 
-        <div class="card" onclick="openModal('modal4')">
-            <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Michael Lee" class="profile-pic">
+        <div class="card" onclick="openModal('modal4')" data-name="latish tivari">
+            <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Latish Tivari" class="profile-pic">
             <h2>Latish Tivari</h2>
             <p>Data Scientist</p>
         </div>
@@ -50,11 +215,11 @@
             </div>
             <div class="section">
                 <h3>Promotions</h3>
-                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+                <p><strong>June 15, 2021:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
             </div>
             <div class="section">
                 <h3>Salary Increments</h3>
-                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+                <p><strong>June 15, 2022:</strong> 15% increase (15,000.00)</p>
             </div>
             <div class="section">
                 <h3>Education & Certifications</h3>
@@ -68,19 +233,19 @@
             <div class="modal-header">
                 <img src="https://th.bing.com/th/id/OIP.oF9aszXSViel6ryhxALFTgHaE7?w=246&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic-large">
                 <h2>Veera Raghava</h2>
-                <p class="role">Senior Software Engineer</p>
+                <p class="role">Product Manager</p>
             </div>
             <div class="section">
                 <h3>Promotions</h3>
-                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+                <p><strong>June 15, 2021:</strong> Software Engineer → <span class="highlight">Product Manager</span></p>
             </div>
             <div class="section">
                 <h3>Salary Increments</h3>
-                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+                <p><strong>June 15, 2022:</strong> 15% increase (15,000.00)</p>
             </div>
             <div class="section">
                 <h3>Education & Certifications</h3>
-                <p><strong>June 15, 2023:</strong> UX Certification</p>
+                <p><strong>June 15, 2024:</strong> UX Certification</p>
             </div>
         </div>
     </div>
@@ -90,15 +255,15 @@
             <div class="modal-header">
                 <img src="https://th.bing.com/th/id/OIP.1H4TjeN5dyNQdkXtz-q7IwHaE2?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Sarah Chen" class="profile-pic-large">
                 <h2>Ajay Kumar</h2>
-                <p class="role">Senior Software Engineer</p>
+                <p class="role">UX Designer</p>
             </div>
             <div class="section">
                 <h3>Promotions</h3>
-                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+                <p><strong>June 15, 2021:</strong> Software Engineer → <span class="highlight">UX Designer</span></p>
             </div>
             <div class="section">
                 <h3>Salary Increments</h3>
-                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+                <p><strong>June 15, 2022:</strong> 15% increase (15,000.00)</p>
             </div>
             <div class="section">
                 <h3>Education & Certifications</h3>
@@ -110,27 +275,60 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal4')">&times;</span>
             <div class="modal-header">
-                <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Sarah Chen" class="profile-pic-large">
-                <h2>Sindhuja</h2>
-                <p class="role">Senior Software Engineer</p>
+                <img src="https://th.bing.com/th/id/OIP.kZCYC_p9O0FoEmp8_ATntwAAAA?rs=1&pid=ImgDetMain" alt="Sarah Chen" class="profile-pic-large" style="width: 400px;">
+                <h2>Latish</h2>
+                <p class="role">Data Scientist</p>
             </div>
             <div class="section">
                 <h3>Promotions</h3>
-                <p><strong>June 15, 2023:</strong> Software Engineer → <span class="highlight">Senior Software Engineer</span></p>
+                <p><strong>June 15, 2022:</strong> Software Engineer → <span class="highlight">Data Scientist</span></p>
             </div>
             <div class="section">
                 <h3>Salary Increments</h3>
-                <p><strong>June 15, 2023:</strong> 15% increase ($15,000.00)</p>
+                <p><strong>June 15, 2023:</strong> 15% increase (15,000.00)</p>
             </div>
             <div class="section">
                 <h3>Education & Certifications</h3>
-                <p><strong>June 15, 2023:</strong> AWS Certification</p>
+                <p><strong>June 15, 2024:</strong> AWS Certification</p>
             </div>
         </div>
     </div>
 
 
     <script>
+        function searchEmployees() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            const container = document.getElementById('employeeContainer');
+            let hasResults = false;
+
+            let noResultsMsg = container.querySelector('.no-results');
+            
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name.includes(filter)) {
+                    card.style.display = '';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (!hasResults) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'no-results';
+                    noResultsMsg.textContent = 'No employees found matching your search.';
+                    container.appendChild(noResultsMsg);
+                }
+            } else {
+                if (noResultsMsg) {
+                    container.removeChild(noResultsMsg);
+                }
+            }
+        }
+
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "flex";
         }
@@ -138,6 +336,15 @@
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
         }
-        </script>
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

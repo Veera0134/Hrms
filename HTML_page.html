@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Web Designer Courses</title>
+    <link rel="stylesheet" href="./Html_page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Oxanium:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #eae8e1;
+}
+
+header {
+    background-color: #d94f3d;
+    padding: 16.2px; 
+    display: flex;
+    justify-content: center;
+    border-radius: 16.2px;
+    margin-top: 16.2px; 
+}
+
+.logo img {
+    width: 162px; 
+    height: 81px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    margin-top: 16.2px; 
+}
+
+.sidebar {
+    width: 243px; 
+    background-color: #94b8b8;
+    padding: 12.15px;
+    box-shadow: 1.62px 0 4.05px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    border-radius: 24.3px; 
+    margin-right: 16.2px;
+}
+
+.sidebar h1 {
+    padding: 8.1px;
+}
+
+.sidebar h2 {
+    color: #f5f3eb;
+    margin-bottom: 8.1px; 
+    padding: 8.1px; 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 8.1px; 
+}
+
+.sidebar li {
+    margin: 4.05px 0; 
+    color: #f5f3eb;
+}
+
+.dashboard {
+    flex: 1;
+    padding: 16.2px; 
+    background-color: #f5f3eb;
+}
+
+.dashboard img {
+    width: 100%;
+    height: 64.8vh;
+    margin-bottom: 12.15px; 
+    border-radius: 16.2px; 
+    z-index: -1;
+}
+
+.dashboard p {
+    color: #4a4a4a;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16.2px; 
+    margin-top: 24.3px; 
+    margin-bottom: 24.3px;
+}
+
+h1 {
+    text-decoration: underline;
+}
+
+.card {
+    background-color: #6A0DAD;
+    color: #FFD700;
+    padding: 16.2px; 
+    width: 186.3px; 
+    border-radius: 8.1px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 3.24px 6.48px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    max-height: 81px;
+    border-radius: 6.48px;
+    margin-bottom: 8.1px; 
+}
+
+.card h3 {
+    font-size: 1.215rem; 
+    margin-bottom: 8.1px;
+}
+
+.card button {
+    background-color: #FFD700;
+    color: #4B0082;
+    padding: 8.1px;
+    border: none;
+    border-radius: 4.05px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #DAA520;
+}
+
+footer {
+    background-color: #d94f3d;
+    color: #f5f3eb;
+    text-align: center;
+    padding: 16.2px; 
+    margin-top: auto;
+}
+
+footer p {
+    margin: 4.05px 0; 
+}
+
+footer i {
+    margin: 0 8.1px; 
+    color: #f5f3eb;
+}
+
+.description-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16.2px; 
+    padding: 16.2px; 
+    border: 0.81px solid #ddd; 
+    border-radius: 6.48px; 
+    background-color: #331ed286;
+}
+
+.description-image img {
+    width: 567px; 
+    height: 324px; 
+    border-radius: 6.48px; 
+    margin-right: 16.2px;
+}
+
+.description-content p {
+    font-size: 19.44px; 
+    font-family: "Noto Sans", serif;
+    margin-bottom: 8.1px;
+    background-color: white;
+    border-radius: 6.48px;
+    box-shadow: 0 1.62px 8.1px rgba(0, 0, 0, 0.1);
+    padding: 24.3px; 
+    width: 567px; 
+}
+
+strong {
+    display: flex;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.62rem; 
+}
+
+.intro-card {
+    position: relative;
+    text-align: center;
+    padding: 16.2px; 
+    border-radius: 6.48px;
+    background-color: white;
+    border: 0.81px solid #ddd;
+    width: 972px; 
+    margin-top: -48.6px; 
+    margin-left: 129.6px; 
+    z-index: +1;
+}
+
+.intro-card p {
+    font-size: 12.96px; 
+    color: black;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: bold;
+}
+
+#img1 {
+    margin-top: 24.3px; 
+    margin-left: 16.2px;
+    width: 607.5px; 
+    height: 380.7px; 
+}
+
+#img2 {
+    margin-top: 26.73px; 
+    margin-left: 16.2px;
+    width: 648px;
+    height: 388.8px; 
+    border-radius: 8.1px; 
+}
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+       
+
+        <main class="dashboard">
+            <img src="https://images.creativemarket.com/0.1.0/ps/3861260/2000/1500/m1/fpnw/wm1/1-.jpg?1516175974&s=57d5c64e6ca45c2812b6c149cc3c80e1" alt="Web Design">
+    
+ 
+    <div class="intro-card">
+        <p>Our web designer courses are tailored to equip you with the skills needed to succeed in the digital space. Whether you're interested in frontend or backend development, we offer comprehensive training designed to help you master the art of web design. Join us and take your skills to the next level!</p>
+    </div><br><br>
+         
+         
+            <div class="description-card">
+                <div class="description-image">
+                    <img src="./93gpi8ba.png" alt="Frontend Courses Image">
+                </div>
+                <div class="description-content">
+                    <p><strong>Frontend Course : </strong><br>Our frontend courses cover essential skills to build interactive, visually appealing websites and applications. From HTML and CSS for structuring and styling, to JavaScript and frameworks like Angular and React, we provide in-depth training to help you become proficient in creating dynamic web interfaces. Start your journey with us and gain the knowledge to develop responsive and user-friendly web designs!</p>
+                </div>
+           
+            </div> 
+            <h1>COURSE DETAILS :</h1>
+        <div class="container">  
+            
+            <div class="card-container">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.744mxzC5wmuJwSAv6Ej3XwHaHa?w=180&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="HTML Course Image">
+                    <h3>HTML</h3>
+                    <a href="./Htmlpage.html"><button type="button">Details</button></a>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.rM8t0CGxBDN6eaJGgJyJwAHaEc?rs=1&pid=ImgDetMain" alt="CSS Course Image">
+                    <h3>CSS</h3>
+                    <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+                </div>
+                <div class="card">
+                    <img src="https://www.wizcase.com/wp-content/uploads/2022/02/en-bootstrap-logo.jpg" alt="CSS Course Image">
+                    <h3>Bootstrap</h3>
+                    <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.u0GbJpCfd9zS4B0xJnSP_gAAAA?rs=1&pid=ImgDetMain" alt="JavaScript Course Image">
+                    <h3>JavaScript</h3>
+                    <button type="button">Details</button>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.uQdNyyDf-qby1z1xlqyHjgHaHH?w=1237&h=1190&rs=1&pid=ImgDetMain" alt="JavaScript Course Image">
+                    <h3>Angular</h3>
+                    <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+                </div>
+                <div class="card">
+                    <img src="https://clipground.com/images/react-js-clipart-8.png" alt="JavaScript Course Image">
+                    <h3>React</h3>
+                    <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+                </div>
+
+            </div>
+            <div class="img1">
+                <img id="img1" src="https://www.onlinecoursereport.com/wp-content/uploads/2020/06/shutterstock_1150510607-2048x1024.jpg" alt="Image 1">
+            </div>
+        </div> 
+        </main>
+    </div>
+    <div class="description-card">
+        <div class="description-image">
+            <img src="https://miro.medium.com/max/3000/1*A-tfdwH0aI44aB9odErs5Q.jpeg" alt="Backend Courses Image">
+        </div>
+        <div class="description-content">
+            <p><strong>Backend Course : </strong><br>A backend developer is a crucial part of modern web development teams, responsible for building the server-side logic and infrastructure that powers web applications.They focus on the server-side development of web applications, managing data storage, business logic, and interactions between the client-side (front end) and the server</p>
+        </div>
+    </div>
+    <h1>COURSE DETAILS :</h1>
+    <div class="container">  
+        
+        <div class="card-container">
+            <div class="card">
+                <img src="https://wallpapercave.com/wp/wp7250277.jpg" alt="HTML Course Image">
+                <h3>Java</h3>
+                <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+            </div>
+            <div class="card">
+                <img src="https://studybullet.com/wp-content/uploads/2022/01/The-Python-and-Django-Learning-Guide.jpg" alt="CSS Course Image">
+                <h3>Python</h3>
+                <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+            </div>
+            <div class="card">
+                <img src="https://4.bp.blogspot.com/-9kYSwCDRbms/W-qSUvwnFWI/AAAAAAAAEsE/j4EeFEPQHBc-QpxMV9l3gQAaLAuG2WhTgCLcBGAs/s1600/spring-framework.png" alt="CSS Course Image">
+                <h3>Spring Framework</h3>
+                <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+            </div>
+            <div class="card">
+                <img src="https://www.peerbits.com/static/3908ce2a3941a9a56f1b145496600fac/189bc/development-practices-for-node-js-developers-main.jpg" alt="JavaScript Course Image">
+                <h3>Node JS</h3>
+                <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+            </div>
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.K5w1PCjxpvnAP53gnSR29QHaD4?rs=1&pid=ImgDetMain" alt="JavaScript Course Image">
+                <h3>PHP</h3>
+                <a href="./page_notfound.html"> <button class="more-btn">More</button></a>
+            </div>
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.INNwENM8Z4HvGPBVkRlKeQHaDt?rs=1&pid=ImgDetMain" alt="JavaScript Course Image">
+                <h3>Ruby</h3>
+                <button type="button">Details</button>
+            </div>
+
+        </div>
+        <div class="img2">
+            <img id="img2" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/How_to_Become_a_Back_End_Developer.jpg" alt="">
+        </div>
+    </div>  
+
+    <footer>
+        <p>&copy; 2024 Astrolite Tech Solution | All Rights Reserved</p><br>
+        <p>Follow us:
+            <i class="fa-brands fa-facebook fa-xl" style="width: 30px;"></i> |
+            <i class="fa-brands fa-twitter fa-xl" style="width: 30px;"></i> |
+            <i class="fa-brands fa-linkedin fa-xl" style="width: 30px;"></i>
+        </p>
+    </footer>
+</body>
+</html>

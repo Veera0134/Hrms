@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .background-half {
+            flex: 1;
+            background-image: url('https://cdni.iconscout.com/illustration/premium/thumb/user-login-illustration-download-in-svg-png-gif-file-formats--password-profile-account-man-lifestyle-pack-business-illustrations-5857345.png?f=webp');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signin-half {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .signin-container {
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            /* background-color: white; */
+            border-radius: 8px;
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+        }
+
+        .signin-container h2 {
+            margin-bottom: 1rem;
+            color: blue;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .signin-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .signin-container label i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .signin-container input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .signin-container input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .signin-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(to right, black, blue);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .signin-container button:hover {
+            background: linear-gradient(to right, #333, #555);
+        }
+
+        .signin-container a {
+            display: inline-block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .signin-container a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-half"></div>
+    <div class="signin-half">
+        <div class="signin-container">
+            <h2>Sign In</h2>
+            <form id="signin-form">
+                <!-- Username Field -->
+                <label for="username"><i class="fas fa-user"></i> Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <p class="error-message" id="username-error"></p>
+
+                <!-- Password Field -->
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <p class="error-message" id="password-error"></p>
+
+                <!-- Submit Button -->
+                <button type="submit">Sign In</button>
+            </form>
+
+            <!-- Signup Link -->
+            <p style="text-align: center;">Don't have an account? <a href="./FingerTest1.html">Sign Up</a></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('signin-form');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                // Clear previous error messages
+                usernameError.textContent = '';
+                passwordError.textContent = '';
+
+                // Get input values
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                // Validate inputs
+                if (!username) {
+                    usernameError.textContent = 'Username cannot be empty.';
+                    return;
+                }
+
+                if (!password) {
+                    passwordError.textContent = 'Password cannot be empty.';
+                    return;
+                }
+
+                // Retrieve users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+                // Find the user by username
+                const user = users.find(user => user.name === username);
+
+                if (!user) {
+                    usernameError.textContent = 'Username not found.';
+                    return;
+                }
+
+                // Check if the password matches
+                if (user.password !== password) {
+                    passwordError.textContent = 'Incorrect password.';
+                    return;
+                }
+
+                // ✅ Store logged-in username in localStorage
+                localStorage.setItem('loggedInUser', username);
+
+                // Login successful
+                try {
+                    const locationMessage = await showLocation();
+                    alert(`Sign In successful! \n${locationMessage}`);
+                } catch (error) {
+                    alert(`Sign In successful! \n${error}`);
+                }
+
+                // Redirect to the dashboard
+                window.location.href = 'Dashboard.html';
+            });
+        });
+
+        // Function to fetch place name using OpenStreetMap Nominatim API
+        function fetchPlaceName(latitude, longitude) {
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+            return fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.display_name) {
+                        return `You are in: ${data.display_name}`;
+                    } else {
+                        return "Unable to determine location.";
+                    }
+                })
+                .catch(error => {
+                    return "Failed to fetch location. " + error.message;
+                });
+        }
+
+        // Function to get the user's current location
+        function showLocation() {
+            return new Promise((resolve, reject) => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        async position => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+                            resolve(await fetchPlaceName(latitude, longitude));
+                        },
+                        error => {
+                            reject('Unable to fetch location. Please allow location access.');
+                        }
+                    );
+                } else {
+                    reject('Geolocation is not supported by this browser.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

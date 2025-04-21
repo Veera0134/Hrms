@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ATS Family!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .welcome-container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        h1 {
+            color: #3a4a6d;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            animation: slideIn 1s ease-out;
+        }
+        
+        p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        
+        .ats-logo {
+            width: 120px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        .welcome-gif {
+            width: 200px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .continue-btn {
+            background: linear-gradient(45deg, #4b6cb7, #182848);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(75, 108, 183, 0.6);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <!-- Confetti elements will be added by JS -->
+        
+        <!-- <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXl5dWx6b3JtY2Q0dWJ1b2VqY2JtNnJtYzF6eG1jZzV5b3R6eWUyZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUA7bdpLxQhsSQdyog/giphy.gif" alt="Welcome GIF" class="welcome-gif"> -->
+        <h1>Your Onboarding Had Completed successfully!</h1>
+        <p>Welcome to ATS Family! 🎉</p>
+        <p>We're thrilled to have you on board and excited for what we'll accomplish together.</p>
+        <!-- <button class="continue-btn">Let's Get Started</button> -->
+    </div>
+
+    <script>
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            const container = document.querySelector('.welcome-container');
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -10 + 'px';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(confetti);
+                
+                // Animate each confetti piece
+                const animation = confetti.animate([
+                    { top: '-10px', opacity: 0, transform: `rotate(0deg) scale(${Math.random() * 0.5 + 0.5})` },
+                    { top: Math.random() * 100 + '%', opacity: 1, transform: `rotate(${Math.random() * 360}deg) scale(${Math.random() + 0.5})` },
+                    { top: '100%', opacity: 0, transform: `rotate(${Math.random() * 720}deg) scale(0.2})` }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    delay: Math.random() * 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    confetti.remove();
+                    if (i === 99) { // When last confetti finishes, restart
+                        setTimeout(createConfetti, 1000);
+                    }
+                };
+            }
+        }
+        
+        // Start animations when page loads
+        window.onload = function() {
+            createConfetti();
+            
+            // Add click effect to button
+            const btn = document.querySelector('.continue-btn');
+            btn.addEventListener('click', function() {
+                alert('Welcome aboard! Let us know how we can help you get started.');
+            });
+        };
+    </script>
+</body>
+</html>

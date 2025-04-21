@@ -1,0 +1,959 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="Dashboards.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+  <div class="sidebar" style=" box-shadow: 0 8px 16px rgba(0, 0, 0, 0.484);">
+    <div class="profile">
+      <img id="profile-picture-display" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+      <h3><span id="username" class="userDisplay" style="color: blue; text-align: center;"></span></h3>
+     <p><strong >login time: </strong><span id="punch-time"  class="status"></span></p>
+    </div>
+    <ul class="nav-links">
+        <li>
+          <a href="#"><i class="fas fa-home" style="color: #28a745;"></i> Admin</a>
+          <li class="has-dropdown">
+            <a href="#"><i class="fas fa-tachometer-alt" style="color: #ff5722;"></i> HRM'S <i class="fas fa-chevron-down" style="padding-left: 38%;"></i></a>
+            <ul class="dropdown" style="display: none;">
+              <li><a href="Recuriment.html" target="iframe-content">Recuriment_page</a></li>
+              <li><a href="Hiring_page.html" target="iframe-content">Hiring_page</a></li>
+              <li><a href="Emp_calendar.html" target="iframe-content">Calendar-page</a></li>
+              <li><a href="Staff_Management.html" target="iframe-content">Staff_Management</a></li>
+              <li><a href="Project.html" target="iframe-content">Project_Management</a></li>
+              <li><a href="Task_Management.html" target="iframe-content">Task_Management</a></li>
+              <li><a href="Leave_Management.html" target="iframe-content">Leave_Management</a></li>
+              <li><a href="Attendance_Management.html" target="iframe-content">Attendance_Management</a></li>
+              <li><a href="Claims_Managements.html" target="iframe-content">Claims_Managements</a></li>
+              <li><a href="Notifications.html" target="iframe-content">Notification_Management</a></li>
+              <li><a href="Assert_Management.html" target="iframe-content">Assert_Management</a></li>
+              <li><a href="Increment-Bounus.html" target="iframe-content">Increment-Bounus</a></li>
+              <li><a href="Payroll_Management.html" target="iframe-content">Payroll_Management</a></li>
+              <li><a href="Training_Management.html" target="iframe-content">Training_Management</a></li>
+              <li><a href="Career_Progression.html" target="iframe-content">Career_Progression</a></li>
+              <li><a href="./Offboarding_Management.html" target="iframe-content">Offboarding Form</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <a href="#"><i class="fas fa-user" style="color: #007bff;"></i> EMPLOYEE <i class="fas fa-chevron-down" style="padding-left: 20%;"></i></a>
+            <ul class="dropdown">
+              <li><a href="./Personalinfo_Dashboard.html"  target="iframe-content">OnBoarding_Form</a></li>
+              <li><a href="Assert.html"  target="iframe-content">Asset</a></li>
+              <li><a href="Profile.html" target="iframe-content">Profile</a></li>
+              <li><a href="Courses_Homepage.html"  target="iframe-content">Courses</a></li>
+              <li><a href="Task.html" target="iframe-content">Task</a></li>
+              <li><a href="Emplyee_Leave.html" target="iframe-content">Leave</a></li>
+              <li><a href="Attendance.html" target="iframe-content">Attendance</a></li>
+              <li><a href="./Emp_payslip.html" target="iframe-content">Pay-Slip</a></li>
+              <li><a href="Emp_Claims.html" target="iframe-content">Emp-Claims</a></li>
+              <li><a href="Emp_Notification.html" target="iframe-content">Notification</a></li>
+              <li><a href="Emp_career_progression.html" target="iframe-content">Career_Progression</a></li>
+              <li ><a href="Performance_management.html" target="iframe-content">Appraisal</a></li>
+              <li ><a href="./Offboarding.html" target="iframe-content">Offboarding</a></li>
+            </ul>
+          </li>
+          <li><a href="#"><i class="fas fa-chart-line" style="color: #4caf50;"></i> Analytics</a></li> 
+          <li><a href="#"><i class="fas fa-tasks" style="color: #ff9800;"></i> Task List</a></li> 
+          <li><a href="#"><i class="fas fa-clock" style="color: #2196f3;"></i> Tracking</a></li> 
+          <li><a href="#"><i class="fas fa-cog" style="color: #9c27b0;"></i> Settings</a></li> 
+      </ul>
+  </div>
+    <div class="main-content">
+        <header class="header">
+          <div class="header-left">
+          <div class="logo">
+            <img src="./logo-removebg-preview.png" alt="Company Logo" class="company-logo">
+          </div>
+          <button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+          <div class="profile1"> 
+            <h2>Hi <span id="header-username" class="userDisplay" style="color: #317ccb;"></span></h2>
+          </div>
+ 
+        </div>
+        <div class="search-bar" style="display: flex;">
+          <input type="text" placeholder="Find something..." style="padding: 10px;width: 300px; flex-grow: 1; border: 2px solid #ddd; border-right: none; border-radius: 5px 0 0 5px; outline: none;">
+          <button style="padding: 10px; background: #007bff; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">🔍</button>
+        </div>
+            <div class="header-right">
+
+              
+              <span class="icon" style="font-size: 18px;">
+                <i class="fa-solid fa-globe"></i> English
+              </span>
+              <span class="icon" style="font-size: 18px;">✉️</span>
+              <div class="notification-icon">
+                <i class="fas fa-bell" style="  font-size: 18px; "></i>
+       
+              </div>
+              <div class="calenadar">
+                <i class="fas fa-calendar-alt" style="color: #825cf1; font-size: 20px; "></i>
+              </div>
+              <button class="logout-btn add-project" 
+              style="background-color: #dc3545; color: white; border: none; padding: 10px 20px; 
+                     font-size: 16px; border-radius: 5px; cursor: pointer; 
+                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <i class="fas fa-sign-out-alt" style=" color: white;"></i> Logout
+      </button>
+            </div>
+          </header>
+          <div class="content-section">
+            <main style="width: 100%; height: 80vh; overflow-y: auto; overflow-x: hidden; margin-left: 15px;">
+              <iframe name="iframe-content" src="./Content.html" scrolling="yes" width="100%" height="600vh" overflow></iframe>
+             </main>
+          </div>
+        </div>
+        <script>
+          document.querySelectorAll('.has-dropdown').forEach(function (item) {
+    item.addEventListener('click', function (event) {
+      event.stopPropagation();
+      document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        dropdown.style.display = 'none';
+      });
+      const dropdown = this.querySelector('.dropdown');
+      if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      }
+    });
+  });
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+      dropdown.style.display = 'none';
+    });
+  });
+          const username = localStorage.getItem("currentUser");
+               const storedProfilePicture = localStorage.getItem("profile-picture");   
+               const punchInTime = localStorage.getItem("punchInTime");
+        if (storedProfilePicture) {
+        document.getElementById("profile-picture-display").src = storedProfilePicture; // Set the image source
+    } else {
+        document.getElementById("profile-picture-display").alt = "No profile picture uploaded.";
+    }
+        document.getElementById("username").textContent = username || "Not available";
+        document.getElementById("punch-time").textContent = punchInTime || "Not available";
+        document.getElementById("header-username").textContent = username || "Not available";
+
+       console.log("punch time " + punchInTime);
+        document.querySelector('.logout-btn').addEventListener('click', function () {
+    const punchInTime = localStorage.getItem("punchInTime");
+
+    if (punchInTime) {
+    const logoutTime = new Date();
+    const logoutHours = logoutTime.getHours();
+    const logoutMinutes = logoutTime.getMinutes();
+
+    const [punchInHours, punchInMinutes] = punchInTime.split(':').map(Number);
+
+    if (isNaN(punchInHours) || isNaN(punchInMinutes)) {
+        alert("Invalid punch-in time format.");
+    } else {
+        let totalMinutes = (logoutHours - punchInHours) * 60 + (logoutMinutes - punchInMinutes);
+
+        if (totalMinutes < 0) {
+            totalMinutes += 24 * 60;  
+        }
+
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        const totalTime = `${hours}h ${minutes}m`;
+
+        console.log("Total time spent: " + totalTime);
+
+        alert(`You logged out successfully!\nTotal time spent: ${totalTime}`);
+        window.location.href = './Fingertest.html'; 
+
+    }
+} else {
+    alert("Login time not available. Please try again.");
+}
+
+    localStorage.clear();
+});
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const sidebar = document.querySelector(".sidebar");
+//   const toggleBtn = document.createElement("button");
+//   toggleBtn.classList.add("sidebar-toggle");
+//   toggleBtn.innerText = "☰";
+//   document.body.appendChild(toggleBtn);
+
+//   toggleBtn.addEventListener("click", function () {
+//     sidebar.classList.toggle("open");
+//   });
+// });
+function toggleSidebar() {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    sidebar.classList.toggle("open");
+    mainContent.classList.toggle("expanded");
+}
+function toggleSidebar() {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    sidebar.classList.toggle("active");
+
+    if (sidebar.classList.contains("active")) {
+        mainContent.style.marginLeft = "0"; // Expand content fully when sidebar is hidden
+        mainContent.style.width = "100%"; 
+    } else {
+        mainContent.style.marginLeft = "200px"; // Adjust based on new sidebar width
+        mainContent.style.width = "calc(100% - 200px)"; 
+    }
+}
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+    const toggleBtn = document.querySelector(".sidebar-toggle");
+
+    toggleBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("active");
+
+        if (sidebar.classList.contains("active")) {
+            mainContent.style.marginLeft = "0";
+            mainContent.style.width = "100%";
+        } else {
+            mainContent.style.marginLeft = "200px";
+            mainContent.style.width = "calc(100% - 200px)";
+        }
+    });
+});
+// document.querySelector(".sidebar-toggle").addEventListener("click", function () {
+//   document.querySelector(".sidebar").classList.toggle("active");
+// });
+
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="Dashboards.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+  /* Base styles */
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #645cff;
+  --success-color: #28a745;
+  --warning-color: #ff9800;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  --dark-color: #343a40;
+  --light-color: #f8f9fa;
+  --gradient-start: #6366f1;
+  --gradient-end: #4338ca;
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--light-color);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.132);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  text-align: center;
+}
+
+.company-logo {
+  max-width: 150px;
+  height: auto;
+}
+
+/* Search Bar */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px;
+  margin-left: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: 1px solid #d1d1d1;
+  border-radius: 25px;
+  outline: none;
+  font-size: 16px;
+  background: #f9f9f9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat center;
+  background-size: contain;
+}
+
+/* Header right section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-right .icon,
+.notification-icon,
+.calenadar {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.header-right .icon:hover,
+.notification-icon:hover,
+.calenadar:hover {
+  background-color: rgba(141, 138, 138, 0.1);
+}
+
+/* Profile Section */
+.profile1 h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 195px;
+  height: calc(100vh - 90px);
+  position: fixed;
+  left: 0;
+  top: 90px;
+  background: white;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed .nav-links span,
+.sidebar.collapsed .profile h3,
+.sidebar.collapsed .profile p {
+  display: none;
+}
+
+.sidebar.collapsed .nav-links a {
+  justify-content: center;
+  padding: 12px 5px;
+}
+
+.sidebar.collapsed .nav-links i {
+  margin: 0;
+}
+
+.profile {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.profile-picture-display {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .profile-picture-display {
+  width: 40px;
+  height: 40px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-bottom: 5px;
+}
+
+.nav-links a {
+  /* display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: var(--dark-color);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease; */
+  position: relative; /* If not already set */
+  padding-right: 15px;
+}
+
+.nav-links a:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.nav-links a i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Dropdown styles */
+.dropdown {
+  display: none;
+  list-style: none;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+.dropdown a {
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.has-dropdown > a {
+  position: relative; /* For absolute positioning of chevron */
+  padding-right: 30px
+}
+
+.has-dropdown > a i.fa-chevron-down {
+  /* padding-left: 0;
+  margin-left: auto;
+  font-size: 12px; */
+  position: absolute;
+  right: 15px; /* Fixed position from right */
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+  margin-left: auto; /* Remove any left margin */
+  padding-left: 0; /* Remove any left padding */
+  font-size: 12px;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  margin-left: 180px;
+  margin-top: 90px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  height: calc(100vh - 90px);
+  overflow-y: auto;
+}
+
+.main-content.expanded {
+  margin-left: 70px;
+}
+
+.content-section {
+  height: 100%;
+}
+
+iframe {
+  border: none;
+  width: 104%;
+  height: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+} 
+
+/* Logout Button Link Container */
+a[href="Clock.html"] {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Logout Button Styles */
+.logout-btn {
+  background-color: #dc3545; /* Red color */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover and Active States */
+.logout-btn:hover {
+  background-color: #c82333; /* Darker red */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Styles */
+.logout-btn i {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.logout-btn:hover i {
+  transform: translateX(-2px);
+}
+.selected-module {
+  background-color: #4a90e2; 
+  color: white !important;
+}
+
+.status-dropdown {
+  width: 130px;
+  padding: 8px;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  background: white;
+  color: black;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    padding: 10px;
+  }
+
+  .logo {
+    margin-bottom: 5px;
+  }
+
+  .search-container {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .header > span {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    margin-left: 200px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .toggle-btn {
+    display: block;
+  }
+  
+  .sidebar {
+    left: -250px;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .header-right {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 10px;
+  }
+  
+  .header-left {
+    gap: 10px;
+  }
+  
+  .company-logo {
+    max-width: 150px;
+  }
+  
+  .search-container {
+    display: none;
+  }
+  
+  .header-right {
+    gap: 8px;
+  }
+  
+  .icon, .notification-icon i, .calenadar i {
+    font-size: 16px;
+  }
+  
+  .logout-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header-right .icon {
+    display: none;
+  }
+  
+  .company-logo {
+    max-width: 120px;
+  }
+  
+  .profile-picture-display {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    left: -100%;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+}
+.sidebar.collapsed .status-dropdown {
+  display: none;
+}
+
+/* Adjust profile section padding when collapsed */
+.sidebar.collapsed .profile {
+  padding: 15px 0 5px 0; /* Reduced bottom padding */
+}
+.sidebar.collapsed .has-dropdown > a i.fa-chevron-down {
+  display: none;
+}
+
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="profile">
+
+      <img id="profile-picture-display" class="profile-picture-display" src="./Man.jpg" alt="Profile Picture">
+      <h3><span id="usernameDisplay1" class="userDisplay" style="color: #4a90e2;"></span></h3>
+
+
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#"><i class="fas fa-home" style="color: #28a745;"></i> <span>Admin</span></a>
+      </li>
+      <li class="has-dropdown">
+        <a href="#"><i class="fas fa-tachometer-alt" style="color: #ff5722;"></i> <span>HRMS</span> <i class="fas fa-chevron-down" ></i></a>
+        <ul class="dropdown">
+          <li><a href="Recuriment.html" target="iframe-content" title="Recruitment"><i class="fas fa-user-plus"></i><span> Recruitment</span></a></li>
+          <li><a href="Hr's_profile.html" target="iframe-content" title="Profile"><i class="fas fa-id-badge"></i><span> Hr_Profile</span></a></li>
+          <li><a href="Hiring_page.html" target="iframe-content" title="Hiring_page"><i class="fas fa-briefcase"></i> <span>Hiring</span></a></li>
+          <li><a href="Emp_calendar.html" target="iframe-content" title="calendar"><i class="fas fa-calendar-alt"></i><span>Calendar</span> </a></li>
+          <li><a href="Staff_Management.html" target="iframe-content" title="Staff_Management"><i class="fas fa-users"></i> <span>Staff Management</span></a></li>
+          <li><a href="Project.html" target="iframe-content" title="Project"><i class="fas fa-tasks"></i><span> Project Management</span></a></li>
+          <li><a href="TestTask_hr.html" target="iframe-content" title="Task_Management"><i class="fas fa-check-circle"></i> <span>Task Management</span></a></li>
+          <li><a href="Leave_Management.html" target="iframe-content" title="Leave_Management"><i class="fas fa-plane-departure"></i><span>Leave Management</span> </a></li>
+          <li><a href="Attendance_Management.html" target="iframe-content" title="Attendance_Management"><i class="fas fa-user-check"></i><span> Attendance</span></a></li>
+          <li><a href="TestClaim_Hr.html" target="iframe-content" title="Claims_Managements"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li>
+          <li><a href="Notifications.html" target="iframe-content" title="Notification"><i class="fas fa-bell"></i><span> Notifications</span></a></li>
+          <li><a href="Assert_Management.html" target="iframe-content" title="Asset_Management"><i class="fas fa-box"></i> <span>Asset Request</span></a></li>
+          <li><a href="Assert_Submit.html" target="iframe-content" title="Asset_Management"><i class="fas fa-box"></i> <span>Asset Management</span></a></li>
+          <li><a href="Increment-Bounus.html" target="iframe-content" title="Increment-Bounus"><i class="fas fa-chart-line"></i><span> Increment & Bonus</span></a></li>
+          <li><a href="Apprisal_Hr.html" target="iframe-content" title="Apprisal"><i class="fas fa-chart-line"></i><span> Apprisal</span></a></li>
+          <li><a href="Payroll_Management.html" target="iframe-content" title="Payroll_Management"><i class="fas fa-money-bill-wave"></i> <span>Payroll</span></a></li>
+          <li><a href="Training_Management.html" target="iframe-content" title="Training_Management"><i class="fas fa-chalkboard-teacher"></i><span> Training</span></a></li>
+          <li><a href="Career_Progression.html" target="iframe-content" title="career_progression"><i class="fas fa-chart-bar"></i> <span>Career Progression</span></a></li>
+          <li><a href="Offboarding_Management.html" target="iframe-content" title="Offboarding_Management"><i class="fas fa-sign-out-alt"></i> <span>Offboarding</span></a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="#"><i class="fas fa-user" style="color: #007bff;"></i> <span>EMPLOYEE</span> <i class="fas fa-chevron-down" ></i></a>
+        <ul class="dropdown">
+          <li><a href="Personalinfo_Dashboard.html" target="iframe-content" title="Onboarding"><i class="fas fa-user-plus"></i><span>Onboarding</span></a></li>
+          <li><a href="Assert.html" target="iframe-content" title="Asset"><i class="fas fa-box"></i><span> Asset</span></a></li>
+          <li><a href="Profile.html" target="iframe-content" title="Profile"><i class="fas fa-id-badge"></i><span>Profile</span></a></li>
+          <li><a href="Courses_Homepage.html" target="iframe-content" title="Courses"><i class="fas fa-book"></i><span>Courses</span></a></li>
+          <li><a href="Emp_calendar.html" target="iframe-content" title="calendar"><i class="fas fa-calendar-alt"></i><span>Calendar</span> </a></li>
+          <li><a href="TestTask_emp.html" target="iframe-content" title="Task"><i class="fas fa-tasks"></i> <span>Task</span></a></li>
+          <li><a href="Emplyee_Leave.html" target="iframe-content" title="Leave"><i class="fas fa-plane-departure"></i> <span>Leave</span></a></li>
+          <li><a href="Attendance.html" target="iframe-content" title="Attendance"><i class="fas fa-user-check"></i> <span>Attendance</span></a></li>
+          <li><a href="Emp_payslip.html" target="iframe-content" title="Pay-Slip"><i class="fas fa-money-bill-wave"></i> <span>Pay-Slip</span></a></li>
+          <li><a href="Testclaim_Emp.html" target="iframe-content" title="Claims"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li>
+          <li><a href="Emp_Notification.html" target="iframe-content" title="Notification"><i class="fas fa-bell"></i><span>Notifications</span></a></li>
+          <li><a href="Emp_career_progression.html" target="iframe-content" title="career_progression"><i class="fas fa-chart-bar"></i><span> Career Progression</span></a></li>
+          <li><a href="Performance_management.html" title="Appraisal" target="iframe-content"><i class="fas fa-chart-line"></i><span> Appraisal</span></a></li>
+          <li><a href="Offboarding.html" target="iframe-content" title="Offboarding"><i class="fas fa-sign-out-alt"></i> <span>Offboarding</span></a></li>        </ul>
+      </li>
+      <li><a href="#"><i class="fas fa-chart-line" style="color: #4caf50;"></i> <span>Analytics</span></a></li>
+      <li><a href="#"><i class="fas fa-tasks" style="color: #ff9800;"></i> <span>Task List</span></a></li>
+      <li><a href="#"><i class="fas fa-clock" style="color: #2196f3;"></i> <span>Tracking</span></a></li>
+      <li><a href="#"><i class="fas fa-cog" style="color: #9c27b0;"></i> <span>Settings</span></a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header class="header">
+   
+      <div class="header-left">
+        <div class="logo">
+          <img src="./logo-removebg-preview.png" alt="Company Logo" class="company-logo">
+        </div>
+        <button class="toggle-btn">
+          <i class="fas fa-bars" style="color: black;"></i>
+        </button>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search...">
+          <span class="search-icon"></span>
+    
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="icon"><i class="fa-solid fa-globe"></i> English</span>
+      <span class="icon"><i class="fas fa-envelope"></i></span>
+      <span class="notification-icon"><i class="fas fa-bell"></i></span>
+      <span class="calenadar"><i class="fas fa-calendar-alt"></i></span>
+      <select class="status-dropdown available">
+        <option value="available" class="available">🟢 Available</option>
+        <option value="busy" class="busy">🔴 Meeting</option>
+        <option value="away" class="away">🟠 Away</option>
+        <option value="offline" class="offline">⚫ Offline</option>
+      </select>
+      <a href="Clock.html">
+      <button class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </a>
+    </div>
+    </header>
+
+    <div class="content-section">
+      <main style="width: 100%; height: 100vh;">
+        <iframe name="iframe-content" src="./Content1.html" scrolling="yes"></iframe>
+      </main>
+    </div>
+  </div>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const mainContent = document.querySelector('.main-content');
+
+  if (window.innerWidth > 992) {
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('expanded');
+  } else {
+    sidebar.classList.toggle('active');
+  }
+}
+
+document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
+
+function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      
+      if (window.innerWidth > 992) {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      } else {
+        sidebar.classList.toggle('active');
+      }
+    }
+    document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
+              document.querySelectorAll('.has-dropdown').forEach(function (item) {
+    item.addEventListener('click', function (event) {
+      event.stopPropagation();
+      document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        dropdown.style.display = 'none';
+      });
+      const dropdown = this.querySelector('.dropdown');
+      if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      }
+    });
+  });
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+      dropdown.style.display = 'none';
+    });
+  });
+  const loggedInUser = localStorage.getItem('loggedInUser');
+
+if (loggedInUser) {
+    document.getElementById('usernameDisplay1').textContent = loggedInUser;
+    document.getElementById('usernameDisplay2').textContent = loggedInUser;
+} else {
+    document.getElementById('usernameDisplay1').textContent = 'Guest';
+    document.getElementById('usernameDisplay2').textContent = 'Guest';
+}
+    const username = localStorage.getItem("currentUser");
+    const storedProfilePicture = localStorage.getItem("profile-picture");
+    const punchInTime = localStorage.getItem("punchInTime");
+
+    if (storedProfilePicture) {
+      document.getElementById("profile-picture-display").src = storedProfilePicture;
+    } else {
+      document.getElementById("profile-picture-display").src = 'https://via.placeholder.com/150';
+    }
+
+    document.getElementById("username").textContent = username || "Guest User";
+    document.getElementById("punch-time").textContent = punchInTime || "Not logged in";
+    document.getElementById("header-username").textContent = username || "Guest";
+    document.querySelector('.logout-btn').addEventListener('click', function() {
+      const punchInTime = localStorage.getItem("punchInTime");
+
+      if (punchInTime) {
+        const logoutTime = new Date();
+        const logoutHours = logoutTime.getHours();
+        const logoutMinutes = logoutTime.getMinutes();
+
+        const [punchInHours, punchInMinutes] = punchInTime.split(':').map(Number);
+
+        if (isNaN(punchInHours) || isNaN(punchInMinutes)) {
+          alert("Invalid punch-in time format.");
+        } else {
+          let totalMinutes = (logoutHours - punchInHours) * 60 + (logoutMinutes - punchInMinutes);
+
+          if (totalMinutes < 0) {
+            totalMinutes += 24 * 60;
+          }
+
+          const hours = Math.floor(totalMinutes / 60);
+          const minutes = totalMinutes % 60;
+
+          const totalTime = `${hours}h ${minutes}m`;
+
+          alert(`Session Summary:\nTotal time: ${totalTime}`);
+          window.location.href = './Fingertest.html';
+        }
+      } else {
+        alert("No active session found.");
+      }
+
+      localStorage.clear();
+    });
+    function handleResize() {
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.remove('collapsed');
+        mainContent.classList.remove('expanded');
+        sidebar.classList.remove('active');
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    document.addEventListener("DOMContentLoaded", function () {
+    const dropdownLinks = document.querySelectorAll(".dropdown li a");
+
+    dropdownLinks.forEach(link => {
+        link.addEventListener("click", function () {
+            dropdownLinks.forEach(item => item.classList.remove("selected-module"));
+
+            this.classList.add("selected-module");
+        });
+    });
+});
+
+</script>
+</body>
+</html>

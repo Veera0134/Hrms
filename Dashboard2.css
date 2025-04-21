@@ -31,30 +31,33 @@ header {
   animation: fadeIn 1s ease-in-out;
   animation: buttonGlow 1.5s infinite ease-in-out;
 }
-.logo img{
+.logo img {
   width: 250px;
   height: 100px;
-  /* border: #000 solid 2px; */
   border-radius: 50px;
   cursor: pointer;
-  animation: logoZoom 3s infinite;
-  transition: transform 0.3s ease-in-out;
-}
-.logo img:hover {
-  transform: rotate(360deg) scale(1.1); /* Rotate and zoom slightly on hover */
+  transform-style: preserve-3d;
   transition: transform 0.6s ease-in-out;
+  animation: logoFlip 3s infinite;
 }
-@keyframes logoZoom {
-0% {
-    transform: scale(1);
+
+.logo img:hover {
+  transform: rotateY(360deg); /* Flip on hover */
 }
-50% {
-    transform: scale(1.2);
+
+@keyframes logoFlip {
+  0% {
+    transform: rotateY(0deg);
+    
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
-100% {
-    transform: scale(1);
-}
-}
+
 
 header h1 {
   margin: 0;
@@ -63,7 +66,7 @@ header h1 {
   /* border: #000 solid 5px; */
   border-radius: 50px 50px 50px 50px / 20px; /*
   /* background-color: #aaa; */
-  background-color: #8ecadb;
+  /* background-color: #8ecadb; */
   padding: 20px;
   width: 45%;
   /* margin-left: -200px; */
@@ -71,7 +74,7 @@ header h1 {
 }
 
 header .As {
-  color: white;
+  color: blue;
   font-size: 40px;
 }
 
@@ -82,7 +85,7 @@ header .Te {
 }
 
 header .So {
-  color: blue;
+  color: black;
   font-size: 40px;
 
 }
@@ -140,8 +143,9 @@ button{
   animation: buttonGlow 1.5s infinite ease-in-out;
 }
 .sidenav {
+  padding-left: 20px;
   display: flex; 
- margin-top: 145px;/* Position below header */
+ margin-top: 165px;/* Position below header */
   padding: 10px 0px;
   align-items: flex-start; /* Align items to the left */
 }
@@ -179,7 +183,7 @@ button{
   flex-direction: row; /* Align items horizontally */
   justify-content: flex-start; /* Align to the left */
   color: #333;
-  padding: 10px 0;
+  padding: 15px 0;
   width: 98%; /* Full width */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   animation: slideIn 0.5s ease-in-out;

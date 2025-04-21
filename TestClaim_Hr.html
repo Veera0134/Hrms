@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Portal - Claims Management</title>
+  <!-- <link rel="stylesheet" href="Testclaim.css"> -->
+  <style>
+    :root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --dark-color: #34495e;
+    --light-color: #ecf0f1;
+    --text-color: #2c3e50;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    background: linear-gradient(135deg,  #2c3e50, #3498db);
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  header h1 {
+    color: var(--dark-color);
+  }
+  
+  .portal-selection {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .portal-selection h2 {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+  }
+  
+  .portal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .portal-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+    min-width: 200px;
+  }
+  
+  .portal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .employee-btn {
+    background-color: var(--primary-color);
+  }
+  
+  .hr-btn {
+    background-color: var(--secondary-color);
+  }
+  
+  .portal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .portal-header h1 {
+    color: var(--dark-color);
+  }
+  
+  .portal-header .back-btn {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+  }
+  
+  .portal-header .back-btn:hover {
+    background-color: #2c3e50;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+  }
+  
+  .form-title {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button.secondary {
+    background-color: #95a5a6;
+    margin-right: 10px;
+  }
+  
+  button.secondary:hover {
+    background-color: #7f8c8d;
+  }
+  
+  .claims-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .claims-title {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .claims-list {
+    list-style: none;
+  }
+  
+  .claim-item {
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: var(--transition);
+  }
+  
+  .claim-item:hover {
+    box-shadow: var(--box-shadow);
+  }
+  
+  .claim-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .claim-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--dark-color);
+  }
+  
+  .claim-date {
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .claim-amount {
+    font-weight: 600;
+    color: var(--dark-color);
+  }
+  
+  .claim-description {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .claim-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .status-pending {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .status-approved {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .status-rejected {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  .claim-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .claim-actions button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .approve-btn {
+    background-color: var(--secondary-color);
+  }
+  
+  .approve-btn:hover {
+    background-color: #27ae60;
+  }
+  
+  .reject-btn {
+    background-color: var(--accent-color);
+  }
+  
+  .reject-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .view-btn {
+    background-color: var(--primary-color);
+  }
+  
+  .view-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .response-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+  }
+  
+  .response-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+  }
+  
+  .response-text {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .modal {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    color: var(--dark-color);
+  }
+  
+  .close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+    padding: 0;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .portal-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .portal-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .form-actions button {
+      width: 100%;
+    }
+    
+    .claim-header {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .claim-actions {
+      flex-direction: column;
+    }
+    
+    .claim-actions button {
+      width: 100%;
+    }
+  }
+  
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .notification.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification.error {
+    background-color: var(--accent-color);
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="color: white;">Claims Management Portal</h1>
+    <p style="color: #e0e0e0;">"Efficient claims management drives customer trust and operational excellence."</p>
+  </header>
+  <div class="container">
+    <div class="claims-container">
+      <h2 class="claims-title">
+        All Claims
+        <div class="filter-controls">
+          <select id="status-filter">
+            <option value="all">All Claims</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </h2>
+      
+      <ul class="claims-list" id="hr-claims-list">
+      </ul>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="respond-claim-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="respond-modal-title">Respond to Claim</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body"> 
+        <div id="claim-details-container"></div>
+        <div class="form-group">
+          <label for="claim-response">Response </label>
+          <textarea 
+            id="claim-response" 
+            rows="4" 
+            maxlength="300"
+            required
+            placeholder="Enter your response with single spaces between words"
+          ></textarea>
+          <div class="hint">Only letters and single spaces between words allowed</div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <!-- <button class="close-modal secondary">Cancel</button> -->
+        <button id="reject-claim-btn" class="reject-btn">Reject Claim</button>
+        <button id="approve-claim-btn" class="approve-btn">Approve Claim</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="view-claim-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="claim-modal-title">Claim Details</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="claim-modal-body"></div>
+      <div class="modal-footer">
+        <!-- <button class="close-modal">Close</button> -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const CLAIMS_STORAGE_KEY = 'claimsData';
+
+    function initializeClaimsData() {
+      if (!localStorage.getItem(CLAIMS_STORAGE_KEY)) {
+        const initialClaims = [
+          {
+            id: 1,
+            employeeId: 'ATS0123',
+            employeeName: 'Veera',
+            title: 'Travel Expense Reimbursement',
+            date: '2025-05-15',
+            amount: 37500.50,
+            category: 'Travel',
+            description: 'Expenses for client meeting in Mumbai including flight, hotel, and meals.',
+            status: 'pending',
+            response: '',
+            attachments: []
+          },
+          {
+            id: 2,
+            employeeId: 'ATS0456',
+            employeeName: 'Raghava',
+            title: 'Office Supplies Purchase',
+            date: '2025-05-10',
+            amount: 10450.30,
+            category: 'Office Supplies',
+            description: 'Purchased notebooks, pens, and printer paper for the marketing department.',
+            status: 'approved',
+            response: 'Approved. Reimbursement will be processed in the next payroll cycle.',
+            attachments: []
+          },
+          {
+            id: 3,
+            employeeId: 'ATS0123',
+            employeeName: 'Pavan',
+            title: 'Training Course Fee',
+            date: '2025-05-05',
+            amount: 62500.00,
+            category: 'Training',
+            description: 'Fee for Advanced Project Management certification course.',
+            status: 'rejected',
+            response: 'Rejected. This training was not pre-approved by your department manager.',
+            attachments: []
+          }
+        ];
+        localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(initialClaims));
+      }
+    }
+    
+    function getAllClaims() {
+      const claimsData = localStorage.getItem(CLAIMS_STORAGE_KEY);
+      return claimsData ? JSON.parse(claimsData) : [];
+    }
+    
+    function getClaimById(claimId) {
+      const claims = getAllClaims();
+      return claims.find(c => c.id === claimId);
+    }
+    
+    function updateClaimStatus(claimId, status, response) {
+      const claims = getAllClaims();
+      const claimIndex = claims.findIndex(c => c.id === claimId);
+      
+      if (claimIndex !== -1) {
+        claims[claimIndex].status = status;
+        claims[claimIndex].response = response;
+        localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(claims));
+        return true;
+      }
+      return false;
+    }
+    
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+    
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+    
+    function showNotification(message, isError = false) {
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+        existingNotification.remove();
+      }
+      
+      const notification = document.createElement('div');
+      notification.className = `notification ${isError ? 'error' : ''}`;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 10);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 3000);
+    }
+    
+    document.addEventListener('DOMContentLoaded', initializeClaimsData);
+  </script>
+  
+  <script>
+    // localStorage.clear();
+    document.addEventListener('DOMContentLoaded', () => {
+      const hrClaimsList = document.getElementById('hr-claims-list');
+      const statusFilter = document.getElementById('status-filter');
+      const respondClaimModal = document.getElementById('respond-claim-modal');
+      const respondModalTitle = document.getElementById('respond-modal-title');
+      const claimDetailsContainer = document.getElementById('claim-details-container');
+      const claimResponse = document.getElementById('claim-response');
+      const rejectClaimBtn = document.getElementById('reject-claim-btn');
+      const approveClaimBtn = document.getElementById('approve-claim-btn');
+      const viewClaimModal = document.getElementById('view-claim-modal');
+      const claimModalTitle = document.getElementById('claim-modal-title');
+      const claimModalBody = document.getElementById('claim-modal-body');
+      let previousValue = '';
+      loadClaims();
+      
+      statusFilter.addEventListener('change', () => {
+        loadClaims(statusFilter.value);
+      });
+      
+      function loadClaims(statusFilter = 'all') {
+        let claims = getAllClaims();
+        
+        if (statusFilter !== 'all') {
+          claims = claims.filter(claim => claim.status === statusFilter);
+        }
+        
+        claims.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        hrClaimsList.innerHTML = '';
+        
+        if (claims.length === 0) {
+          hrClaimsList.innerHTML = '<li class="claim-item">No claims found.</li>';
+          return;
+        }
+        
+        claims.forEach(claim => {
+          const claimItem = document.createElement('li');
+          claimItem.className = 'claim-item';
+          
+          claimItem.innerHTML = `
+            <div class="claim-header">
+              <span class="claim-title">${claim.title}</span>
+              <span class="claim-date">${formatDate(claim.date)}</span>
+            </div>
+            <p><strong>Employee:</strong> ${claim.employeeName} (${claim.employeeId})</p>
+            <div class="claim-amount"><strong>Amount:</strong>${formatCurrency(claim.amount)}</div>
+            <div class="claim-description"><strong>Description:</strong>${claim.description.substring(0, 100)}${claim.description.length > 100 ? '...' : ''}</div>
+            <span class="claim-status status-${claim.status}">${claim.status.charAt(0).toUpperCase() + claim.status.slice(1)}</span>
+            
+            ${claim.status !== 'pending' ? `
+              <div class="response-section">
+                <div class="response-label">HR Response:</div>
+                <div class="response-text">${claim.response}</div>
+              </div>
+            ` : ''}
+            
+            <div class="claim-actions">
+              ${claim.status === 'pending' ? 
+                `<button class="respond-btn" data-id="${claim.id}">Respond</button>` : 
+                `<button class="view-btn" data-id="${claim.id}">View Details</button>`
+              }
+            </div>
+          `;
+          
+          hrClaimsList.appendChild(claimItem);
+        });
+        
+        document.querySelectorAll('.respond-btn').forEach(btn => {
+          btn.addEventListener('click', () => showRespondModal(parseInt(btn.dataset.id)));
+        });
+        
+        document.querySelectorAll('.view-btn').forEach(btn => {
+          btn.addEventListener('click', () => viewClaimDetails(parseInt(btn.dataset.id)));
+        });
+      }
+      
+      function showRespondModal(claimId) {
+        const claim = getClaimById(claimId);
+        
+        if (!claim) {
+          showNotification('Claim not found', true);
+          return;
+        }
+        
+        respondModalTitle.textContent = `Respond to: ${claim.title}`;
+        
+        claimDetailsContainer.innerHTML = `
+          <div class="claim-details">
+            <p><strong>Employee:</strong> ${claim.employeeName} (${claim.employeeId})</p>
+            <p><strong>Date Submitted:</strong> ${formatDate(claim.date)}</p>
+            <p><strong>Amount:</strong> ${formatCurrency(claim.amount)}</p>
+            <p><strong>Category:</strong> ${claim.category}</p>
+            <h4>Description:</h4>
+            <p>${claim.description}</p>
+          </div>
+        `;
+        
+        claimResponse.value = '';
+        rejectClaimBtn.dataset.claimId = claimId;
+        approveClaimBtn.dataset.claimId = claimId;
+        respondClaimModal.style.display = 'flex';
+      }
+
+function isValidResponseText(text) {
+  return /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(text);
+}
+
+claimResponse.addEventListener('input', function(e) {
+  const caretPos = this.selectionStart;
+  
+  let value = this.value;
+  
+  const originalLength = value.length;
+  
+  value = value.replace(/[^a-zA-Z ]/g, '');
+  
+  value = value.replace(/\s{2,}/g, ' ');
+  
+  value = value.trim();
+  
+
+  const lengthDiff = value.length - originalLength;
+  let newCaretPos = caretPos + lengthDiff;
+  
+  newCaretPos = Math.max(0, Math.min(newCaretPos, value.length));
+  
+  if (value !== previousValue) {
+    this.value = value;
+    previousValue = value;
+    
+    this.setSelectionRange(newCaretPos, newCaretPos);
+  }
+});
+claimResponse.addEventListener('blur', function() {
+  this.value = this.value.trim();
+});
+      function viewClaimDetails(claimId) {
+        const claim = getClaimById(claimId);
+        
+        if (!claim) {
+          showNotification('Claim not found', true);
+          return;
+        }
+        
+        claimModalTitle.textContent = claim.title;
+        
+        claimModalBody.innerHTML = `
+          <div class="claim-details">
+            <p><strong>Employee:</strong> ${claim.employeeName} (${claim.employeeId})</p>
+            <p><strong>Date Submitted:</strong> ${formatDate(claim.date)}</p>
+            <p><strong>Amount:</strong> ${formatCurrency(claim.amount)}</p>
+            <p><strong>Category:</strong> ${claim.category}</p>
+            <p><strong>Status:</strong> <span class="claim-status status-${claim.status}">${claim.status.charAt(0).toUpperCase() + claim.status.slice(1)}</span></p>
+            <h4>Description:</h4>
+            <p>${claim.description}</p>
+            <div class="response-section">
+              <h4>HR Response:</h4>
+              <div class="response-text">${claim.response}</div>
+            </div>
+          </div>
+        `;
+        
+        viewClaimModal.style.display = 'flex';
+      }
+      
+approveClaimBtn.addEventListener('click', () => {
+  const claimId = parseInt(approveClaimBtn.dataset.claimId);
+  const response = claimResponse.value.trim();
+
+  if (!response) {
+    showNotification('Please provide a response', 'error');
+    return;
+  }
+
+  if (!isValidResponseText(response)) {
+    showNotification('Only letters with single spaces between words are allowed', 'error');
+    return;
+  }
+
+  if (updateClaimStatus(claimId, 'approved', response)) {
+    respondClaimModal.style.display = 'none';
+    loadClaims(statusFilter.value);
+    showNotification('Claim approved successfully!', 'success');
+  } else {
+    showNotification('Error updating claim', 'error');
+  }
+});
+
+
+rejectClaimBtn.addEventListener('click', () => {
+  const claimId = parseInt(rejectClaimBtn.dataset.claimId);
+  const response = claimResponse.value.trim();
+
+  if (!response) {
+    showNotification('Please provide a reason for rejection', 'error');
+    return;
+  }
+
+  if (!isValidResponseText(response)) {
+    showNotification('Only letters with single spaces between words are allowed', 'error');
+    return;
+  }
+
+  if (updateClaimStatus(claimId, 'rejected', response)) {
+    respondClaimModal.style.display = 'none';
+    loadClaims(statusFilter.value);
+    showNotification('Claim rejected successfully!', 'success');
+  } else {
+    showNotification('Error updating claim', 'error');
+  }
+}); 
+      document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          respondClaimModal.style.display = 'none';
+          viewClaimModal.style.display = 'none';
+        });
+      });
+      
+      [respondClaimModal, viewClaimModal].forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      });
+    });
+
+  </script>
+</body>
+</html>

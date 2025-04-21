@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asset Delivery Receipt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+    
+        .receipt-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+    
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+    
+        .receipt-header h1 {
+            background: linear-gradient(135deg,  #2c3e50, #3498db);
+            padding: 20px;
+            color: #ffffff;
+            margin: 0;
+            font-size: 28px;
+        }
+    
+        .receipt-details, .assets-delivered, .timestamp {
+            margin-bottom: 25px;
+        }
+    
+        h2 {
+            color: #3498db;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+    
+        p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+    
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+    
+        .asset-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .asset-list li {
+            padding: 8px 15px;
+            margin-bottom: 5px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+        }
+    
+        .timestamp {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+    
+        [class*="request"] h2 {
+            color: #e74c3c;
+        }
+    
+        @media (max-width: 600px) {
+            .receipt-container {
+                padding: 20px;
+            }
+            
+            .receipt-header h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <div class="receipt-header">
+            <h1>Asset Delivery Receipt</h1>
+            <!-- <p>Date: <span id="receipt-date"></span></p> -->
+        </div>
+        
+        <div class="receipt-details">
+            <h2>Employee Information</h2>
+            <p><strong>Name:</strong> <span id="employee-name"></span></p>
+            <p><strong>ID:</strong> <span id="employee-id"></span></p>
+            <p><strong>Department:</strong> <span id="department"></span></p>
+        </div>
+        
+        <div class="assets-delivered">
+            <h2>Assets Delivered</h2>
+            <ul class="asset-list" id="assets-list">
+                <!-- Assets will be listed here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const deliveryData = JSON.parse(localStorage.getItem('assetDeliveryData'));
+        const requestData = JSON.parse(localStorage.getItem('assetRequestData'));
+
+        if (deliveryData) {
+            document.getElementById('employee-name').textContent = deliveryData.employeeName;
+            document.getElementById('employee-id').textContent = deliveryData.employeeId;
+            document.getElementById('department').textContent = deliveryData.department;
+            
+            const assetsList = document.getElementById('assets-list');
+            deliveryData.assets.forEach(asset => {
+                const li = document.createElement('li');
+                li.textContent = asset;
+                assetsList.appendChild(li);
+            });
+            
+            const date = new Date(deliveryData.timestamp);
+            document.getElementById('receipt-date').textContent = date.toLocaleDateString();
+            document.getElementById('processing-time').textContent = date.toLocaleString();
+        }
+
+        if (requestData) {
+            const requestSection = document.createElement('div');
+            requestSection.innerHTML = `
+                <h2>Pending Asset Request</h2>
+                <p><strong>Requested Asset:</strong> ${requestData.assetName}</p>
+                <p><strong>Reason:</strong> ${requestData.reason}</p>
+                <p><small>Requested at: ${new Date(requestData.timestamp).toLocaleString()}</small></p>
+            `;
+            document.querySelector('.receipt-container').appendChild(requestSection);
+        }
+    </script>
+</body>
+</html>

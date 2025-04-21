@@ -235,85 +235,56 @@ canvas {
 
     <script>
         const ctx = document.getElementById('monthlyAttendanceChart').getContext('2d');
-const attendanceChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], 
-        datasets: [{
-            label: 'Attendance Days',
-            data: [20, 22, 18, 24], 
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 99, 132, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
+        const attendanceChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Attendance Days',
+                    data: [20, 22, 18, 24],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
-        }
-    }
-});
-
-            const username = localStorage.getItem("currentUser");
+        });
+    
+        const username = localStorage.getItem("currentUser");
         const punchInTime = localStorage.getItem("punchInTime");
         const punchOutTime = localStorage.getItem("punchOutTime");
-
-
-              const today = new Date();
-        const date = today.toLocaleDateString();  
-     
-        const historyData = [
-            { date: "01/05/2025", punchInTime: "09:00 AM", punchOutTime: "06:00 PM", status: "Present" },
-            { date: "01/04/2025", punchInTime: "09:15 AM", punchOutTime: "06:05 PM", status: "Late" },
-            { date: "01/03/2025", punchInTime: "08:45 AM", punchOutTime: "06:00 PM", status: "Present" }
-        ];
-
-
-       
+        const today = new Date();
+        const date = today.toLocaleDateString();
+    
         function calculateStatus(punchInTime) {
-            if (!punchInTime) {
-                return "Not punched in yet"; 
-            }
-
-
-            const punchInParts = punchInTime.split(":");        
-    const punchInHour = parseInt(punchInParts[0], 10);           
-  const punchInMinute = parseInt(punchInParts[1], 10); 
-            const lateHour = 10; 
-            if (punchInHour < lateHour || (punchInHour === lateHour && punchInMinute < 0)) {
-                return "Present";
-            } else {
-                return "On Time";
-            }
+            if (!punchInTime) return "Not punched in yet";
+    
+            const [hour, minute] = punchInTime.split(":").map(Number);
+            return (hour < 10 || (hour === 10 && minute < 0)) ? "Present" : "Late";
         }
-
-
-  
+    
         if (username && punchInTime) {
             const attendanceContainer = document.getElementById("attendance-cards");
-
-
+            const status = calculateStatus(punchInTime);
+    
             const card = document.createElement("div");
             card.classList.add("attendance-card");
-
-
-            const status = calculateStatus(punchInTime);
-
-
             card.innerHTML = `
                 <h3>Attendance Details</h3>
                 <div class="card-header">
@@ -329,36 +300,44 @@ const attendanceChart = new Chart(ctx, {
                     <p><strong>Punch-Out Time: </strong>${punchOutTime || "Not punched out yet"}</p>
                 </div>
             `;
-
-
             attendanceContainer.appendChild(card);
-
-
-                   localStorage.setItem("attendanceData", JSON.stringify({
-                username: username,
-                punchInTime: punchInTime,
-                punchOutTime: punchOutTime || "Not punched out yet",
-                date: date,
-                status: status
-            }));
+    
+            let historyData = JSON.parse(localStorage.getItem("attendanceHistory")) || [];
+    
+            const newEntry = { date, punchInTime, punchOutTime: punchOutTime || "Not punched out yet", status };
+            historyData.unshift(newEntry);
+    
+            const additionalEntries = [
+                { date: "01/02/2025", punchInTime: "09:10 AM", punchOutTime: "06:00 PM", status: "Present" },
+                { date: "01/01/2025", punchInTime: "10:05 AM", punchOutTime: "06:15 PM", status: "Late" }
+            ];
+    
+            historyData = historyData.concat(additionalEntries);
+    
+            localStorage.setItem("attendanceHistory", JSON.stringify(historyData));
+    
+            updateAttendanceHistory(historyData);
         } else {
             alert("No attendance data found. Please sign in and punch in.");
         }
-
-
     
-        const historyTable = document.getElementById("attendance-history").getElementsByTagName('tbody')[0];
-
-
-        historyData.forEach(entry => {
-            const row = historyTable.insertRow();
-            row.innerHTML = `
-                <td>${entry.date}</td>
-                <td>${entry.punchInTime}</td>
-                <td>${entry.punchOutTime}</td>
-                <td>${entry.status}</td>
-            `;
-        });
+        function updateAttendanceHistory(data) {
+            const historyTable = document.getElementById("attendance-history").getElementsByTagName('tbody')[0];
+            historyTable.innerHTML = "";
+            data.forEach(entry => {
+                const row = historyTable.insertRow();
+                row.innerHTML = `
+                    <td>${entry.date}</td>
+                    <td>${entry.punchInTime}</td>
+                    <td>${entry.punchOutTime}</td>
+                    <td>${entry.status}</td>
+                `;
+            });
+        }
+    
+        const storedHistory = JSON.parse(localStorage.getItem("attendanceHistory")) || [];
+        updateAttendanceHistory(storedHistory);
     </script>
+    
 </body>
 </html>

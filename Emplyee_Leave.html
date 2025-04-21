@@ -5,12 +5,365 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <title>Employee Leave Management</title>
-  <link rel="stylesheet" href="Employee_Leave.css">
+  <!-- <link rel="stylesheet" href="Employee_Leave.css"> -->
+  <style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  color: #2c3e50;
+}
+
+/* Banner Styles */
+.banner {
+  background: linear-gradient(135deg,  #2c3e50, #3498db);
+  color: white;
+  text-align: center;
+  /* padding: 30px 20px; */
+  /* margin-bottom: 30px; */
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.quote {
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Leave Overview Styles */
+.leave-overview h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.leave-balance {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.balance-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.balance-card:hover {
+  transform: translateY(-5px);
+}
+
+.balance-card h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  color: #3498db;
+}
+
+.balance-card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.apply-leave-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.apply-leave-btn:hover {
+  background-color: #2980b9;
+}
+
+.leave-history-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.leave-history-btn:hover {
+  background-color: #27ae60;
+}
+
+/* Leave Request Form Styles */
+.leave-request {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  max-width: 800px;
+  display: none;
+  position: relative;
+}
+
+.leave-request h2 {
+  text-align: center;
+  margin-top: 0;
+  color: #3498db;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #7f8c8d;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+  width: 97%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+#leaveType{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-group textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  display: block;
+}
+
+#reasonCounter {
+  display: block;
+  text-align: right;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.submit-btn {
+  background-color: #2ecc71;
+  color: white;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+}
+
+.submit-btn:hover {
+  background-color: #27ae60;
+}
+
+#error-message {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* Leave History Styles */
+.leave-history {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  display: none;
+}
+
+.leave-history h2 {
+  text-align: center;
+  margin-top: 0;
+  color: #3498db;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: linear-gradient(135deg,  #2c3e50, #3498db);
+  color: white;
+  font-weight: 600;
+ 
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .leave-balance {
+    flex-direction: column;
+  }
+  
+  .balance-card {
+    min-width: 100%;
+  }
+  
+  .button-container {
+    flex-direction: column;
+  }
+  
+  button {
+    width: 100%;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+.leave-table th:nth-child(1) { /* Leave Type */
+  width: 20%;
+  min-width: 150px;
+}
+
+.leave-table th:nth-child(2) { /* Dates */
+  width: 350px;
+  min-width: 180px;
+}
+
+.leave-table th:nth-child(3) { /* Days */
+  width: 10%;
+  min-width: 80px;
+  text-align: center;
+}
+
+.leave-table th:nth-child(4) { /* Status */
+  width: 15%;
+  min-width: 100px;
+  text-align: center;
+}
+
+.leave-table th:nth-child(5) { /* Reason */
+  width: 30%;
+  min-width: 200px;
+}
+
+/* Align the Days and Status columns to center in td as well */
+.leave-table td:nth-child(3),
+.leave-table td:nth-child(4) {
+  text-align: center;
+}
+
+/* Animation for section transitions */
+.leave-request, .leave-history {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
 </head>
 <body>
-
   <section class="banner">
     <h1>Employee Leave Management</h1>
+    <p class="quote">"A well-balanced team needs both dedication and downtime - plan your leaves wisely."</p>
   </section>
 
   <section class="leave-overview">
@@ -18,15 +371,15 @@
     <div class="leave-balance">
       <div class="balance-card">
         <h2>Annual Leave</h2>
-        <p>10 days remaining</p>
+        <p><span id="annualLeaveBalance">10</span> days remaining</p>
       </div>
       <div class="balance-card">
         <h2>Sick Leave</h2>
-        <p>5 days remaining</p>
+        <p><span id="sickLeaveBalance">5</span> days remaining</p>
       </div>
       <div class="balance-card">
         <h2>Casual Leave</h2>
-        <p>8 days remaining</p>
+        <p><span id="casualLeaveBalance">8</span> days remaining</p>
       </div>
     </div>
     <div class="button-container">
@@ -36,19 +389,70 @@
   </section>
 
   <section class="leave-request">
+    <button class="close-btn" style="background: none; border: none; font-size: 18px; cursor: pointer; margin-left: 100%;">
+      ❌
+    </button>
     <h2>Request Leave</h2>
     <form id="leaveRequestForm">
-      <label>Leave Type:
-        <select>
+      <div class="form-group">
+        <label for="Empid">Emp-Id</label>
+        <input 
+          type="text" 
+          id="Empid" 
+          name="Empid" 
+          required 
+          pattern="^ATS0(?!000)\d{3}$"
+          title="Emp-ID must start with ATS0 letters followed by numbers."
+          maxlength="7"
+        >
+        <small class="error-message"></small>
+      </div>
+      <div class="form-group">
+        <label for="leaveType">Leave Type:</label>
+        <select id="leaveType" required>
+          <option value="">select option</option>
           <option>Annual Leave</option>
           <option>Sick Leave</option>
           <option>Casual Leave</option>
         </select>
-      </label>
-      <label>Start Date: <input type="date" id="startDate"></label>
-      <label>End Date: <input type="date" id="endDate" ></label>
-      <label>Reason: <textarea rows="3"></textarea></label>
-      <button type="submit" class="submit-btn">Submit Request</button>
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input 
+          type="date" 
+          id="startDate" 
+          required
+          pattern="\d{4}-\d{2}-\d{2}"
+          title="Please enter a date in YYYY-MM-DD format"
+        >
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input 
+          type="date" 
+          id="endDate" 
+          required
+          pattern="\d{4}-\d{2}-\d{2}"
+          title="Please enter a date in YYYY-MM-DD format"
+        >
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason:</label>
+        <textarea 
+          id="reason" 
+          rows="3" 
+          required
+          maxlength="500"
+          title="Reason must be 3-100 words with only letters, numbers, and single spaces"
+          oninput="validateReason(this)"
+          pattern="^[a-zA-Z0-9 ]+$"
+        ></textarea>
+        <small id="reasonCounter">Words: 0/100</small>
+        <small class="error-message" id="reasonError" style="color: red; display: none;"></small>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">Submit Request</button>
+      </div>
     </form>
     <p id="error-message" style="color: red; display: none;"></p>
   </section>
@@ -58,25 +462,408 @@
     <table>
       <thead>
         <tr>
-          <th>Date Range</th>
-          <th>Type</th>
-          <th>Status</th>
+          <th style="width: 100px">Start - Date</th>
+          <th style="width: 100px">End - Date</th>
+          <th style="width: 100px">Emp-Id</th>
+          <th style="width: 100px">Type</th>
+          <th style="width: 80px">Status</th>
           <th>Notes</th>
         </tr>
       </thead>
       <tbody id="leaveHistoryTable">
-        <!-- Leave history rows will be dynamically added here -->
       </tbody>
     </table>
   </section>
-
   <script>
+    function countWords(text) {
+      const words = text.trim() ? text.trim().split(/\s+/) : [];
+      return words.filter(word => word.length > 0).length;
+    }
+    
+    function validateReason(textarea) {
+      const reasonText = textarea.value;
+      const wordCount = countWords(reasonText);
+      const reasonCounter = document.getElementById("reasonCounter");
+      const reasonError = document.getElementById("reasonError");
+      
+      const hasSpecialChars = /[^a-zA-Z0-9 ,.!?]/.test(reasonText); 
+      const hasMultipleSpaces = / {2,}/.test(reasonText); 
+      
+      reasonCounter.textContent = `Words: ${wordCount}/100`;
+      
+      if (hasSpecialChars) {
+        reasonError.textContent = "Reason can only contain letters, numbers, and basic punctuation";
+        reasonError.style.display = "block";
+        textarea.setCustomValidity("Reason can only contain letters, numbers, and basic punctuation");
+        return false;
+      } 
+      else if (hasMultipleSpaces) {
+        reasonError.textContent = "Reason cannot contain multiple consecutive spaces";
+        reasonError.style.display = "block";
+        textarea.setCustomValidity("Reason cannot contain multiple consecutive spaces");
+        return false;
+      }
+      else if (wordCount > 100) {
+        reasonError.textContent = "Reason cannot exceed 100 words";
+        reasonError.style.display = "block";
+        textarea.setCustomValidity("Reason cannot exceed 100 words");
+        return false;
+      } 
+      else if (wordCount < 3 && reasonText.trim().length > 0) {
+        reasonError.textContent = "Reason must be at least 3 words";
+        reasonError.style.display = "block";
+        textarea.setCustomValidity("Reason must be at least 3 words");
+        return false;
+      }
+      else if (reasonText.trim().length === 0) {
+        reasonError.textContent = "Reason cannot be empty";
+        reasonError.style.display = "block";
+        textarea.setCustomValidity("Reason cannot be empty");
+        return false;
+      }
+      else {
+        reasonError.style.display = "none";
+        textarea.setCustomValidity("");
+        return true;
+      }
+    }
+
+    function countWords(text) {
+      const trimmed = text.trim().replace(/ {2,}/g, ' ');
+      return trimmed === '' ? 0 : trimmed.split(' ').length;
+    }
+    
+    function isWithinSixMonths(date) {
+      const today = new Date();
+      const sixMonthsFromNow = new Date();
+      sixMonthsFromNow.setMonth(today.getMonth() + 6);
+      return date <= sixMonthsFromNow;
+    }
+    
     document.addEventListener("DOMContentLoaded", function () {
       const applyLeaveBtn = document.querySelector(".apply-leave-btn");
       const leaveRequestSection = document.querySelector(".leave-request");
       const leaveHistoryBtn = document.querySelector(".leave-history-btn");
       const leaveHistorySection = document.querySelector(".leave-history");
       const leaveHistoryTable = document.getElementById("leaveHistoryTable");
+      const closeBtn = document.querySelector(".close-btn");
+    
+      const annualLeaveBalance = document.getElementById("annualLeaveBalance");
+      const sickLeaveBalance = document.getElementById("sickLeaveBalance");
+      const casualLeaveBalance = document.getElementById("casualLeaveBalance");
+    
+      leaveRequestSection.style.display = "none";
+      leaveHistorySection.style.display = "none";
+
+      if (!localStorage.getItem("leaveBalances")) {
+        const initialBalances = {
+          annual: 10,
+          sick: 5,
+          casual: 8,
+        };
+        localStorage.setItem("leaveBalances", JSON.stringify(initialBalances));
+      }
+    
+      if (!localStorage.getItem("leaveRequests")) {
+        localStorage.setItem("leaveRequests", JSON.stringify([]));
+      }
+    
+      const leaveBalances = JSON.parse(localStorage.getItem("leaveBalances"));
+      annualLeaveBalance.textContent = leaveBalances.annual;
+      sickLeaveBalance.textContent = leaveBalances.sick;
+      casualLeaveBalance.textContent = leaveBalances.casual;
+    
+      applyLeaveBtn.addEventListener("click", function () {
+        leaveRequestSection.style.display = "block";
+        leaveHistorySection.style.display = "none"; 
+      });
+    
+      leaveHistoryBtn.addEventListener("click", function () {
+        leaveHistorySection.style.display =
+          leaveHistorySection.style.display === "none" ? "block" : "none";
+        leaveRequestSection.style.display = "none"; 
+      });
+    
+      closeBtn.addEventListener("click", function () {
+        leaveRequestSection.style.display = "none";
+      });
+    
+      function formatDate(date) {
+        return date.toISOString().split("T")[0];
+      }
+    
+      function isValidDateFormat(dateString) {
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        if (!datePattern.test(dateString)) return false;
+        
+        const date = new Date(dateString);
+        return !isNaN(date.getTime());
+      }
+    
+      function loadLeaveHistory() {
+        const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+        leaveHistoryTable.innerHTML = ""; 
+        
+        if (leaveRequests.length === 0) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="6" style="text-align: center;">No leave history found</td>`;
+          leaveHistoryTable.appendChild(row);
+          return;
+        }
+        
+        leaveRequests.forEach(request => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${request.startDate}</td>
+            <td>${request.endDate}</td>
+            <td>${request.Empid}</td>
+            <td>${request.leaveType}</td>
+            <td>${request.status}</td>
+            <td>${request.reason}</td>
+          `;
+          leaveHistoryTable.appendChild(row);
+        });
+      }
+    
+      loadLeaveHistory();
+    
+      document.getElementById("leaveRequestForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+    
+        const leaveType = document.getElementById("leaveType").value;
+        const Empid = document.getElementById("Empid").value;
+        const startDateInput = document.getElementById("startDate");
+        const endDateInput = document.getElementById("endDate");
+        const errorMessage = document.getElementById("error-message");
+        const reasonTextarea = document.getElementById("reason");
+        const reason = reasonTextarea.value;
+    
+        if (!validateReason(reasonTextarea)) {
+          return;
+        }
+    
+        if (!leaveType) {
+          errorMessage.textContent = "Please select a leave type.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        if (!isValidDateFormat(startDateInput.value)) {
+          errorMessage.textContent = "Invalid start date format. Please use YYYY-MM-DD format.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        if (!isValidDateFormat(endDateInput.value)) {
+          errorMessage.textContent = "Invalid end date format. Please use YYYY-MM-DD format.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+    
+        errorMessage.style.display = "none";
+    
+        if (startDate < today) {
+          errorMessage.textContent = "Start date cannot be in the past.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        if (!isWithinSixMonths(startDate) || !isWithinSixMonths(endDate)) {
+          errorMessage.textContent = "Leave dates cannot be more than 6 months in the future.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        if (endDate < startDate) {
+          errorMessage.textContent = "End date cannot be earlier than the start date.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+        const formattedStartDate = formatDate(startDate);
+        const formattedEndDate = formatDate(endDate);
+        
+        const hasExistingLeave = leaveRequests.some(request => {
+          return (
+            request.Empid === Empid && 
+            (
+              (formattedStartDate >= request.startDate && formattedStartDate <= request.endDate) ||
+              (formattedEndDate >= request.startDate && formattedEndDate <= request.endDate) ||
+              (formattedStartDate <= request.startDate && formattedEndDate >= request.endDate)
+            )
+          );
+        });
+    
+        if (hasExistingLeave) {
+          errorMessage.textContent = "You already have a leave application for these dates.";
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        const timeDiff = endDate - startDate;
+        const leaveDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+    
+        const leaveBalances = JSON.parse(localStorage.getItem("leaveBalances"));
+        let balanceKey;
+    
+        switch (leaveType) {
+          case "Annual Leave":
+            balanceKey = "annual";
+            break;
+          case "Sick Leave":
+            balanceKey = "sick";
+            break;
+          case "Casual Leave":
+            balanceKey = "casual";
+            break;
+          default:
+            balanceKey = null;
+        }
+    
+        if (leaveBalances[balanceKey] < leaveDays) {
+          errorMessage.textContent = `Insufficient ${leaveType} balance.`;
+          errorMessage.style.display = "block";
+          return;
+        }
+    
+        leaveBalances[balanceKey] -= leaveDays;
+        localStorage.setItem("leaveBalances", JSON.stringify(leaveBalances));
+    
+        annualLeaveBalance.textContent = leaveBalances.annual;
+        sickLeaveBalance.textContent = leaveBalances.sick;
+        casualLeaveBalance.textContent = leaveBalances.casual;
+    
+        const leaveRequest = {
+          Empid,
+          leaveType,
+          startDate: formattedStartDate,
+          endDate: formattedEndDate,
+          reason,
+          status: "Pending",
+          submittedDate: formatDate(new Date())
+        };
+    
+        leaveRequests.push(leaveRequest);
+        localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
+    
+        loadLeaveHistory();
+        document.getElementById("leaveRequestForm").reset();
+        document.getElementById("reasonCounter").textContent = "Words: 0/100";
+        leaveRequestSection.style.display = "none"; 
+        
+        alert("Leave Request submitted successfully!");
+      });
+    });
+</script>
+
+  
+</body>
+</html>
+<!-- <script>
+      function validateReason(textarea) {
+        const reasonText = textarea.value;
+        const wordCount = countWords(reasonText);
+        const reasonCounter = document.getElementById("reasonCounter");
+        const reasonError = document.getElementById("reasonError");
+        
+        // Check for special characters
+        const hasSpecialChars = /[^a-zA-Z0-9 ]/.test(reasonText);
+        
+        reasonCounter.textContent = `Words: ${wordCount}/100`;
+        
+        if (hasSpecialChars) {
+          reasonError.textContent = "Reason cannot contain special characters";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot contain special characters");
+        } 
+        else if (wordCount > 100) {
+          reasonError.textContent = "Reason cannot exceed 100 words";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot exceed 100 words");
+        } 
+        else if (wordCount < 10 && reasonText.trim().length > 0) {
+          reasonError.textContent = "Reason must be at least 10 words";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason must be at least 10 words");
+        }
+        else if (reasonText.trim().length === 0) {
+          reasonError.textContent = "Reason cannot be empty";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot be empty");
+        }
+        else {
+          reasonError.style.display = "none";
+          textarea.setCustomValidity("");
+        }
+      }
+    document.addEventListener("DOMContentLoaded", function () {
+      const applyLeaveBtn = document.querySelector(".apply-leave-btn");
+      const leaveRequestSection = document.querySelector(".leave-request");
+      const leaveHistoryBtn = document.querySelector(".leave-history-btn");
+      const leaveHistorySection = document.querySelector(".leave-history");
+      const leaveHistoryTable = document.getElementById("leaveHistoryTable");
+      const closeBtn = document.querySelector(".close-btn");
+
+      const annualLeaveBalance = document.getElementById("annualLeaveBalance");
+      const sickLeaveBalance = document.getElementById("sickLeaveBalance");
+      const casualLeaveBalance = document.getElementById("casualLeaveBalance");
+      function validateReason(textarea) {
+        const reasonText = textarea.value;
+        const wordCount = countWords(reasonText);
+        const reasonCounter = document.getElementById("reasonCounter");
+        const reasonError = document.getElementById("reasonError");
+        
+        // Check for special characters
+        const hasSpecialChars = /[^a-zA-Z0-9 ]/.test(reasonText);
+        
+        reasonCounter.textContent = `Words: ${wordCount}/100`;
+        
+        if (hasSpecialChars) {
+          reasonError.textContent = "Reason cannot contain special characters";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot contain special characters");
+        } 
+        else if (wordCount > 100) {
+          reasonError.textContent = "Reason cannot exceed 100 words";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot exceed 100 words");
+        } 
+        else if (wordCount < 10 && reasonText.trim().length > 0) {
+          reasonError.textContent = "Reason must be at least 10 words";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason must be at least 10 words");
+        }
+        else if (reasonText.trim().length === 0) {
+          reasonError.textContent = "Reason cannot be empty";
+          reasonError.style.display = "block";
+          textarea.setCustomValidity("Reason cannot be empty");
+        }
+        else {
+          reasonError.style.display = "none";
+          textarea.setCustomValidity("");
+        }
+      }
+
+
+      if (!localStorage.getItem("leaveBalances")) {
+        const initialBalances = {
+          annual: 10,
+          sick: 5,
+          casual: 8,
+        };
+        localStorage.setItem("leaveBalances", JSON.stringify(initialBalances));
+      }
+
+      const leaveBalances = JSON.parse(localStorage.getItem("leaveBalances"));
+      annualLeaveBalance.textContent = leaveBalances.annual;
+      sickLeaveBalance.textContent = leaveBalances.sick;
+      casualLeaveBalance.textContent = leaveBalances.casual;
 
       leaveRequestSection.style.display = "none";
       leaveHistorySection.style.display = "none";
@@ -91,9 +878,23 @@
           leaveHistorySection.style.display === "none" ? "block" : "none";
       });
 
+      closeBtn.addEventListener("click", function () {
+        leaveRequestSection.style.display = "none";
+      });
+
+      function formatDate(date) {
+        return date.toISOString().split("T")[0];
+      }
+
+      function isValidDateFormat(dateString) {
+        // Check if the date string matches YYYY-MM-DD format with exactly 4 digits for year
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        return datePattern.test(dateString);
+      }
+
       function loadLeaveHistory() {
         const leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
-        leaveHistoryTable.innerHTML = ""; // Clear table
+        leaveHistoryTable.innerHTML = ""; 
         leaveRequests.forEach(request => {
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -105,54 +906,121 @@
           leaveHistoryTable.appendChild(row);
         });
       }
+
       loadLeaveHistory();
 
       document.getElementById("leaveRequestForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const leaveType = document.querySelector("select").value;
+        const leaveType = document.getElementById("leaveType").value;
+        const Empid = document.getElementById("Empid").value;
         const startDateInput = document.getElementById("startDate");
         const endDateInput = document.getElementById("endDate");
         const errorMessage = document.getElementById("error-message");
-        const reason = document.querySelector("textarea").value;
+        const reasonTextarea = document.getElementById("reason");
+        validateReason(reasonTextarea);
+        
+        // Check if there's any validation message
+        if (reasonTextarea.validationMessage) {
+          const reasonError = document.getElementById("reasonError");
+          reasonError.textContent = reasonTextarea.validationMessage;
+          reasonError.style.display = "block";
+          return;
+        }
+
+        // Validate leave type selection
+        if (!leaveType) {
+          errorMessage.textContent = "Please select a leave type.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        // Validate date formats
+        if (!isValidDateFormat(startDateInput.value)) {
+          errorMessage.textContent = "Invalid start date format. Please use YYYY-MM-DD format.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        if (!isValidDateFormat(endDateInput.value)) {
+          errorMessage.textContent = "Invalid end date format. Please use YYYY-MM-DD format.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
         const startDate = new Date(startDateInput.value);
         const endDate = new Date(endDateInput.value);
         const today = new Date();
-            // Clear previous error messages
-    errorMessage.style.display = "none";
 
-// Validation for dates
-if (startDate < today) {
-  errorMessage.textContent = "Start date cannot be in the past.";
-  errorMessage.style.display = "block";
-  return;
-}
+        errorMessage.style.display = "none";
 
-if (endDate < startDate) {
-  errorMessage.textContent = "End date cannot be earlier than the start date.";
-  errorMessage.style.display = "block";
-  return;
-}
+        if (startDate < today) {
+          errorMessage.textContent = "Start date cannot be in the past.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        if (endDate < startDate) {
+          errorMessage.textContent = "End date cannot be earlier than the start date.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        if (startDate.toDateString() === endDate.toDateString()) {
+          errorMessage.textContent = "Start date and end date cannot be the same.";
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        const timeDiff = endDate - startDate;
+        const leaveDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1; 
+
+        const leaveBalances = JSON.parse(localStorage.getItem("leaveBalances"));
+        let balanceKey;
+
+        switch (leaveType) {
+          case "Annual Leave":
+            balanceKey = "annual";
+            break;
+          case "Sick Leave":
+            balanceKey = "sick";
+            break;
+          case "Casual Leave":
+            balanceKey = "casual";
+            break;
+          default:
+            balanceKey = null;
+        }
+
+        if (leaveBalances[balanceKey] < leaveDays) {
+          errorMessage.textContent = `Insufficient ${leaveType} balance.`;
+          errorMessage.style.display = "block";
+          return;
+        }
+
+        leaveBalances[balanceKey] -= leaveDays;
+        localStorage.setItem("leaveBalances", JSON.stringify(leaveBalances));
+
+        annualLeaveBalance.textContent = leaveBalances.annual;
+        sickLeaveBalance.textContent = leaveBalances.sick;
+        casualLeaveBalance.textContent = leaveBalances.casual;
 
         const leaveRequest = {
+          Empid,
           leaveType,
-          startDate,
-          endDate,
+          startDate: formatDate(startDate),
+          endDate: formatDate(endDate),
           reason,
           status: "Pending",
         };
 
         let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
         leaveRequests.push(leaveRequest);
-
         localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
 
         loadLeaveHistory();
-
         document.getElementById("leaveRequestForm").reset();
         alert("Leave Request Form is submitted successfully");
       });
     });
-  </script>
-</body>
-</html>
+  </script> -->

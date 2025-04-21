@@ -3,23 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Assert_Management.css">
+    <!-- <link rel="stylesheet" href="Assert_Management.css"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
     <title>Asset Management - HR</title>
     <style>
         .container {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
             padding: 10px;
+            max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
         }
-
+    
+        header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+        }
+    
+        header h1 {
+            margin: 0;
+        }
+    
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+    
         .asset-section {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
         }
-
+    
         .asset-card {
             background-color: #f0f0f0;
             border-radius: 8px;
@@ -28,15 +50,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1.0s ease-in-out;
         }
-
+    
         .asset-card h3 {
             margin-top: 0;
         }
-
+    
         .asset-card p {
             margin: 10px 0;
         }
-
+    
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -47,7 +69,30 @@
                 transform: translateY(0);
             }
         }
+    
+.search-bar {
+    display: flex;
+    margin-left: auto; 
+    margin-right: 20px; 
+}
 
+.search-bar input {
+    width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    /* margin-top: 20px;    */
+}
+
+.search-bar input:focus {
+    border-color: #abe2f9;
+}
+
+  
+    
         .btn {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -57,72 +102,67 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
+    
         .btn:hover {
             background-color: #45a049;
         }
-
-        header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-
-header h1 {
-    margin: 0;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%; 
-}
-
-.search-bar {
-    flex-grow: 1;
-}
-
-.search-bar input {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%; 
-}
-
-.requests-btn {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    
+        .requests-btn {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
     border: none;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .requests-btn:hover {
-    background-color: #0056b3;
+    /* background: linear-gradient(135deg, #45a049, #3d8b40); */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+    
+        h2 {
+            
+            color: blue;
+            font-size: 1.5rem;
+            font-weight: 600;
+        
+        
+        }
+        .heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 24px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
 }
 
+.heading-container h2 {
+    margin: 0;
+    clear: none;
+    padding-bottom: 0;
+    border-bottom: none;
+}
 
-       
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
+            .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; 
-            background-color: rgb(0,0,0);
+            overflow: auto;
             background-color: rgba(0,0,0,0.4);
         }
-
+    
         .modal-content {
             background-color: #fefefe;
             margin: 15% auto;
@@ -132,7 +172,7 @@ header h1 {
             max-width: 500px;
             border-radius: 8px;
         }
-
+    
         .close {
             color: #aaa;
             float: right;
@@ -140,136 +180,379 @@ header h1 {
             font-weight: bold;
             cursor: pointer;
         }
-
+    
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
-            cursor: pointer;
         }
-
+    
         .request-item {
             margin: 10px 0;
             padding: 10px;
             background-color: #f0f0f0;
             border-radius: 5px;
         }
-
+    
         .request-item h3 {
             margin: 0;
         }
-
-       
+    
         .request-details {
             margin-top: 20px;
         }
-
+    
+        @media (max-width: 768px) {
+            .requests-btn {
+                float: none;
+                display: block;
+                width: 100%;
+                margin-bottom: 12px;
+            }
+            
+            h2 {
+                margin-top: 8px;
+                font-size: 1.3rem;
+            }
+            
+            .search-bar input {
+                width: 100%;
+            }
+            
+            .asset-card {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Assets Management Dashboard</h1>
+        <p>"Optimizing resources, maximizing value"</p>
+    </header>
 
-<header>
-    <h1>Assets Management Dashboard</h1>
-    <div class="nav">
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search by employee name, asset ID, or type...">
-    </div>
-    <button class="requests-btn" id="requestButton">Requests</button>
-</div>
-</header>
-
-<div id="requestModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h2>Previous Requests</h2>
-
-        <div class="request-details">
-            <p><strong>Requested Asset:</strong> <span id="asset-name">Loading...</span></p>
-            <p><strong>Reason:</strong> <span id="asset-reason">Loading...</span></p>
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Requests</h2>
+            <div class="request-details">
+                <p><strong>Emp-Name:</strong> <span id="modal-emp-name">Loading...</span></p>
+                <p><strong>Emp-Id:</strong> <span id="modal-emp-id">Loading...</span></p>
+                <p><strong>Requested Asset:</strong> <span id="modal-asset-name">Loading...</span></p>
+                <p><strong>Reason:</strong> <span id="modal-asset-reason">Loading...</span></p>
+            </div>
+            <div class="request-actions">
+                <button class="approve-btn" onclick="approveRequest()">Approve</button>
+                <button class="reject-btn" onclick="rejectRequest()">Reject</button>
+            </div>
         </div>
+    </div>
 
+    <div class="container">
+        <div class="heading-container">
+            <h2>Assigned Assets</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by employee name..." oninput="searchAssets()">
+            </div>
+            <button class="requests-btn" id="requestButton">Requests</button>
+            
+        </div>
         
-    </div>
-</div>
-
-<div class="container">
-    <h2>Assigned Assets</h2>
-    <div class="asset-section">
-        <div class="asset-card">
-            <h3>Veera Raghava</h3>
-            <p><strong>Asset:</strong> Laptop</p>
-            <p><strong>Assigned Date:</strong> 2024-10-15</p>
-            <p><strong>Status:</strong> Assigned</p>
-        </div>
-
-        <div class="asset-card">
-            <h3>Ajay Kumar</h3>
-            <p><strong>Asset:</strong> Smartphone</p>
-            <p><strong>Assigned Date:</strong> 2024-11-01</p>
-            <p><strong>Status:</strong> Assigned</p>
+        <div class="asset-section" id="assignedAssets">
+            
+            <!-- Asset cards will be dynamically added here -->
         </div>
     </div>
 
-    <h2>Loans</h2>
-    <div class="asset-section">
-        <div class="asset-card">
-            <h3>Srikanth</h3>
-            <p><strong>Loan Amount:</strong> $5000</p>
-            <p><strong>Repayment Start Date:</strong> 2024-05-10</p>
-            <p><strong>Status:</strong> Active</p>
-        </div>
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header p {
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .heading-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-bar {
+            margin: 10px 0;
+        }
+        .search-bar input {
+            padding: 8px;
+            width: 250px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .requests-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .requests-btn:hover {
+            background-color: #2980b9;
+        }
+        .asset-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .asset-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .asset-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .asset-card p {
+            margin: 5px 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+        .request-details {
+            margin-bottom: 20px;
+        }
+        .request-details p {
+            margin: 10px 0;
+        }
+        .request-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .approve-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .approve-btn:hover {
+            background-color: #27ae60;
+        }
+        .reject-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .reject-btn:hover {
+            background-color: #c0392b;
+        }
+    </style> -->
 
-        <div class="asset-card">
-            <h3>Jay Simha</h3>
-            <p><strong>Loan Amount:</strong> $3000</p>
-            <p><strong>Repayment Start Date:</strong> 2024-06-20</p>
-            <p><strong>Status:</strong> Repayed</p>
-        </div>
-    </div>
+    <script>
+        // Initialize modal elements and event listeners
+        var modal = document.getElementById("requestModal");
+        var btn = document.getElementById("requestButton");
+        var closeBtn = document.getElementById("closeModal");
 
-    <h2>Insurance</h2>
-    <div class="asset-section">
-        <div class="asset-card">
-            <h3>Veera Raghava</h3>
-            <p><strong>Insurance Type:</strong> Health</p>
-            <p><strong>Policy Number:</strong> 123456</p>
-            <p><strong>Status:</strong> Active</p>
-        </div>
+        btn.onclick = function() {
+            modal.style.display = "block";
+            loadRequestData();
+        }
 
-        <div class="asset-card">
-            <h3>Ajay Kumar</h3>
-            <p><strong>Insurance Type:</strong> Life</p>
-            <p><strong>Policy Number:</strong> 654321</p>
-            <p><strong>Status:</strong> Active</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    var modal = document.getElementById("requestModal");
-    var btn = document.getElementById("requestButton");
-    var closeBtn = document.getElementById("closeModal");
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        closeBtn.onclick = function() {
             modal.style.display = "none";
         }
-    }
 
-    const assetName = localStorage.getItem('assetName');
-    const reason = localStorage.getItem('reason');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-    document.getElementById('asset-name').textContent = assetName || "No asset requested";
-    document.getElementById('asset-reason').textContent = reason || "No reason provided";
-</script>
+        // Load request data from localStorage
+        function loadRequestData() {
+            const requestData = JSON.parse(localStorage.getItem('assetRequestData')) || {};
+            
+            document.getElementById('modal-emp-name').textContent = requestData.employeeName || "No Name";
+            document.getElementById('modal-emp-id').textContent = requestData.employeeId || "No Employee ID";
+            document.getElementById('modal-asset-name').textContent = requestData.assetName || "No asset requested";
+            document.getElementById('modal-asset-reason').textContent = requestData.reason || "No reason provided";
+        }
 
+        // Load assigned assets from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAssignedAssets();
+        });
+
+        // Function to load assigned assets from localStorage
+        function loadAssignedAssets() {
+            const assignedAssets = JSON.parse(localStorage.getItem('assignedAssets')) || [];
+            const assetsContainer = document.getElementById('assignedAssets');
+            assetsContainer.innerHTML = '';
+
+            if (assignedAssets.length === 0) {
+                assetsContainer.innerHTML = '<p>No assets assigned yet</p>';
+                return;
+            }
+
+            assignedAssets.forEach(asset => {
+                const assetCard = document.createElement('div');
+                assetCard.className = 'asset-card';
+                assetCard.innerHTML = `
+                    <h3>${asset.employeeName}</h3>
+                    <p><strong>Emp-Id:</strong> ${asset.employeeId}</p>
+                    <p><strong>Asset:</strong> ${asset.assetName}</p>
+                    <p><strong>Assigned Date:</strong> ${asset.assignedDate}</p>
+                    <p><strong>Status:</strong> ${asset.status}</p>
+                `;
+                assetsContainer.appendChild(assetCard);
+            });
+        }
+
+        // Approve request function
+        function approveRequest() {
+            const requestData = JSON.parse(localStorage.getItem('assetRequestData'));
+            if (!requestData) {
+                alert('No request data found');
+                return;
+            }
+
+            // Get current assigned assets or initialize empty array
+            const assignedAssets = JSON.parse(localStorage.getItem('assignedAssets')) || [];
+            
+            // Add new asset to assigned assets
+            assignedAssets.push({
+                employeeName: requestData.employeeName,
+                employeeId: requestData.employeeId,
+                assetName: requestData.assetName,
+                assignedDate: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+                status: 'Assigned'
+            });
+
+            // Save updated assigned assets
+            localStorage.setItem('assignedAssets', JSON.stringify(assignedAssets));
+            
+            // Clear the request data
+            localStorage.removeItem('assetRequestData');
+            
+            // Reload the assigned assets display
+            loadAssignedAssets();
+            
+            // Close the modal
+            modal.style.display = "none";
+            
+            alert('Request approved and asset assigned successfully!');
+        }
+
+        // Reject request function
+        function rejectRequest() {
+            const requestData = JSON.parse(localStorage.getItem('assetRequestData'));
+            if (!requestData) {
+                alert('No request data found');
+                return;
+            }
+
+            // Get current rejected requests or initialize empty array
+            const rejectedRequests = JSON.parse(localStorage.getItem('rejectedRequests')) || [];
+            
+            // Add new rejected request
+            rejectedRequests.push({
+                employeeName: requestData.employeeName,
+                employeeId: requestData.employeeId,
+                assetName: requestData.assetName,
+                rejectedDate: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+                status: 'Rejected'
+            });
+
+            // Save updated rejected requests
+            localStorage.setItem('rejectedRequests', JSON.stringify(rejectedRequests));
+            
+            // Clear the request data
+            localStorage.removeItem('assetRequestData');
+            
+            // Close the modal
+            modal.style.display = "none";
+            
+            alert('Request has been rejected.');
+        }
+
+        // Search functionality
+        function searchAssets() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const assetCards = document.querySelectorAll('.asset-card');
+            let anyResultsFound = false;
+
+            assetCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = '';
+                    anyResultsFound = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            if (!anyResultsFound) {
+                if (!noResultsMsg) {
+                    const msg = document.createElement('p');
+                    msg.id = 'noResultsMsg';
+                    msg.textContent = 'No matching assets found';
+                    msg.style.textAlign = 'center';
+                    msg.style.margin = '20px 0';
+                    msg.style.color = '#666';
+                    document.querySelector('.asset-section').appendChild(msg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+    </script>
 </body>
 </html>

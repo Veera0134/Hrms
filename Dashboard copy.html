@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="Dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="profile">
+      <img id="profile-picture-display" alt="Profile Picture">
+      <h3><span id="username" class="userDisplay" style="color: #4a90e2;"></span></h3>
+      <p><strong>Login time: </strong><span id="punch-time" class="status"></span></p>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#"><i class="fas fa-home" style="color: #28a745;"></i> <span>Admin</span></a>
+      </li>
+      <li class="has-dropdown">
+        <a href="#"><i class="fas fa-tachometer-alt" style="color: #ff5722;"></i> <span>HRM'S</span> <i class="fas fa-chevron-down" style="padding-left: 40%;"></i></a>
+        <ul class="dropdown">
+          <li><a href="Recuriment.html" target="iframe-content" title="Recruitment"><i class="fas fa-user-plus"></i><span> Recruitment</span></a></li>
+          <li><a href="Hiring_page.html" target="iframe-content" title="Hiring_page"><i class="fas fa-briefcase"></i> <span>Hiring</span></a></li>
+          <!-- <li><a href="Emp_calendar.html" target="iframe-content" title="calendar"><i class="fas fa-calendar-alt"></i><span>Calendar</span> </a></li> -->
+          <li><a href="TestCalendar.html" target="iframe-content" title="calendar"><i class="fas fa-calendar-alt"></i><span>Calendar</span> </a></li>
+
+          <li><a href="Staff_Management.html" target="iframe-content" title="Staff_Management"><i class="fas fa-users"></i> <span>Staff Management</span></a></li>
+          <li><a href="Project.html" target="iframe-content" title="Project"><i class="fas fa-tasks"></i><span> Project Management</span></a></li>
+          <li><a href="Task_Management.html" target="iframe-content" title="Task_Management"><i class="fas fa-check-circle"></i> <span>Task Management</span></a></li>
+          <li><a href="Leave_Management.html" target="iframe-content" title="Leave_Management"><i class="fas fa-plane-departure"></i><span>Leave Management</span> </a></li>
+          <li><a href="Attendance_Management.html" target="iframe-content" title="Attendance_Management"><i class="fas fa-user-check"></i><span> Attendance</span></a></li>
+          <!-- <li><a href="Claims_Managements.html" target="iframe-content" title="Claims_Managements"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li> -->
+          <li><a href="TestClaim_Hr.html" target="iframe-content" title="Claims_Managements"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li>
+          <li><a href="Notifications.html" target="iframe-content" title="Notification"><i class="fas fa-bell"></i><span> Notifications</span></a></li>
+          <li><a href="Assert_Management.html" target="iframe-content" title="Asset_Management"><i class="fas fa-box"></i> <span>Asset Management</span></a></li>
+          <li><a href="Increment-Bounus.html" target="iframe-content" title="Increment-Bounus"><i class="fas fa-chart-line"></i><span> Increment & Bonus</span></a></li>
+          <li><a href="Payroll_Management.html" target="iframe-content" title="Payroll_Management"><i class="fas fa-money-bill-wave"></i> <span>Payroll</span></a></li>
+          <li><a href="Training_Management.html" target="iframe-content" title="Training_Management"><i class="fas fa-chalkboard-teacher"></i><span> Training</span></a></li>
+          <li><a href="Career_Progression.html" target="iframe-content" title="career_progression"><i class="fas fa-chart-bar"></i> <span>Career Progression</span></a></li>
+          <li><a href="./Offboarding_Management.html" target="iframe-content" title="Offboarding_Management"><i class="fas fa-sign-out-alt"></i> <span>Offboarding</span></a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="#"><i class="fas fa-user" style="color: #007bff;"></i> <span>EMPLOYEE</span> <i class="fas fa-chevron-down" style="padding-left: 20%;"></i></a>
+        <ul class="dropdown">
+          <li><a href="./Personalinfo_Dashboard.html" target="iframe-content" title="Onboarding"><i class="fas fa-user-plus"></i><span>Onboarding</span></a></li>
+          <li><a href="Assert.html" target="iframe-content" title="Asset"><i class="fas fa-box"></i><span> Asset</span></a></li>
+          <li><a href="Profile.html" target="iframe-content" title="Profile"><i class="fas fa-id-badge"></i><span>Profile</span></a></li>
+          <li><a href="Courses_Homepage.html" target="iframe-content" title="Courses"><i class="fas fa-book"></i><span>Courses</span></a></li>
+          <!-- <li><a href="Task.html" target="iframe-content" title="Task"><i class="fas fa-tasks"></i> <span>Task</span></a></li> -->
+          <li><a href="TestTask_emp.html" target="iframe-content" title="Task"><i class="fas fa-tasks"></i> <span>Task</span></a></li>
+          <li><a href="Emplyee_Leave.html" target="iframe-content" title="Leave"><i class="fas fa-plane-departure"></i> <span>Leave</span></a></li>
+          <li><a href="Attendance.html" target="iframe-content" title="Attendance"><i class="fas fa-user-check"></i> <span>Attendance</span></a></li>
+          <li><a href="./Emp_payslip.html" target="iframe-content" title="Pay-Slip"><i class="fas fa-money-bill-wave"></i> <span>Pay-Slip</span></a></li>
+          <!-- <li><a href="Emp_Claims.html" target="iframe-content" title="Claims"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li> -->
+          <li><a href="Testclaim_Emp.html" target="iframe-content" title="Claims"><i class="fas fa-file-invoice-dollar"></i> <span>Claims</span></a></li>
+          <li><a href="Emp_Notification.html" target="iframe-content" title="Notification"><i class="fas fa-bell"></i><span>Notifications</span></a></li>
+          <li><a href="Emp_career_progression.html" target="iframe-content" title="career_progression"><i class="fas fa-chart-bar"></i><span> Career Progression</span></a></li>
+          <li><a href="Performance_management.html" title="Appraisal" target="iframe-content"><i class="fas fa-chart-line"></i><span> Appraisal</span></a></li>
+          <li><a href="./Offboarding.html" target="iframe-content" title="Offboarding"><i class="fas fa-sign-out-alt"></i> <span>Offboarding</span></a></li>        </ul>
+      </li>
+      <li><a href="#"><i class="fas fa-chart-line" style="color: #4caf50;"></i> <span>Analytics</span></a></li>
+      <li><a href="#"><i class="fas fa-tasks" style="color: #ff9800;"></i> <span>Task List</span></a></li>
+      <li><a href="#"><i class="fas fa-clock" style="color: #2196f3;"></i> <span>Tracking</span></a></li>
+      <li><a href="#"><i class="fas fa-cog" style="color: #9c27b0;"></i> <span>Settings</span></a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header class="header">
+      <div class="header-left">
+        <button class="toggle-btn">
+          <i class="fas fa-bars" style="color: black;"></i>
+        </button>
+        <div class="logo">
+          <img src="./logo-removebg-preview.png" alt="Company Logo" class="company-logo">
+        </div>
+        <div class="profile1">
+          <h2 style="color: black;">Hi <span id="header-username" class="userDisplay" style="color: blue;"></span></h2>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="header-right">
+        <span class="icon"><i class="fa-solid fa-globe"></i> English</span>
+        <span class="icon"><i class="fas fa-envelope"></i></span>
+        <span class="notification-icon"><i class="fas fa-bell"></i></span>
+        <span class="calenadar"><i class="fas fa-calendar-alt"></i></span>
+        <button class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </header>
+
+    <div class="content-section">
+      <main style="width: 100%; height: 100vh;">
+        <iframe name="iframe-content" src="./Content.html" scrolling="yes"></iframe>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Sidebar
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      
+      // For desktop view (> 992px)
+      if (window.innerWidth > 992) {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      } else {
+        // For mobile view
+        sidebar.classList.toggle('active');
+      }
+    }
+
+    // Toggle Button Event
+    document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
+              document.querySelectorAll('.has-dropdown').forEach(function (item) {
+    item.addEventListener('click', function (event) {
+      event.stopPropagation();
+      document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        dropdown.style.display = 'none';
+      });
+      const dropdown = this.querySelector('.dropdown');
+      if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      }
+    });
+  });
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+      dropdown.style.display = 'none';
+    });
+  });
+    // // Dropdown Menu
+    // document.querySelectorAll('.has-dropdown').forEach(item => {
+    //   item.addEventListener('click', function(e) {
+    //     e.stopPropagation();
+    //     const dropdown = this.querySelector('.dropdown');
+        
+    //     // Close all other dropdowns
+    //     document.querySelectorAll('.dropdown').forEach(d => {
+    //       if (d !== dropdown) {
+    //         d.style.display = 'none';
+    //       }
+    //     });
+
+    //     // Toggle current dropdown
+    //     if (dropdown) {
+    //       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    //     }
+    //   });
+    // });
+
+    // // Close dropdowns when clicking outside
+    // document.addEventListener('click', () => {
+    //   document.querySelectorAll('.dropdown').forEach(dropdown => {
+    //     dropdown.style.display = 'none';
+    //   });
+    // });
+
+    // User Profile
+    const username = localStorage.getItem("currentUser");
+    const storedProfilePicture = localStorage.getItem("profile-picture");
+    const punchInTime = localStorage.getItem("punchInTime");
+
+    if (storedProfilePicture) {
+      document.getElementById("profile-picture-display").src = storedProfilePicture;
+    } else {
+      document.getElementById("profile-picture-display").src = 'https://via.placeholder.com/150';
+    }
+
+    document.getElementById("username").textContent = username || "Guest User";
+    document.getElementById("punch-time").textContent = punchInTime || "Not logged in";
+    document.getElementById("header-username").textContent = username || "Guest";
+
+    // Logout Handler
+    document.querySelector('.logout-btn').addEventListener('click', function() {
+      const punchInTime = localStorage.getItem("punchInTime");
+
+      if (punchInTime) {
+        const logoutTime = new Date();
+        const logoutHours = logoutTime.getHours();
+        const logoutMinutes = logoutTime.getMinutes();
+
+        const [punchInHours, punchInMinutes] = punchInTime.split(':').map(Number);
+
+        if (isNaN(punchInHours) || isNaN(punchInMinutes)) {
+          alert("Invalid punch-in time format.");
+        } else {
+          let totalMinutes = (logoutHours - punchInHours) * 60 + (logoutMinutes - punchInMinutes);
+
+          if (totalMinutes < 0) {
+            totalMinutes += 24 * 60;
+          }
+
+          const hours = Math.floor(totalMinutes / 60);
+          const minutes = totalMinutes % 60;
+
+          const totalTime = `${hours}h ${minutes}m`;
+
+          alert(`Session Summary:\nTotal time: ${totalTime}`);
+          window.location.href = './Fingertest.html';
+        }
+      } else {
+        alert("No active session found.");
+      }
+
+      localStorage.clear();
+    });
+
+    // Responsive handling
+    function handleResize() {
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.remove('collapsed');
+        mainContent.classList.remove('expanded');
+        sidebar.classList.remove('active');
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  </script>
+</body>
+</html>

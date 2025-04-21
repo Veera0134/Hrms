@@ -3,82 +3,301 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="Notification.css">
   <title>HR Notification Management</title>
+<style>
+  /* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+  padding: 20px 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.header h1 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 2.2em;
+}
+
+.header p {
+  color: #ffffff;
+  font-style: italic;
+  margin: 10px 0 0;
+}
+
+/* Form Styles */
+.notification-form {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+.notification-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.notification-form input[type="text"],
+.notification-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #c5c0c0;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.notification-form textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85em;
+  margin-bottom: 15px;
+  display: none;
+}
+
+#sendNotification {
+  background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+  display: block;
+  margin: 0 auto;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;  
+  font-weight: 600;
+}
+
+#sendNotification:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+#sendNotification:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Notifications Section */
+.notifications h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+
+.notification-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.notification-card {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notification-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.notification-text {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #0080ff;
+  margin-bottom: 10px;
+}
+
+.notification-message {
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.notification-time {
+  font-size: 0.85em;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .notification-form {
+    padding: 15px;
+  }
+  
+  .header h1 {
+    font-size: 1.8em;
+  }
+}
+</style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="header">
+      <div class="header" style="text-align: center;">
         <h1>HR Notification Management</h1>
-        <p>Manage and send announcements or notifications to all employees</p>
+        <p>"Manage and send announcements or notifications to all employees"</p>
       </div>
     </header>
 
     <div class="notification-form">
       <label for="title">Notification Title:</label>
-      <input type="text" id="title" placeholder="Enter notification title">
+      <input type="text" id="title" placeholder="Enter notification title" maxlength="30">
+      <div id="titleError" class="error-message">Must start with capital letter and use single spaces</div>
 
       <label for="message">Notification Message:</label>
-      <textarea id="message" rows="4" placeholder="Enter notification message"></textarea>
+      <textarea id="message" rows="4" placeholder="Enter notification message" maxlength="200"></textarea>
+      <div id="messageError" class="error-message">Must start with capital letter and use single spaces</div>
 
-      <button id="sendNotification" type="button">Send Notification</button>
+      <button id="sendNotification" type="button" disabled>Send Notification</button>
     </div>
 
-    <div class="notifications">
+    <div class="notifications" style="margin-top: 20px;">
       <h2>Recent Notifications</h2>
       <div class="notification-cards">
-      <div class="notification-card">
-        <div class="notification-text">Holiday Schedule for 2025</div>
-        <div class="notification-time">Posted on: 01 Nov 2024</div>
+        <div id="notificationCards"></div>
+        <div class="notification-card">
+          <div class="notification-text">Holiday Schedule for 2025</div>
+          <div class="notification-message">Please review the attached holiday schedule for 2025</div>
+          <div class="notification-time">Posted on: 01 Nov 2024</div>
+        </div>
+        <div class="notification-card">
+          <div class="notification-text">Employee of the Month</div>
+          <div class="notification-message">Congratulations to John Doe for being selected as Employee of the Month!</div>
+          <div class="notification-time">Posted on: 20 Oct 2024</div>
+        </div>
+        
       </div>
-      <div class="notification-card">
-        <div class="notification-text">Employee of the Month</div>
-        <div class="notification-time">Posted on: 20 Oct 2024</div>
-      </div>
-      <div class="notification-cards" id="notificationCards">
-      </div>
-    </div>
     </div>
   </div>
 
   <script>
+    function isBlank(str) {
+      return !str || !str.trim();
+    }
+    
+    function isValidInput(str) {
+      if (isBlank(str)) return false;
+      
+      if (!/^[A-Z]/.test(str)) {
+        return false;
+      }
+      
+      if (/\s{2,}/.test(str)) {
+        return false;
+      }
+      
+      return true;
+    }
+    
+    function cleanInput(str) {
+      str = str.charAt(0).toUpperCase() + str.slice(1);
+      
+      str = str.replace(/\s{2,}/g, ' ');
+      
+      return str;
+    }
+
     window.onload = function() {
+      const sendButton = document.getElementById('sendNotification');
+      sendButton.disabled = true;
+      
       const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
       const notificationCards = document.getElementById('notificationCards');
+      
       storedNotifications.forEach(function(notification) {
         const notificationCard = document.createElement('div');
         notificationCard.classList.add('notification-card');
         notificationCard.innerHTML = `
           <div class="notification-text">${notification.title}</div>
+          <div class="notification-message">${notification.message}</div>
           <div class="notification-time">Posted on: ${notification.date}</div>
         `;
         notificationCards.appendChild(notificationCard);
       });
+      
+      function validateInputs() {
+        const title = document.getElementById('title').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        sendButton.disabled = !(isValidInput(title) && isValidInput(message));
+      }
+      
+      document.getElementById('title').addEventListener('input', function() {
+        validateInputs();
+        document.getElementById('titleError').style.display = 
+          isValidInput(this.value.trim()) ? 'none' : 'block';
+      });
+      
+      document.getElementById('message').addEventListener('input', function() {
+        validateInputs();
+        document.getElementById('messageError').style.display = 
+          isValidInput(this.value.trim()) ? 'none' : 'block';
+      });
     };
 
     document.getElementById('sendNotification').addEventListener('click', function() {
-      const title = document.getElementById('title').value;
-      const message = document.getElementById('message').value;
+      let title = document.getElementById('title').value.trim();
+      let message = document.getElementById('message').value.trim();
       const date = new Date().toLocaleDateString();
 
-      if (title && message) {
-        const newNotification = { title, message, date };
-        
-        const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+      title = cleanInput(title);
+      message = cleanInput(message);
 
-        storedNotifications.unshift(newNotification); 
-        localStorage.setItem('notifications', JSON.stringify(storedNotifications));
+      const newNotification = { 
+        title, 
+        message, 
+        date 
+      };
+      
+      const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+      storedNotifications.unshift(newNotification);
+      localStorage.setItem('notifications', JSON.stringify(storedNotifications));
 
-        document.getElementById('title').value = '';
-        document.getElementById('message').value = '';
-
-        window.location.reload();
-      } else {
-        alert('Please fill in both title and message!');
-      }
+      alert('Notification sent successfully!');
+      
+      document.getElementById('title').value = '';
+      document.getElementById('message').value = '';
+      window.location.reload();
     });
   </script>
 </body>
 </html>
-
