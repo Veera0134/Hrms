@@ -359,8 +359,8 @@ input:focus {
         { id: "email", pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: "Please enter a valid email address." },
         {
             id: "Empid",
-            pattern: /^[A-Z]{3}[0-9]+$/,
-            errorMessage: "Emp-ID must start with 3 uppercase letters followed by numbers.",
+            pattern: /^[A-Z]{3}0[0-9]+$/,
+            errorMessage: "Emp-ID the first three characters are uppercase letters, followed by exactly one 0, and then any remaining numbers..",
         },
         {
             id: "streetAddress",
